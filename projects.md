@@ -51,6 +51,10 @@ permalink: /projects/
   .project-link a:hover {
     text-decoration: underline;
   }
+  img {
+    border-radius: 10px;
+    margin: 10px 0;
+  }
   @media (max-width: 600px) {
     .column {
       flex: 100%;
@@ -66,18 +70,15 @@ permalink: /projects/
       <ul>
         <li>
           <div class="project-title">WINMSS Buddy</div>
-          <div class="project-description">Description of programming project 2.</div>
-          <div class="project-link"><a href="http://example.com/project2">View Project</a></div>
-        </li>
-        <li>
-          <div class="project-title">Project 3</div>
-          <div class="project-description">Description of programming project 3.</div>
-          <div class="project-link"><a href="http://example.com/project3">View Project</a></div>
+          <img src="/images/winmssBuddyBanner.png" alt="WINMSS Buddy Banner">
+          <div class="project-description">A web app tool that takes WinMSS export files and allows the user to view the match information. Also creates Championship series results from the imported data.</div>
+          <div class="project-link"><a href="https://winmss-buddy.mockachino.app/">WinMSS Buddy Tool</a></div>
         </li>
         <li>
           <div class="project-title">Practical Shooter App (Legacy)</div>
+          <img src="/images/psaBanner.jpg" alt="PSA Banner">
           <div class="project-description">A mobile app providing the IPSC ruleset offline in a mobile friendly and dynamic way. This is unfortunately not being maintained anymore but is due a resurgence.</div>
-          <div class="project-link"><a href="https://apkpure.com/the-practical-shooter-app/com.barneymcgrew.practicalshooterapp/download/2.7">View Project</a></div>
+          <div class="project-link"><a href="https://apkpure.com/the-practical-shooter-app/com.barneymcgrew.practicalshooterapp/download/2.7">Android APK Archive</a></div>
         </li>
       </ul>
     </div>
@@ -85,19 +86,17 @@ permalink: /projects/
       <h2>Media Projects</h2>
       <ul>
         <li>
-          <div class="project-title">Project A</div>
-          <div class="project-description">Description of media project A.</div>
-          <div class="project-link"><a href="http://example.com/projectA">View Project</a></div>
+          <div class="project-title">Not The Nine O'clock Pews Podcast</div>
+          <img src="/images/ntnopBanner.jpg" alt="NTNOP Banner">
+          <div class="project-description">A Covid podcast by two Airsoft personalities with British Accents. Covering all manner of topics about Airsoft and current trends.</div>
+          <div class="project-link"><a href="https://open.spotify.com/show/5cQOPLjJ6KTloNDJTKc0yT?si=f9571afd815c437b">Spotify Podcast</a></div>
         </li>
         <li>
-          <div class="project-title">Project B</div>
-          <div class="project-description">Description of media project B.</div>
-          <div class="project-link"><a href="http://example.com/projectB">View Project</a></div>
-        </li>
-        <li>
-          <div class="project-title">Project C</div>
-          <div class="project-description">Description of media project C.</div>
-          <div class="project-link"><a href="http://example.com/projectC">View Project</a></div>
+          <div class="project-title">Lynx Brutality 2024 Livestream</div>
+          <img src="/images/lynxBrutBanner.png" alt="Lynx Brutality Banner">
+          <div class="project-description">Guest commentator for Polenar Tactical's Lynx Brutality 2024 livestream. Covering the competition and providing insights on sponsors and other event details.</div>
+          <div class="project-link"><a href="https://vimeo.com/946221958?fbclid=IwZXh0bgNhZW0CMTAAAR3PiVaMS-dl7cf5Vk-lTxIamo__s6DapRaa7kK02hXlhsjKPywun1EV_Dk_aem_Cb3bw5jlTCZBUHZAf3R8Eg">Day One Livestream</a></div>
+          <div class="project-link"><a href="https://vimeo.com/949968645?fbclid=IwZXh0bgNhZW0CMTAAAR2rAIm7evwduC5K0XdJilQFl3KovFdxZAgIQ5q78UIiCBGKYl9Ls_En-nw_aem_aaVk4vnzQpCu2ZycXzlMnA">Day Two Livestream</a></div>
         </li>
       </ul>
     </div>
