@@ -44,7 +44,7 @@ termina-plex:
   standard_titles: false
 
   username: mocka
-  hostname: inthechino
+  hostname:
 
   header_links:
     - { name: About, url: "/about" }
