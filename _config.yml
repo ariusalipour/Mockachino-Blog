@@ -43,16 +43,19 @@ termina-plex:
   centered_tables: false
   standard_titles: false
 
-  username: aryan
-  hostname: mockachino
+  username: mocka
+  hostname: inthechino
 
   header_links:
     - { name: About, url: "/about" }
     - { name: Blog, url: "/blog" }
 
   social_links:
+    - { name: Facebook, url: "https://www.facebook.com/MockaInTheChino/" }
+    - { name: Instagram, url: "https://www.instagram.com/mockainthechino/" }
+    - { name: YouTube, url: "https://www.youtube.com/@MockaInTheChino" }
+    - { name: TikTok, url: "https://www.tiktok.com/@mockainthechino" }
     - { name: GitHub, url: "https://github.com/ariusalipour" }
-    - { name: WinMSS Buddy, url: "https://winmss-buddy.mockachino.app/" }
 
 exclude:
   - "Gemfile"
