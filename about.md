@@ -20,35 +20,45 @@ permalink: /about/
     display: flex;
     flex-wrap: wrap;
     align-items: flex-start;
+    justify-content: center;
   }
-  .content img {
-    max-width: 150px;
-    margin-right: 20px;
+  .column {
     flex: 1;
+    margin: 0 10px;
+    min-width: 300px;
   }
-  .content div {
-    flex: 2;
-  }
-  .content p {
-    margin: 10px 0;
-  }
-  .content ul {
+  .list ul {
     list-style-type: none;
     padding: 0;
   }
-  .content ul li {
+  .list ul li {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-    margin: 15px;
+    margin: 20px 0;
     padding: 10px;
     border-radius: 5px;
   }
+  .project-title {
+    font-weight: bold;
+    font-size: 1.2em;
+  }
+  .project-description {
+    margin: 10px;
+    text-align: left;
+  }
+  .project-link a {
+    color: #007BFF;
+    text-decoration: none;
+  }
+  .project-link a:hover {
+    text-decoration: underline;
+  }
+  img {
+    border-radius: 10px;
+  }
   @media (max-width: 600px) {
-    .content {
-      flex-direction: column;
-      align-items: center;
-    }
-    .content img {
-      margin: 0 0 20px 0;
+    .column {
+      flex: 100%;
+      margin: 0;
     }
   }
 </style>
@@ -56,7 +66,7 @@ permalink: /about/
 <div class="container">
   <div class="content">
     <img src="/images/profilePicture.png" alt="MOCKA Logo">
-    <div>
+    <div class="list">
       <p>I thrive at the intersection of technology, firearms, and content creation. As a <strong>software engineer</strong>, I specialize in building <strong>mobile and web applications</strong>, focusing on <strong>backend architecture and AI tooling</strong> to create scalable, high-performance solutions. My expertise lies in designing robust <strong>API ecosystems</strong>, leveraging cloud infrastructure, and integrating AI-driven automation to enhance digital experiences.</p>
       <p>Beyond tech, I’m deeply involved in <strong>competitive shooting and firearms content creation</strong>. My YouTube channel, <em>MOCKA</em>, is dedicated to <strong>bringing shooting sports into the mainstream</strong>, delivering in-depth <strong>gear reviews, competitive insights, and industry commentary</strong>. My experience extends behind the scenes as a <strong>YouTube editor</strong> for well-known channels like <em>English Shooting</em> and <em>Polenar Tactical</em>, where I’ve helped craft high-quality shooting and firearms-related content.</p>
       <p>More recently, I’ve stepped into <strong>commentary for shooting competitions</strong>, including <em>Lynx Brutality</em> by Polenar Tactical, bringing expert analysis and energy to the competitive shooting scene.</p>

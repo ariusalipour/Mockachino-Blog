@@ -54,7 +54,6 @@ permalink: /projects/
   }
   img {
     border-radius: 10px;
-    margin: 10px 0;
   }
   @media (max-width: 600px) {
     .column {
