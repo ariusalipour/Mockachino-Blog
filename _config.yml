@@ -43,8 +43,8 @@ termina-plex:
   centered_tables: false
   standard_titles: false
 
-  username: mocka
-  hostname:
+  username: user
+  hostname: mockachino
 
   header_links:
     - { name: About, url: "/about" }
