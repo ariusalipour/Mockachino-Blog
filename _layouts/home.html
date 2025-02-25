@@ -21,11 +21,13 @@ layout: base
     <div class="postInfo">
       {%- if standard_titles -%}
       <h2 class="postTitle">
-      {%- else -%}
-      <h2 class="postTitle capitalize-title">
-      {%- endif -%}
         <a class="postListLink" href="{{ post.url | relative_url }}">{{ post.title | escape }}</a>
       </h2>
+      {%- else -%}
+      <h2 class="postTitle capitalize-title">
+        <a class="postListLink" href="{{ post.url | relative_url }}">{{ post.title | escape }}</a>
+      </h2>
+      {%- endif -%}
       {%- if post.date -%}
       <time class="postDate" datetime="{{ post.date | date: '%Y-%m-%d' }}">{{ post.date | date: date_format }}</time>
       {%- endif -%}

@@ -1,13 +1,13 @@
-title: Termina Plex Jekyll Theme
+title: MOCKA IN THE CHINO
 author:
-  name: Termina Plex
-  email: your-email@domain.com
-  pronouns: they/them
+  name: MOCKA
+  email: aryan@mockachino.co.uk
+  pronouns: Sh/it
 
 # The `>` after `description:` means to ignore line-breaks until next key.
 # If you want to omit the line-break after the end of text, use `>-` instead.
 description: >
-  Site Description
+  Home of the Mocka In The Chino
 
 # Build settings
 permalink: pretty
@@ -43,16 +43,16 @@ termina-plex:
   centered_tables: false
   standard_titles: false
 
-  username: theme
-  hostname: termina-plex
+  username: aryan
+  hostname: mockachino
 
   header_links:
     - { name: About, url: "/about" }
     - { name: Blog, url: "/blog" }
 
   social_links:
-    - { name: GitHub, url: "https://github.com/questionlp/termina-plex" }
-    - { name: Jekyll, url: "https://jekyllrb.com" }
+    - { name: GitHub, url: "https://github.com/ariusalipour" }
+    - { name: WinMSS Buddy, url: "https://winmss-buddy.mockachino.app/" }
 
 exclude:
   - "Gemfile"

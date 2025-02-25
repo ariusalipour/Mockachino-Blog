@@ -1,44 +1,87 @@
 <!DOCTYPE html>
 <html lang="{{ page.lang | default: site.lang | default: 'en' }}">
-  {%- include head.html -%}
+{%- include head.html -%}
 
-  <body>
-    <div class="flexWrapper">
-      {%- include header.html -%}
+<style>
+  .fade {
+    transition: opacity 0.5s ease-in-out;
+    opacity: 1;
+  }
+  #animatedText {
+    opacity: 1;
+  }
+  .socialNavbar ul {
+    display: flex;
+    flex-direction: column;
+  }
+  .socialNavbar li {
+    margin-bottom: 10px; /* Optional: Add some space between the items */
+  }
+</style>
 
-      <div class="content vertical">
-        <main class="main">
-          <div class="indexWrapper">
-            <div>
-              <h1 class="indexHeader">
-                {{ site.author.name }}
-                {%- if site.author.pronouns -%}<div class="authorPronouns">{{ site.author.pronouns }}</div>{%- endif -%}
-              </h1>
-            </div>
-            {%- if site.termina-plex.social_links -%}
-            <div class="socialNavbar">
-              <ul>
-                {%- for link in site.termina-plex.social_links -%}
-                  {%- if link.rel -%}
-                  <li>
-                    <a href="{{ link.url }}" rel="{{ link.rel }}">{{ link.name }}</a>
-                  </li>
-                  {%- else -%}
-                  <li>
-                    <a href="{{ link.url }}">{{ link.name }}</a>
-                  </li>
-                  {%- endif -%}
-                {%- endfor -%}
-              </ul>
-            </div>
+<body>
+<div class="flexWrapper">
+  {%- include header.html -%}
+
+  <div class="content vertical">
+    <main class="main">
+      <div class="indexWrapper">
+        <div>
+          <h1 class="indexHeader">
+            {{ site.author.name }}
+            <div id="animatedText" class="authorPronouns">Programmer</div>
+          </h1>
+        </div>
+        {%- if site.termina-plex.social_links -%}
+        <div class="socialNavbar">
+          <ul>
+            {%- for link in site.termina-plex.social_links -%}
+            {%- if link.rel -%}
+            <li>
+              <a href="{{ link.url }}" rel="{{ link.rel }}">{{ link.name }}</a>
+            </li>
+            {%- else -%}
+            <li>
+              <a href="{{ link.url }}">{{ link.name }}</a>
+            </li>
             {%- endif -%}
-          </div>
-        </main>
+            {%- endfor -%}
+          </ul>
+        </div>
+        {%- endif -%}
       </div>
+    </main>
+  </div>
 
-      {%- include footer.html -%}
-    </div>
+  {%- include footer.html -%}
+</div>
 
-    <script src="{{ '/assets/js/theme.js' | relative_url }}"></script>
-  </body>
+<script src="{{ '/assets/js/theme.js' | relative_url }}"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const texts = [
+      'Competitive Shooter',
+      'Journalist',
+      'Gamer',
+      'YouTube Editor'
+    ];
+    let index = 0;
+    const textElement = document.getElementById('animatedText');
+
+    function changeText() {
+      textElement.classList.add('fade');
+      setTimeout(() => {
+        textElement.classList.remove('fade');
+        setTimeout(() => {
+          textElement.textContent = texts[index];
+          textElement.classList.add('fade');
+          index = (index + 1) % texts.length;
+        }, 0);
+      }, 0);
+    }
+
+    setInterval(changeText, 2000);
+  });
+</script>
+</body>
 </html>
