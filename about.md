@@ -64,9 +64,6 @@ permalink: /about/
 </style>
 
 <div class="container">
-  <div class="header">
-    <h1>About</h1>
-  </div>
   <div class="content">
     <img src="/images/profilePicture.png" alt="MOCKA Logo">
     <div>
