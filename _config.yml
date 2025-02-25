@@ -47,8 +47,8 @@ termina-plex:
   hostname: mockachino
 
   header_links:
-    - { name: About, url: "/about" }
     - { name: Blog, url: "/blog" }
+    - { name: About, url: "/about" }
 
   social_links:
     - { name: Facebook, url: "https://www.facebook.com/MockaInTheChino/" }
