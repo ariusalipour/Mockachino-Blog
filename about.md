@@ -4,6 +4,8 @@ title: About
 permalink: /about/
 ---
 
-Hello there! I'm a competition shooter in both handgun and rifle disciplines, and I'm a big tech and gaming enthusiast. Whether it's the latest FPS or RTS game, or the newest tech gadgets and software, I'm always eager to learn more and stay ahead of the curve.
+Aryan Alipour (MOCKA) is a Software Engineer specialising in web and mobile tech. With a background in jounralism in the Airsoft and Tactical industry. 
+Aryan has been a part of an award winning team at the Airsoft & Milsim News Blog and has been expanding to sporting firearms since 2019. 
+Having worked as a YouTube Editor and presenter for multiple channels, Aryan has a passion for creating content and sharing his knowledge with the world.
 
-I'm not afraid to dive deep into specs and offer my opinions on what works best for me. I like to keep things fun and light-hearted, so expect the occasional joke or quip. Thanks for checking out my site, and I hope you enjoy what you find here!
+Outside of competitive shooting and working on coding projects, Aryan is an avid gamer who enjoys the technical aspects of immersive tactical shooters and spends some of his free time dedicating time to the Airsoft community.
