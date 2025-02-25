@@ -20,46 +20,35 @@ permalink: /projects/
     display: flex;
     flex-wrap: wrap;
     align-items: flex-start;
-    justify-content: center;
   }
-  .column {
+  .content img {
+    max-width: 150px;
+    margin-right: 20px;
     flex: 1;
-    margin: 0 10px;
-    min-width: 300px;
   }
-  .column ul {
+  .content div {
+    flex: 2;
+  }
+  .content p {
+    margin: 10px 0;
+  }
+  .content ul {
     list-style-type: none;
     padding: 0;
   }
-  .column ul li {
+  .content ul li {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-    margin: 20px 0;
+    margin: 15px;
     padding: 10px;
     border-radius: 5px;
   }
-  .project-title {
-    font-weight: bold;
-    font-size: 1.2em;
-  }
-  .project-description {
-    margin: 10px;
-    text-align: left;
-  }
-  .project-link a {
-    color: #007BFF;
-    text-decoration: none;
-  }
-  .project-link a:hover {
-    text-decoration: underline;
-  }
-  img {
-    border-radius: 10px;
-    margin: 10px 0;
-  }
   @media (max-width: 600px) {
-    .column {
-      flex: 100%;
-      margin: 0;
+    .content {
+      flex-direction: column;
+      align-items: center;
+    }
+    .content img {
+      margin: 0 0 20px 0;
     }
   }
 </style>
