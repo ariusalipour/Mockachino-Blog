@@ -18,3 +18,9 @@ gem "csv", "~> 3.3"
 # Add gems that will no longer be included in Ruby >= 3.5.0
 gem "logger", "~> 1.6"
 gem 'ostruct', '~> 0.6.0'
+
+gem 'jekyll-admin', group: :jekyll_plugins
+gem 'wdm'
+
+# Add the rack gem
+gem 'rack', '~> 2.2'
