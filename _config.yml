@@ -52,10 +52,9 @@ termina-plex:
     - { name: About, url: "/about" }
 
   social_links:
-    - { name: Facebook, url: "https://www.facebook.com/MockaInTheChino/" }
-    - { name: Instagram, url: "https://www.instagram.com/mockainthechino/" }
-    - { name: YouTube, url: "https://www.youtube.com/@MockaInTheChino" }
-    - { name: TikTok, url: "https://www.tiktok.com/@mockainthechino" }
+    - { name: Facebook, url: "https://www.facebook.com/MockaShoots/" }
+    - { name: Instagram, url: "https://www.instagram.com/mockashoots/" }
+    - { name: YouTube, url: "https://www.youtube.com/@MockaShoots" }
     - { name: GitHub, url: "https://github.com/ariusalipour" }
 
 exclude:
