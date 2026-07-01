@@ -1,0 +1,85 @@
+---
+import EntryList from "../../components/EntryList.astro";
+import Layout from "../../layouts/Layout.astro";
+import {
+  formatCategoryLabel,
+  formatTopicLabel,
+  getEntry,
+  getEntryNarrative,
+  getRelatedEntries,
+  wikiEntries,
+} from "../../data/wiki";
+import { formatDate, formatDateTime, formatKind, formatRelativeTime, formatTopicCategory } from "../../lib/format";
+
+export function getStaticPaths() {
+  return wikiEntries.map((entry) => ({
+    params: { slug: entry.slug },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const relatedEntries = getRelatedEntries(entry, 3);
+const narrative = getEntryNarrative(entry);
+---
+
+<Layout title={`${entry.title} | MOCKACHINO`} description={entry.summary} currentPath={Astro.url.pathname}>
+  <div class="page-stack">
+    <section class="panel entry-hero">
+      <p class="section-label">{formatKind(entry.kind)}</p>
+      <h1>{entry.title}</h1>
+      <div class="meta-strip">
+        <span class="meta-chip">{formatTopicCategory(entry.topic, entry.category)}</span>
+        <span class="meta-chip">Created {formatDate(entry.createdAt)}</span>
+        <span class="meta-chip">Updated {formatRelativeTime(entry.updatedAt)}</span>
+      </div>
+      <p class="taxonomy-copy">{entry.summary}</p>
+    </section>
+
+    <section class="detail-grid">
+      <article class="panel copy-block">
+        <h2>Overview</h2>
+        {narrative.map((paragraph) => <p>{paragraph}</p>)}
+      </article>
+
+      <article class="panel detail-block">
+        <h2>Page Data</h2>
+        <div class="site-footer__meta">
+          <div>
+            <dt>Topic</dt>
+            <dd>{formatTopicLabel(entry.topic)}</dd>
+          </div>
+          <div>
+            <dt>Category</dt>
+            <dd>{formatCategoryLabel(entry.topic, entry.category)}</dd>
+          </div>
+          <div>
+            <dt>Created</dt>
+            <dd>{formatDateTime(entry.createdAt)}</dd>
+          </div>
+          <div>
+            <dt>Updated</dt>
+            <dd>{formatDateTime(entry.updatedAt)}</dd>
+          </div>
+          <div>
+            <dt>Popularity</dt>
+            <dd>{entry.popularity}</dd>
+          </div>
+        </div>
+        <div class="tag-cloud">
+          {entry.tags.map((tag) => <a href={`/browse/?tag=${encodeURIComponent(tag)}`} class="tag-chip">#{tag}</a>)}
+        </div>
+      </article>
+    </section>
+
+    <section class="panel">
+      <div class="section-heading">
+        <div>
+          <p class="section-label">Related Pages</p>
+          <h2>Continue through adjacent notes.</h2>
+        </div>
+      </div>
+      <EntryList entries={relatedEntries} />
+    </section>
+  </div>
+</Layout>

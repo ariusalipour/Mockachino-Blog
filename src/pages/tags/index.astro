@@ -1,0 +1,30 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import { getTags } from "../../data/wiki";
+
+const tags = getTags();
+---
+
+<Layout title="Tags | MOCKACHINO" description="Browse the wiki by tag." currentPath={Astro.url.pathname}>
+  <div class="page-stack">
+    <section class="panel taxonomy-hero">
+      <p class="section-label">Tags</p>
+      <h1>Cross-topic shortcuts for recurring themes.</h1>
+      <p class="taxonomy-copy">
+        Tags connect pages that share workflows, hardware, or concepts even when they live in different categories.
+      </p>
+    </section>
+
+    <section class="tag-grid">
+      {
+        tags.map((tag) => (
+          <article class="panel tag-card">
+            <h3>#{tag.name}</h3>
+            <p>{tag.count} linked entries</p>
+            <a href={`/browse/?tag=${encodeURIComponent(tag.name)}`} class="button button--secondary">Browse Tag</a>
+          </article>
+        ))
+      }
+    </section>
+  </div>
+</Layout>

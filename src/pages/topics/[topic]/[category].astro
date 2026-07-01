@@ -1,0 +1,39 @@
+---
+import EntryList from "../../../components/EntryList.astro";
+import Layout from "../../../layouts/Layout.astro";
+import { formatCategoryLabel, getCategory, getEntriesByCategory, topics } from "../../../data/wiki";
+
+export function getStaticPaths() {
+  return topics.flatMap((topic) =>
+    topic.categories.map((category) => ({
+      params: { topic: topic.id, category: category.id },
+      props: { topic, category },
+    })),
+  );
+}
+
+const { topic, category } = Astro.props;
+const entries = getEntriesByCategory(topic.id, category.id);
+const resolvedCategory = getCategory(topic.id, category.id);
+---
+
+<Layout
+  title={`${topic.name} / ${formatCategoryLabel(topic.id, category.id)} | MOCKACHINO`}
+  description={resolvedCategory?.description ?? ""}
+  currentPath={Astro.url.pathname}
+>
+  <div class="page-stack">
+    <section class="panel taxonomy-hero">
+      <p class="section-label">{topic.name}</p>
+      <h1>{resolvedCategory?.name ?? category.id}</h1>
+      <p class="taxonomy-copy">{resolvedCategory?.description}</p>
+      <div class="meta-strip">
+        <span class="meta-chip">{entries.length} linked pages</span>
+      </div>
+    </section>
+
+    <section class="panel">
+      {entries.length > 0 ? <EntryList entries={entries} /> : <p class="empty-state">No entries are assigned to this category yet.</p>}
+    </section>
+  </div>
+</Layout>

@@ -1,0 +1,28 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import { topics } from "../../data/wiki";
+---
+
+<Layout title="About | MOCKACHINO" description="About the Mockachino wiki." currentPath={Astro.url.pathname}>
+  <div class="page-stack">
+    <section class="panel taxonomy-hero">
+      <p class="section-label">About</p>
+      <h1>A compact wiki built like a field manual.</h1>
+      <p class="taxonomy-copy">
+        The site is organized as a multi-topic reference system rather than a chronological blog. Every page is meant
+        to stay useful after the publish date by leaning on categories, tags, and related links.
+      </p>
+    </section>
+
+    <section class="panel topic-overview-grid">
+      {
+        topics.map((topic) => (
+          <article class="copy-block">
+            <h2>{topic.name}</h2>
+            <p>{topic.description}</p>
+          </article>
+        ))
+      }
+    </section>
+  </div>
+</Layout>

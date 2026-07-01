@@ -1,0 +1,53 @@
+---
+import EntryList from "../../../components/EntryList.astro";
+import Layout from "../../../layouts/Layout.astro";
+import { getEntriesByTopic, getTopicStats, topics } from "../../../data/wiki";
+
+export function getStaticPaths() {
+  return topics.map((topic) => ({
+    params: { topic: topic.id },
+    props: { topic },
+  }));
+}
+
+const { topic } = Astro.props;
+const entries = getEntriesByTopic(topic.id);
+const stats = getTopicStats(topic.id);
+---
+
+<Layout title={`${topic.name} | MOCKACHINO`} description={topic.description} currentPath={Astro.url.pathname}>
+  <div class="page-stack">
+    <section class="panel taxonomy-hero">
+      <p class="section-label">{topic.name}</p>
+      <h1>{topic.strapline}</h1>
+      <p class="taxonomy-copy">{topic.description}</p>
+      <div class="meta-strip">
+        <span class="meta-chip">{stats.reviews} Reviews</span>
+        <span class="meta-chip">{stats.articles} Articles</span>
+        <span class="meta-chip">{stats.guides} Guides</span>
+      </div>
+    </section>
+
+    <section class="taxonomy-grid">
+      {
+        topic.categories.map((category) => (
+          <article class="panel category-card">
+            <h3>{category.name}</h3>
+            <p>{category.description}</p>
+            <a href={`/topics/${topic.id}/${category.id}/`} class="button button--secondary">Open Category</a>
+          </article>
+        ))
+      }
+    </section>
+
+    <section class="panel">
+      <div class="section-heading">
+        <div>
+          <p class="section-label">Entries</p>
+          <h2>All pages under {topic.name}.</h2>
+        </div>
+      </div>
+      <EntryList entries={entries} />
+    </section>
+  </div>
+</Layout>

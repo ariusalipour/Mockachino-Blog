@@ -1,23 +1,187 @@
 ---
 import "../styles/global.css";
+import Icon from "../components/Icon.astro";
+import LogoMark from "../components/LogoMark.astro";
+import SystemGrid from "../components/SystemGrid.astro";
+import { headerNav, primaryNav, topics } from "../data/wiki";
+import { getRepoStatus } from "../lib/repo";
 
 interface Props {
   title?: string;
+  description?: string;
+  currentPath?: string;
 }
 
-const { title = "Astro Starter" } = Astro.props;
+const { title = "MOCKACHINO", description = "The Mocka Wiki", currentPath = "/" } = Astro.props;
+const repoStatus = getRepoStatus();
+const updatedLabel = new Intl.DateTimeFormat("en-GB", {
+  dateStyle: "medium",
+  timeStyle: "short",
+}).format(new Date(repoStatus.lastCommitDate));
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="en" data-theme="dark">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
     <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <meta name="description" content={description} />
     <title>{title}</title>
+    <script is:inline>
+      const preferredTheme = localStorage.getItem("mockachino-theme");
+      const systemDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+      document.documentElement.dataset.theme = preferredTheme ?? (systemDark ? "dark" : "light");
+    </script>
   </head>
   <body>
-    <slot />
+    <div class="site-shell">
+      <aside class="sidebar">
+        <section class="panel panel--sidebar">
+          <p class="panel__kicker">Navigation</p>
+          <nav aria-label="Primary">
+            <ul class="nav-list">
+              {
+                primaryNav.map((item) => (
+                  <li>
+                    <a href={item.href} class:list={["nav-link", currentPath === item.href && "is-active"]}>
+                      <Icon name={item.icon} class="nav-link__icon" />
+                      <span>{item.label}</span>
+                    </a>
+                  </li>
+                ))
+              }
+            </ul>
+          </nav>
+        </section>
+
+        <section class="panel panel--sidebar">
+          <p class="panel__kicker">Topics</p>
+          <div class="topic-tree">
+            {
+              topics.map((topic) => (
+                <div class="topic-tree__group">
+                  <a href={`/topics/${topic.id}/`} class="topic-tree__topic">
+                    <Icon name={topic.icon} class="topic-tree__icon" />
+                    <span>{topic.name}</span>
+                  </a>
+                  <ul class="topic-tree__categories">
+                    {topic.categories.map((category) => <li><a href={`/topics/${topic.id}/${category.id}/`}>{category.name}</a></li>)}
+                  </ul>
+                </div>
+              ))
+            }
+          </div>
+        </section>
+
+        <section class="panel panel--sidebar panel--status">
+          <div class="panel__row">
+            <p class="panel__kicker">System Status</p>
+            <span class="status-pill">Operational</span>
+          </div>
+          <SystemGrid activity={repoStatus.activity} />
+          <dl class="status-meta">
+            <div>
+              <dt>Window</dt>
+              <dd>84 days</dd>
+            </div>
+            <div>
+              <dt>Commits</dt>
+              <dd>{repoStatus.totalCommitsInWindow}</dd>
+            </div>
+            <div>
+              <dt>Last</dt>
+              <dd>{updatedLabel}</dd>
+            </div>
+          </dl>
+        </section>
+      </aside>
+
+      <div class="site-main">
+        <header class="site-header panel">
+          <div class="site-header__top">
+            <p class="site-header__reference">REF-MOCKA / WIKI-SYSTEM / REV-C</p>
+            <a href="/" class="brand-lockup">
+              <div class="brand-lockup__text">
+                <span class="brand-lockup__title">MOCKACHINO</span>
+                <span class="brand-lockup__subtitle">THE MOCKA WIKI</span>
+              </div>
+              <LogoMark class="brand-lockup__mark" />
+            </a>
+          </div>
+
+          <div class="site-header__bottom">
+            <nav aria-label="Header">
+              <ul class="header-nav">
+                {
+                  headerNav.map((item) => (
+                    <li>
+                      <a href={item.href} class:list={["header-nav__link", currentPath === item.href && "is-active"]}>
+                        {item.label}
+                      </a>
+                    </li>
+                  ))
+                }
+              </ul>
+            </nav>
+
+            <div class="site-tools">
+              <form action="/browse/" method="get" class="search-form">
+                <label class="sr-only" for="site-search">Search wiki</label>
+                <Icon name="search" class="search-form__icon" />
+                <input id="site-search" name="q" type="search" placeholder="Search articles, guides, reviews" />
+              </form>
+              <button class="theme-toggle" type="button" data-theme-toggle aria-label="Toggle day and night mode">
+                <Icon name="moon" class="theme-toggle__icon theme-toggle__icon--dark" />
+                <Icon name="sun" class="theme-toggle__icon theme-toggle__icon--light" />
+              </button>
+            </div>
+          </div>
+        </header>
+
+        <main class="page-content">
+          <slot />
+        </main>
+
+        <footer class="site-footer panel">
+          <div class="site-footer__brand">
+            <LogoMark class="site-footer__mark" />
+            <div>
+              <p class="site-footer__title">MOCKACHINO</p>
+              <p class="site-footer__subtitle">Engineering notes for shoots, plays, and code.</p>
+            </div>
+          </div>
+
+          <div class="site-footer__info">
+            <p class="panel__kicker">System Info</p>
+            <dl class="site-footer__meta">
+              <div>
+                <dt>Version</dt>
+                <dd>{repoStatus.version}</dd>
+              </div>
+              <div>
+                <dt>Updated</dt>
+                <dd>{updatedLabel}</dd>
+              </div>
+              <div>
+                <dt>Status</dt>
+                <dd>Operational</dd>
+              </div>
+            </dl>
+          </div>
+        </footer>
+      </div>
+    </div>
+
+    <script is:inline>
+      const toggle = document.querySelector("[data-theme-toggle]");
+      toggle?.addEventListener("click", () => {
+        const root = document.documentElement;
+        const nextTheme = root.dataset.theme === "dark" ? "light" : "dark";
+        root.dataset.theme = nextTheme;
+        localStorage.setItem("mockachino-theme", nextTheme);
+      });
+    </script>
   </body>
 </html>

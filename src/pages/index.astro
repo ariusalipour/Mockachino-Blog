@@ -1,39 +1,106 @@
 ---
-import Card from "../components/Card.astro";
+import EntryList from "../components/EntryList.astro";
+import Icon from "../components/Icon.astro";
+import LogoMark from "../components/LogoMark.astro";
 import Layout from "../layouts/Layout.astro";
+import { getPopularEntries, getRecentEntries, getTopicStats, topics } from "../data/wiki";
+
+const recentEntries = getRecentEntries(5);
+const popularEntries = getPopularEntries(5);
 ---
 
-<Layout title="Astro Starter">
-  <main class="hero">
-    <div class="hero__content">
-      <p class="eyebrow">Template Site</p>
-      <h1>Welcome to <span>Astro</span></h1>
-      <p class="intro">
-        This project has been reset to a minimal starter so you can build from a clean Astro baseline.
+<Layout
+  title="MOCKACHINO | The Mocka Wiki"
+  description="A technical-style wiki for shoots, plays, and code notes."
+  currentPath={Astro.url.pathname}
+>
+  <section class="panel hero-panel">
+    <div class="hero-panel__content">
+      <p class="section-label">Welcome To Mockachino</p>
+      <h1>Structured notes, reviews, and guides for the things worth documenting.</h1>
+      <p class="hero-panel__summary">
+        MOCKACHINO is a multi-topic wiki built around three operating lanes: cameras and fieldcraft in
+        MOCKA SHOOTS, game reviews and strategy in MOCKA PLAYS, and implementation notes in MOCKA CODES.
+        It is designed to read like a compact engineering manual rather than a conventional blog.
       </p>
-
-      <ul class="link-card-grid">
-        <Card
-          href="https://docs.astro.build"
-          title="Documentation"
-          body="Learn how Astro works and explore the core concepts."
-        />
-        <Card
-          href="https://astro.build/integrations/"
-          title="Integrations"
-          body="Add tools and services for styling, content, and deployment."
-        />
-        <Card
-          href="https://astro.build/themes/"
-          title="Themes"
-          body="Browse starter designs and examples you can use as a base."
-        />
-        <Card
-          href="https://astro.build/chat/"
-          title="Community"
-          body="Get help, ask questions, and see what other Astro users are building."
-        />
-      </ul>
+      <div class="hero-panel__actions">
+        <a href="/browse/" class="button button--primary">Browse All</a>
+        <a href="/recent/" class="button button--secondary">Recent Changes</a>
+      </div>
     </div>
-  </main>
+
+    <div class="hero-panel__visual">
+      <LogoMark variant="hero" class="hero-panel__mark" />
+    </div>
+  </section>
+
+  <section class="panel">
+    <div class="section-heading">
+      <div>
+        <p class="section-label">Explore Topics</p>
+        <h2>Three indexed domains with their own categories and entry mix.</h2>
+      </div>
+    </div>
+
+    <div class="topic-card-grid">
+      {
+        topics.map((topic) => {
+          const stats = getTopicStats(topic.id);
+
+          return (
+            <article class="topic-card">
+              <div class="topic-card__header">
+                <Icon name={topic.icon} class="topic-card__icon" />
+                <div>
+                  <h3>{topic.name}</h3>
+                  <p>{topic.strapline}</p>
+                </div>
+              </div>
+              <div class="metric-row">
+                <div class="metric-box">
+                  <span class="metric-box__value">{stats.reviews}</span>
+                  <span class="metric-box__label">Reviews</span>
+                </div>
+                <div class="metric-box">
+                  <span class="metric-box__value">{stats.articles}</span>
+                  <span class="metric-box__label">Articles</span>
+                </div>
+                <div class="metric-box">
+                  <span class="metric-box__value">{stats.guides}</span>
+                  <span class="metric-box__label">Guides</span>
+                </div>
+              </div>
+              <p class="topic-card__description">{topic.description}</p>
+              <a href={`/topics/${topic.id}/`} class="button button--primary topic-card__button">
+                Explore {topic.shortName.toUpperCase()}
+              </a>
+            </article>
+          );
+        })
+      }
+    </div>
+  </section>
+
+  <section class="dual-panel">
+    <article class="panel">
+      <div class="section-heading">
+        <div>
+          <p class="section-label">Recently Updated</p>
+          <h2>Fresh changes across the wiki.</h2>
+        </div>
+      </div>
+      <EntryList entries={recentEntries} mode="recent" />
+      <a href="/recent/" class="panel-footer-link">View All Recent Changes</a>
+    </article>
+
+    <article class="panel">
+      <div class="section-heading">
+        <div>
+          <p class="section-label">Popular Pages</p>
+          <h2>Most visited field references.</h2>
+        </div>
+      </div>
+      <EntryList entries={popularEntries} mode="popular" />
+    </article>
+  </section>
 </Layout>

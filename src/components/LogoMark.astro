@@ -1,0 +1,11 @@
+---
+interface Props {
+  variant?: "compact" | "hero";
+  class?: string;
+}
+
+const { variant = "compact", class: className } = Astro.props;
+const asset = variant === "hero" ? "/brand/mockachino-hero.svg" : "/brand/mockachino-mark.svg";
+---
+
+<img class={className} src={asset} alt="Mockachino emblem" loading="eager" />
