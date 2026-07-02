@@ -1,20 +1,8 @@
 <svg width="192" height="192" viewBox="0 0 192 192" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <path d="M24 22V38H22V22H38V24H24ZM170 22V38H168V24H154V22H170ZM24 170H38V168H24V154H22V170H38ZM170 170H154V168H168V154H170V170H154Z" stroke="#F5C542" stroke-width="2"/>
-  <path d="M36 24V168M52 24V168M68 24V168M84 24V168M100 24V168M116 24V168M132 24V168M148 24V168M164 24V168" stroke="#171C22" stroke-width="1"/>
-  <path d="M24 36H168M24 52H168M24 68H168M24 84H168M24 100H168M24 116H168M24 132H168M24 148H168M24 164H168" stroke="#171C22" stroke-width="1"/>
-  <path d="M12 96H24M168 96H180M96 12V24M96 168V180" stroke="#4A4F57" stroke-width="1.5"/>
-  <circle cx="96" cy="96" r="2.6" fill="#4A4F57"/>
-  <circle cx="12" cy="96" r="3.2" stroke="#4A4F57" stroke-width="1.2"/>
-  <circle cx="180" cy="96" r="3.2" stroke="#4A4F57" stroke-width="1.2"/>
-  <path d="M32 32H40M36 28V36M152 32H160M156 28V36M32 160H40M36 156V164M152 160H160M156 156V164" stroke="#4A4F57" stroke-width="1.2"/>
-  <path d="M50 146V46H80L96 62L112 46H142V146H126V82L96 112L66 82V146H50Z" stroke="#F2EEE5" stroke-width="2.4" stroke-linejoin="miter"/>
-  <path d="M70 146V88L96 114L122 88V146" stroke="#F2EEE5" stroke-width="1.6" stroke-linejoin="miter"/>
-  <path d="M66 58V128M126 58V128M66 58H72M126 58H120M66 128H72M126 128H120" stroke="#6A717A" stroke-width="1.1"/>
-  <circle cx="66" cy="58" r="3.6" stroke="#6A717A" stroke-width="1.1"/>
-  <circle cx="126" cy="58" r="3.6" stroke="#6A717A" stroke-width="1.1"/>
-  <circle cx="96" cy="78" r="3.4" stroke="#6A717A" stroke-width="1.1"/>
-  <circle cx="96" cy="78" r="1.4" fill="#F5C542"/>
-  <path d="M66 58L96 78L126 58M80 86L96 98L112 86" stroke="#6A717A" stroke-width="1" stroke-dasharray="3 3"/>
-  <path d="M79 102L85 96L91 102L85 108L79 102Z" stroke="#6A717A" stroke-width="1"/>
-  <path d="M60 134L63 131L66 134L63 137L60 134ZM126 134L129 131L132 134L129 137L126 134Z" fill="#6A717A"/>
+  <path d="M20 20H172V24H24V172H20V20Z" fill="#F5C542"/>
+  <path d="M168 20H172V172H92V168H168V20Z" fill="#F5C542"/>
+  <g transform="translate(-48 -6) scale(0.5142857)">
+    <path d="M140 282V78H216L280 142L344 78H420V282H384V128L280 232L176 128V282H140Z" stroke="#F5C542" stroke-width="14" stroke-linejoin="miter"/>
+    <path d="M184 282V136L232 184L280 232L328 184L376 136V282" stroke="#F5C542" stroke-width="9" stroke-linejoin="miter"/>
+  </g>
 </svg>

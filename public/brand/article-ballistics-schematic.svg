@@ -1,0 +1,18 @@
+<svg width="520" height="320" viewBox="0 0 520 320" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="520" height="320" fill="#070B10"/>
+  <path d="M26 26H494V294" stroke="#2A2414" stroke-width="2"/>
+  <path d="M46 42H474V276" stroke="#141A20"/>
+  <path d="M48 88H472M48 152H472M48 216H472M132 42V276M260 42V276M388 42V276" stroke="#11171D"/>
+  <path d="M120 160H322C337 160 352 154 364 144L392 122C403 114 417 110 432 110H454C460 110 466 115 466 122C466 128 461 134 454 134H433C419 134 406 138 396 146L362 172C351 181 336 186 322 186H120C111 186 104 179 104 170V176C104 167 111 160 120 160Z" stroke="#E6E0D2" stroke-width="3"/>
+  <path d="M120 160H322C337 160 352 154 364 144L392 122C403 114 417 110 432 110H454C460 110 466 115 466 122C466 128 461 134 454 134H433C419 134 406 138 396 146L362 172C351 181 336 186 322 186H120" stroke="#676D74" stroke-width="1" stroke-dasharray="4 4"/>
+  <path d="M100 86V236M100 86H120M100 236H120M454 110V184M454 110H438M454 184H438" stroke="#676D74" stroke-width="1.6"/>
+  <path d="M86 82L92 88L86 94M468 106L462 112L468 118M468 180L462 186L468 192" stroke="#676D74" stroke-width="1.4"/>
+  <path d="M134 72H420M134 72V88M420 72V88" stroke="#A8A298" stroke-width="1.5"/>
+  <path d="M420 142H476M420 142V124M476 142V124" stroke="#A8A298" stroke-width="1.5"/>
+  <text x="222" y="62" fill="#E4E0D5" font-family="'IBM Plex Mono', monospace" font-size="18">33.56 MM</text>
+  <text x="432" y="152" fill="#E4E0D5" font-family="'IBM Plex Mono', monospace" font-size="18">7.82 MM</text>
+  <path d="M62 270H184" stroke="#6F5A1E" stroke-width="2"/>
+  <path d="M334 270H454" stroke="#6F5A1E" stroke-width="2"/>
+  <text x="64" y="294" fill="#D2C9B7" font-family="'IBM Plex Mono', monospace" font-size="24">CALIBER: 6.5MM</text>
+  <text x="340" y="294" fill="#8F8A80" font-family="'IBM Plex Mono', monospace" font-size="22">REF-DWG-023</text>
+</svg>
