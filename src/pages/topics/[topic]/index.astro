@@ -17,7 +17,8 @@ const stats = getTopicStats(topic.id);
 
 <Layout title={`${topic.name} | MOCKACHINO`} description={topic.description} currentPath={Astro.url.pathname}>
   <div class="page-stack">
-    <section class="panel taxonomy-hero">
+    <section class="panel taxonomy-hero" data-topic={topic.id}>
+      <div class="taxonomy-hero__media" aria-hidden="true"></div>
       <p class="section-label">{topic.name}</p>
       <h1>{topic.strapline}</h1>
       <p class="taxonomy-copy">{topic.description}</p>
