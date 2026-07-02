@@ -23,7 +23,8 @@ const resolvedCategory = getCategory(topic.id, category.id);
   currentPath={Astro.url.pathname}
 >
   <div class="page-stack">
-    <section class="panel taxonomy-hero">
+    <section class="panel taxonomy-hero" data-topic={topic.id}>
+      <div class="taxonomy-hero__media" aria-hidden="true"></div>
       <p class="section-label">{topic.name}</p>
       <h1>{resolvedCategory?.name ?? category.id}</h1>
       <p class="taxonomy-copy">{resolvedCategory?.description}</p>
