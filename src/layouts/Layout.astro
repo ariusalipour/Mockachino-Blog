@@ -1,23 +1,72 @@
 ---
 import "../styles/global.css";
+import { execSync } from "node:child_process";
 import LogoMark from "../components/LogoMark.astro";
 import RasterIcon from "../components/RasterIcon.astro";
 import SystemGrid from "../components/SystemGrid.astro";
 import { headerNav, primaryNav, topics } from "../data/wiki";
-import { getRepoStatus } from "../lib/repo";
 
 interface Props {
   title?: string;
   description?: string;
   currentPath?: string;
+  headerPath?: string;
+  pageClass?: string;
+  showPrimaryNav?: boolean;
 }
 
-const { title = "MOCKACHINO", description = "The Mocka Wiki", currentPath = "/" } = Astro.props;
-const repoStatus = getRepoStatus();
-const updatedLabel = new Intl.DateTimeFormat("en-GB", {
-  dateStyle: "medium",
-  timeStyle: "short",
-}).format(new Date(repoStatus.lastCommitDate));
+const {
+  title = "MOCKACHINO",
+  description = "The Mocka Wiki",
+  currentPath = "/",
+  headerPath = currentPath,
+  pageClass,
+  showPrimaryNav = true,
+} = Astro.props;
+
+const today = new Date();
+today.setHours(0, 0, 0, 0);
+const activityDays = 7 * 16;
+const activityStart = new Date(today);
+activityStart.setDate(today.getDate() - activityDays + 1);
+
+function toDateKey(date: Date) {
+  return date.toISOString().slice(0, 10);
+}
+
+function getRepoActivity() {
+  const counts = new Map<string, number>();
+
+  try {
+    const output = execSync("git log --date=short --pretty=format:%ad -n 500", {
+      cwd: process.cwd(),
+      encoding: "utf8",
+      stdio: ["ignore", "pipe", "ignore"],
+    });
+
+    for (const date of output.split(/\r?\n/).filter(Boolean)) {
+      counts.set(date, (counts.get(date) ?? 0) + 1);
+    }
+  } catch {
+    // Keep the activity grid renderable outside a git checkout.
+  }
+
+  return Array.from({ length: 16 }, (_, weekIndex) =>
+    Array.from({ length: 7 }, (_, dayIndex) => {
+      const date = new Date(activityStart);
+      date.setDate(activityStart.getDate() + weekIndex * 7 + dayIndex);
+      const dateKey = toDateKey(date);
+
+      return {
+        date: dateKey,
+        count: counts.get(dateKey) ?? 0,
+      };
+    }),
+  );
+}
+
+const repoActivity = getRepoActivity();
+const totalRepoCommits = repoActivity.flat().reduce((total, cell) => total + cell.count, 0);
 ---
 
 <!doctype html>
@@ -35,16 +84,16 @@ const updatedLabel = new Intl.DateTimeFormat("en-GB", {
       document.documentElement.dataset.theme = preferredTheme ?? (systemDark ? "dark" : "light");
     </script>
   </head>
-  <body class:list={[currentPath === "/" && "page-home"]}>
+  <body class:list={[currentPath === "/" && "page-home", pageClass]}>
     <div class="site-frame">
       <header class="site-header panel">
         <div class="site-header__row">
           <div class="site-header__lead">
-            <a href="/" class="sidebar-brand site-header__brand">
-              <LogoMark variant="monogram" class="sidebar-brand__mark" />
-              <div class="sidebar-brand__copy">
-                <span class="sidebar-brand__title">MOCKACHINO</span>
-                <span class="sidebar-brand__subtitle">THE MOCKA WIKI</span>
+            <a href="/" class="site-brand">
+              <LogoMark variant="monogram" class="site-brand__mark" />
+              <div class="site-brand__copy">
+                <span class="site-brand__title">MOCKACHINO</span>
+                <span class="site-brand__subtitle">THE MOCKA WIKI</span>
               </div>
             </a>
 
@@ -53,7 +102,7 @@ const updatedLabel = new Intl.DateTimeFormat("en-GB", {
                 {
                   headerNav.map((item) => (
                     <li>
-                      <a href={item.href} class:list={["header-nav__link", currentPath === item.href && "is-active"]}>
+                      <a href={item.href} class:list={["header-nav__link", headerPath === item.href && "is-active"]}>
                         {item.label}
                       </a>
                     </li>
@@ -73,33 +122,46 @@ const updatedLabel = new Intl.DateTimeFormat("en-GB", {
             </form>
             <div class="header-utilities">
               <button class="theme-toggle" type="button" data-theme-toggle aria-label="Toggle day and night mode">
-                <RasterIcon name="moon" class="theme-toggle__icon theme-toggle__icon--dark theme-toggle__icon--raster" />
-                <RasterIcon name="sun" class="theme-toggle__icon theme-toggle__icon--light theme-toggle__icon--raster" />
+                <RasterIcon name="sun" class="theme-toggle__icon theme-toggle__icon--dark theme-toggle__icon--raster" />
+                <RasterIcon name="moon" class="theme-toggle__icon theme-toggle__icon--light theme-toggle__icon--raster" />
               </button>
+              <a href="/about/" class="theme-toggle theme-toggle--ghost header-user" aria-label="Open help and profile">
+                <RasterIcon name="user" class="theme-toggle__icon theme-toggle__icon--raster" />
+              </a>
             </div>
           </div>
         </div>
+        <div class="header-meta" aria-hidden="true">
+          <span>REF-001</span>
+          <span>REV-C</span>
+        </div>
       </header>
+
+      <slot name="subheader" />
 
       <div class="site-shell">
         <aside class="sidebar">
-          <section class="panel panel--sidebar">
-            <p class="panel__kicker">Navigation</p>
-            <nav aria-label="Primary">
-              <ul class="nav-list">
-                {
-                  primaryNav.map((item) => (
-                    <li>
-                      <a href={item.href} class:list={["nav-link", currentPath === item.href && "is-active"]}>
-                        <RasterIcon name={item.icon} class="nav-link__icon nav-link__icon--raster" />
-                        <span>{item.label}</span>
-                      </a>
-                    </li>
-                  ))
-                }
-              </ul>
-            </nav>
-          </section>
+          {
+            showPrimaryNav && (
+              <section class="panel panel--sidebar">
+                <p class="panel__kicker">Navigation</p>
+                <nav aria-label="Primary">
+                  <ul class="nav-list">
+                    {
+                      primaryNav.map((item) => (
+                        <li>
+                          <a href={item.href} class:list={["nav-link", currentPath === item.href && "is-active"]}>
+                            <RasterIcon name={item.icon} class="nav-link__icon nav-link__icon--raster" />
+                            <span>{item.label}</span>
+                          </a>
+                        </li>
+                      ))
+                    }
+                  </ul>
+                </nav>
+              </section>
+            )
+          }
 
           <section class="panel panel--sidebar panel--topics">
             <p class="panel__kicker">Topics</p>
@@ -130,25 +192,14 @@ const updatedLabel = new Intl.DateTimeFormat("en-GB", {
           </section>
 
           <section class="panel panel--sidebar panel--status">
-            <div class="panel__row">
-              <p class="panel__kicker panel__kicker--icon"><RasterIcon name="status" class="panel__kicker-icon panel__kicker-icon--raster" /> <span>System Status</span></p>
-              <span class="status-pill">Operational</span>
+            <p class="panel__kicker">Repo Activity</p>
+            <div class="repo-activity">
+              <SystemGrid activity={repoActivity} />
+              <div class="repo-activity__meta">
+                <span>{totalRepoCommits} commits</span>
+                <span>16 weeks</span>
+              </div>
             </div>
-            <SystemGrid activity={repoStatus.activity} />
-            <dl class="status-meta">
-              <div>
-                <dt>Window</dt>
-                <dd>84 days</dd>
-              </div>
-              <div>
-                <dt>Commits</dt>
-                <dd>{repoStatus.totalCommitsInWindow}</dd>
-              </div>
-              <div>
-                <dt>Last</dt>
-                <dd>{updatedLabel}</dd>
-              </div>
-            </dl>
           </section>
         </aside>
 
@@ -168,6 +219,9 @@ const updatedLabel = new Intl.DateTimeFormat("en-GB", {
               <p class="site-footer__subtitle">The Mocka Wiki</p>
             </div>
           </div>
+        </div>
+
+        <div class="footer-column footer-column--statement">
           <p class="site-footer__blurb">Built by Mocka. For everyone.</p>
           <p class="site-footer__ref">REF-FOOTER-01</p>
         </div>
@@ -204,15 +258,15 @@ const updatedLabel = new Intl.DateTimeFormat("en-GB", {
           <dl class="site-footer__meta">
             <div>
               <dt>Version</dt>
-              <dd>{repoStatus.version}</dd>
+              <dd>2.0.0</dd>
             </div>
             <div>
               <dt>Last Update</dt>
-              <dd>{updatedLabel}</dd>
+              <dd>25 May 2025</dd>
             </div>
             <div>
               <dt>Status</dt>
-              <dd>Operational</dd>
+              <dd class="site-footer__status">Operational</dd>
             </div>
           </dl>
         </div>

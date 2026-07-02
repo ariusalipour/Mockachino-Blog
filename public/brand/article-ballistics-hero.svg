@@ -1,0 +1,30 @@
+<svg width="1200" height="620" viewBox="0 0 1200 620" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="620" fill="#06090D"/>
+  <path d="M24 24H1176V596" stroke="#2B2412" stroke-width="2"/>
+  <path d="M48 44H1152V572" stroke="#141A20" stroke-width="1"/>
+  <path d="M52 420H1170M52 278H1170M180 44V572M470 44V572M818 44V572" stroke="#12181E" stroke-width="1"/>
+  <path d="M86 396C180 390 238 356 308 306C340 283 377 274 430 276L663 286C717 288 768 264 804 223L862 157C883 135 909 124 947 124H1080C1119 124 1151 154 1151 193C1151 231 1120 262 1082 262H948C910 262 883 274 862 295L804 357C768 394 718 415 662 415H428C378 415 342 428 304 456C237 506 174 536 86 544" stroke="#A46D1E" stroke-width="5"/>
+  <path d="M674 285C707 285 734 312 734 345C734 378 707 405 674 405H594C561 405 534 378 534 345C534 312 561 285 594 285H674Z" fill="#A46D1E"/>
+  <path d="M592 286C625 286 651 312 651 345C651 378 625 404 592 404H548C515 404 488 378 488 345C488 312 515 286 548 286H592Z" fill="#8C5820"/>
+  <path d="M734 345C734 312 761 286 794 286H868C896 286 926 298 948 320L974 345L948 370C926 392 896 404 868 404H794C761 404 734 378 734 345Z" fill="#B97B2F"/>
+  <path d="M975 345C975 329 988 316 1004 316H1017C1035 316 1054 322 1069 333L1104 359L1069 387C1054 398 1035 404 1017 404H1004C988 404 975 391 975 375V345Z" fill="#D3A15C"/>
+  <circle cx="632" cy="345" r="40" stroke="#D39C3B" stroke-width="3"/>
+  <circle cx="632" cy="345" r="13" fill="#6D4A1E"/>
+  <path d="M164 188C193 218 212 246 226 272C239 296 252 323 276 347C296 367 329 390 371 411" stroke="#A2A29F" stroke-opacity=".42" stroke-width="14" stroke-linecap="round"/>
+  <path d="M144 210C174 234 196 259 215 290C232 319 251 338 276 355" stroke="#D6D0C4" stroke-opacity=".18" stroke-width="20" stroke-linecap="round"/>
+  <path d="M960 82H1116M1116 82V160M1072 490H1142M1142 490V562M52 78H112M52 78V138M56 510H126M56 510V584" stroke="#6F5A1E" stroke-width="2"/>
+  <path d="M838 452H1130V586H838V452Z" stroke="#6F5A1E" stroke-width="2"/>
+  <path d="M870 560C925 560 968 532 1018 512C1063 495 1100 494 1130 500" stroke="#A46D1E" stroke-width="3"/>
+  <path d="M838 534H1130" stroke="#1B2129"/>
+  <path d="M885 452V586M944 452V586M1004 452V586M1064 452V586" stroke="#141A20"/>
+  <text x="912" y="98" fill="#E4B236" font-family="'IBM Plex Mono', monospace" font-size="34">BC: 0.547 (G1)</text>
+  <text x="912" y="140" fill="#E4B236" font-family="'IBM Plex Mono', monospace" font-size="34">CAL: 6.5MM</text>
+  <text x="912" y="182" fill="#E4B236" font-family="'IBM Plex Mono', monospace" font-size="34">VEL: 2650 FPS</text>
+  <text x="108" y="116" fill="#A6A29A" font-family="'IBM Plex Mono', monospace" font-size="22">DRAG (LBF)</text>
+  <text x="120" y="542" fill="#E4B236" font-family="'IBM Plex Mono', monospace" font-size="28">DISTANCE (YDS)</text>
+  <text x="858" y="484" fill="#E4B236" font-family="'IBM Plex Mono', monospace" font-size="24">ENERGY (FT-LB)</text>
+  <text x="76" y="160" fill="#8F908E" font-family="'IBM Plex Mono', monospace" font-size="20">300</text>
+  <text x="76" y="250" fill="#8F908E" font-family="'IBM Plex Mono', monospace" font-size="20">200</text>
+  <text x="76" y="340" fill="#8F908E" font-family="'IBM Plex Mono', monospace" font-size="20">100</text>
+  <text x="76" y="440" fill="#8F908E" font-family="'IBM Plex Mono', monospace" font-size="20">0</text>
+</svg>
