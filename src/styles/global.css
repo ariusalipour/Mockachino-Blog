@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Handjet:wght@600;700&family=IBM+Plex+Mono:wght@400;500&family=Pixelify+Sans:wght@400;500;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Audiowide&family=IBM+Plex+Mono:wght@400;500&display=swap");
 
 :root {
   --bg: #07090c;
@@ -269,7 +269,7 @@ input {
 .detail-block h2,
 .copy-block h2,
 .glossary-grid dt {
-  font-family: "Pixelify Sans", monospace;
+  font-family: "Audiowide", "IBM Plex Mono", sans-serif;
   letter-spacing: 0.06em;
   text-transform: uppercase;
 }
@@ -277,7 +277,7 @@ input {
 .sidebar-brand__title,
 .site-footer__title {
   color: var(--accent);
-  font-size: 2.3rem;
+  font-size: 2.08rem;
   line-height: 0.9;
 }
 
@@ -314,7 +314,7 @@ input {
 .section-label,
 .button,
 .panel-footer-link {
-  font-family: "Pixelify Sans", monospace;
+  font-family: "Audiowide", "IBM Plex Mono", sans-serif;
   letter-spacing: 0.08em;
   text-transform: uppercase;
 }
@@ -323,7 +323,7 @@ input {
 .section-label {
   margin: 0 0 0.7rem;
   color: var(--accent);
-  font-size: 1.15rem;
+  font-size: 1.04rem;
 }
 
 .panel__kicker--icon {
@@ -587,7 +587,7 @@ input {
 }
 
 .site-header__brand .sidebar-brand__title {
-  font-size: 2.15rem;
+  font-size: 1.95rem;
 }
 
 .header-nav {
@@ -600,8 +600,8 @@ input {
   display: inline-flex;
   padding: 0.55rem 0.2rem;
   color: var(--text-soft);
-  font-family: "Pixelify Sans", monospace;
-  font-size: 1rem;
+  font-family: "Audiowide", "IBM Plex Mono", sans-serif;
+  font-size: 0.92rem;
   font-weight: 400;
   letter-spacing: 0.04em;
   border-bottom: 1px solid transparent;
@@ -733,8 +733,8 @@ html[data-theme="light"] .theme-toggle__icon--light {
 
 .hero-panel__strap {
   margin: 0.45rem 0 0;
-  font-size: 1.6rem;
-  font-family: "Pixelify Sans", monospace;
+  font-size: 1.45rem;
+  font-family: "Audiowide", "IBM Plex Mono", sans-serif;
   font-weight: 400;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -860,7 +860,7 @@ html[data-theme="light"] .theme-toggle__icon--light {
 
 .topic-card h3 {
   margin: 0;
-  font-size: 2rem;
+  font-size: 1.8rem;
 }
 
 .topic-card__header p,
@@ -897,8 +897,8 @@ html[data-theme="light"] .theme-toggle__icon--light {
 }
 
 .metric-box__value {
-  font-family: "Pixelify Sans", monospace;
-  font-size: 1.6rem;
+  font-family: "Audiowide", "IBM Plex Mono", sans-serif;
+  font-size: 1.44rem;
   font-weight: 400;
   color: currentColor;
 }
@@ -918,7 +918,7 @@ html[data-theme="light"] .theme-toggle__icon--light {
   gap: 0.4rem;
   padding: 0.5rem 0.8rem;
   border: 1px solid currentColor;
-  font-size: 1.2rem;
+  font-size: 1.08rem;
   transition: background-color 140ms ease, color 140ms ease;
 }
 
@@ -994,19 +994,19 @@ html[data-theme="light"] .theme-toggle__icon--light {
 }
 
 .entry-list__title {
-  font-size: 1.45rem;
+  font-size: 1.3rem;
   line-height: 1;
 }
 
 .entry-list--recent .entry-list__title,
 .entry-list--popular .entry-list__title {
-  font-size: 1.22rem;
+  font-size: 1.1rem;
   line-height: 1.1;
 }
 
 .entry-list__rank {
-  font-family: "Pixelify Sans", monospace;
-  font-size: 1.3rem;
+  font-family: "Audiowide", "IBM Plex Mono", sans-serif;
+  font-size: 1.17rem;
   font-weight: 400;
   color: var(--accent);
 }
@@ -1059,7 +1059,7 @@ html[data-theme="light"] .theme-toggle__icon--light {
   display: inline-flex;
   margin-top: 0.9rem;
   color: var(--accent);
-  font-size: 1.15rem;
+  font-size: 1.04rem;
 }
 
 .page-stack {
@@ -1402,8 +1402,8 @@ body::before {
 
 .site-brand__title {
   color: var(--accent);
-  font-family: "Pixelify Sans", monospace;
-  font-size: 1.58rem;
+  font-family: "Audiowide", "IBM Plex Mono", sans-serif;
+  font-size: 1.42rem;
   letter-spacing: 0.06em;
   line-height: 0.9;
 }
@@ -1426,8 +1426,8 @@ body::before {
 .header-nav__link {
   padding: 0.45rem 0.15rem 0.8rem;
   color: rgba(246, 242, 232, 0.78);
-  font-family: "Pixelify Sans", monospace;
-  font-size: 0.98rem;
+  font-family: "Audiowide", "IBM Plex Mono", sans-serif;
+  font-size: 0.88rem;
   letter-spacing: 0.06em;
   text-transform: uppercase;
 }
@@ -1506,7 +1506,7 @@ body::before {
 .section-label,
 .panel-footer-link,
 .button {
-  font-size: 1.08rem;
+  font-size: 0.97rem;
 }
 
 .nav-link,
@@ -1563,8 +1563,8 @@ body::before {
 
 .topic-tree__topic {
   padding: 0.45rem 0;
-  font-family: "Pixelify Sans", monospace;
-  font-size: 1.2rem;
+  font-family: "Audiowide", "IBM Plex Mono", sans-serif;
+  font-size: 1.08rem;
   letter-spacing: 0.04em;
 }
 
@@ -1702,8 +1702,8 @@ body::before {
   max-width: 42rem;
   margin-top: 0.55rem;
   color: var(--text);
-  font-family: "Pixelify Sans", monospace;
-  font-size: 0.98rem;
+  font-family: "Audiowide", "IBM Plex Mono", sans-serif;
+  font-size: 0.88rem;
   letter-spacing: 0.06em;
   line-height: 1.3;
 }
@@ -1787,8 +1787,8 @@ body::before {
 .entry-hero h1 {
   max-width: 58rem;
   color: var(--text);
-  font-family: "Pixelify Sans", monospace;
-  font-size: clamp(1.8rem, 2.4vw, 3rem);
+  font-family: "Audiowide", "IBM Plex Mono", sans-serif;
+  font-size: clamp(1.62rem, 2.16vw, 2.7rem);
   line-height: 0.98;
   letter-spacing: 0.045em;
   text-transform: uppercase;
@@ -1851,7 +1851,7 @@ body::before {
 .entry-card h2,
 .glossary-grid dt {
   color: var(--accent);
-  font-size: clamp(1.45rem, 1.25vw, 1.9rem);
+  font-size: clamp(1.3rem, 1.12vw, 1.7rem);
   line-height: 1;
 }
 
@@ -1918,7 +1918,7 @@ body::before {
 }
 
 .article-main__hero h1 {
-  font-family: "Pixelify Sans", monospace;
+  font-family: "Audiowide", "IBM Plex Mono", sans-serif;
   letter-spacing: 0.035em;
   text-transform: uppercase;
 }
@@ -2000,7 +2000,7 @@ body::before {
 }
 
 .topic-card h3 {
-  font-size: 1.22rem;
+  font-size: 1.1rem;
   letter-spacing: 0.04em;
   white-space: nowrap;
 }
@@ -2028,8 +2028,8 @@ body::before {
 }
 
 .metric-box__value {
-  font-family: "Pixelify Sans", monospace;
-  font-size: 1.18rem;
+  font-family: "Audiowide", "IBM Plex Mono", sans-serif;
+  font-size: 1.06rem;
   line-height: 1;
 }
 
@@ -2046,7 +2046,7 @@ body::before {
   padding: 0.58rem 0 0.62rem;
   border-top: 1px solid currentColor;
   color: currentColor;
-  font-size: 1.12rem;
+  font-size: 1rem;
 }
 
 .dual-panel {
@@ -2123,8 +2123,8 @@ body::before {
 
 .entry-list--home-popular .entry-list__rank {
   min-width: 1.8rem;
-  font-family: "Pixelify Sans", monospace;
-  font-size: 1.18rem;
+  font-family: "Audiowide", "IBM Plex Mono", sans-serif;
+  font-size: 1.06rem;
   line-height: 1;
 }
 
@@ -2159,7 +2159,7 @@ body::before {
 }
 
 .site-footer__title {
-  font-size: 1rem;
+  font-size: 0.9rem;
 }
 
 .site-footer__subtitle {
@@ -2356,8 +2356,8 @@ body::before {
 .article-main h1 {
   margin: 0.4rem 0 0;
   color: var(--accent);
-  font-family: "Pixelify Sans", monospace;
-  font-size: clamp(2.2rem, 3.2vw, 3.1rem);
+  font-family: "Audiowide", "IBM Plex Mono", sans-serif;
+  font-size: clamp(1.98rem, 2.88vw, 2.8rem);
   line-height: 1.02;
   text-transform: uppercase;
   letter-spacing: 0.02em;
@@ -2430,8 +2430,8 @@ body::before {
   gap: 1rem;
   margin: 0 0 0.75rem;
   color: var(--accent);
-  font-family: "Pixelify Sans", monospace;
-  font-size: 1.45rem;
+  font-family: "Audiowide", "IBM Plex Mono", sans-serif;
+  font-size: 1.3rem;
   letter-spacing: 0.06em;
   text-transform: uppercase;
 }
@@ -2482,8 +2482,8 @@ body::before {
 
 .article-takeaway__label {
   color: var(--accent);
-  font-family: "Pixelify Sans", monospace;
-  font-size: 0.95rem;
+  font-family: "Audiowide", "IBM Plex Mono", sans-serif;
+  font-size: 0.86rem;
   letter-spacing: 0.06em;
   text-transform: uppercase;
 }
@@ -2553,8 +2553,8 @@ body::before {
 .article-metric-card h3 {
   margin: 0.75rem 0 0.45rem;
   color: var(--accent);
-  font-family: "Pixelify Sans", monospace;
-  font-size: 0.92rem;
+  font-family: "Audiowide", "IBM Plex Mono", sans-serif;
+  font-size: 0.83rem;
   letter-spacing: 0.05em;
   text-transform: uppercase;
 }
@@ -3004,3 +3004,6 @@ html[data-theme="light"] .article-compare__header,
 html[data-theme="light"] .article-metric-card {
   background: rgba(244, 236, 222, 0.58);
 }
+
+
+
