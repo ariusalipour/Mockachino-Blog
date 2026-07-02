@@ -40,3 +40,9 @@ Thumbs.db
 
 # Codex artifacts
 .codex-artifacts/
+
+# Google service account keys
+*.json
+!package.json
+!package-lock.json
+!tsconfig.json
