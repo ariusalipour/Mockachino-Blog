@@ -43,7 +43,7 @@ Node version: 22
 This repo also includes:
 
 - a Cloudflare Worker at `workers/ga-sync/` that syncs GA4 page view data into KV
-- a Pages Function at `functions/api/popular.json.js` that reads popularity data from KV
+- a Pages Function at `functions/api/popular.js` that reads popularity data from KV
 
 Required bindings and secrets:
 

@@ -178,7 +178,7 @@ function relativeTime(dateValue: string) {
     // Hydrate popular list from live GA data
     (async () => {
       try {
-        const resp = await fetch("/api/popular.json");
+        const resp = await fetch("/api/popular");
         if (!resp.ok) return;
         const { popular } = await resp.json();
         if (!popular || popular.length === 0) return;
