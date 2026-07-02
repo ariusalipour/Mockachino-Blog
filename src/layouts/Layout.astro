@@ -1,7 +1,7 @@
 ---
 import "../styles/global.css";
-import Icon from "../components/Icon.astro";
 import LogoMark from "../components/LogoMark.astro";
+import RasterIcon from "../components/RasterIcon.astro";
 import SystemGrid from "../components/SystemGrid.astro";
 import { headerNav, primaryNav, topics } from "../data/wiki";
 import { getRepoStatus } from "../lib/repo";
@@ -35,83 +35,19 @@ const updatedLabel = new Intl.DateTimeFormat("en-GB", {
       document.documentElement.dataset.theme = preferredTheme ?? (systemDark ? "dark" : "light");
     </script>
   </head>
-  <body>
-    <div class="site-shell">
-      <aside class="sidebar">
-        <section class="panel panel--sidebar">
-          <p class="panel__kicker">Navigation</p>
-          <nav aria-label="Primary">
-            <ul class="nav-list">
-              {
-                primaryNav.map((item) => (
-                  <li>
-                    <a href={item.href} class:list={["nav-link", currentPath === item.href && "is-active"]}>
-                      <Icon name={item.icon} class="nav-link__icon" />
-                      <span>{item.label}</span>
-                    </a>
-                  </li>
-                ))
-              }
-            </ul>
-          </nav>
-        </section>
-
-        <section class="panel panel--sidebar">
-          <p class="panel__kicker">Topics</p>
-          <div class="topic-tree">
-            {
-              topics.map((topic) => (
-                <div class="topic-tree__group">
-                  <a href={`/topics/${topic.id}/`} class="topic-tree__topic">
-                    <Icon name={topic.icon} class="topic-tree__icon" />
-                    <span>{topic.name}</span>
-                  </a>
-                  <ul class="topic-tree__categories">
-                    {topic.categories.map((category) => <li><a href={`/topics/${topic.id}/${category.id}/`}>{category.name}</a></li>)}
-                  </ul>
-                </div>
-              ))
-            }
-          </div>
-        </section>
-
-        <section class="panel panel--sidebar panel--status">
-          <div class="panel__row">
-            <p class="panel__kicker">System Status</p>
-            <span class="status-pill">Operational</span>
-          </div>
-          <SystemGrid activity={repoStatus.activity} />
-          <dl class="status-meta">
-            <div>
-              <dt>Window</dt>
-              <dd>84 days</dd>
-            </div>
-            <div>
-              <dt>Commits</dt>
-              <dd>{repoStatus.totalCommitsInWindow}</dd>
-            </div>
-            <div>
-              <dt>Last</dt>
-              <dd>{updatedLabel}</dd>
-            </div>
-          </dl>
-        </section>
-      </aside>
-
-      <div class="site-main">
-        <header class="site-header panel">
-          <div class="site-header__top">
-            <p class="site-header__reference">REF-MOCKA / WIKI-SYSTEM / REV-C</p>
-            <a href="/" class="brand-lockup">
-              <div class="brand-lockup__text">
-                <span class="brand-lockup__title">MOCKACHINO</span>
-                <span class="brand-lockup__subtitle">THE MOCKA WIKI</span>
+  <body class:list={[currentPath === "/" && "page-home"]}>
+    <div class="site-frame">
+      <header class="site-header panel">
+        <div class="site-header__row">
+          <div class="site-header__lead">
+            <a href="/" class="sidebar-brand site-header__brand">
+              <LogoMark variant="monogram" class="sidebar-brand__mark" />
+              <div class="sidebar-brand__copy">
+                <span class="sidebar-brand__title">MOCKACHINO</span>
+                <span class="sidebar-brand__subtitle">THE MOCKA WIKI</span>
               </div>
-              <LogoMark class="brand-lockup__mark" />
             </a>
-          </div>
 
-          <div class="site-header__bottom">
             <nav aria-label="Header">
               <ul class="header-nav">
                 {
@@ -125,53 +61,162 @@ const updatedLabel = new Intl.DateTimeFormat("en-GB", {
                 }
               </ul>
             </nav>
+          </div>
 
-            <div class="site-tools">
-              <form action="/browse/" method="get" class="search-form">
-                <label class="sr-only" for="site-search">Search wiki</label>
-                <Icon name="search" class="search-form__icon" />
-                <input id="site-search" name="q" type="search" placeholder="Search articles, guides, reviews" />
-              </form>
+          <div class="site-tools">
+            <form action="/browse/" method="get" class="search-form">
+              <label class="sr-only" for="site-search">Search wiki</label>
+              <RasterIcon name="search" class="search-form__icon search-form__icon--raster" />
+              <input id="site-search" name="q" type="search" placeholder="Search the wiki..." />
+              <span class="search-form__hint">CTRL</span>
+              <span class="search-form__hint">K</span>
+            </form>
+            <div class="header-utilities">
               <button class="theme-toggle" type="button" data-theme-toggle aria-label="Toggle day and night mode">
-                <Icon name="moon" class="theme-toggle__icon theme-toggle__icon--dark" />
-                <Icon name="sun" class="theme-toggle__icon theme-toggle__icon--light" />
+                <RasterIcon name="moon" class="theme-toggle__icon theme-toggle__icon--dark theme-toggle__icon--raster" />
+                <RasterIcon name="sun" class="theme-toggle__icon theme-toggle__icon--light theme-toggle__icon--raster" />
               </button>
             </div>
           </div>
-        </header>
+        </div>
+      </header>
 
-        <main class="page-content">
-          <slot />
-        </main>
+      <div class="site-shell">
+        <aside class="sidebar">
+          <section class="panel panel--sidebar">
+            <p class="panel__kicker">Navigation</p>
+            <nav aria-label="Primary">
+              <ul class="nav-list">
+                {
+                  primaryNav.map((item) => (
+                    <li>
+                      <a href={item.href} class:list={["nav-link", currentPath === item.href && "is-active"]}>
+                        <RasterIcon name={item.icon} class="nav-link__icon nav-link__icon--raster" />
+                        <span>{item.label}</span>
+                      </a>
+                    </li>
+                  ))
+                }
+              </ul>
+            </nav>
+          </section>
 
-        <footer class="site-footer panel">
-          <div class="site-footer__brand">
-            <LogoMark class="site-footer__mark" />
-            <div>
-              <p class="site-footer__title">MOCKACHINO</p>
-              <p class="site-footer__subtitle">Engineering notes for shoots, plays, and code.</p>
+          <section class="panel panel--sidebar panel--topics">
+            <p class="panel__kicker">Topics</p>
+            <div class="topic-tree">
+              {
+                topics.map((topic) => (
+                  <div class="topic-tree__group" data-topic={topic.id}>
+                    <a href={`/topics/${topic.id}/`} class="topic-tree__topic">
+                      <RasterIcon name={topic.icon} class="topic-tree__icon topic-tree__icon--raster" />
+                      <span>{topic.name}</span>
+                    </a>
+                    <ul class="topic-tree__categories">
+                      {
+                        topic.categories.map((category) => (
+                          <li>
+                            <a href={`/topics/${topic.id}/${category.id}/`}>
+                              <RasterIcon name="chevron" class="topic-tree__chevron topic-tree__chevron--raster" />
+                              <span>{category.name}</span>
+                            </a>
+                          </li>
+                        ))
+                      }
+                    </ul>
+                  </div>
+                ))
+              }
             </div>
-          </div>
+          </section>
 
-          <div class="site-footer__info">
-            <p class="panel__kicker">System Info</p>
-            <dl class="site-footer__meta">
+          <section class="panel panel--sidebar panel--status">
+            <div class="panel__row">
+              <p class="panel__kicker panel__kicker--icon"><RasterIcon name="status" class="panel__kicker-icon panel__kicker-icon--raster" /> <span>System Status</span></p>
+              <span class="status-pill">Operational</span>
+            </div>
+            <SystemGrid activity={repoStatus.activity} />
+            <dl class="status-meta">
               <div>
-                <dt>Version</dt>
-                <dd>{repoStatus.version}</dd>
+                <dt>Window</dt>
+                <dd>84 days</dd>
               </div>
               <div>
-                <dt>Updated</dt>
+                <dt>Commits</dt>
+                <dd>{repoStatus.totalCommitsInWindow}</dd>
+              </div>
+              <div>
+                <dt>Last</dt>
                 <dd>{updatedLabel}</dd>
               </div>
-              <div>
-                <dt>Status</dt>
-                <dd>Operational</dd>
-              </div>
             </dl>
-          </div>
-        </footer>
+          </section>
+        </aside>
+
+        <div class="site-main">
+          <main class="page-content">
+            <slot />
+          </main>
+        </div>
       </div>
+
+      <footer class="site-footer panel">
+        <div class="site-footer__brand footer-column">
+          <div class="site-footer__brand-lockup">
+            <LogoMark variant="monogram" class="site-footer__mark" />
+            <div>
+              <p class="site-footer__title">MOCKACHINO</p>
+              <p class="site-footer__subtitle">The Mocka Wiki</p>
+            </div>
+          </div>
+          <p class="site-footer__blurb">Built by Mocka. For everyone.</p>
+          <p class="site-footer__ref">REF-FOOTER-01</p>
+        </div>
+
+        <div class="footer-column">
+          <p class="panel__kicker">Explore</p>
+          <ul class="footer-links">
+            <li><a href="/browse/">Browse All</a></li>
+            <li><a href="/recent/">Recent Changes</a></li>
+            <li><a href="/random/">Random Page</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-column">
+          <p class="panel__kicker">Community</p>
+          <ul class="footer-links">
+            <li><a href="/about/">Contribute</a></li>
+            <li><a href="/glossary/">Wiki Guidelines</a></li>
+            <li><a href="/tags/">Tag Index</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-column">
+          <p class="panel__kicker">Connect</p>
+          <ul class="footer-links">
+            <li><a href="/topics/shoots/">Mocka Shoots</a></li>
+            <li><a href="/topics/plays/">Mocka Plays</a></li>
+            <li><a href="/topics/codes/">Mocka Codes</a></li>
+          </ul>
+        </div>
+
+        <div class="site-footer__info footer-column">
+          <p class="panel__kicker">System Info</p>
+          <dl class="site-footer__meta">
+            <div>
+              <dt>Version</dt>
+              <dd>{repoStatus.version}</dd>
+            </div>
+            <div>
+              <dt>Last Update</dt>
+              <dd>{updatedLabel}</dd>
+            </div>
+            <div>
+              <dt>Status</dt>
+              <dd>Operational</dd>
+            </div>
+          </dl>
+        </div>
+      </footer>
     </div>
 
     <script is:inline>

@@ -1,4 +1,5 @@
 ---
+import RasterIcon from "./RasterIcon.astro";
 import { formatCategoryLabel, formatTopicLabel, type WikiEntry } from "../data/wiki";
 
 interface Props {
@@ -26,18 +27,40 @@ function relativeTime(dateValue: string) {
 <ol class:list={["entry-list", `entry-list--${mode}`]}>
   {
     entries.slice(0, limit).map((entry, index) => (
-      <li class="entry-list__item">
+      <li class="entry-list__item" data-topic={entry.topic}>
         <a href={`/wiki/${entry.slug}/`} class="entry-list__link">
-          <div class="entry-list__header">
-            <span class="entry-list__title">{entry.title}</span>
-            {mode === "popular" && <span class="entry-list__rank">#{index + 1}</span>}
-          </div>
-          <p class="entry-list__summary">{entry.summary}</p>
-          <div class="entry-list__meta">
-            <span>{formatTopicLabel(entry.topic)}</span>
-            <span>{formatCategoryLabel(entry.topic, entry.category)}</span>
-            {mode === "recent" && <span>{relativeTime(entry.updatedAt)}</span>}
-          </div>
+          {
+            mode === "recent" || mode === "popular" ? (
+              <>
+                <div class="entry-list__row">
+                  <div class="entry-list__lead">
+                    <RasterIcon
+                      name={entry.topic === "shoots" ? "target" : entry.topic === "plays" ? "controller" : "chip"}
+                      class="entry-list__topic-icon entry-list__topic-icon--raster"
+                    />
+                    {mode === "popular" && <span class="entry-list__rank">{String(index + 1).padStart(2, "0")}</span>}
+                    <span class="entry-list__title">{entry.title}</span>
+                  </div>
+                  <div class="entry-list__meta entry-list__meta--inline">
+                    <span>{formatTopicLabel(entry.topic)}</span>
+                    <span>{formatCategoryLabel(entry.topic, entry.category)}</span>
+                    {mode === "recent" && <span>{relativeTime(entry.updatedAt)}</span>}
+                  </div>
+                </div>
+              </>
+            ) : (
+              <>
+                <div class="entry-list__header">
+                  <span class="entry-list__title">{entry.title}</span>
+                </div>
+                <p class="entry-list__summary">{entry.summary}</p>
+                <div class="entry-list__meta">
+                  <span>{formatTopicLabel(entry.topic)}</span>
+                  <span>{formatCategoryLabel(entry.topic, entry.category)}</span>
+                </div>
+              </>
+            )
+          }
         </a>
       </li>
     ))

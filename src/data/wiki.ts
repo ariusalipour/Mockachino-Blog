@@ -39,7 +39,7 @@ export const topics: Topic[] = [
     strapline: "Camera, lens, and fieldcraft notes.",
     description:
       "Reviews, setup sheets, and shooting guides focused on image quality, ergonomics, and repeatable field workflows.",
-    accent: "#f5c542",
+    accent: "#d94a3a",
     icon: "target",
     categories: [
       {
@@ -66,7 +66,7 @@ export const topics: Topic[] = [
     strapline: "Reviews, tactics, and hardware diaries.",
     description:
       "Game impressions, build notes, and practical strategy guides for sessions worth documenting.",
-    accent: "#9dc56f",
+    accent: "#8b5cf6",
     icon: "controller",
     categories: [
       {
@@ -93,7 +93,7 @@ export const topics: Topic[] = [
     strapline: "Build logs, snippets, and tooling guides.",
     description:
       "Engineering notes for small systems, site tooling, and pragmatic implementation details.",
-    accent: "#7cc0ff",
+    accent: "#75c267",
     icon: "chip",
     categories: [
       {
@@ -269,6 +269,7 @@ export const primaryNav = [
   { href: "/random/", label: "Random Page", icon: "shuffle" },
   { href: "/glossary/", label: "Glossary", icon: "book" },
   { href: "/tags/", label: "Tags", icon: "tag" },
+  { href: "/about/", label: "Help", icon: "help" },
 ] as const;
 
 export const headerNav = [

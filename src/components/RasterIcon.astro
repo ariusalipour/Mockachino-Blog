@@ -1,0 +1,41 @@
+---
+interface Props {
+  name: string;
+  label?: string;
+  class?: string;
+}
+
+const { name, label = name, class: className } = Astro.props;
+
+const iconMap: Record<string, string> = {
+  home: "/icons/hifi-png/home.png",
+  grid: "/icons/hifi-png/browse.png",
+  pulse: "/icons/hifi-png/recent.png",
+  shuffle: "/icons/hifi-png/random.png",
+  book: "/icons/hifi-png/glossary.png",
+  tag: "/icons/hifi-png/tags.png",
+  help: "/icons/hifi-png/help.png",
+  target: "/icons/hifi-png/shoots.png",
+  controller: "/icons/hifi-png/plays.png",
+  chip: "/icons/hifi-png/codes.png",
+  search: "/icons/hifi-png/search.png",
+  sun: "/icons/hifi-png/sun.png",
+  moon: "/icons/hifi-png/moon.png",
+  user: "/icons/hifi-png/user.png",
+  chevron: "/icons/hifi-png/chevron.png",
+  status: "/icons/hifi-png/status.png",
+};
+
+const src = iconMap[name];
+---
+
+{
+  src && (
+    <span
+      class:list={["raster-icon", className]}
+      role="img"
+      aria-label={label}
+      style={`--icon-url: url('${src}')`}
+    ></span>
+  )
+}
