@@ -152,10 +152,10 @@ function relativeTime(dateValue: string) {
       <div class="section-heading section-heading--compact">
         <p class="section-label">/// Popular Pages</p>
       </div>
-      <ol class="entry-list entry-list--home-popular">
+      <ol class="entry-list entry-list--home-popular" id="popular-list">
         {
           popularEntries.map((entry, index) => (
-            <li class="entry-list__item" data-topic={entry.topic}>
+            <li class="entry-list__item" data-topic={entry.topic} data-slug={entry.slug}>
               <a href={`/wiki/${entry.slug}/`} class="entry-list__link entry-list__link--home">
                 <div class="entry-list__row">
                   <div class="entry-list__lead">
@@ -173,4 +173,50 @@ function relativeTime(dateValue: string) {
       </ol>
     </article>
   </section>
+
+  <script is:inline define:vars={{ wikiEntries: popularEntries.map(e => ({ slug: e.slug, title: e.title, topic: e.topic })) }}>
+    // Hydrate popular list from live GA data
+    (async () => {
+      try {
+        const resp = await fetch("/api/popular.json");
+        if (!resp.ok) return;
+        const { popular } = await resp.json();
+        if (!popular || popular.length === 0) return;
+
+        // Build a lookup from the full wiki entry list baked at build time
+        const lookup = Object.fromEntries(wikiEntries.map(e => [e.slug, e]));
+
+        const list = document.getElementById("popular-list");
+        if (!list) return;
+
+        // Filter to slugs we know about and take top 10
+        const ranked = popular
+          .filter(({ slug }) => lookup[slug])
+          .slice(0, 10);
+
+        if (ranked.length === 0) return;
+
+        list.innerHTML = ranked.map(({ slug, views }, index) => {
+          const entry = lookup[slug];
+          const topic = entry.topic.replace("mocka", "").trim();
+          return `<li class="entry-list__item" data-topic="${entry.topic}" data-slug="${slug}">
+            <a href="/wiki/${slug}/" class="entry-list__link entry-list__link--home">
+              <div class="entry-list__row">
+                <div class="entry-list__lead">
+                  <span class="entry-list__rank">${String(index + 1).padStart(2, "0")}</span>
+                  <span class="entry-list__title">${entry.title}</span>
+                </div>
+                <div class="entry-list__meta entry-list__meta--inline">
+                  <span>${entry.topic.replace("shoots", "Shoots").replace("plays", "Plays").replace("codes", "Codes")}</span>
+                  <span>${views.toLocaleString()} views</span>
+                </div>
+              </div>
+            </a>
+          </li>`;
+        }).join("");
+      } catch {
+        // Silently fall back to server-rendered list
+      }
+    })();
+  </script>
 </Layout>
