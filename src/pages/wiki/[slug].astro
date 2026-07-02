@@ -245,25 +245,6 @@ const tocItems = migratedContent
           }
         </div>
       </section>
-
-      <section class="panel article-rail__panel">
-        <p class="panel__kicker">Helpful Resources</p>
-        <div class="article-resources">
-          {
-            articleView.resources.map((resource) => (
-              <div class="article-resource">
-                <RasterIcon name="book" class="article-resource__icon article-resource__icon--raster" />
-                <div>
-                  <p class="article-resource__title">{resource.title}</p>
-                  <p class="article-resource__meta">{resource.meta}</p>
-                </div>
-                <span class="article-resource__type">{resource.type}</span>
-              </div>
-            ))
-          }
-        </div>
-        <a href="/browse/" class="panel-footer-link">View All Resources</a>
-      </section>
     </aside>
   </section>
 </Layout>
