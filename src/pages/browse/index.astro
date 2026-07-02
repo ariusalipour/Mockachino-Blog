@@ -1,0 +1,41 @@
+---
+import BrowseControls from "../../components/BrowseControls.astro";
+import EntryList from "../../components/EntryList.astro";
+import Layout from "../../layouts/Layout.astro";
+import { wikiEntries } from "../../data/wiki";
+
+const params = Astro.url.searchParams;
+const initialQ = params.get("q") ?? params.get("tag") ?? "";
+const listId = "browse-list";
+---
+
+<Layout title="Browse | MOCKACHINO" description="Browse all wiki entries." currentPath={Astro.url.pathname}>
+  <div class="page-stack">
+    <section class="panel taxonomy-hero">
+      <p class="section-label">/// BROWSE ALL</p>
+      <h1>All articles, reviews, and guides in one indexed register.</h1>
+      <p class="taxonomy-copy">
+        Use the live filter below or jump in through tags. Header search feeds into this page so the same route can
+        handle direct browsing and targeted lookup.
+      </p>
+      <div class="meta-strip">
+        <span class="meta-chip">{wikiEntries.length} entries</span>
+        <span class="meta-chip">{wikiEntries.filter(e => e.kind === "article").length} Articles</span>
+        <span class="meta-chip">{wikiEntries.filter(e => e.kind === "guide").length} Guides</span>
+        <span class="meta-chip">{wikiEntries.filter(e => e.kind === "review").length} Reviews</span>
+      </div>
+    </section>
+
+    <BrowseControls total={wikiEntries.length} listId={listId} initialQ={initialQ} />
+
+    <section class="panel">
+      <div class="section-heading">
+        <div>
+          <p class="section-label">Entries</p>
+          <h2>All pages in the wiki.</h2>
+        </div>
+      </div>
+      <EntryList entries={wikiEntries} perPage={10} id={listId} />
+    </section>
+  </div>
+</Layout>

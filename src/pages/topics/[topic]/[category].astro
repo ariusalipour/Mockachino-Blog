@@ -1,0 +1,48 @@
+---
+import BrowseControls from "../../../components/BrowseControls.astro";
+import EntryList from "../../../components/EntryList.astro";
+import Layout from "../../../layouts/Layout.astro";
+import { formatCategoryLabel, getCategory, getEntriesByCategory, topics } from "../../../data/wiki";
+
+export function getStaticPaths() {
+  return topics.flatMap((topic) =>
+    topic.categories.map((category) => ({
+      params: { topic: topic.id, category: category.id },
+      props: { topic, category },
+    })),
+  );
+}
+
+const { topic, category } = Astro.props;
+const entries = getEntriesByCategory(category.id).filter((e) => e.topic === topic.id);
+const resolvedCategory = getCategory(topic.id, category.id);
+const listId = `category-list-${topic.id}-${category.id}`;
+---
+
+<Layout
+  title={`${topic.name} / ${formatCategoryLabel(topic.id, category.id)} | MOCKACHINO`}
+  description={resolvedCategory?.description ?? ""}
+  currentPath={Astro.url.pathname}
+>
+  <div class="page-stack">
+    <section class="panel taxonomy-hero" data-topic={topic.id}>
+      <div class="taxonomy-hero__media" aria-hidden="true"></div>
+      <p class="section-label">{topic.name}</p>
+      <h1>{resolvedCategory?.name ?? category.id}</h1>
+      <p class="taxonomy-copy">{resolvedCategory?.description}</p>
+      <div class="meta-strip">
+        <span class="meta-chip">{entries.length} entries</span>
+      </div>
+    </section>
+
+    {entries.length > 0
+      ? <>
+          <BrowseControls total={entries.length} listId={listId} />
+          <section class="panel">
+            <EntryList entries={entries} perPage={10} id={listId} />
+          </section>
+        </>
+      : <section class="panel"><p class="empty-state">No entries are assigned to this category yet.</p></section>
+    }
+  </div>
+</Layout>

@@ -1,0 +1,23 @@
+---
+import EntryList from "../../components/EntryList.astro";
+import Layout from "../../layouts/Layout.astro";
+import { getRecentEntries } from "../../data/wiki";
+
+const recentEntries = getRecentEntries();
+---
+
+<Layout title="Recent Changes | MOCKACHINO" description="Latest updates across the wiki." currentPath={Astro.url.pathname}>
+  <div class="page-stack">
+    <section class="panel taxonomy-hero">
+      <p class="section-label">Recent Changes</p>
+      <h1>Latest page revisions across all three topics.</h1>
+      <p class="taxonomy-copy">
+        This log is ordered by the most recently updated entries so new notes and refreshed guides are visible at a glance.
+      </p>
+    </section>
+
+    <section class="panel">
+      <EntryList entries={recentEntries} mode="recent" perPage={10} />
+    </section>
+  </div>
+</Layout>

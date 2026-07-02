@@ -1,0 +1,15 @@
+<svg width="720" height="480" viewBox="0 0 720 480" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect x="24" y="24" width="672" height="432" rx="16" stroke="#34383D" stroke-width="2"/>
+  <rect x="48" y="48" width="624" height="384" rx="12" stroke="#8D949C" stroke-width="2"/>
+  <path d="M120 240H600" stroke="#34383D" stroke-width="2" stroke-dasharray="8 8"/>
+  <path d="M360 96V384" stroke="#34383D" stroke-width="2" stroke-dasharray="8 8"/>
+  <circle cx="360" cy="240" r="110" stroke="#FFFFFF" stroke-width="2"/>
+  <circle cx="360" cy="240" r="60" stroke="#F5C542" stroke-width="6"/>
+  <circle cx="360" cy="240" r="18" fill="#F5C542"/>
+  <path d="M188 240H288M432 240H532M360 68V168M360 312V412" stroke="#FFFFFF" stroke-width="2"/>
+  <path d="M216 116L266 166M454 314L504 364M504 116L454 166M266 314L216 364" stroke="#8D949C" stroke-width="2"/>
+  <rect x="88" y="84" width="122" height="56" rx="8" stroke="#F5C542" stroke-width="2"/>
+  <text x="108" y="118" fill="#F5C542" font-family="monospace" font-size="20" letter-spacing="2">MK-01</text>
+  <rect x="510" y="340" width="122" height="56" rx="8" stroke="#F5C542" stroke-width="2"/>
+  <text x="530" y="374" fill="#F5C542" font-family="monospace" font-size="20" letter-spacing="2">WIKI</text>
+</svg>

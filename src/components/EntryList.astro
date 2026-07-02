@@ -1,0 +1,127 @@
+---
+import { formatCategoryLabel, formatTopicLabel, type WikiEntry } from "../data/wiki";
+
+interface Props {
+  entries: WikiEntry[];
+  mode?: "default" | "recent" | "popular";
+  limit?: number;
+  perPage?: number;
+  id?: string;
+}
+
+const { entries, mode = "default", limit = entries.length, perPage, id } = Astro.props;
+const hasPagination = perPage != null && perPage < entries.length;
+const pageLimit = hasPagination ? entries.length : limit;
+
+function relativeTime(dateValue: string) {
+  const delta = Date.now() - Date.parse(dateValue);
+  const hours = Math.max(1, Math.floor(delta / 3_600_000));
+
+  if (hours < 24) return `${hours}h ago`;
+
+  const days = Math.floor(hours / 24);
+  if (days < 30) return `${days}d ago`;
+
+  const months = Math.floor(days / 30);
+  return `${months}mo ago`;
+}
+---
+
+<ol id={id} class:list={["entry-list", `entry-list--${mode}`]} data-per-page={perPage}>
+  {
+    entries.slice(0, pageLimit).map((entry, index) => (
+      <li class="entry-list__item" data-topic={entry.topic} data-kind={entry.kind} data-search={`${entry.title} ${entry.summary} ${formatTopicLabel(entry.topic)} ${formatCategoryLabel(entry.topic, entry.category)} ${entry.tags?.join(" ") ?? ""}`.toLowerCase()}>
+        <a href={`/wiki/${entry.slug}/`} class="entry-list__link">
+          {
+            mode === "recent" || mode === "popular" ? (
+              <>
+                <div class="entry-list__row">
+                  <div class="entry-list__lead">
+                    <img src={`/brand/logo-${entry.topic}.png`} alt="" class="entry-list__topic-icon entry-list__topic-icon--logo" />
+                    {mode === "popular" && <span class="entry-list__rank">{String(index + 1).padStart(2, "0")}</span>}
+                    <span class="entry-list__title">{entry.title}</span>
+                  </div>
+                  <div class="entry-list__meta entry-list__meta--inline">
+                    <span>{formatTopicLabel(entry.topic)}</span>
+                    <span>{formatCategoryLabel(entry.topic, entry.category)}</span>
+                    {mode === "recent" && <span>{relativeTime(entry.updatedAt)}</span>}
+                  </div>
+                </div>
+              </>
+            ) : (
+              <>
+                <div class="entry-list__header">
+                  <span class="entry-list__title">{entry.title}</span>
+                </div>
+                <p class="entry-list__summary">{entry.summary}</p>
+                <div class="entry-list__meta">
+                  <span>{formatTopicLabel(entry.topic)}</span>
+                  <span>{formatCategoryLabel(entry.topic, entry.category)}</span>
+                </div>
+              </>
+            )
+          }
+        </a>
+      </li>
+    ))
+  }
+</ol>
+
+{
+  hasPagination && (
+    <nav class="pagination" aria-label="Pagination">
+      <button class="pagination__prev" disabled>Prev</button>
+      <span class="pagination__info">Page <span class="pagination__current">1</span> of <span class="pagination__total">{Math.ceil(entries.length / perPage!)}</span></span>
+      <button class="pagination__next">Next</button>
+    </nav>
+  )
+}
+
+<script is:inline>
+  document.addEventListener("DOMContentLoaded", () => {
+    const lists = document.querySelectorAll(".entry-list[data-per-page]");
+    lists.forEach((list) => {
+      const perPage = parseInt(list.dataset.perPage || "10", 10);
+      const items = [...list.querySelectorAll(".entry-list__item")];
+      if (items.length <= perPage) return;
+
+      const nav = list.nextElementSibling;
+      if (!nav || !nav.classList.contains("pagination")) return;
+
+      const prevBtn = nav.querySelector(".pagination__prev");
+      const nextBtn = nav.querySelector(".pagination__next");
+      const currentSpan = nav.querySelector(".pagination__current");
+      const totalSpan = nav.querySelector(".pagination__total");
+
+      let page = 1;
+
+      const getVisible = () => items.filter((item) => item.style.display !== "none");
+
+      const calcPages = () => Math.max(1, Math.ceil(getVisible().length / perPage));
+
+      const showPage = (p) => {
+        const total = calcPages();
+        page = Math.max(1, Math.min(p, total));
+        const visible = getVisible();
+        const start = (page - 1) * perPage;
+        const end = start + perPage;
+
+        visible.forEach((item, idx) => {
+          item.classList.toggle("pagination-hidden", idx < start || idx >= end);
+        });
+
+        if (currentSpan) currentSpan.textContent = String(page);
+        if (totalSpan) totalSpan.textContent = String(total);
+        if (prevBtn) prevBtn.disabled = page <= 1;
+        if (nextBtn) nextBtn.disabled = page >= total;
+      };
+
+      list._repage = () => { page = 1; showPage(1); };
+
+      if (prevBtn) prevBtn.addEventListener("click", () => showPage(page - 1));
+      if (nextBtn) nextBtn.addEventListener("click", () => showPage(page + 1));
+
+      showPage(1);
+    });
+  });
+</script>

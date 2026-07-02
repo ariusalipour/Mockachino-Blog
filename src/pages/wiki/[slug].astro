@@ -1,0 +1,269 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import RasterIcon from "../../components/RasterIcon.astro";
+import {
+  formatCategoryLabel,
+  formatTopicLabel,
+  getArticleView,
+  getEntriesByTopic,
+  getEntry,
+  getRelatedEntries,
+  getTopic,
+  wikiEntries,
+} from "../../data/wiki";
+import { migratedArticleContent } from "../../data/migratedArticleContent";
+import { formatDate } from "../../lib/format";
+
+export function getStaticPaths() {
+  return wikiEntries.map((entry) => ({
+    params: { slug: entry.slug },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const articleView = getArticleView(entry);
+const migratedContent = migratedArticleContent[entry.slug];
+const relatedEntries = getRelatedEntries(entry, 5);
+const topic = getTopic(entry.topic);
+const topicEntries = getEntriesByTopic(entry.topic);
+const entryIndex = topicEntries.findIndex((candidate) => candidate.slug === entry.slug);
+const previousEntry = entryIndex > 0 ? topicEntries[entryIndex - 1] : undefined;
+const nextEntry = entryIndex >= 0 && entryIndex < topicEntries.length - 1 ? topicEntries[entryIndex + 1] : undefined;
+const articleInfoLabel = `${formatTopicLabel(entry.topic)} / ${formatCategoryLabel(entry.topic, entry.category)}`;
+// Read time derived from word count at build time (220 wpm average).
+// Once this page is migrated to getCollection(), replace with:
+//   const readMinutes = Math.max(1, Math.ceil(entry.body.split(/\s+/).length / 220));
+const readMinutes = migratedContent
+  ? Math.max(1, Math.ceil(migratedContent.wordCount / 220))
+  : Math.max(1, Math.ceil(entry.summary.split(/\s+/).length / 220));
+const heroImage = migratedContent?.featuredImage?.src ?? articleView.heroAsset;
+const heroAlt = migratedContent?.featuredImage?.alt || `${entry.title} hero visual`;
+const tocItems = migratedContent
+  ? migratedContent.toc.length > 0
+    ? migratedContent.toc
+    : [{ id: "article-content", title: "Article" }]
+  : articleView.sections.map((section) => ({ id: section.id, title: section.title }));
+---
+
+<Layout
+  title={`${entry.title} | MOCKACHINO`}
+  description={entry.summary}
+  currentPath={Astro.url.pathname}
+  headerPath="/browse/"
+  pageClass="page-article"
+>
+  <div slot="subheader" class="panel article-breadcrumb">
+    <a href={`/topics/${entry.topic}/`} class="article-breadcrumb__item">{topic?.name}</a>
+    <span class="article-breadcrumb__sep">›</span>
+    <a href={`/topics/${entry.topic}/${entry.category}/`} class="article-breadcrumb__item">
+      {formatCategoryLabel(entry.topic, entry.category)}
+    </a>
+    <span class="article-breadcrumb__sep">›</span>
+    <span class="article-breadcrumb__item article-breadcrumb__item--current">{entry.title}</span>
+  </div>
+
+  <section class="article-layout">
+    <article class="panel article-main">
+      <header class="article-main__hero">
+        <div class="article-main__kicker-row">
+          <p class="section-label article-main__kicker">// {formatCategoryLabel(entry.topic, entry.category)}</p>
+          <p class="article-main__id">ARTICLE ID: {articleView.articleId}</p>
+        </div>
+        <h1>{entry.title}</h1>
+        <p class="article-main__summary">{entry.summary}</p>
+
+        <div class="article-main__meta">
+          <span><RasterIcon name="book" class="article-main__meta-icon article-main__meta-icon--raster" /> {formatDate(entry.createdAt)}</span>
+          <span><RasterIcon name="pulse" class="article-main__meta-icon article-main__meta-icon--raster" /> {readMinutes} MIN READ</span>
+          <span><RasterIcon name="user" class="article-main__meta-icon article-main__meta-icon--raster" /> MOCKA</span>
+          <span class="article-main__meta-topic">{entry.topic.toUpperCase()}</span>
+        </div>
+      </header>
+
+      <div class="article-main__visual panel">
+        <img src={heroImage} alt={heroAlt} />
+      </div>
+
+      {
+        migratedContent ? (
+          <div id="article-content" class="article-content" set:html={migratedContent.html} />
+        ) : (
+          <div class="article-sections">
+            {
+              articleView.sections.map((section) => (
+                <section class="article-section" id={section.id}>
+                  <h2>
+                    <span>{section.number}</span>
+                    <span>{section.title}</span>
+                  </h2>
+                  {section.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
+
+                  {section.takeaway && (
+                    <div class="article-takeaway">
+                      <div class="article-takeaway__icon">
+                        <img src={`/brand/logo-${entry.topic}.png`} alt="" class="article-takeaway__icon-mark article-takeaway__icon-mark--logo" />
+                      </div>
+                      <div class="article-takeaway__content">
+                        <p class="article-takeaway__label">Key Takeaway</p>
+                        <p>{section.takeaway}</p>
+                      </div>
+                    </div>
+                  )}
+
+                  {section.comparisonRows && (
+                    <div class="article-compare">
+                      <div class="article-compare__header">
+                        <span>Model</span>
+                        <span>Best Used For</span>
+                        <span>Speed Range</span>
+                        <span>Notes</span>
+                      </div>
+                      {section.comparisonRows.map((row) => (
+                        <div class="article-compare__row">
+                          <span>{row.model}</span>
+                          <span>{row.bestUsedFor}</span>
+                          <span>{row.speedRange}</span>
+                          <span>{row.notes}</span>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+
+                  {section.metricCards && (
+                    <div class="article-metrics">
+                      {section.metricCards.map((metric) => (
+                        <article class="article-metric-card">
+                          {metric.icon === "target" ? (
+                            <img src={`/brand/logo-${entry.topic}.png`} alt="" class="article-metric-card__icon--logo" />
+                          ) : (
+                            <RasterIcon name={metric.icon} class="article-metric-card__icon article-metric-card__icon--raster" />
+                          )}
+                          <h3>{metric.title}</h3>
+                          <p>{metric.body}</p>
+                        </article>
+                      ))}
+                    </div>
+                  )}
+                </section>
+              ))
+            }
+          </div>
+        )
+      }
+
+      <footer class="article-pagination">
+        <a href={previousEntry ? `/wiki/${previousEntry.slug}/` : "#"} class:list={["article-pagination__link", !previousEntry && "is-disabled"]}>
+          <span class="article-pagination__label">Previous Article</span>
+          <span class="article-pagination__title">{previousEntry?.title ?? "No earlier article"}</span>
+        </a>
+        <a href={nextEntry ? `/wiki/${nextEntry.slug}/` : "#"} class:list={["article-pagination__link", !nextEntry && "is-disabled"]}>
+          <span class="article-pagination__label">Next Article</span>
+          <span class="article-pagination__title">{nextEntry?.title ?? "No next article"}</span>
+        </a>
+      </footer>
+    </article>
+
+    <aside class="article-rail">
+      <section class="panel article-rail__panel">
+        <p class="panel__kicker">Table Of Contents</p>
+        <ol class="article-toc">
+          {
+            tocItems.map((item, index) => (
+              <li>
+                <a href={`#${item.id}`}>
+                  <span>{String(index + 1).padStart(2, "0")}</span>
+                  <span>{item.title}</span>
+                </a>
+              </li>
+            ))
+          }
+        </ol>
+      </section>
+
+      <section class="panel article-rail__panel article-rail__schematic">
+        <div class="article-rail__schematic-meta">
+          <span>{entry.kind.toUpperCase()}</span>
+        </div>
+        <img src="/brand/mockachino-blueprint.svg" alt="Mockachino schematic" />
+        <div class="article-rail__schematic-meta">
+          <a href={`/topics/${entry.topic}/${entry.category}/`}>{formatCategoryLabel(entry.topic, entry.category)}</a>
+        </div>
+      </section>
+
+      <section class="panel article-rail__panel">
+        <p class="panel__kicker">Article Information</p>
+        <dl class="article-info">
+          <div>
+            <dt>Topic</dt>
+            <dd>{formatTopicLabel(entry.topic)}</dd>
+          </div>
+          <div>
+            <dt>Category</dt>
+            <dd>{formatCategoryLabel(entry.topic, entry.category)}</dd>
+          </div>
+          <div>
+            <dt>Tags</dt>
+            <dd class="article-info__tags">
+              {entry.tags.map((tag) => <span class="tag-chip">{tag}</span>)}
+            </dd>
+          </div>
+          <div>
+            <dt>Updated</dt>
+            <dd>{formatDate(entry.updatedAt)}</dd>
+          </div>
+          <div>
+            <dt>Version</dt>
+            <dd>{articleView.version}</dd>
+          </div>
+          <div>
+            <dt>Ref</dt>
+            <dd>{articleInfoLabel}</dd>
+          </div>
+        </dl>
+      </section>
+
+      <section class="panel article-rail__panel">
+        <p class="panel__kicker">Related Articles</p>
+        <div class="article-related">
+          {
+            relatedEntries.map((related) => {
+              const relatedImage = migratedArticleContent[related.slug]?.featuredImage;
+              const fallbackSrc = related.topic === "shoots" ? "/brand/topic-shoots-panel.png" : related.topic === "plays" ? "/brand/topic-plays-panel.png" : "/brand/topic-codes-panel.png";
+              return (
+                <a href={`/wiki/${related.slug}/`} class="article-related__item" data-topic={related.topic}>
+                  <div class="article-related__thumb">
+                    <img src={relatedImage?.src ?? fallbackSrc} alt={relatedImage?.alt || related.title} />
+                  </div>
+                  <div class="article-related__body">
+                    <span class="article-related__title">{related.title}</span>
+                    <span class="article-related__meta">{related.kind.toUpperCase()}</span>
+                  </div>
+                </a>
+              );
+            })
+          }
+        </div>
+      </section>
+
+      <section class="panel article-rail__panel">
+        <p class="panel__kicker">Helpful Resources</p>
+        <div class="article-resources">
+          {
+            articleView.resources.map((resource) => (
+              <div class="article-resource">
+                <RasterIcon name="book" class="article-resource__icon article-resource__icon--raster" />
+                <div>
+                  <p class="article-resource__title">{resource.title}</p>
+                  <p class="article-resource__meta">{resource.meta}</p>
+                </div>
+                <span class="article-resource__type">{resource.type}</span>
+              </div>
+            ))
+          }
+        </div>
+        <a href="/browse/" class="panel-footer-link">View All Resources</a>
+      </section>
+    </aside>
+  </section>
+</Layout>

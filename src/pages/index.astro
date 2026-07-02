@@ -1,0 +1,176 @@
+---
+import Layout from "../layouts/Layout.astro";
+import {
+  formatCategoryLabel,
+  formatTopicLabel,
+  getPopularEntries,
+  getRecentEntries,
+  topics,
+  wikiEntries,
+} from "../data/wiki";
+
+const recentEntries = getRecentEntries(10);
+// TODO: Replace static wiki popularity values with Google Analytics or Cloudflare metrics.
+const popularEntries = getPopularEntries(10);
+const homeTopicPanels = topics.map((topic) => {
+  const topicEntries = wikiEntries.filter((e) => e.topic === topic.id);
+  return {
+    ...topic,
+    stats: {
+      reviews: topicEntries.filter((e) => e.kind === "review").length,
+      articles: topicEntries.filter((e) => e.kind === "article").length,
+      guides: topicEntries.filter((e) => e.kind === "guide").length,
+    },
+  };
+});
+
+function relativeTime(dateValue: string) {
+  const delta = Date.now() - Date.parse(dateValue);
+  const hours = Math.max(1, Math.floor(delta / 3_600_000));
+
+  if (hours < 24) return `${hours}h ago`;
+
+  const days = Math.floor(hours / 24);
+  if (days < 30) return `${days}d ago`;
+
+  const months = Math.floor(days / 30);
+  return `${months}mo ago`;
+}
+
+---
+
+<Layout
+  title="MOCKACHINO | The Mocka Wiki"
+  description="A technical-style wiki for shoots, plays, and code notes."
+  currentPath={Astro.url.pathname}
+>
+  <section class="panel hero-panel">
+    <div class="hero-panel__content">
+      <p class="section-label">// Welcome To</p>
+      <span class="sr-only" role="heading" aria-level="1">MOCKACHINO</span>
+      <img
+        src="/brand/mockachino-lcd-title.svg"
+        alt=""
+        class="hero-panel__title-image"
+        width="930"
+        height="140"
+        loading="eager"
+        aria-hidden="true"
+      />
+      <p class="hero-panel__strap">The central knowledge base for everything Mocka</p>
+      <p class="hero-panel__summary">
+        Explore in-depth guides, tutorials, reviews and documentation across shooting, gaming and coding.
+      </p>
+    </div>
+
+    <div class="hero-panel__visual">
+      <div class="hero-blueprint">
+        <div class="hero-blueprint__frame">
+          <img
+            src="/brand/mockachino-blueprint.svg"
+            alt="Mockachino blueprint logo"
+            class="hero-panel__mark"
+            width="560"
+            height="360"
+            loading="eager"
+          />
+        </div>
+        <div class="hero-blueprint__meta">
+          <p>Building knowledge.<br />Sharing experience.<br />Improving every day.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="panel topics-panel">
+    <div class="section-heading section-heading--compact">
+      <p class="section-label">/// Explore Topics</p>
+    </div>
+
+    <div class="topic-card-grid">
+      {
+        homeTopicPanels.map((topic) => (
+          <article class="topic-card" data-topic={topic.id}>
+            <div class="topic-card__header">
+              <img src={`/brand/logo-${topic.id}.png`} alt="" class="topic-card__logo" width="120" height="90" loading="lazy" />
+              <h3>{topic.name}</h3>
+            </div>
+            <p class="topic-card__description">{topic.description}</p>
+            <div class="metric-row">
+              <div class="metric-box">
+                <span class="metric-box__value">{topic.stats.reviews}</span>
+                <span class="metric-box__label">Reviews</span>
+              </div>
+              <div class="metric-box">
+                <span class="metric-box__value">{topic.stats.articles}</span>
+                <span class="metric-box__label">Articles</span>
+              </div>
+              <div class="metric-box">
+                <span class="metric-box__value">{topic.stats.guides}</span>
+                <span class="metric-box__label">Guides</span>
+              </div>
+            </div>
+            <a href={`/topics/${topic.id}/`} class="button button--primary topic-card__button">
+              Explore {topic.shortName.toUpperCase()} <span aria-hidden="true">→</span>
+            </a>
+          </article>
+        ))
+      }
+    </div>
+  </section>
+
+  <section class="dual-panel">
+    <article class="panel">
+      <div class="section-heading section-heading--compact">
+        <p class="section-label">/// Recently Updated</p>
+      </div>
+      <ol class="entry-list entry-list--home-recent">
+        {
+          recentEntries.map((entry) => (
+            <li class="entry-list__item" data-topic={entry.topic}>
+              <a href={`/wiki/${entry.slug}/`} class="entry-list__link entry-list__link--home">
+                <div class="entry-list__row">
+                  <div class="entry-list__lead">
+                    <img src={`/brand/logo-${entry.topic}.png`} alt="" class="entry-list__topic-icon entry-list__topic-icon--logo" />
+                    <span class="entry-list__title">{entry.title}</span>
+                  </div>
+                  <div class="entry-list__meta entry-list__meta--inline">
+                    <span>{formatTopicLabel(entry.topic).replace("MOCKA ", "")}</span>
+                    <span>{formatCategoryLabel(entry.topic, entry.category).toUpperCase()}</span>
+                    <span>{relativeTime(entry.updatedAt)}</span>
+                  </div>
+                </div>
+              </a>
+            </li>
+          ))
+        }
+      </ol>
+      <a href="/recent/" class="panel-footer-link">View All Recent Changes</a>
+    </article>
+
+    <article class="panel">
+      <div class="section-heading section-heading--compact">
+        <p class="section-label">/// Popular Pages</p>
+      </div>
+      <ol class="entry-list entry-list--home-popular">
+        {
+          popularEntries.map((entry, index) => (
+            <li class="entry-list__item" data-topic={entry.topic}>
+              <a href={`/wiki/${entry.slug}/`} class="entry-list__link entry-list__link--home">
+                <div class="entry-list__row">
+                  <div class="entry-list__lead">
+                    <span class="entry-list__rank">{String(index + 1).padStart(2, "0")}</span>
+                    <span class="entry-list__title">{entry.title}</span>
+                  </div>
+                  <div class="entry-list__meta entry-list__meta--inline">
+                    <span>{formatTopicLabel(entry.topic).replace("MOCKA ", "")}</span>
+                  </div>
+                </div>
+              </a>
+            </li>
+          ))
+        }
+      </ol>
+    </article>
+  </section>
+</Layout>

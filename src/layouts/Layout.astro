@@ -1,0 +1,285 @@
+---
+import "../styles/global.css";
+import { execSync } from "node:child_process";
+import LogoMark from "../components/LogoMark.astro";
+import RasterIcon from "../components/RasterIcon.astro";
+import SystemGrid from "../components/SystemGrid.astro";
+import { headerNav, primaryNav, topics } from "../data/wiki";
+
+interface Props {
+  title?: string;
+  description?: string;
+  currentPath?: string;
+  headerPath?: string;
+  pageClass?: string;
+}
+
+const {
+  title = "MOCKACHINO",
+  description = "The Mocka Wiki",
+  currentPath = "/",
+  headerPath = currentPath,
+  pageClass,
+} = Astro.props;
+
+const today = new Date();
+today.setHours(0, 0, 0, 0);
+const activityDays = 7 * 16;
+const activityStart = new Date(today);
+activityStart.setDate(today.getDate() - activityDays + 1);
+
+function toDateKey(date: Date) {
+  return date.toISOString().slice(0, 10);
+}
+
+function getRepoActivity() {
+  const counts = new Map<string, number>();
+
+  try {
+    const output = execSync("git log --date=short --pretty=format:%ad -n 500", {
+      cwd: process.cwd(),
+      encoding: "utf8",
+      stdio: ["ignore", "pipe", "ignore"],
+    });
+
+    for (const date of output.split(/\r?\n/).filter(Boolean)) {
+      counts.set(date, (counts.get(date) ?? 0) + 1);
+    }
+  } catch {
+    // Keep the activity grid renderable outside a git checkout.
+  }
+
+  return Array.from({ length: 16 }, (_, weekIndex) =>
+    Array.from({ length: 7 }, (_, dayIndex) => {
+      const date = new Date(activityStart);
+      date.setDate(activityStart.getDate() + weekIndex * 7 + dayIndex);
+      const dateKey = toDateKey(date);
+
+      return {
+        date: dateKey,
+        count: counts.get(dateKey) ?? 0,
+      };
+    }),
+  );
+}
+
+const repoActivity = getRepoActivity();
+const totalRepoCommits = repoActivity.flat().reduce((total, cell) => total + cell.count, 0);
+
+function getLastGitUpdate() {
+  try {
+    return execSync('git log -1 --format="%cd" --date=format:"%d %b %Y"', {
+      cwd: process.cwd(),
+      encoding: "utf8",
+      stdio: ["ignore", "pipe", "ignore"],
+    }).trim();
+  } catch {
+    return "Unavailable";
+  }
+}
+
+const lastGitUpdate = getLastGitUpdate();
+---
+
+<!doctype html>
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="description" content={description} />
+    <title>{title}</title>
+    <script is:inline>
+      const preferredTheme = localStorage.getItem("mockachino-theme");
+      const systemDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+      document.documentElement.dataset.theme = preferredTheme ?? (systemDark ? "dark" : "light");
+    </script>
+  </head>
+  <body class:list={[currentPath === "/" && "page-home", pageClass]}>
+    <div class="site-frame">
+      <header class="site-header panel">
+        <div class="site-header__row">
+          <div class="site-header__lead">
+            <a href="/" class="site-brand">
+              <LogoMark variant="monogram" class="site-brand__mark" />
+              <div class="site-brand__copy">
+                <span class="site-brand__title">MOCKACHINO</span>
+                <span class="site-brand__subtitle">THE MOCKA WIKI</span>
+              </div>
+            </a>
+
+            <nav aria-label="Header">
+              <ul class="header-nav">
+                {
+                  headerNav.map((item) => (
+                    <li>
+                      <a href={item.href} class:list={["header-nav__link", headerPath === item.href && "is-active"]}>
+                        {item.label}
+                      </a>
+                    </li>
+                  ))
+                }
+              </ul>
+            </nav>
+          </div>
+
+          <div class="site-tools">
+            <form action="/browse/" method="get" class="search-form">
+              <label class="sr-only" for="site-search">Search wiki</label>
+              <RasterIcon name="search" class="search-form__icon search-form__icon--raster" />
+              <input id="site-search" name="q" type="search" placeholder="Search the wiki..." />
+            </form>
+            <div class="header-utilities">
+              <button class="theme-toggle" type="button" data-theme-toggle aria-label="Toggle day and night mode">
+                <RasterIcon name="sun" class="theme-toggle__icon theme-toggle__icon--dark theme-toggle__icon--raster" />
+                <RasterIcon name="moon" class="theme-toggle__icon theme-toggle__icon--light theme-toggle__icon--raster" />
+              </button>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <slot name="subheader" />
+
+      <div class="site-shell">
+        <aside class="sidebar">
+          <section class="panel panel--sidebar">
+            <p class="panel__kicker">Navigation</p>
+            <nav aria-label="Primary">
+              <ul class="nav-list">
+                {
+                  primaryNav.map((item) => (
+                    <li>
+                      <a href={item.href} class:list={["nav-link", currentPath === item.href && "is-active"]}>
+                        <RasterIcon name={item.icon} class="nav-link__icon nav-link__icon--raster" />
+                        <span>{item.label}</span>
+                      </a>
+                    </li>
+                  ))
+                }
+              </ul>
+            </nav>
+          </section>
+
+          <section class="panel panel--sidebar panel--topics">
+            <p class="panel__kicker">Topics</p>
+            <div class="topic-tree">
+              {
+                topics.map((topic) => (
+                  <div class="topic-tree__group" data-topic={topic.id}>
+                    <a href={`/topics/${topic.id}/`} class="topic-tree__topic">
+                      <img src={`/brand/logo-${topic.id}.png`} alt="" class="topic-tree__icon topic-tree__icon--logo" />
+                      <span>{topic.name}</span>
+                    </a>
+                    <ul class="topic-tree__categories">
+                      {
+                        topic.categories.map((category) => (
+                          <li>
+                            <a href={`/topics/${topic.id}/${category.id}/`}>
+                              <RasterIcon name="chevron" class="topic-tree__chevron topic-tree__chevron--raster" />
+                              <span>{category.name}</span>
+                            </a>
+                          </li>
+                        ))
+                      }
+                    </ul>
+                  </div>
+                ))
+              }
+            </div>
+          </section>
+
+          <section class="panel panel--sidebar panel--status">
+            <p class="panel__kicker">Repo Activity</p>
+            <div class="repo-activity">
+              <SystemGrid activity={repoActivity} />
+              <div class="repo-activity__meta">
+                <span>{totalRepoCommits} commits</span>
+                <span>16 weeks</span>
+              </div>
+            </div>
+          </section>
+        </aside>
+
+        <div class="site-main">
+          <main class="page-content">
+            <slot />
+          </main>
+        </div>
+      </div>
+
+      <footer class="site-footer panel">
+        <div class="site-footer__brand footer-column">
+          <div class="site-footer__brand-lockup">
+            <LogoMark variant="monogram" class="site-footer__mark" />
+            <div>
+              <p class="site-footer__title">MOCKACHINO</p>
+              <p class="site-footer__subtitle">The Mocka Wiki</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="footer-column footer-column--statement">
+          <p class="site-footer__blurb">Copyright © 2026 Mockachino. All rights reserved.</p>
+          <p class="site-footer__ref">Mockachino and The Mocka Wiki are trademarks of Mocka.</p>
+        </div>
+
+        <div class="footer-column">
+          <p class="panel__kicker">Explore</p>
+          <ul class="footer-links">
+            <li><a href="/browse/">Browse All</a></li>
+            <li><a href="/recent/">Recent Changes</a></li>
+            <li><a href="/random/">Random Page</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-column">
+          <p class="panel__kicker">Community</p>
+          <ul class="footer-links">
+            <li><a href="/about/">Contribute</a></li>
+            <li><a href="/glossary/">Wiki Guidelines</a></li>
+            <li><a href="/tags/">Tag Index</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-column">
+          <p class="panel__kicker">Connect</p>
+          <ul class="footer-links">
+            <li><a href="/topics/shoots/">Mocka Shoots</a></li>
+            <li><a href="/topics/plays/">Mocka Plays</a></li>
+            <li><a href="/topics/codes/">Mocka Codes</a></li>
+          </ul>
+        </div>
+
+        <div class="site-footer__info footer-column">
+          <p class="panel__kicker">System Info</p>
+          <dl class="site-footer__meta">
+            <div>
+              <dt>Version</dt>
+              <dd>2.0.0</dd>
+            </div>
+            <div>
+              <dt>Last Update</dt>
+              <dd>{lastGitUpdate}</dd>
+            </div>
+            <div>
+              <dt>Status</dt>
+              <dd class="site-footer__status">Operational</dd>
+            </div>
+          </dl>
+        </div>
+      </footer>
+    </div>
+
+    <script is:inline>
+      const toggle = document.querySelector("[data-theme-toggle]");
+      toggle?.addEventListener("click", () => {
+        const root = document.documentElement;
+        const nextTheme = root.dataset.theme === "dark" ? "light" : "dark";
+        root.dataset.theme = nextTheme;
+        localStorage.setItem("mockachino-theme", nextTheme);
+      });
+    </script>
+  </body>
+</html>

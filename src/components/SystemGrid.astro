@@ -1,0 +1,29 @@
+---
+interface Cell {
+  date: string;
+  count: number;
+}
+
+interface Props {
+  activity: Cell[][];
+}
+
+const { activity } = Astro.props;
+
+function getLevel(count: number) {
+  if (count === 0) return 0;
+  if (count === 1) return 1;
+  if (count <= 3) return 2;
+  return 3;
+}
+---
+
+<div class="status-grid" aria-label="Repository activity grid">
+  {
+    activity.map((column) => (
+      <div class="status-grid__column">
+        {column.map((cell) => <span class={`status-grid__cell level-${getLevel(cell.count)}`} title={`${cell.date}: ${cell.count} commits`} />)}
+      </div>
+    ))
+  }
+</div>

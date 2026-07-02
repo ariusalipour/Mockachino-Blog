@@ -1,0 +1,8 @@
+<svg width="192" height="192" viewBox="0 0 192 192" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M20 20H172V24H24V172H20V20Z" fill="#F5C542"/>
+  <path d="M168 20H172V172H92V168H168V20Z" fill="#F5C542"/>
+  <g transform="translate(-48 -6) scale(0.5142857)">
+    <path d="M140 282V78H216L280 142L344 78H420V282H384V128L280 232L176 128V282H140Z" stroke="#F5C542" stroke-width="14" stroke-linejoin="miter"/>
+    <path d="M184 282V136L232 184L280 232L328 184L376 136V282" stroke="#F5C542" stroke-width="9" stroke-linejoin="miter"/>
+  </g>
+</svg>
