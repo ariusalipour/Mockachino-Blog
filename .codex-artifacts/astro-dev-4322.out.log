@@ -1,0 +1,75 @@
+
+> dev
+> astro dev --host 127.0.0.1 --port 4322
+
+[2m19:22:44[22m [34m[types][39m Generated [2m1ms[22m
+[2m19:22:44[22m [34m[content][39m Syncing content
+[2m19:22:44[22m [34m[content][39m Astro config changed
+[2m19:22:44[22m [34m[content][39m Clearing content store
+[2m19:22:44[22m [34m[content][39m Synced content
+[2m19:22:44[22m [34m[vite][39m Re-optimizing dependencies because vite config has changed
+
+[42m[1m astro [22m[49m [32mv5.18.2[39m [2mready in[22m 254 [2mms[22m
+
+[2m┃[22m Local    [36mhttp://127.0.0.1:4322/[39m
+
+[2m19:22:44[22m [32mwatching for file changes...[39m
+[2m19:23:10[22m [34m[200][39m /topics/plays/indie-games/ [2m257ms[22m
+[2m19:23:10[22m [34m[200][39m /topics/plays/ [2m259ms[22m
+[2m19:23:10[22m [34m[200][39m /wiki/sp-tarkov-the-forbidden-fruit/ [2m112ms[22m
+[2m19:39:24[22m [34m[200][39m /topics/shoots/ [2m473ms[22m
+[2m19:39:24[22m [34m[200][39m /topics/shoots/events/ [2m473ms[22m
+[2m19:39:24[22m [34m[200][39m /wiki/window-size-doesnt-really-matter/ [2m474ms[22m
+[2m19:39:24[22m [34m[200][39m /wiki/shoots-new-year-new-feat/ [2m474ms[22m
+[2m19:48:33[22m [34m[200][39m /topics/codes/guides/ [2m433ms[22m
+[2m19:48:33[22m [34m[200][39m /topics/codes/ [2m433ms[22m
+[2m19:48:33[22m [34m[200][39m /wiki/codes-discord-stream-overlay-hack/ [2m432ms[22m
+[2m19:48:33[22m [34m[200][39m /wiki/swapping-over-to-windows-11/ [2m433ms[22m
+[2m19:58:04[22m [34m[200][39m /wiki/window-size-doesnt-really-matter/ [2m548ms[22m
+[2m19:58:04[22m [34m[200][39m /wiki/shot-show-2026-first-timer/ [2m554ms[22m
+[2m19:58:04[22m [34m[200][39m /wiki/slay-the-spire/ [2m556ms[22m
+[2m19:58:04[22m [34m[200][39m /wiki/create-your-first-discord-bot/ [2m556ms[22m
+[2m19:59:27[22m [34m[200][39m /wiki/vortex-razor-hd-gen-iii-1-10x24/ [2m137ms[22m
+[2m19:59:27[22m [34m[200][39m /wiki/migrating-wordpress-sites-without-plugins/ [2m114ms[22m
+[2m20:46:00[22m Configuration file updated. Restarting...
+[2m20:46:01[22m [34m[vite][39m Re-optimizing dependencies because lockfile has changed
+[2m20:46:01[22m [34m[content][39m Syncing content
+[2m20:46:01[22m [34m[content][39m Synced content
+[2m20:46:01[22m [34m[types][39m Generated [2m300ms[22m
+[2m20:46:01[22m [34m[vite][39m Re-optimizing dependencies because vite config has changed
+[2m20:47:37[22m [34m[content][39m Syncing content
+[2m20:47:59[22m [34m[glob-loader][39m Reloaded data from [32mshoots.md[39m
+[2m20:47:59[22m [34m[glob-loader][39m Reloaded data from [32mshoots-blog.md[39m
+[2m20:47:59[22m [34m[glob-loader][39m Reloaded data from [32mplays.md[39m
+[2m20:47:59[22m [34m[glob-loader][39m Reloaded data from [32mcodes.md[39m
+[2m20:47:59[22m [34m[glob-loader][39m Reloaded data from [32mshoots-events.md[39m
+[2m20:47:59[22m [34m[glob-loader][39m Reloaded data from [32mshoots-experiences.md[39m
+[2m20:47:59[22m [34m[glob-loader][39m Reloaded data from [32mshoots-news.md[39m
+[2m20:47:59[22m [34m[glob-loader][39m Reloaded data from [32mshoots-reviews.md[39m
+[2m20:47:59[22m [34m[glob-loader][39m Reloaded data from [32mshoots-firearms.md[39m
+[2m20:47:59[22m [34m[glob-loader][39m Reloaded data from [32mshoots-guides.md[39m
+[2m20:47:59[22m [34m[glob-loader][39m Reloaded data from [32mshoots-how-tos.md[39m
+[2m20:47:59[22m [34m[glob-loader][39m Reloaded data from [32mshoots-tips.md[39m
+[2m20:47:59[22m [34m[glob-loader][39m Reloaded data from [32mshoots-training.md[39m
+[2m20:47:59[22m [34m[glob-loader][39m Reloaded data from [32mplays-news.md[39m
+[2m20:47:59[22m [34m[glob-loader][39m Reloaded data from [32mplays-how-tos.md[39m
+[2m20:47:59[22m [34m[glob-loader][39m Reloaded data from [32mplays-tips.md[39m
+[2m20:47:59[22m [34m[glob-loader][39m Reloaded data from [32mplays-indie-games.md[39m
+[2m20:47:59[22m [34m[glob-loader][39m Reloaded data from [32mcodes-blog.md[39m
+[2m20:47:59[22m [34m[glob-loader][39m Reloaded data from [32mplays-experiences.md[39m
+[2m20:47:59[22m [34m[glob-loader][39m Reloaded data from [32mcodes-guides.md[39m
+[2m20:48:00[22m [34m[glob-loader][39m Reloaded data from [32mcodes-reviews.md[39m
+[2m21:22:39[22m [34m[content][39m Syncing content
+[2m21:22:39[22m [34m[content][39m Content config changed
+[2m21:22:39[22m [34m[content][39m Clearing content store
+[2m22:03:17[22m [34m[content][39m Syncing content
+[2m22:03:17[22m [34m[content][39m Content config changed
+[2m22:03:17[22m [34m[content][39m Clearing content store
+[33m[1m22:03:17[22m [WARN] [glob-loader][39m No files found matching "**/*.md,!**/_*/**/*.md,!**/_*.md" in directory "src\content\categories"
+[2m22:03:17[22m [34m[content][39m Synced content
+[2m22:08:22[22m [34m[content][39m Syncing content
+[2m22:08:22[22m [34m[content][39m Content config changed
+[2m22:08:22[22m [34m[content][39m Clearing content store
+[2m22:08:22[22m [34m[content][39m Synced content
+[33m[1m22:28:59[22m [WARN] [glob-loader][39m Duplicate id "what-is-the-36-yard-zero" found in D:\GIT\Mockachino-Blog\src\content\wiki\shoots\SHO-GUI-WHA.md. Later items with the same id will overwrite earlier ones.
+[2m22:28:59[22m [34m[glob-loader][39m Reloaded data from [32mshoots/SHO-GUI-WHA.md[39m

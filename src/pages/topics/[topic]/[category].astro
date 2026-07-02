@@ -1,4 +1,5 @@
 ---
+import BrowseControls from "../../../components/BrowseControls.astro";
 import EntryList from "../../../components/EntryList.astro";
 import Layout from "../../../layouts/Layout.astro";
 import { formatCategoryLabel, getCategory, getEntriesByCategory, topics } from "../../../data/wiki";
@@ -13,8 +14,9 @@ export function getStaticPaths() {
 }
 
 const { topic, category } = Astro.props;
-const entries = getEntriesByCategory(topic.id, category.id);
+const entries = getEntriesByCategory(category.id).filter((e) => e.topic === topic.id);
 const resolvedCategory = getCategory(topic.id, category.id);
+const listId = `category-list-${topic.id}-${category.id}`;
 ---
 
 <Layout
@@ -29,12 +31,18 @@ const resolvedCategory = getCategory(topic.id, category.id);
       <h1>{resolvedCategory?.name ?? category.id}</h1>
       <p class="taxonomy-copy">{resolvedCategory?.description}</p>
       <div class="meta-strip">
-        <span class="meta-chip">{entries.length} linked pages</span>
+        <span class="meta-chip">{entries.length} entries</span>
       </div>
     </section>
 
-    <section class="panel">
-      {entries.length > 0 ? <EntryList entries={entries} perPage={10} /> : <p class="empty-state">No entries are assigned to this category yet.</p>}
-    </section>
+    {entries.length > 0
+      ? <>
+          <BrowseControls total={entries.length} listId={listId} />
+          <section class="panel">
+            <EntryList entries={entries} perPage={10} id={listId} />
+          </section>
+        </>
+      : <section class="panel"><p class="empty-state">No entries are assigned to this category yet.</p></section>
+    }
   </div>
 </Layout>

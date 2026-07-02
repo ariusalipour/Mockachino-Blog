@@ -1,5 +1,4 @@
 ---
-import RasterIcon from "../components/RasterIcon.astro";
 import Layout from "../layouts/Layout.astro";
 import {
   formatCategoryLabel,
@@ -8,11 +7,11 @@ import {
   getRecentEntries,
   topics,
   wikiEntries,
-  type WikiEntry,
 } from "../data/wiki";
 
-const recentEntries = getRecentEntries(5);
-const popularEntries = getPopularEntries(5);
+const recentEntries = getRecentEntries(10);
+// TODO: Replace static wiki popularity values with Google Analytics or Cloudflare metrics.
+const popularEntries = getPopularEntries(10);
 const homeTopicPanels = topics.map((topic) => {
   const topicEntries = wikiEntries.filter((e) => e.topic === topic.id);
   return {
@@ -38,9 +37,6 @@ function relativeTime(dateValue: string) {
   return `${months}mo ago`;
 }
 
-function topicIcon(topic: WikiEntry["topic"]) {
-  return topic === "shoots" ? "target" : topic === "plays" ? "controller" : "chip";
-}
 ---
 
 <Layout
@@ -96,7 +92,7 @@ function topicIcon(topic: WikiEntry["topic"]) {
         homeTopicPanels.map((topic) => (
           <article class="topic-card" data-topic={topic.id}>
             <div class="topic-card__header">
-              <RasterIcon name={topic.icon} class="topic-card__icon topic-card__icon--raster" />
+              <img src={`/brand/logo-${topic.id}.png`} alt="" class="topic-card__logo" width="120" height="90" loading="lazy" />
               <h3>{topic.name}</h3>
             </div>
             <p class="topic-card__description">{topic.description}</p>
@@ -135,10 +131,7 @@ function topicIcon(topic: WikiEntry["topic"]) {
               <a href={`/wiki/${entry.slug}/`} class="entry-list__link entry-list__link--home">
                 <div class="entry-list__row">
                   <div class="entry-list__lead">
-                    <RasterIcon
-                      name={topicIcon(entry.topic)}
-                      class="entry-list__topic-icon entry-list__topic-icon--raster"
-                    />
+                    <img src={`/brand/logo-${entry.topic}.png`} alt="" class="entry-list__topic-icon entry-list__topic-icon--logo" />
                     <span class="entry-list__title">{entry.title}</span>
                   </div>
                   <div class="entry-list__meta entry-list__meta--inline">

@@ -1,4 +1,5 @@
 ---
+import BrowseControls from "../../../components/BrowseControls.astro";
 import EntryList from "../../../components/EntryList.astro";
 import Layout from "../../../layouts/Layout.astro";
 import { getEntriesByTopic, getTopicStats, topics } from "../../../data/wiki";
@@ -13,6 +14,7 @@ export function getStaticPaths() {
 const { topic } = Astro.props;
 const entries = getEntriesByTopic(topic.id);
 const stats = getTopicStats(topic.id);
+const listId = `topic-list-${topic.id}`;
 ---
 
 <Layout title={`${topic.name} | MOCKACHINO`} description={topic.description} currentPath={Astro.url.pathname}>
@@ -41,6 +43,8 @@ const stats = getTopicStats(topic.id);
       }
     </section>
 
+    <BrowseControls total={entries.length} listId={listId} />
+
     <section class="panel">
       <div class="section-heading">
         <div>
@@ -48,7 +52,7 @@ const stats = getTopicStats(topic.id);
           <h2>All pages under {topic.name}.</h2>
         </div>
       </div>
-      <EntryList entries={entries} perPage={10} />
+      <EntryList entries={entries} perPage={10} id={listId} />
     </section>
   </div>
 </Layout>

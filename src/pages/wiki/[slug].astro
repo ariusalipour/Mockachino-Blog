@@ -11,6 +11,7 @@ import {
   getTopic,
   wikiEntries,
 } from "../../data/wiki";
+import { migratedArticleContent } from "../../data/migratedArticleContent";
 import { formatDate } from "../../lib/format";
 
 export function getStaticPaths() {
@@ -22,13 +23,27 @@ export function getStaticPaths() {
 
 const { entry } = Astro.props;
 const articleView = getArticleView(entry);
-const relatedEntries = getRelatedEntries(entry, 3);
+const migratedContent = migratedArticleContent[entry.slug];
+const relatedEntries = getRelatedEntries(entry, 5);
 const topic = getTopic(entry.topic);
 const topicEntries = getEntriesByTopic(entry.topic);
 const entryIndex = topicEntries.findIndex((candidate) => candidate.slug === entry.slug);
 const previousEntry = entryIndex > 0 ? topicEntries[entryIndex - 1] : undefined;
 const nextEntry = entryIndex >= 0 && entryIndex < topicEntries.length - 1 ? topicEntries[entryIndex + 1] : undefined;
 const articleInfoLabel = `${formatTopicLabel(entry.topic)} / ${formatCategoryLabel(entry.topic, entry.category)}`;
+// Read time derived from word count at build time (220 wpm average).
+// Once this page is migrated to getCollection(), replace with:
+//   const readMinutes = Math.max(1, Math.ceil(entry.body.split(/\s+/).length / 220));
+const readMinutes = migratedContent
+  ? Math.max(1, Math.ceil(migratedContent.wordCount / 220))
+  : Math.max(1, Math.ceil(entry.summary.split(/\s+/).length / 220));
+const heroImage = migratedContent?.featuredImage?.src ?? articleView.heroAsset;
+const heroAlt = migratedContent?.featuredImage?.alt || `${entry.title} hero visual`;
+const tocItems = migratedContent
+  ? migratedContent.toc.length > 0
+    ? migratedContent.toc
+    : [{ id: "article-content", title: "Article" }]
+  : articleView.sections.map((section) => ({ id: section.id, title: section.title }));
 ---
 
 <Layout
@@ -60,72 +75,82 @@ const articleInfoLabel = `${formatTopicLabel(entry.topic)} / ${formatCategoryLab
 
         <div class="article-main__meta">
           <span><RasterIcon name="book" class="article-main__meta-icon article-main__meta-icon--raster" /> {formatDate(entry.createdAt)}</span>
-          <span><RasterIcon name="pulse" class="article-main__meta-icon article-main__meta-icon--raster" /> {articleView.readMinutes} MIN READ</span>
+          <span><RasterIcon name="pulse" class="article-main__meta-icon article-main__meta-icon--raster" /> {readMinutes} MIN READ</span>
           <span><RasterIcon name="user" class="article-main__meta-icon article-main__meta-icon--raster" /> MOCKA</span>
           <span class="article-main__meta-topic">{entry.topic.toUpperCase()}</span>
         </div>
       </header>
 
       <div class="article-main__visual panel">
-        <img src={articleView.heroAsset} alt={`${entry.title} hero visual`} />
+        <img src={heroImage} alt={heroAlt} />
       </div>
 
-      <div class="article-sections">
-        {
-          articleView.sections.map((section) => (
-            <section class="article-section" id={section.id}>
-              <h2>
-                <span>{section.number}</span>
-                <span>{section.title}</span>
-              </h2>
-              {section.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
+      {
+        migratedContent ? (
+          <div id="article-content" class="article-content" set:html={migratedContent.html} />
+        ) : (
+          <div class="article-sections">
+            {
+              articleView.sections.map((section) => (
+                <section class="article-section" id={section.id}>
+                  <h2>
+                    <span>{section.number}</span>
+                    <span>{section.title}</span>
+                  </h2>
+                  {section.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
 
-              {section.takeaway && (
-                <div class="article-takeaway">
-                  <div class="article-takeaway__icon">
-                    <RasterIcon name="target" class="article-takeaway__icon-mark article-takeaway__icon-mark--raster" />
-                  </div>
-                  <div class="article-takeaway__content">
-                    <p class="article-takeaway__label">Key Takeaway</p>
-                    <p>{section.takeaway}</p>
-                  </div>
-                </div>
-              )}
-
-              {section.comparisonRows && (
-                <div class="article-compare">
-                  <div class="article-compare__header">
-                    <span>Model</span>
-                    <span>Best Used For</span>
-                    <span>Speed Range</span>
-                    <span>Notes</span>
-                  </div>
-                  {section.comparisonRows.map((row) => (
-                    <div class="article-compare__row">
-                      <span>{row.model}</span>
-                      <span>{row.bestUsedFor}</span>
-                      <span>{row.speedRange}</span>
-                      <span>{row.notes}</span>
+                  {section.takeaway && (
+                    <div class="article-takeaway">
+                      <div class="article-takeaway__icon">
+                        <img src={`/brand/logo-${entry.topic}.png`} alt="" class="article-takeaway__icon-mark article-takeaway__icon-mark--logo" />
+                      </div>
+                      <div class="article-takeaway__content">
+                        <p class="article-takeaway__label">Key Takeaway</p>
+                        <p>{section.takeaway}</p>
+                      </div>
                     </div>
-                  ))}
-                </div>
-              )}
+                  )}
 
-              {section.metricCards && (
-                <div class="article-metrics">
-                  {section.metricCards.map((metric) => (
-                    <article class="article-metric-card">
-                      <RasterIcon name={metric.icon} class="article-metric-card__icon article-metric-card__icon--raster" />
-                      <h3>{metric.title}</h3>
-                      <p>{metric.body}</p>
-                    </article>
-                  ))}
-                </div>
-              )}
-            </section>
-          ))
-        }
-      </div>
+                  {section.comparisonRows && (
+                    <div class="article-compare">
+                      <div class="article-compare__header">
+                        <span>Model</span>
+                        <span>Best Used For</span>
+                        <span>Speed Range</span>
+                        <span>Notes</span>
+                      </div>
+                      {section.comparisonRows.map((row) => (
+                        <div class="article-compare__row">
+                          <span>{row.model}</span>
+                          <span>{row.bestUsedFor}</span>
+                          <span>{row.speedRange}</span>
+                          <span>{row.notes}</span>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+
+                  {section.metricCards && (
+                    <div class="article-metrics">
+                      {section.metricCards.map((metric) => (
+                        <article class="article-metric-card">
+                          {metric.icon === "target" ? (
+                            <img src={`/brand/logo-${entry.topic}.png`} alt="" class="article-metric-card__icon--logo" />
+                          ) : (
+                            <RasterIcon name={metric.icon} class="article-metric-card__icon article-metric-card__icon--raster" />
+                          )}
+                          <h3>{metric.title}</h3>
+                          <p>{metric.body}</p>
+                        </article>
+                      ))}
+                    </div>
+                  )}
+                </section>
+              ))
+            }
+          </div>
+        )
+      }
 
       <footer class="article-pagination">
         <a href={previousEntry ? `/wiki/${previousEntry.slug}/` : "#"} class:list={["article-pagination__link", !previousEntry && "is-disabled"]}>
@@ -144,11 +169,11 @@ const articleInfoLabel = `${formatTopicLabel(entry.topic)} / ${formatCategoryLab
         <p class="panel__kicker">Table Of Contents</p>
         <ol class="article-toc">
           {
-            articleView.toc.map((item, index) => (
+            tocItems.map((item, index) => (
               <li>
-                <a href={`#${articleView.sections[index]?.id}`}>
+                <a href={`#${item.id}`}>
                   <span>{String(index + 1).padStart(2, "0")}</span>
-                  <span>{item}</span>
+                  <span>{item.title}</span>
                 </a>
               </li>
             ))
@@ -157,10 +182,12 @@ const articleInfoLabel = `${formatTopicLabel(entry.topic)} / ${formatCategoryLab
       </section>
 
       <section class="panel article-rail__panel article-rail__schematic">
-        <img src={articleView.schematicAsset} alt={`${entry.title} reference schematic`} />
         <div class="article-rail__schematic-meta">
-          <span>{articleView.schematicLabel}</span>
-          <span>{articleView.schematicRef}</span>
+          <span>{entry.kind.toUpperCase()}</span>
+        </div>
+        <img src="/brand/mockachino-blueprint.svg" alt="Mockachino schematic" />
+        <div class="article-rail__schematic-meta">
+          <a href={`/topics/${entry.topic}/${entry.category}/`}>{formatCategoryLabel(entry.topic, entry.category)}</a>
         </div>
       </section>
 
@@ -182,15 +209,7 @@ const articleInfoLabel = `${formatTopicLabel(entry.topic)} / ${formatCategoryLab
             </dd>
           </div>
           <div>
-            <dt>Difficulty</dt>
-            <dd>
-              <div class="article-difficulty" aria-label={`Difficulty ${articleView.difficulty} of 7`}>
-                {Array.from({ length: 7 }).map((_, index) => <span class:list={[index < articleView.difficulty && "is-active"]}></span>)}
-              </div>
-            </dd>
-          </div>
-          <div>
-            <dt>Last Updated</dt>
+            <dt>Updated</dt>
             <dd>{formatDate(entry.updatedAt)}</dd>
           </div>
           <div>
@@ -208,23 +227,23 @@ const articleInfoLabel = `${formatTopicLabel(entry.topic)} / ${formatCategoryLab
         <p class="panel__kicker">Related Articles</p>
         <div class="article-related">
           {
-            relatedEntries.map((related) => (
-              <a href={`/wiki/${related.slug}/`} class="article-related__item" data-topic={related.topic}>
-                <div class="article-related__thumb">
-                  <img
-                    src={related.topic === "shoots" ? "/brand/topic-shoots-panel.png" : related.topic === "plays" ? "/brand/topic-plays-panel.png" : "/brand/topic-codes-panel.png"}
-                    alt=""
-                  />
-                </div>
-                <div class="article-related__body">
-                  <span class="article-related__title">{related.title}</span>
-                  <span class="article-related__meta">{formatTopicLabel(related.topic)} · {related.kind.toUpperCase()}</span>
-                </div>
-              </a>
-            ))
+            relatedEntries.map((related) => {
+              const relatedImage = migratedArticleContent[related.slug]?.featuredImage;
+              const fallbackSrc = related.topic === "shoots" ? "/brand/topic-shoots-panel.png" : related.topic === "plays" ? "/brand/topic-plays-panel.png" : "/brand/topic-codes-panel.png";
+              return (
+                <a href={`/wiki/${related.slug}/`} class="article-related__item" data-topic={related.topic}>
+                  <div class="article-related__thumb">
+                    <img src={relatedImage?.src ?? fallbackSrc} alt={relatedImage?.alt || related.title} />
+                  </div>
+                  <div class="article-related__body">
+                    <span class="article-related__title">{related.title}</span>
+                    <span class="article-related__meta">{related.kind.toUpperCase()}</span>
+                  </div>
+                </a>
+              );
+            })
           }
         </div>
-        <a href="/browse/" class="panel-footer-link">View All Resources</a>
       </section>
 
       <section class="panel article-rail__panel">
