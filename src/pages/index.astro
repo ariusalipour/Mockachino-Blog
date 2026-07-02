@@ -7,6 +7,7 @@ import {
   getPopularEntries,
   getRecentEntries,
   topics,
+  wikiEntries,
   type WikiEntry,
 } from "../data/wiki";
 
@@ -15,7 +16,7 @@ const popularEntries = getPopularEntries(5);
 const homeTopicPanels = topics.map((topic) => ({
   ...topic,
   stats: topic.homeStats ?? {
-    categories: topic.categories.length,
+    reviews: wikiEntries.filter((e) => e.topic === topic.id && e.kind === "review").length,
     articles: 0,
     guides: 0,
   },
@@ -98,8 +99,8 @@ function topicIcon(topic: WikiEntry["topic"]) {
             <p class="topic-card__description">{topic.description}</p>
             <div class="metric-row">
               <div class="metric-box">
-                <span class="metric-box__value">{topic.stats.categories}</span>
-                <span class="metric-box__label">Categories</span>
+                <span class="metric-box__value">{topic.stats.reviews}</span>
+                <span class="metric-box__label">Reviews</span>
               </div>
               <div class="metric-box">
                 <span class="metric-box__value">{topic.stats.articles}</span>

@@ -16,7 +16,7 @@ export interface Topic {
   accent: string;
   icon: string;
   homeStats?: {
-    categories: number;
+    reviews: number;
     articles: number;
     guides: number;
   };
@@ -89,7 +89,7 @@ export const topics: Topic[] = [
     accent: "#f5c542",
     icon: "target",
     homeStats: {
-      categories: 6,
+      reviews: 0,
       articles: 127,
       guides: 24,
     },
@@ -135,7 +135,7 @@ export const topics: Topic[] = [
     accent: "#9cd45a",
     icon: "controller",
     homeStats: {
-      categories: 5,
+      reviews: 2,
       articles: 89,
       guides: 16,
     },
@@ -176,7 +176,7 @@ export const topics: Topic[] = [
     accent: "#5f87ff",
     icon: "chip",
     homeStats: {
-      categories: 6,
+      reviews: 0,
       articles: 143,
       guides: 32,
     },
