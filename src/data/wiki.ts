@@ -524,6 +524,56 @@ function defaultResources(entry: WikiEntry): ArticleResource[] {
   ];
 }
 
+const ballisticSections: ArticleSection[] = [
+  {
+    id: "what-is-ballistic-coefficient",
+    number: "01",
+    title: "What Is Ballistic Coefficient?",
+    paragraphs: [
+      "Ballistic Coefficient (BC) is a measure of a bullet's ability to overcome air resistance. A higher BC means the bullet retains velocity and energy better, drifts less in the wind and drops less over distance.",
+      "BC is a dimensionless number that relates the bullet's mass, diameter, form factor and drag. While it might sound complex, understanding BC is essential for long range accuracy.",
+    ],
+    takeaway: "The higher the BC, the better the bullet cuts through the air.",
+  },
+  {
+    id: "bc-models-g1-vs-g7",
+    number: "02",
+    title: "BC Models: G1 vs G7",
+    paragraphs: [
+      "There are multiple drag models, but the two most common are G1 and G7. They represent how the bullet interacts with the air at different speeds.",
+      "Most manufacturers now provide G7 BC as it better represents modern bullet designs.",
+    ],
+    comparisonRows: [
+      {
+        model: "G1",
+        bestUsedFor: "Standard bullets",
+        speedRange: "Subsonic to ~1,200 FPS",
+        notes: "Older model, less accurate for modern bullets",
+      },
+      {
+        model: "G7",
+        bestUsedFor: "Modern, long range projectiles",
+        speedRange: "~1,200 FPS and above",
+        notes: "More accurate for sleek, high BC bullets",
+      },
+    ],
+  },
+  {
+    id: "how-bc-affects-performance",
+    number: "03",
+    title: "How BC Affects Performance",
+    paragraphs: [
+      "Understanding BC helps you make smarter decisions about bullet selection, zeroing and long range performance.",
+    ],
+    metricCards: [
+      { icon: "pulse", title: "Velocity Retention", body: "Higher BC retains velocity downrange." },
+      { icon: "shuffle", title: "Wind Drift", body: "Higher BC means less wind deflection." },
+      { icon: "arrow", title: "Trajectory", body: "Higher BC results in a flatter trajectory." },
+      { icon: "target", title: "Energy On Target", body: "More energy retained at distance." },
+    ],
+  },
+];
+
 const specialArticleViews: Record<string, ArticleView> = {
   "understanding-ballistic-coefficients": {
     articleId: "SHO-TRN-023",
@@ -534,79 +584,8 @@ const specialArticleViews: Record<string, ArticleView> = {
     schematicAsset: "/brand/article-ballistics-schematic.svg",
     schematicLabel: "CALIBER: 6.5MM",
     schematicRef: "REF-DWG-023",
-    toc: [
-      "What is Ballistic Coefficient?",
-      "BC Models: G1 vs G7",
-      "How BC Affects Performance",
-      "Interpreting BC Values",
-      "Practical Applications",
-      "Final Thoughts",
-    ],
-    sections: [
-      {
-        id: "what-is-ballistic-coefficient",
-        number: "01",
-        title: "What Is Ballistic Coefficient?",
-        paragraphs: [
-          "Ballistic Coefficient (BC) is a measure of a bullet's ability to overcome air resistance. A higher BC means the bullet retains velocity and energy better, drifts less in the wind and drops less over distance.",
-          "BC is a dimensionless number that relates the bullet's mass, diameter, form factor and drag. While it might sound complex, understanding BC is essential for long range accuracy.",
-        ],
-        takeaway: "The higher the BC, the better the bullet cuts through the air.",
-      },
-      {
-        id: "bc-models-g1-vs-g7",
-        number: "02",
-        title: "BC Models: G1 vs G7",
-        paragraphs: [
-          "There are multiple drag models, but the two most common are G1 and G7. They represent how the bullet interacts with the air at different speeds.",
-          "Most manufacturers now provide G7 BC as it better represents modern bullet designs.",
-        ],
-        comparisonRows: [
-          {
-            model: "G1",
-            bestUsedFor: "Standard bullets",
-            speedRange: "Subsonic to ~1,200 FPS",
-            notes: "Older model, less accurate for modern bullets",
-          },
-          {
-            model: "G7",
-            bestUsedFor: "Modern, long range projectiles",
-            speedRange: "~1,200 FPS and above",
-            notes: "More accurate for sleek, high BC bullets",
-          },
-        ],
-      },
-      {
-        id: "how-bc-affects-performance",
-        number: "03",
-        title: "How BC Affects Performance",
-        paragraphs: [
-          "Understanding BC helps you make smarter decisions about bullet selection, zeroing and long range performance.",
-        ],
-        metricCards: [
-          {
-            icon: "pulse",
-            title: "Velocity Retention",
-            body: "Higher BC retains velocity downrange.",
-          },
-          {
-            icon: "shuffle",
-            title: "Wind Drift",
-            body: "Higher BC means less wind deflection.",
-          },
-          {
-            icon: "arrow",
-            title: "Trajectory",
-            body: "Higher BC results in a flatter trajectory.",
-          },
-          {
-            icon: "target",
-            title: "Energy On Target",
-            body: "More energy retained at distance.",
-          },
-        ],
-      },
-    ],
+    sections: ballisticSections,
+    toc: ballisticSections.map((s) => s.title),
     resources: [
       { title: "G1 vs G7 Drag Models", meta: "PDF GUIDE", type: "GUIDE" },
       { title: "Ballistics Calculator", meta: "EXTERNAL TOOL", type: "TOOL" },
@@ -622,6 +601,42 @@ export function getArticleView(entry: WikiEntry): ArticleView {
   const topic = getTopic(entry.topic);
   const category = getCategory(entry.topic, entry.category);
 
+  const sections: ArticleSection[] = [
+    {
+      id: "overview",
+      number: "01",
+      title: "Overview",
+      paragraphs: [
+        entry.summary,
+        `${entry.title} sits inside ${topic?.name ?? entry.topic} under ${category?.name ?? entry.category}. This page is written as a technical field note: concise, reusable and cross-linked to the rest of the wiki.`,
+      ],
+      takeaway: `Primary focus: ${entry.kind === "review" ? "evaluation" : entry.kind === "guide" ? "repeatable process" : "documented context"}.`,
+    },
+    {
+      id: "core-notes",
+      number: "02",
+      title: "Core Notes",
+      paragraphs: [
+        `The main benefit of this note is that it compresses the important tradeoffs into one place instead of scattering them across setup steps, trial-and-error, and memory.`,
+        `Use the topic, category and tags as the routing system for adjacent pages when you need deeper supporting detail.`,
+      ],
+    },
+    {
+      id: "practical-use",
+      number: "03",
+      title: "Practical Use",
+      paragraphs: [
+        `Treat this page as an operational reference: pull the key idea, apply it in context, then move to the related articles for implementation or comparison.`,
+      ],
+      metricCards: [
+        { icon: "pulse", title: "Signal", body: "Condenses the high-value takeaway fast." },
+        { icon: "book", title: "Context", body: "Keeps topic and category links close at hand." },
+        { icon: "tag", title: "Tags", body: "Surfaces adjacent notes and shared patterns." },
+        { icon: "target", title: "Use Case", body: "Optimized for fast lookup, not long-form prose." },
+      ],
+    },
+  ];
+
   return {
     articleId: `${entry.topic.toUpperCase().slice(0, 3)}-${entry.category.slice(0, 3).toUpperCase()}-${entry.slug.slice(0, 3).toUpperCase()}`,
     readMinutes: entry.kind === "guide" ? 7 : entry.kind === "review" ? 9 : 6,
@@ -631,42 +646,8 @@ export function getArticleView(entry: WikiEntry): ArticleView {
     schematicAsset: topicSchematicAsset(entry.topic),
     schematicLabel: category ? `${category.name.toUpperCase()}` : "REFERENCE PANEL",
     schematicRef: `REF-${entry.topic.toUpperCase()}-${entry.slug.slice(0, 3).toUpperCase()}`,
-    toc: ["Overview", "Core Notes", "Practical Use", "Related Context"],
-    sections: [
-      {
-        id: "overview",
-        number: "01",
-        title: "Overview",
-        paragraphs: [
-          entry.summary,
-          `${entry.title} sits inside ${topic?.name ?? entry.topic} under ${category?.name ?? entry.category}. This page is written as a technical field note: concise, reusable and cross-linked to the rest of the wiki.`,
-        ],
-        takeaway: `Primary focus: ${entry.kind === "review" ? "evaluation" : entry.kind === "guide" ? "repeatable process" : "documented context"}.`,
-      },
-      {
-        id: "core-notes",
-        number: "02",
-        title: "Core Notes",
-        paragraphs: [
-          `The main benefit of this note is that it compresses the important tradeoffs into one place instead of scattering them across setup steps, trial-and-error, and memory.`,
-          `Use the topic, category and tags as the routing system for adjacent pages when you need deeper supporting detail.`,
-        ],
-      },
-      {
-        id: "practical-use",
-        number: "03",
-        title: "Practical Use",
-        paragraphs: [
-          `Treat this page as an operational reference: pull the key idea, apply it in context, then move to the related articles for implementation or comparison.`,
-        ],
-        metricCards: [
-          { icon: "pulse", title: "Signal", body: "Condenses the high-value takeaway fast." },
-          { icon: "book", title: "Context", body: "Keeps topic and category links close at hand." },
-          { icon: "tag", title: "Tags", body: "Surfaces adjacent notes and shared patterns." },
-          { icon: "target", title: "Use Case", body: "Optimized for fast lookup, not long-form prose." },
-        ],
-      },
-    ],
+    toc: sections.map((s) => s.title),
+    sections,
     resources: defaultResources(entry),
   };
 }

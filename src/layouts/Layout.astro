@@ -12,7 +12,6 @@ interface Props {
   currentPath?: string;
   headerPath?: string;
   pageClass?: string;
-  showPrimaryNav?: boolean;
 }
 
 const {
@@ -21,7 +20,6 @@ const {
   currentPath = "/",
   headerPath = currentPath,
   pageClass,
-  showPrimaryNav = true,
 } = Astro.props;
 
 const today = new Date();
@@ -89,7 +87,7 @@ const lastGitUpdate = getLastGitUpdate();
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
-    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="description" content={description} />
     <title>{title}</title>
     <script is:inline>
@@ -146,27 +144,23 @@ const lastGitUpdate = getLastGitUpdate();
 
       <div class="site-shell">
         <aside class="sidebar">
-          {
-            showPrimaryNav && (
-              <section class="panel panel--sidebar">
-                <p class="panel__kicker">Navigation</p>
-                <nav aria-label="Primary">
-                  <ul class="nav-list">
-                    {
-                      primaryNav.map((item) => (
-                        <li>
-                          <a href={item.href} class:list={["nav-link", currentPath === item.href && "is-active"]}>
-                            <RasterIcon name={item.icon} class="nav-link__icon nav-link__icon--raster" />
-                            <span>{item.label}</span>
-                          </a>
-                        </li>
-                      ))
-                    }
-                  </ul>
-                </nav>
-              </section>
-            )
-          }
+          <section class="panel panel--sidebar">
+            <p class="panel__kicker">Navigation</p>
+            <nav aria-label="Primary">
+              <ul class="nav-list">
+                {
+                  primaryNav.map((item) => (
+                    <li>
+                      <a href={item.href} class:list={["nav-link", currentPath === item.href && "is-active"]}>
+                        <RasterIcon name={item.icon} class="nav-link__icon nav-link__icon--raster" />
+                        <span>{item.label}</span>
+                      </a>
+                    </li>
+                  ))
+                }
+              </ul>
+            </nav>
+          </section>
 
           <section class="panel panel--sidebar panel--topics">
             <p class="panel__kicker">Topics</p>

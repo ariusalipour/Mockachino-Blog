@@ -37,14 +37,8 @@ const articleInfoLabel = `${formatTopicLabel(entry.topic)} / ${formatCategoryLab
   currentPath={Astro.url.pathname}
   headerPath="/browse/"
   pageClass="page-article"
-  showPrimaryNav={false}
 >
   <div slot="subheader" class="panel article-breadcrumb">
-    <a href="/" class="article-breadcrumb__item">
-      <RasterIcon name="home" class="article-breadcrumb__icon article-breadcrumb__icon--raster" />
-      <span>Home</span>
-    </a>
-    <span class="article-breadcrumb__sep">›</span>
     <a href={`/topics/${entry.topic}/`} class="article-breadcrumb__item">{topic?.name}</a>
     <span class="article-breadcrumb__sep">›</span>
     <a href={`/topics/${entry.topic}/${entry.category}/`} class="article-breadcrumb__item">
@@ -58,7 +52,7 @@ const articleInfoLabel = `${formatTopicLabel(entry.topic)} / ${formatCategoryLab
     <article class="panel article-main">
       <header class="article-main__hero">
         <div class="article-main__kicker-row">
-          <p class="section-label article-main__kicker">// {topic?.name} › {formatCategoryLabel(entry.topic, entry.category)}</p>
+          <p class="section-label article-main__kicker">// {formatCategoryLabel(entry.topic, entry.category)}</p>
           <p class="article-main__id">ARTICLE ID: {articleView.articleId}</p>
         </div>
         <h1>{entry.title}</h1>
@@ -152,8 +146,10 @@ const articleInfoLabel = `${formatTopicLabel(entry.topic)} / ${formatCategoryLab
           {
             articleView.toc.map((item, index) => (
               <li>
-                <span>{String(index + 1).padStart(2, "0")}</span>
-                <span>{item}</span>
+                <a href={`#${articleView.sections[index]?.id}`}>
+                  <span>{String(index + 1).padStart(2, "0")}</span>
+                  <span>{item}</span>
+                </a>
               </li>
             ))
           }
