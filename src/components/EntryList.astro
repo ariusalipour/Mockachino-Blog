@@ -27,7 +27,7 @@ function relativeTime(dateValue: string) {
 <ol class:list={["entry-list", `entry-list--${mode}`]}>
   {
     entries.slice(0, limit).map((entry, index) => (
-      <li class="entry-list__item" data-topic={entry.topic}>
+      <li class="entry-list__item" data-topic={entry.topic} data-search={`${entry.title} ${entry.summary} ${formatTopicLabel(entry.topic)} ${formatCategoryLabel(entry.topic, entry.category)} ${entry.tags?.join(" ") ?? ""}`.toLowerCase()}>
         <a href={`/wiki/${entry.slug}/`} class="entry-list__link">
           {
             mode === "recent" || mode === "popular" ? (

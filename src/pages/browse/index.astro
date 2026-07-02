@@ -1,17 +1,24 @@
 ---
+import EntryList from "../../components/EntryList.astro";
 import Layout from "../../layouts/Layout.astro";
-import { formatCategoryLabel, formatTopicLabel, getTags, wikiEntries } from "../../data/wiki";
+import { getTags, wikiEntries } from "../../data/wiki";
 ---
 
 <Layout title="Browse | MOCKACHINO" description="Browse all wiki entries." currentPath={Astro.url.pathname}>
   <div class="page-stack">
     <section class="panel taxonomy-hero">
-      <p class="section-label">Browse All</p>
+      <p class="section-label">/// BROWSE ALL</p>
       <h1>All articles, reviews, and guides in one indexed register.</h1>
       <p class="taxonomy-copy">
         Use the live filter below or jump in through tags. Header search feeds into this page so the same route can
         handle direct browsing and targeted lookup.
       </p>
+      <div class="meta-strip">
+        <span class="meta-chip">{wikiEntries.length} entries</span>
+        <span class="meta-chip">{wikiEntries.filter(e => e.kind === "article").length} Articles</span>
+        <span class="meta-chip">{wikiEntries.filter(e => e.kind === "guide").length} Guides</span>
+        <span class="meta-chip">{wikiEntries.filter(e => e.kind === "review").length} Reviews</span>
+      </div>
     </section>
 
     <section class="panel browse-controls">
@@ -30,36 +37,20 @@ import { formatCategoryLabel, formatTopicLabel, getTags, wikiEntries } from "../
       <p class="results-meta"><span id="results-count">{wikiEntries.length}</span> entries visible</p>
     </section>
 
-    <section class="entry-grid" id="browse-grid">
-      {
-        wikiEntries.map((entry) => (
-          <article
-            class="entry-card"
-            data-search={`${entry.title} ${entry.summary} ${formatTopicLabel(entry.topic)} ${formatCategoryLabel(entry.topic, entry.category)} ${entry.tags.join(" ")}`.toLowerCase()}
-            data-tags={entry.tags.join(",")}
-          >
-            <a href={`/wiki/${entry.slug}/`}>
-              <div class="meta-strip">
-                <span class="meta-chip">{entry.kind.toUpperCase()}</span>
-                <span class="meta-chip">{formatTopicLabel(entry.topic)}</span>
-                <span class="meta-chip">{formatCategoryLabel(entry.topic, entry.category)}</span>
-              </div>
-              <h2>{entry.title}</h2>
-              <p class="copy-block">{entry.summary}</p>
-              <div class="entry-card__footer">
-                <span>{entry.tags.join(" / ")}</span>
-                <span>Popularity {entry.popularity}</span>
-              </div>
-            </a>
-          </article>
-        ))
-      }
+    <section class="panel" id="browse-list">
+      <div class="section-heading">
+        <div>
+          <p class="section-label">Entries</p>
+          <h2>All pages in the wiki.</h2>
+        </div>
+      </div>
+      <EntryList entries={wikiEntries} />
     </section>
   </div>
 
   <script is:inline>
     const params = new URLSearchParams(window.location.search);
-    const cards = [...document.querySelectorAll("#browse-grid .entry-card")];
+    const items = [...document.querySelectorAll("#browse-list .entry-list__item")];
     const input = document.querySelector("#browse-filter");
     const counter = document.querySelector("#results-count");
     const q = (params.get("q") ?? params.get("tag") ?? "").toLowerCase();
@@ -70,10 +61,10 @@ import { formatCategoryLabel, formatTopicLabel, getTags, wikiEntries } from "../
       const needle = value.trim().toLowerCase();
       let visible = 0;
 
-      cards.forEach((card) => {
-        const haystack = card.dataset.search ?? "";
+      items.forEach((item) => {
+        const haystack = item.dataset.search ?? "";
         const match = !needle || haystack.includes(needle);
-        card.style.display = match ? "" : "none";
+        item.style.display = match ? "" : "none";
         if (match) visible += 1;
       });
 
