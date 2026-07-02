@@ -6,9 +6,12 @@ interface Props {
   entries: WikiEntry[];
   mode?: "default" | "recent" | "popular";
   limit?: number;
+  perPage?: number;
 }
 
-const { entries, mode = "default", limit = entries.length } = Astro.props;
+const { entries, mode = "default", limit = entries.length, perPage } = Astro.props;
+const hasPagination = perPage != null && perPage < entries.length;
+const pageLimit = hasPagination ? entries.length : limit;
 
 function relativeTime(dateValue: string) {
   const delta = Date.now() - Date.parse(dateValue);
@@ -24,9 +27,9 @@ function relativeTime(dateValue: string) {
 }
 ---
 
-<ol class:list={["entry-list", `entry-list--${mode}`]}>
+<ol class:list={["entry-list", `entry-list--${mode}`]} data-per-page={perPage}>
   {
-    entries.slice(0, limit).map((entry, index) => (
+    entries.slice(0, pageLimit).map((entry, index) => (
       <li class="entry-list__item" data-topic={entry.topic} data-search={`${entry.title} ${entry.summary} ${formatTopicLabel(entry.topic)} ${formatCategoryLabel(entry.topic, entry.category)} ${entry.tags?.join(" ") ?? ""}`.toLowerCase()}>
         <a href={`/wiki/${entry.slug}/`} class="entry-list__link">
           {
@@ -66,3 +69,62 @@ function relativeTime(dateValue: string) {
     ))
   }
 </ol>
+
+{
+  hasPagination && (
+    <nav class="pagination" aria-label="Pagination">
+      <button class="pagination__prev" disabled>Prev</button>
+      <span class="pagination__info">Page <span class="pagination__current">1</span> of <span class="pagination__total">{Math.ceil(entries.length / perPage!)}</span></span>
+      <button class="pagination__next">Next</button>
+    </nav>
+  )
+}
+
+<script is:inline>
+  (() => {
+    const lists = document.querySelectorAll(".entry-list[data-per-page]");
+    lists.forEach((list) => {
+      const perPage = parseInt(list.dataset.perPage || "10", 10);
+      const items = [...list.querySelectorAll(".entry-list__item")];
+      if (items.length <= perPage) return;
+
+      const nav = list.nextElementSibling;
+      if (!nav || !nav.classList.contains("pagination")) return;
+
+      const prevBtn = nav.querySelector(".pagination__prev");
+      const nextBtn = nav.querySelector(".pagination__next");
+      const currentSpan = nav.querySelector(".pagination__current");
+      const totalSpan = nav.querySelector(".pagination__total");
+
+      let page = 1;
+
+      const getVisible = () => items.filter((item) => item.style.display !== "none");
+
+      const calcPages = () => Math.max(1, Math.ceil(getVisible().length / perPage));
+
+      const showPage = (p) => {
+        const total = calcPages();
+        page = Math.max(1, Math.min(p, total));
+        const visible = getVisible();
+        const start = (page - 1) * perPage;
+        const end = start + perPage;
+
+        visible.forEach((item, idx) => {
+          item.classList.toggle("pagination-hidden", idx < start || idx >= end);
+        });
+
+        if (currentSpan) currentSpan.textContent = String(page);
+        if (totalSpan) totalSpan.textContent = String(total);
+        if (prevBtn) prevBtn.disabled = page <= 1;
+        if (nextBtn) nextBtn.disabled = page >= total;
+      };
+
+      list._repage = () => { page = 1; showPage(1); };
+
+      if (prevBtn) prevBtn.addEventListener("click", () => showPage(page - 1));
+      if (nextBtn) nextBtn.addEventListener("click", () => showPage(page + 1));
+
+      showPage(1);
+    });
+  })();
+</script>

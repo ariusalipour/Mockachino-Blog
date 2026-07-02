@@ -1,7 +1,7 @@
 ---
 import EntryList from "../../components/EntryList.astro";
 import Layout from "../../layouts/Layout.astro";
-import { getTags, wikiEntries } from "../../data/wiki";
+import { wikiEntries } from "../../data/wiki";
 ---
 
 <Layout title="Browse | MOCKACHINO" description="Browse all wiki entries." currentPath={Astro.url.pathname}>
@@ -25,15 +25,6 @@ import { getTags, wikiEntries } from "../../data/wiki";
       <div class="filter-bar">
         <input id="browse-filter" type="search" placeholder="Filter by title, summary, topic, category, or tag" />
       </div>
-      <div class="tag-cloud">
-        {
-          getTags().map((tag) => (
-            <a href={`/browse/?tag=${encodeURIComponent(tag.name)}`} class="tag-chip">
-              #{tag.name} / {tag.count}
-            </a>
-          ))
-        }
-      </div>
       <p class="results-meta"><span id="results-count">{wikiEntries.length}</span> entries visible</p>
     </section>
 
@@ -44,7 +35,7 @@ import { getTags, wikiEntries } from "../../data/wiki";
           <h2>All pages in the wiki.</h2>
         </div>
       </div>
-      <EntryList entries={wikiEntries} />
+      <EntryList entries={wikiEntries} perPage={10} />
     </section>
   </div>
 
@@ -53,6 +44,7 @@ import { getTags, wikiEntries } from "../../data/wiki";
     const items = [...document.querySelectorAll("#browse-list .entry-list__item")];
     const input = document.querySelector("#browse-filter");
     const counter = document.querySelector("#results-count");
+    const list = document.querySelector("#browse-list .entry-list");
     const q = (params.get("q") ?? params.get("tag") ?? "").toLowerCase();
 
     if (input) input.value = q;
@@ -69,6 +61,7 @@ import { getTags, wikiEntries } from "../../data/wiki";
       });
 
       if (counter) counter.textContent = String(visible);
+      if (list && list._repage) list._repage();
     };
 
     applyFilter(q);

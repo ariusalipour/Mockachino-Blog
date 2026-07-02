@@ -48,7 +48,7 @@ const stats = getTopicStats(topic.id);
           <h2>All pages under {topic.name}.</h2>
         </div>
       </div>
-      <EntryList entries={entries} />
+      <EntryList entries={entries} perPage={10} />
     </section>
   </div>
 </Layout>

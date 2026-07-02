@@ -34,7 +34,7 @@ const resolvedCategory = getCategory(topic.id, category.id);
     </section>
 
     <section class="panel">
-      {entries.length > 0 ? <EntryList entries={entries} /> : <p class="empty-state">No entries are assigned to this category yet.</p>}
+      {entries.length > 0 ? <EntryList entries={entries} perPage={10} /> : <p class="empty-state">No entries are assigned to this category yet.</p>}
     </section>
   </div>
 </Layout>
