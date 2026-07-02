@@ -32,3 +32,6 @@ Gemfile.lock
 .Trashes
 ehthumbs.db
 Thumbs.db
+
+# Codex artifacts
+.codex-artifacts/
