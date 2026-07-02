@@ -13,14 +13,17 @@ import {
 
 const recentEntries = getRecentEntries(5);
 const popularEntries = getPopularEntries(5);
-const homeTopicPanels = topics.map((topic) => ({
-  ...topic,
-  stats: topic.homeStats ?? {
-    reviews: wikiEntries.filter((e) => e.topic === topic.id && e.kind === "review").length,
-    articles: 0,
-    guides: 0,
-  },
-}));
+const homeTopicPanels = topics.map((topic) => {
+  const topicEntries = wikiEntries.filter((e) => e.topic === topic.id);
+  return {
+    ...topic,
+    stats: {
+      reviews: topicEntries.filter((e) => e.kind === "review").length,
+      articles: topicEntries.filter((e) => e.kind === "article").length,
+      guides: topicEntries.filter((e) => e.kind === "guide").length,
+    },
+  };
+});
 
 function relativeTime(dateValue: string) {
   const delta = Date.now() - Date.parse(dateValue);
