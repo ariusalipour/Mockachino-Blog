@@ -1,0 +1,27 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import { glossaryTerms } from "../../data/wiki";
+---
+
+<Layout title="Glossary | MOCKACHINO" description="Glossary of recurring wiki terms." currentPath={Astro.url.pathname}>
+  <div class="page-stack">
+    <section class="panel taxonomy-hero">
+      <p class="section-label">Glossary</p>
+      <h1>Shared terms used across the wiki.</h1>
+      <p class="taxonomy-copy">
+        A small reference index for the phrases, shorthand, and evaluation terms that show up repeatedly across entries.
+      </p>
+    </section>
+
+    <section class="glossary-grid">
+      {
+        glossaryTerms.map((item) => (
+          <dl class="panel">
+            <dt>{item.term}</dt>
+            <dd>{item.definition}</dd>
+          </dl>
+        ))
+      }
+    </section>
+  </div>
+</Layout>

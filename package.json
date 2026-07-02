@@ -1,0 +1,18 @@
+{
+  "name": "mockachino-blog",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview"
+  },
+  "dependencies": {
+    "astro": "^5.12.0",
+    "typescript": "^5.9.2"
+  },
+  "devDependencies": {
+    "@types/turndown": "^5.0.6",
+    "turndown": "^7.2.4"
+  }
+}

@@ -1,0 +1,18 @@
+---
+interface Props {
+  variant?: "compact" | "hero" | "monogram" | "blueprint";
+  class?: string;
+}
+
+const { variant = "compact", class: className } = Astro.props;
+const asset =
+  variant === "hero"
+    ? "/brand/mockachino-hero.svg"
+    : variant === "monogram"
+      ? "/brand/mockachino-small-logo.svg"
+      : variant === "blueprint"
+        ? "/brand/mockachino-blueprint.svg"
+        : "/brand/mockachino-mark.svg";
+---
+
+<img class={className} src={asset} alt="Mockachino emblem" loading="eager" />

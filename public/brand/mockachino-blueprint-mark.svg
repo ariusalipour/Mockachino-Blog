@@ -1,0 +1,13 @@
+<svg width="340" height="245" viewBox="110 55 340 245" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title">
+  <title id="title">Mockachino blueprint mark</title>
+  <path d="M140 282V78H216L280 142L344 78H420V282H384V128L280 232L176 128V282H140Z" stroke="#F2EEE5" stroke-width="3" stroke-linejoin="miter"/>
+  <path d="M184 282V136L232 184L280 232L328 184L376 136V282" stroke="#F2EEE5" stroke-width="2" stroke-linejoin="miter"/>
+  <path d="M188 100V252M372 100V252M188 100H204M372 100H356M188 252H204M372 252H356" stroke="#6A717A" stroke-width="1.4"/>
+  <circle cx="188" cy="100" r="7" stroke="#6A717A" stroke-width="1.4"/>
+  <circle cx="372" cy="100" r="7" stroke="#6A717A" stroke-width="1.4"/>
+  <circle cx="280" cy="142" r="6.5" stroke="#6A717A" stroke-width="1.4"/>
+  <circle cx="280" cy="142" r="2.4" fill="#F5C542"/>
+  <path d="M188 100L280 142L372 100M232 154L280 190L328 154" stroke="#6A717A" stroke-width="1.2" stroke-dasharray="5 5"/>
+  <path d="M220 190L232 178L244 190L232 202L220 190Z" stroke="#6A717A" stroke-width="1.2"/>
+  <path d="M170 248L176 242L182 248L176 254L170 248ZM378 248L384 242L390 248L384 254L378 248Z" fill="#6A717A"/>
+</svg>
