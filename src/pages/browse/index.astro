@@ -1,7 +1,12 @@
 ---
+import BrowseControls from "../../components/BrowseControls.astro";
 import EntryList from "../../components/EntryList.astro";
 import Layout from "../../layouts/Layout.astro";
 import { wikiEntries } from "../../data/wiki";
+
+const params = Astro.url.searchParams;
+const initialQ = params.get("q") ?? params.get("tag") ?? "";
+const listId = "browse-list";
 ---
 
 <Layout title="Browse | MOCKACHINO" description="Browse all wiki entries." currentPath={Astro.url.pathname}>
@@ -21,53 +26,16 @@ import { wikiEntries } from "../../data/wiki";
       </div>
     </section>
 
-    <section class="panel browse-controls">
-      <div class="filter-bar">
-        <input id="browse-filter" type="search" placeholder="Filter by title, summary, topic, category, or tag" />
-      </div>
-      <p class="results-meta"><span id="results-count">{wikiEntries.length}</span> entries visible</p>
-    </section>
+    <BrowseControls total={wikiEntries.length} listId={listId} initialQ={initialQ} />
 
-    <section class="panel" id="browse-list">
+    <section class="panel">
       <div class="section-heading">
         <div>
           <p class="section-label">Entries</p>
           <h2>All pages in the wiki.</h2>
         </div>
       </div>
-      <EntryList entries={wikiEntries} perPage={10} />
+      <EntryList entries={wikiEntries} perPage={10} id={listId} />
     </section>
   </div>
-
-  <script is:inline>
-    const params = new URLSearchParams(window.location.search);
-    const items = [...document.querySelectorAll("#browse-list .entry-list__item")];
-    const input = document.querySelector("#browse-filter");
-    const counter = document.querySelector("#results-count");
-    const list = document.querySelector("#browse-list .entry-list");
-    const q = (params.get("q") ?? params.get("tag") ?? "").toLowerCase();
-
-    if (input) input.value = q;
-
-    const applyFilter = (value) => {
-      const needle = value.trim().toLowerCase();
-      let visible = 0;
-
-      items.forEach((item) => {
-        const haystack = item.dataset.search ?? "";
-        const match = !needle || haystack.includes(needle);
-        item.style.display = match ? "" : "none";
-        if (match) visible += 1;
-      });
-
-      if (counter) counter.textContent = String(visible);
-      if (list && list._repage) list._repage();
-    };
-
-    applyFilter(q);
-
-    input?.addEventListener("input", (event) => {
-      applyFilter(event.currentTarget.value);
-    });
-  </script>
 </Layout>

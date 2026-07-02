@@ -1,0 +1,77 @@
+---
+interface Props {
+  total: number;
+  listId: string;
+  initialQ?: string;
+}
+
+const { total, listId, initialQ = "" } = Astro.props;
+---
+
+<section class="panel browse-controls">
+  <div class="filter-bar">
+    <input
+      id={`${listId}-filter`}
+      type="search"
+      placeholder="Filter by title, summary, topic, category, or tag"
+      value={initialQ}
+    />
+    <div class="kind-pills">
+      <button class="kind-pill is-active" data-kind="all">All</button>
+      <button class="kind-pill" data-kind="article">Articles</button>
+      <button class="kind-pill" data-kind="guide">Guides</button>
+      <button class="kind-pill" data-kind="review">Reviews</button>
+    </div>
+  </div>
+  <p class="results-meta">
+    <span class="results-count">{total}</span> entries visible
+  </p>
+</section>
+
+<script is:inline define:vars={{ listId, initialQ }}>
+  document.addEventListener("DOMContentLoaded", () => {
+    const controls = document.querySelector(`#${listId}-filter`)?.closest(".browse-controls");
+    if (!controls) return;
+
+    const input = controls.querySelector("input");
+    const counter = controls.querySelector(".results-count");
+    const pills = [...controls.querySelectorAll(".kind-pill")];
+    const list = document.getElementById(listId);
+    if (!list) return;
+
+    const items = [...list.querySelectorAll(".entry-list__item")];
+
+    let activeKind = "all";
+    let needle = (initialQ ?? "").toLowerCase();
+
+    const apply = () => {
+      let visible = 0;
+      items.forEach((item) => {
+        const haystack = item.dataset.search ?? "";
+        const kind = item.dataset.kind ?? "";
+        const textMatch = !needle || haystack.includes(needle);
+        const kindMatch = activeKind === "all" || kind === activeKind;
+        const show = textMatch && kindMatch;
+        item.style.display = show ? "" : "none";
+        if (show) visible++;
+      });
+      if (counter) counter.textContent = String(visible);
+      if (list._repage) list._repage();
+    };
+
+    input?.addEventListener("input", (e) => {
+      needle = e.currentTarget.value.trim().toLowerCase();
+      apply();
+    });
+
+    pills.forEach((pill) => {
+      pill.addEventListener("click", () => {
+        activeKind = pill.dataset.kind;
+        pills.forEach((p) => p.classList.toggle("is-active", p === pill));
+        apply();
+      });
+    });
+
+    apply();
+  });
+</script>

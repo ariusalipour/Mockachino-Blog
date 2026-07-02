@@ -1,5 +1,4 @@
 ---
-import RasterIcon from "./RasterIcon.astro";
 import { formatCategoryLabel, formatTopicLabel, type WikiEntry } from "../data/wiki";
 
 interface Props {
@@ -7,9 +6,10 @@ interface Props {
   mode?: "default" | "recent" | "popular";
   limit?: number;
   perPage?: number;
+  id?: string;
 }
 
-const { entries, mode = "default", limit = entries.length, perPage } = Astro.props;
+const { entries, mode = "default", limit = entries.length, perPage, id } = Astro.props;
 const hasPagination = perPage != null && perPage < entries.length;
 const pageLimit = hasPagination ? entries.length : limit;
 
@@ -27,20 +27,17 @@ function relativeTime(dateValue: string) {
 }
 ---
 
-<ol class:list={["entry-list", `entry-list--${mode}`]} data-per-page={perPage}>
+<ol id={id} class:list={["entry-list", `entry-list--${mode}`]} data-per-page={perPage}>
   {
     entries.slice(0, pageLimit).map((entry, index) => (
-      <li class="entry-list__item" data-topic={entry.topic} data-search={`${entry.title} ${entry.summary} ${formatTopicLabel(entry.topic)} ${formatCategoryLabel(entry.topic, entry.category)} ${entry.tags?.join(" ") ?? ""}`.toLowerCase()}>
+      <li class="entry-list__item" data-topic={entry.topic} data-kind={entry.kind} data-search={`${entry.title} ${entry.summary} ${formatTopicLabel(entry.topic)} ${formatCategoryLabel(entry.topic, entry.category)} ${entry.tags?.join(" ") ?? ""}`.toLowerCase()}>
         <a href={`/wiki/${entry.slug}/`} class="entry-list__link">
           {
             mode === "recent" || mode === "popular" ? (
               <>
                 <div class="entry-list__row">
                   <div class="entry-list__lead">
-                    <RasterIcon
-                      name={entry.topic === "shoots" ? "target" : entry.topic === "plays" ? "controller" : "chip"}
-                      class="entry-list__topic-icon entry-list__topic-icon--raster"
-                    />
+                    <img src={`/brand/logo-${entry.topic}.png`} alt="" class="entry-list__topic-icon entry-list__topic-icon--logo" />
                     {mode === "popular" && <span class="entry-list__rank">{String(index + 1).padStart(2, "0")}</span>}
                     <span class="entry-list__title">{entry.title}</span>
                   </div>
@@ -81,7 +78,7 @@ function relativeTime(dateValue: string) {
 }
 
 <script is:inline>
-  (() => {
+  document.addEventListener("DOMContentLoaded", () => {
     const lists = document.querySelectorAll(".entry-list[data-per-page]");
     lists.forEach((list) => {
       const perPage = parseInt(list.dataset.perPage || "10", 10);
@@ -126,5 +123,5 @@ function relativeTime(dateValue: string) {
 
       showPage(1);
     });
-  })();
+  });
 </script>

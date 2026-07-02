@@ -1,0 +1,596 @@
+[31m[1m20:47:37[22m [ERROR][39m [31m[InvalidContentEntryDataError][39m [1mwiki → codes-the-spiritual-successor-to-teamspeak[22m data does not match collection schema.
+
+  [1mslug**: **slug[22m: Required
+  [1mfeaturedImage.alt**: **featuredImage.alt[22m: Expected type `"string"`, received `"null"`
+
+  [1mHint:[22m
+[33m    See [4mhttps://docs.astro.build/en/guides/content-collections/[24m for more information on content schemas.[39m
+  [1mError reference:[22m
+    [36m[4mhttps://docs.astro.build/en/reference/errors/invalid-content-entry-data-error/[24m[39m
+  [1mStack trace:[22m
+[2m    at D:\GIT\Mockachino-Blog\src\content\wiki\codes\COD-BLO-COD.md
+    [...] See full stack trace in the browser, or rerun with --verbose.[22m
+[31m[1m21:22:39[22m [ERROR][39m [31m[InvalidContentEntryDataError][39m [1mwiki → codes-the-spiritual-successor-to-teamspeak[22m data does not match collection schema.
+
+  [1mslug**: **slug[22m: Required
+  [1mfeaturedImage.alt**: **featuredImage.alt[22m: Expected type `"string"`, received `"null"`
+
+  [1mHint:[22m
+[33m    See [4mhttps://docs.astro.build/en/guides/content-collections/[24m for more information on content schemas.[39m
+  [1mError reference:[22m
+    [36m[4mhttps://docs.astro.build/en/reference/errors/invalid-content-entry-data-error/[24m[39m
+  [1mStack trace:[22m
+[2m    at D:\GIT\Mockachino-Blog\src\content\wiki\codes\COD-BLO-COD.md
+    [...] See full stack trace in the browser, or rerun with --verbose.[22m
+[31m[1m21:42:11[22m [ERROR][39m [31m[InvalidContentEntryDataError][39m [1mcategories → news[22m data does not match collection schema.
+
+  [1mtopic**: **topic[22m: Required
+
+  [1mHint:[22m
+[33m    See [4mhttps://docs.astro.build/en/guides/content-collections/[24m for more information on content schemas.[39m
+  [1mError reference:[22m
+    [36m[4mhttps://docs.astro.build/en/reference/errors/invalid-content-entry-data-error/[24m[39m
+  [1mStack trace:[22m
+[2m    at getEntryDataAndImages (file:///D:/GIT/Mockachino-Blog/node_modules/astro/dist/content/utils.js:168:26)
+    [...] See full stack trace in the browser, or rerun with --verbose.[22m
+[31m[1m21:42:15[22m [ERROR][39m [31m[InvalidContentEntryDataError][39m [1mcategories → guides[22m data does not match collection schema.
+
+  [1mtopic**: **topic[22m: Required
+
+  [1mHint:[22m
+[33m    See [4mhttps://docs.astro.build/en/guides/content-collections/[24m for more information on content schemas.[39m
+  [1mError reference:[22m
+    [36m[4mhttps://docs.astro.build/en/reference/errors/invalid-content-entry-data-error/[24m[39m
+  [1mStack trace:[22m
+[2m    at D:\GIT\Mockachino-Blog\src\content\categories\guides.md
+    [...] See full stack trace in the browser, or rerun with --verbose.[22m
+[31m[1m21:42:19[22m [ERROR][39m [31m[InvalidContentEntryDataError][39m [1mcategories → reviews[22m data does not match collection schema.
+
+  [1mtopic**: **topic[22m: Required
+
+  [1mHint:[22m
+[33m    See [4mhttps://docs.astro.build/en/guides/content-collections/[24m for more information on content schemas.[39m
+  [1mError reference:[22m
+    [36m[4mhttps://docs.astro.build/en/reference/errors/invalid-content-entry-data-error/[24m[39m
+  [1mStack trace:[22m
+[2m    at getEntryDataAndImages (file:///D:/GIT/Mockachino-Blog/node_modules/astro/dist/content/utils.js:168:26)
+    [...] See full stack trace in the browser, or rerun with --verbose.[22m
+[31m[1m22:08:22[22m [ERROR][39m [31m[InvalidContentEntryDataError][39m [1mwiki → codes-the-spiritual-successor-to-teamspeak[22m data does not match collection schema.
+
+  [1mcategory**: **category[22m: Invalid enum value. Expected 'news' | 'guides' | 'reviews', received 'software-tools'
+
+  [1mHint:[22m
+[33m    See [4mhttps://docs.astro.build/en/guides/content-collections/[24m for more information on content schemas.[39m
+  [1mError reference:[22m
+    [36m[4mhttps://docs.astro.build/en/reference/errors/invalid-content-entry-data-error/[24m[39m
+  [1mStack trace:[22m
+[2m    at D:\GIT\Mockachino-Blog\src\content\wiki\codes\COD-BLO-COD.md
+    [...] See full stack trace in the browser, or rerun with --verbose.[22m
+[31m[1m22:08:22[22m [ERROR][39m [31m[InvalidContentEntryDataError][39m [1mwiki → swapping-over-to-windows-11[22m data does not match collection schema.
+
+  [1mcategory**: **category[22m: Invalid enum value. Expected 'news' | 'guides' | 'reviews', received 'software-tools'
+
+  [1mHint:[22m
+[33m    Browser APIs are not available on the server.
+    
+    If the code is in a framework component, try to access these objects after rendering using lifecycle methods or use a `client:only` directive to make the component exclusively run on the client.
+    
+    See [4mhttps://docs.astro.build/en/guides/troubleshooting/#document-or-window-is-not-defined[24m for more information.
+    		[39m
+  [1mError reference:[22m
+    [36m[4mhttps://docs.astro.build/en/reference/errors/invalid-content-entry-data-error/[24m[39m
+  [1mStack trace:[22m
+[2m    at getEntryDataAndImages (file:///D:/GIT/Mockachino-Blog/node_modules/astro/dist/content/utils.js:168:26)
+    [...] See full stack trace in the browser, or rerun with --verbose.[22m
+[31m[1m22:08:22[22m [ERROR][39m [31m[InvalidContentEntryDataError][39m [1mwiki → the-death-of-xamarin-forms-net-maui[22m data does not match collection schema.
+
+  [1mcategory**: **category[22m: Invalid enum value. Expected 'news' | 'guides' | 'reviews', received 'software-tools'
+
+  [1mHint:[22m
+[33m    See [4mhttps://docs.astro.build/en/guides/content-collections/[24m for more information on content schemas.[39m
+  [1mError reference:[22m
+    [36m[4mhttps://docs.astro.build/en/reference/errors/invalid-content-entry-data-error/[24m[39m
+  [1mStack trace:[22m
+[2m    at D:\GIT\Mockachino-Blog\src\content\wiki\codes\COD-BLO-THE.md
+    [...] See full stack trace in the browser, or rerun with --verbose.[22m
+[31m[1m22:08:22[22m [ERROR][39m [31m[InvalidContentEntryDataError][39m [1mwiki → codes-discord-stream-overlay-hack-for-pop-out[22m data does not match collection schema.
+
+  [1mcategory**: **category[22m: Invalid enum value. Expected 'news' | 'guides' | 'reviews', received 'software-tools'
+
+  [1mHint:[22m
+[33m    See [4mhttps://docs.astro.build/en/guides/content-collections/[24m for more information on content schemas.[39m
+  [1mError reference:[22m
+    [36m[4mhttps://docs.astro.build/en/reference/errors/invalid-content-entry-data-error/[24m[39m
+  [1mStack trace:[22m
+[2m    at getEntryDataAndImages (file:///D:/GIT/Mockachino-Blog/node_modules/astro/dist/content/utils.js:168:26)
+    [...] See full stack trace in the browser, or rerun with --verbose.[22m
+[31m[1m22:08:22[22m [ERROR][39m [31m[InvalidContentEntryDataError][39m [1mwiki → codes-discord-stream-overlay-hack[22m data does not match collection schema.
+
+  [1mcategory**: **category[22m: Invalid enum value. Expected 'news' | 'guides' | 'reviews', received 'software-tools'
+
+  [1mHint:[22m
+[33m    See [4mhttps://docs.astro.build/en/guides/content-collections/[24m for more information on content schemas.[39m
+  [1mError reference:[22m
+    [36m[4mhttps://docs.astro.build/en/reference/errors/invalid-content-entry-data-error/[24m[39m
+  [1mStack trace:[22m
+[2m    at D:\GIT\Mockachino-Blog\src\content\wiki\codes\COD-GUI-CODE.md
+    [...] See full stack trace in the browser, or rerun with --verbose.[22m
+[31m[1m22:08:22[22m [ERROR][39m [31m[InvalidContentEntryDataError][39m [1mwiki → create-your-first-discord-bot[22m data does not match collection schema.
+
+  [1mcategory**: **category[22m: Invalid enum value. Expected 'news' | 'guides' | 'reviews', received 'software-tools'
+
+  [1mHint:[22m
+[33m    See [4mhttps://docs.astro.build/en/guides/content-collections/[24m for more information on content schemas.[39m
+  [1mError reference:[22m
+    [36m[4mhttps://docs.astro.build/en/reference/errors/invalid-content-entry-data-error/[24m[39m
+  [1mStack trace:[22m
+[2m    at getEntryDataAndImages (file:///D:/GIT/Mockachino-Blog/node_modules/astro/dist/content/utils.js:168:26)
+    [...] See full stack trace in the browser, or rerun with --verbose.[22m
+[31m[1m22:08:22[22m [ERROR][39m [31m[InvalidContentEntryDataError][39m [1mwiki → new-year-new-feat[22m data does not match collection schema.
+
+  [1mcategory**: **category[22m: Invalid enum value. Expected 'news' | 'guides' | 'reviews', received 'software-tools'
+
+  [1mHint:[22m
+[33m    See [4mhttps://docs.astro.build/en/guides/content-collections/[24m for more information on content schemas.[39m
+  [1mError reference:[22m
+    [36m[4mhttps://docs.astro.build/en/reference/errors/invalid-content-entry-data-error/[24m[39m
+  [1mStack trace:[22m
+[2m    at D:\GIT\Mockachino-Blog\src\content\wiki\plays\PLA-EXP-009.md
+    [...] See full stack trace in the browser, or rerun with --verbose.[22m
+[31m[1m22:08:22[22m [ERROR][39m [31m[InvalidContentEntryDataError][39m [1mwiki → its-a-moderator-not-a-silencer[22m data does not match collection schema.
+
+  [1mcategory**: **category[22m: Invalid enum value. Expected 'news' | 'guides' | 'reviews', received 'law-and-safety'
+
+  [1mHint:[22m
+[33m    See [4mhttps://docs.astro.build/en/guides/content-collections/[24m for more information on content schemas.[39m
+  [1mError reference:[22m
+    [36m[4mhttps://docs.astro.build/en/reference/errors/invalid-content-entry-data-error/[24m[39m
+  [1mStack trace:[22m
+[2m    at getEntryDataAndImages (file:///D:/GIT/Mockachino-Blog/node_modules/astro/dist/content/utils.js:168:26)
+    [...] See full stack trace in the browser, or rerun with --verbose.[22m
+[31m[1m22:08:22[22m [ERROR][39m [31m[InvalidContentEntryDataError][39m [1mwiki → how-to-film-in-s-log-3[22m data does not match collection schema.
+
+  [1mcategory**: **category[22m: Invalid enum value. Expected 'news' | 'guides' | 'reviews', received 'gear-and-hardware'
+
+  [1mHint:[22m
+[33m    See [4mhttps://docs.astro.build/en/guides/content-collections/[24m for more information on content schemas.[39m
+  [1mError reference:[22m
+    [36m[4mhttps://docs.astro.build/en/reference/errors/invalid-content-entry-data-error/[24m[39m
+  [1mStack trace:[22m
+[2m    at D:\GIT\Mockachino-Blog\src\content\wiki\codes\COD-GUI-HOW.md
+    [...] See full stack trace in the browser, or rerun with --verbose.[22m
+[31m[1m22:08:22[22m [ERROR][39m [31m[InvalidContentEntryDataError][39m [1mwiki → migrating-wordpress-sites-without-plugins[22m data does not match collection schema.
+
+  [1mcategory**: **category[22m: Invalid enum value. Expected 'news' | 'guides' | 'reviews', received 'software-tools'
+
+  [1mHint:[22m
+[33m    See [4mhttps://docs.astro.build/en/guides/content-collections/[24m for more information on content schemas.[39m
+  [1mError reference:[22m
+    [36m[4mhttps://docs.astro.build/en/reference/errors/invalid-content-entry-data-error/[24m[39m
+  [1mStack trace:[22m
+[2m    at getEntryDataAndImages (file:///D:/GIT/Mockachino-Blog/node_modules/astro/dist/content/utils.js:168:26)
+    [...] See full stack trace in the browser, or rerun with --verbose.[22m
+[31m[1m22:08:22[22m [ERROR][39m [31m[InvalidContentEntryDataError][39m [1mwiki → discord-stream-overlay-hack-for-pop-out[22m data does not match collection schema.
+
+  [1mcategory**: **category[22m: Invalid enum value. Expected 'news' | 'guides' | 'reviews', received 'software-tools'
+
+  [1mHint:[22m
+[33m    See [4mhttps://docs.astro.build/en/guides/content-collections/[24m for more information on content schemas.[39m
+  [1mError reference:[22m
+    [36m[4mhttps://docs.astro.build/en/reference/errors/invalid-content-entry-data-error/[24m[39m
+  [1mStack trace:[22m
+[2m    at D:\GIT\Mockachino-Blog\src\content\wiki\plays\PLA-HOW-007.md
+    [...] See full stack trace in the browser, or rerun with --verbose.[22m
+[31m[1m22:08:22[22m [ERROR][39m [31m[InvalidContentEntryDataError][39m [1mwiki → discord-stream-overlay-hack[22m data does not match collection schema.
+
+  [1mcategory**: **category[22m: Invalid enum value. Expected 'news' | 'guides' | 'reviews', received 'software-tools'
+
+  [1mHint:[22m
+[33m    See [4mhttps://docs.astro.build/en/guides/content-collections/[24m for more information on content schemas.[39m
+  [1mError reference:[22m
+    [36m[4mhttps://docs.astro.build/en/reference/errors/invalid-content-entry-data-error/[24m[39m
+  [1mStack trace:[22m
+[2m    at getEntryDataAndImages (file:///D:/GIT/Mockachino-Blog/node_modules/astro/dist/content/utils.js:168:26)
+    [...] See full stack trace in the browser, or rerun with --verbose.[22m
+[31m[1m22:08:22[22m [ERROR][39m [31m[InvalidContentEntryDataError][39m [1mwiki → slay-the-spire[22m data does not match collection schema.
+
+  [1mcategory**: **category[22m: Invalid enum value. Expected 'news' | 'guides' | 'reviews', received 'indie-gaming'
+
+  [1mHint:[22m
+[33m    See [4mhttps://docs.astro.build/en/guides/content-collections/[24m for more information on content schemas.[39m
+  [1mError reference:[22m
+    [36m[4mhttps://docs.astro.build/en/reference/errors/invalid-content-entry-data-error/[24m[39m
+  [1mStack trace:[22m
+[2m    at D:\GIT\Mockachino-Blog\src\content\wiki\plays\PLA-IND-010.md
+    [...] See full stack trace in the browser, or rerun with --verbose.[22m
+[31m[1m22:08:22[22m [ERROR][39m [31m[InvalidContentEntryDataError][39m [1mwiki → sp-tarkov-the-forbidden-fruit[22m data does not match collection schema.
+
+  [1mcategory**: **category[22m: Invalid enum value. Expected 'news' | 'guides' | 'reviews', received 'tactical-shooters'
+
+  [1mHint:[22m
+[33m    See [4mhttps://docs.astro.build/en/guides/content-collections/[24m for more information on content schemas.[39m
+  [1mError reference:[22m
+    [36m[4mhttps://docs.astro.build/en/reference/errors/invalid-content-entry-data-error/[24m[39m
+  [1mStack trace:[22m
+[2m    at getEntryDataAndImages (file:///D:/GIT/Mockachino-Blog/node_modules/astro/dist/content/utils.js:168:26)
+    [...] See full stack trace in the browser, or rerun with --verbose.[22m
+[31m[1m22:08:22[22m [ERROR][39m [31m[InvalidContentEntryDataError][39m [1mwiki → this-game-will-wreck-your-world-the-finals[22m data does not match collection schema.
+
+  [1mcategory**: **category[22m: Invalid enum value. Expected 'news' | 'guides' | 'reviews', received 'tactical-shooters'
+
+  [1mHint:[22m
+[33m    See [4mhttps://docs.astro.build/en/guides/content-collections/[24m for more information on content schemas.[39m
+  [1mError reference:[22m
+    [36m[4mhttps://docs.astro.build/en/reference/errors/invalid-content-entry-data-error/[24m[39m
+  [1mStack trace:[22m
+[2m    at D:\GIT\Mockachino-Blog\src\content\wiki\plays\PLA-NEW-003.md
+    [...] See full stack trace in the browser, or rerun with --verbose.[22m
+[31m[1m22:08:22[22m [ERROR][39m [31m[InvalidContentEntryDataError][39m [1mwiki → escape-from-tarkov-bugs[22m data does not match collection schema.
+
+  [1mcategory**: **category[22m: Invalid enum value. Expected 'news' | 'guides' | 'reviews', received 'tactical-shooters'
+
+  [1mHint:[22m
+[33m    See [4mhttps://docs.astro.build/en/guides/content-collections/[24m for more information on content schemas.[39m
+  [1mError reference:[22m
+    [36m[4mhttps://docs.astro.build/en/reference/errors/invalid-content-entry-data-error/[24m[39m
+  [1mStack trace:[22m
+[2m    at getEntryDataAndImages (file:///D:/GIT/Mockachino-Blog/node_modules/astro/dist/content/utils.js:168:26)
+    [...] See full stack trace in the browser, or rerun with --verbose.[22m
+[31m[1m22:08:22[22m [ERROR][39m [31m[InvalidContentEntryDataError][39m [1mwiki → why-is-escape-from-tarkov-so-immersive[22m data does not match collection schema.
+
+  [1mcategory**: **category[22m: Invalid enum value. Expected 'news' | 'guides' | 'reviews', received 'tactical-shooters'
+
+  [1mHint:[22m
+[33m    See [4mhttps://docs.astro.build/en/guides/content-collections/[24m for more information on content schemas.[39m
+  [1mError reference:[22m
+    [36m[4mhttps://docs.astro.build/en/reference/errors/invalid-content-entry-data-error/[24m[39m
+  [1mStack trace:[22m
+[2m    at D:\GIT\Mockachino-Blog\src\content\wiki\plays\PLA-NEW-006.md
+    [...] See full stack trace in the browser, or rerun with --verbose.[22m
+[31m[1m22:08:22[22m [ERROR][39m [31m[InvalidContentEntryDataError][39m [1mwiki → 5-basic-skills-to-learn-for-escape-from-tarkov[22m data does not match collection schema.
+
+  [1mcategory**: **category[22m: Invalid enum value. Expected 'news' | 'guides' | 'reviews', received 'tactical-shooters'
+
+  [1mHint:[22m
+[33m    See [4mhttps://docs.astro.build/en/guides/content-collections/[24m for more information on content schemas.[39m
+  [1mError reference:[22m
+    [36m[4mhttps://docs.astro.build/en/reference/errors/invalid-content-entry-data-error/[24m[39m
+  [1mStack trace:[22m
+[2m    at getEntryDataAndImages (file:///D:/GIT/Mockachino-Blog/node_modules/astro/dist/content/utils.js:168:26)
+    [...] See full stack trace in the browser, or rerun with --verbose.[22m
+[31m[1m22:08:22[22m [ERROR][39m [31m[InvalidContentEntryDataError][39m [1mwiki → the-spiritual-successor-to-teamspeak[22m data does not match collection schema.
+
+  [1mcategory**: **category[22m: Invalid enum value. Expected 'news' | 'guides' | 'reviews', received 'software-tools'
+
+  [1mHint:[22m
+[33m    See [4mhttps://docs.astro.build/en/guides/content-collections/[24m for more information on content schemas.[39m
+  [1mError reference:[22m
+    [36m[4mhttps://docs.astro.build/en/reference/errors/invalid-content-entry-data-error/[24m[39m
+  [1mStack trace:[22m
+[2m    at D:\GIT\Mockachino-Blog\src\content\wiki\plays\PLA-NEW-005.md
+    [...] See full stack trace in the browser, or rerun with --verbose.[22m
+[31m[1m22:08:22[22m [ERROR][39m [31m[InvalidContentEntryDataError][39m [1mwiki → shoot-a-handgun-in-10-minutes-or-less[22m data does not match collection schema.
+
+  [1mcategory**: **category[22m: Invalid enum value. Expected 'news' | 'guides' | 'reviews', received 'gear-and-firearms'
+
+  [1mHint:[22m
+[33m    See [4mhttps://docs.astro.build/en/guides/content-collections/[24m for more information on content schemas.[39m
+  [1mError reference:[22m
+    [36m[4mhttps://docs.astro.build/en/reference/errors/invalid-content-entry-data-error/[24m[39m
+  [1mStack trace:[22m
+[2m    at getEntryDataAndImages (file:///D:/GIT/Mockachino-Blog/node_modules/astro/dist/content/utils.js:168:26)
+    [...] See full stack trace in the browser, or rerun with --verbose.[22m
+[31m[1m22:08:22[22m [ERROR][39m [31m[InvalidContentEntryDataError][39m [1mwiki → lynx-brutality-2025-commentator-to-competitor[22m data does not match collection schema.
+
+  [1mcategory**: **category[22m: Invalid enum value. Expected 'news' | 'guides' | 'reviews', received 'practical-shooting'
+
+  [1mHint:[22m
+[33m    See [4mhttps://docs.astro.build/en/guides/content-collections/[24m for more information on content schemas.[39m
+  [1mError reference:[22m
+    [36m[4mhttps://docs.astro.build/en/reference/errors/invalid-content-entry-data-error/[24m[39m
+  [1mStack trace:[22m
+[2m    at D:\GIT\Mockachino-Blog\src\content\wiki\shoots\SHO-EVE-LYN.md
+    [...] See full stack trace in the browser, or rerun with --verbose.[22m
+[31m[1m22:08:22[22m [ERROR][39m [31m[InvalidContentEntryDataError][39m [1mwiki → iwa-outdoor-classics-what-is-it[22m data does not match collection schema.
+
+  [1mcategory**: **category[22m: Invalid enum value. Expected 'news' | 'guides' | 'reviews', received 'practical-shooting'
+
+  [1mHint:[22m
+[33m    See [4mhttps://docs.astro.build/en/guides/content-collections/[24m for more information on content schemas.[39m
+  [1mError reference:[22m
+    [36m[4mhttps://docs.astro.build/en/reference/errors/invalid-content-entry-data-error/[24m[39m
+  [1mStack trace:[22m
+[2m    at getEntryDataAndImages (file:///D:/GIT/Mockachino-Blog/node_modules/astro/dist/content/utils.js:168:26)
+    [...] See full stack trace in the browser, or rerun with --verbose.[22m
+[31m[1m22:08:22[22m [ERROR][39m [31m[InvalidContentEntryDataError][39m [1mwiki → shot-show-2026-first-timer[22m data does not match collection schema.
+
+  [1mcategory**: **category[22m: Invalid enum value. Expected 'news' | 'guides' | 'reviews', received 'practical-shooting'
+
+  [1mHint:[22m
+[33m    See [4mhttps://docs.astro.build/en/guides/content-collections/[24m for more information on content schemas.[39m
+  [1mError reference:[22m
+    [36m[4mhttps://docs.astro.build/en/reference/errors/invalid-content-entry-data-error/[24m[39m
+  [1mStack trace:[22m
+[2m    at D:\GIT\Mockachino-Blog\src\content\wiki\shoots\SHO-EVE-SHO.md
+    [...] See full stack trace in the browser, or rerun with --verbose.[22m
+[31m[1m22:08:22[22m [ERROR][39m [31m[InvalidContentEntryDataError][39m [1mwiki → shoots-new-year-new-feat[22m data does not match collection schema.
+
+  [1mcategory**: **category[22m: Invalid enum value. Expected 'news' | 'guides' | 'reviews', received 'field-notes'
+
+  [1mHint:[22m
+[33m    See [4mhttps://docs.astro.build/en/guides/content-collections/[24m for more information on content schemas.[39m
+  [1mError reference:[22m
+    [36m[4mhttps://docs.astro.build/en/reference/errors/invalid-content-entry-data-error/[24m[39m
+  [1mStack trace:[22m
+[2m    at getEntryDataAndImages (file:///D:/GIT/Mockachino-Blog/node_modules/astro/dist/content/utils.js:168:26)
+    [...] See full stack trace in the browser, or rerun with --verbose.[22m
+[31m[1m22:08:22[22m [ERROR][39m [31m[InvalidContentEntryDataError][39m [1mwiki → stop-referring-to-firearms-as-weapons[22m data does not match collection schema.
+
+  [1mcategory**: **category[22m: Invalid enum value. Expected 'news' | 'guides' | 'reviews', received 'law-and-safety'
+
+  [1mHint:[22m
+[33m    See [4mhttps://docs.astro.build/en/guides/content-collections/[24m for more information on content schemas.[39m
+  [1mError reference:[22m
+    [36m[4mhttps://docs.astro.build/en/reference/errors/invalid-content-entry-data-error/[24m[39m
+  [1mStack trace:[22m
+[2m    at D:\GIT\Mockachino-Blog\src\content\wiki\shoots\SHO-EXP-STO.md
+    [...] See full stack trace in the browser, or rerun with --verbose.[22m
+[31m[1m22:08:22[22m [ERROR][39m [31m[InvalidContentEntryDataError][39m [1mwiki → top-5-handguns-id-like-to-shoot-ipsc-handgun[22m data does not match collection schema.
+
+  [1mcategory**: **category[22m: Invalid enum value. Expected 'news' | 'guides' | 'reviews', received 'gear-and-firearms'
+
+  [1mHint:[22m
+[33m    See [4mhttps://docs.astro.build/en/guides/content-collections/[24m for more information on content schemas.[39m
+  [1mError reference:[22m
+    [36m[4mhttps://docs.astro.build/en/reference/errors/invalid-content-entry-data-error/[24m[39m
+  [1mStack trace:[22m
+[2m    at getEntryDataAndImages (file:///D:/GIT/Mockachino-Blog/node_modules/astro/dist/content/utils.js:168:26)
+    [...] See full stack trace in the browser, or rerun with --verbose.[22m
+[31m[1m22:08:22[22m [ERROR][39m [31m[InvalidContentEntryDataError][39m [1mwiki → window-size-doesnt-really-matter[22m data does not match collection schema.
+
+  [1mcategory**: **category[22m: Invalid enum value. Expected 'news' | 'guides' | 'reviews', received 'gear-and-firearms'
+
+  [1mHint:[22m
+[33m    Browser APIs are not available on the server.
+    
+    If the code is in a framework component, try to access these objects after rendering using lifecycle methods or use a `client:only` directive to make the component exclusively run on the client.
+    
+    See [4mhttps://docs.astro.build/en/guides/troubleshooting/#document-or-window-is-not-defined[24m for more information.
+    		[39m
+  [1mError reference:[22m
+    [36m[4mhttps://docs.astro.build/en/reference/errors/invalid-content-entry-data-error/[24m[39m
+  [1mStack trace:[22m
+[2m    at D:\GIT\Mockachino-Blog\src\content\wiki\shoots\SHO-EXP-WIN.md
+    [...] See full stack trace in the browser, or rerun with --verbose.[22m
+[31m[1m22:08:22[22m [ERROR][39m [31m[InvalidContentEntryDataError][39m [1mwiki → the-mp-15-22-is-your-best-and-worst-practical-mini-rifle[22m data does not match collection schema.
+
+  [1mcategory**: **category[22m: Invalid enum value. Expected 'news' | 'guides' | 'reviews', received 'gear-and-firearms'
+
+  [1mHint:[22m
+[33m    See [4mhttps://docs.astro.build/en/guides/content-collections/[24m for more information on content schemas.[39m
+  [1mError reference:[22m
+    [36m[4mhttps://docs.astro.build/en/reference/errors/invalid-content-entry-data-error/[24m[39m
+  [1mStack trace:[22m
+[2m    at getEntryDataAndImages (file:///D:/GIT/Mockachino-Blog/node_modules/astro/dist/content/utils.js:168:26)
+    [...] See full stack trace in the browser, or rerun with --verbose.[22m
+[31m[1m22:08:22[22m [ERROR][39m [31m[InvalidContentEntryDataError][39m [1mwiki → why-i-chose-an-hhs-setup-over-an-lpvo-setup-for-practical-mini-rifle[22m data does not match collection schema.
+
+  [1mcategory**: **category[22m: Invalid enum value. Expected 'news' | 'guides' | 'reviews', received 'practical-shooting'
+
+  [1mHint:[22m
+[33m    See [4mhttps://docs.astro.build/en/guides/content-collections/[24m for more information on content schemas.[39m
+  [1mError reference:[22m
+    [36m[4mhttps://docs.astro.build/en/reference/errors/invalid-content-entry-data-error/[24m[39m
+  [1mStack trace:[22m
+[2m    at D:\GIT\Mockachino-Blog\src\content\wiki\shoots\SHO-EXP-WHY.md
+    [...] See full stack trace in the browser, or rerun with --verbose.[22m
+[31m[1m22:08:22[22m [ERROR][39m [31m[InvalidContentEntryDataError][39m [1mwiki → how-to-start-ipsc-mini-rifle-on-a-budget[22m data does not match collection schema.
+
+  [1mcategory**: **category[22m: Invalid enum value. Expected 'news' | 'guides' | 'reviews', received 'practical-shooting'
+
+  [1mHint:[22m
+[33m    See [4mhttps://docs.astro.build/en/guides/content-collections/[24m for more information on content schemas.[39m
+  [1mError reference:[22m
+    [36m[4mhttps://docs.astro.build/en/reference/errors/invalid-content-entry-data-error/[24m[39m
+  [1mStack trace:[22m
+[2m    at getEntryDataAndImages (file:///D:/GIT/Mockachino-Blog/node_modules/astro/dist/content/utils.js:168:26)
+    [...] See full stack trace in the browser, or rerun with --verbose.[22m
+[31m[1m22:08:22[22m [ERROR][39m [31m[InvalidContentEntryDataError][39m [1mwiki → how-to-start-ipsc-action-air-on-a-budget[22m data does not match collection schema.
+
+  [1mcategory**: **category[22m: Invalid enum value. Expected 'news' | 'guides' | 'reviews', received 'practical-shooting'
+
+  [1mHint:[22m
+[33m    See [4mhttps://docs.astro.build/en/guides/content-collections/[24m for more information on content schemas.[39m
+  [1mError reference:[22m
+    [36m[4mhttps://docs.astro.build/en/reference/errors/invalid-content-entry-data-error/[24m[39m
+  [1mStack trace:[22m
+[2m    at D:\GIT\Mockachino-Blog\src\content\wiki\shoots\SHO-GUI-HOWT.md
+    [...] See full stack trace in the browser, or rerun with --verbose.[22m
+[31m[1m22:08:22[22m [ERROR][39m [31m[InvalidContentEntryDataError][39m [1mwiki → cz-scorpion-evo-coming-to-the-uk[22m data does not match collection schema.
+
+  [1mcategory**: **category[22m: Invalid enum value. Expected 'news' | 'guides' | 'reviews', received 'gear-and-firearms'
+
+  [1mHint:[22m
+[33m    See [4mhttps://docs.astro.build/en/guides/content-collections/[24m for more information on content schemas.[39m
+  [1mError reference:[22m
+    [36m[4mhttps://docs.astro.build/en/reference/errors/invalid-content-entry-data-error/[24m[39m
+  [1mStack trace:[22m
+[2m    at getEntryDataAndImages (file:///D:/GIT/Mockachino-Blog/node_modules/astro/dist/content/utils.js:168:26)
+    [...] See full stack trace in the browser, or rerun with --verbose.[22m
+[31m[1m22:08:22[22m [ERROR][39m [31m[InvalidContentEntryDataError][39m [1mwiki → how-to-start-shooting-ipsc-action-air[22m data does not match collection schema.
+
+  [1mcategory**: **category[22m: Invalid enum value. Expected 'news' | 'guides' | 'reviews', received 'practical-shooting'
+
+  [1mHint:[22m
+[33m    See [4mhttps://docs.astro.build/en/guides/content-collections/[24m for more information on content schemas.[39m
+  [1mError reference:[22m
+    [36m[4mhttps://docs.astro.build/en/reference/errors/invalid-content-entry-data-error/[24m[39m
+  [1mStack trace:[22m
+[2m    at D:\GIT\Mockachino-Blog\src\content\wiki\shoots\SHO-GUI-HOWTO.md
+    [...] See full stack trace in the browser, or rerun with --verbose.[22m
+[31m[1m22:08:22[22m [ERROR][39m [31m[InvalidContentEntryDataError][39m [1mwiki → how-to-get-into-sports-shooting-in-the-uk[22m data does not match collection schema.
+
+  [1mcategory**: **category[22m: Invalid enum value. Expected 'news' | 'guides' | 'reviews', received 'practical-shooting'
+
+  [1mHint:[22m
+[33m    See [4mhttps://docs.astro.build/en/guides/content-collections/[24m for more information on content schemas.[39m
+  [1mError reference:[22m
+    [36m[4mhttps://docs.astro.build/en/reference/errors/invalid-content-entry-data-error/[24m[39m
+  [1mStack trace:[22m
+[2m    at getEntryDataAndImages (file:///D:/GIT/Mockachino-Blog/node_modules/astro/dist/content/utils.js:168:26)
+    [...] See full stack trace in the browser, or rerun with --verbose.[22m
+[31m[1m22:08:22[22m [ERROR][39m [31m[InvalidContentEntryDataError][39m [1mwiki → this-trigger-will-make-your-airsoft-gun-realistic[22m data does not match collection schema.
+
+  [1mcategory**: **category[22m: Invalid enum value. Expected 'news' | 'guides' | 'reviews', received 'airsoft-and-tactical'
+
+  [1mHint:[22m
+[33m    See [4mhttps://docs.astro.build/en/guides/content-collections/[24m for more information on content schemas.[39m
+  [1mError reference:[22m
+    [36m[4mhttps://docs.astro.build/en/reference/errors/invalid-content-entry-data-error/[24m[39m
+  [1mStack trace:[22m
+[2m    at D:\GIT\Mockachino-Blog\src\content\wiki\shoots\SHO-NEW-THI.md
+    [...] See full stack trace in the browser, or rerun with --verbose.[22m
+[31m[1m22:08:22[22m [ERROR][39m [31m[InvalidContentEntryDataError][39m [1mwiki → why-practical-shooting-is-a-great-shooting-discipline[22m data does not match collection schema.
+
+  [1mcategory**: **category[22m: Invalid enum value. Expected 'news' | 'guides' | 'reviews', received 'practical-shooting'
+
+  [1mHint:[22m
+[33m    See [4mhttps://docs.astro.build/en/guides/content-collections/[24m for more information on content schemas.[39m
+  [1mError reference:[22m
+    [36m[4mhttps://docs.astro.build/en/reference/errors/invalid-content-entry-data-error/[24m[39m
+  [1mStack trace:[22m
+[2m    at getEntryDataAndImages (file:///D:/GIT/Mockachino-Blog/node_modules/astro/dist/content/utils.js:168:26)
+    [...] See full stack trace in the browser, or rerun with --verbose.[22m
+[31m[1m22:08:22[22m [ERROR][39m [31m[InvalidContentEntryDataError][39m [1mwiki → recover-tactical-20-20-stabiliser-kit[22m data does not match collection schema.
+
+  [1mcategory**: **category[22m: Invalid enum value. Expected 'news' | 'guides' | 'reviews', received 'gear-and-firearms'
+
+  [1mHint:[22m
+[33m    See [4mhttps://docs.astro.build/en/guides/content-collections/[24m for more information on content schemas.[39m
+  [1mError reference:[22m
+    [36m[4mhttps://docs.astro.build/en/reference/errors/invalid-content-entry-data-error/[24m[39m
+  [1mStack trace:[22m
+[2m    at D:\GIT\Mockachino-Blog\src\content\wiki\shoots\SHO-REV-REC.md
+    [...] See full stack trace in the browser, or rerun with --verbose.[22m
+[31m[1m22:08:22[22m [ERROR][39m [31m[InvalidContentEntryDataError][39m [1mwiki → vortex-razor-hd-gen-iii-1-10x24[22m data does not match collection schema.
+
+  [1mcategory**: **category[22m: Invalid enum value. Expected 'news' | 'guides' | 'reviews', received 'gear-and-firearms'
+
+  [1mHint:[22m
+[33m    See [4mhttps://docs.astro.build/en/guides/content-collections/[24m for more information on content schemas.[39m
+  [1mError reference:[22m
+    [36m[4mhttps://docs.astro.build/en/reference/errors/invalid-content-entry-data-error/[24m[39m
+  [1mStack trace:[22m
+[2m    at getEntryDataAndImages (file:///D:/GIT/Mockachino-Blog/node_modules/astro/dist/content/utils.js:168:26)
+    [...] See full stack trace in the browser, or rerun with --verbose.[22m
+[31m[1m22:08:22[22m [ERROR][39m [31m[InvalidContentEntryDataError][39m [1mwiki → balancing-the-trigger-time-management-and-avoiding-burnout[22m data does not match collection schema.
+
+  [1mcategory**: **category[22m: Invalid enum value. Expected 'news' | 'guides' | 'reviews', received 'practical-shooting'
+
+  [1mHint:[22m
+[33m    See [4mhttps://docs.astro.build/en/guides/content-collections/[24m for more information on content schemas.[39m
+  [1mError reference:[22m
+    [36m[4mhttps://docs.astro.build/en/reference/errors/invalid-content-entry-data-error/[24m[39m
+  [1mStack trace:[22m
+[2m    at D:\GIT\Mockachino-Blog\src\content\wiki\shoots\SHO-TIP-BAL.md
+    [...] See full stack trace in the browser, or rerun with --verbose.[22m
+[31m[1m22:08:22[22m [ERROR][39m [31m[InvalidContentEntryDataError][39m [1mwiki → what-i-focus-on-when-reviewing-optics[22m data does not match collection schema.
+
+  [1mcategory**: **category[22m: Invalid enum value. Expected 'news' | 'guides' | 'reviews', received 'practical-shooting'
+
+  [1mHint:[22m
+[33m    See [4mhttps://docs.astro.build/en/guides/content-collections/[24m for more information on content schemas.[39m
+  [1mError reference:[22m
+    [36m[4mhttps://docs.astro.build/en/reference/errors/invalid-content-entry-data-error/[24m[39m
+  [1mStack trace:[22m
+[2m    at getEntryDataAndImages (file:///D:/GIT/Mockachino-Blog/node_modules/astro/dist/content/utils.js:168:26)
+    [...] See full stack trace in the browser, or rerun with --verbose.[22m
+[31m[1m22:08:22[22m [ERROR][39m [31m[InvalidContentEntryDataError][39m [1mwiki → from-air-to-fire-how-ipsc-action-air-training-prepares-you-for-the-real-deal[22m data does not match collection schema.
+
+  [1mcategory**: **category[22m: Invalid enum value. Expected 'news' | 'guides' | 'reviews', received 'practical-shooting'
+
+  [1mHint:[22m
+[33m    See [4mhttps://docs.astro.build/en/guides/content-collections/[24m for more information on content schemas.[39m
+  [1mError reference:[22m
+    [36m[4mhttps://docs.astro.build/en/reference/errors/invalid-content-entry-data-error/[24m[39m
+  [1mStack trace:[22m
+[2m    at D:\GIT\Mockachino-Blog\src\content\wiki\shoots\SHO-NEW-FRO.md
+    [...] See full stack trace in the browser, or rerun with --verbose.[22m
+[31m[1m22:08:22[22m [ERROR][39m [31m[InvalidContentEntryDataError][39m [1mwiki → tactical-vs-practical-shooting[22m data does not match collection schema.
+
+  [1mcategory**: **category[22m: Invalid enum value. Expected 'news' | 'guides' | 'reviews', received 'practical-shooting'
+
+  [1mHint:[22m
+[33m    See [4mhttps://docs.astro.build/en/guides/content-collections/[24m for more information on content schemas.[39m
+  [1mError reference:[22m
+    [36m[4mhttps://docs.astro.build/en/reference/errors/invalid-content-entry-data-error/[24m[39m
+  [1mStack trace:[22m
+[2m    at getEntryDataAndImages (file:///D:/GIT/Mockachino-Blog/node_modules/astro/dist/content/utils.js:168:26)
+    [...] See full stack trace in the browser, or rerun with --verbose.[22m
+[31m[1m22:08:22[22m [ERROR][39m [31m[InvalidContentEntryDataError][39m [1mwiki → what-optic-setup-is-best-for-practical-mini-rifle[22m data does not match collection schema.
+
+  [1mcategory**: **category[22m: Invalid enum value. Expected 'news' | 'guides' | 'reviews', received 'practical-shooting'
+
+  [1mHint:[22m
+[33m    See [4mhttps://docs.astro.build/en/guides/content-collections/[24m for more information on content schemas.[39m
+  [1mError reference:[22m
+    [36m[4mhttps://docs.astro.build/en/reference/errors/invalid-content-entry-data-error/[24m[39m
+  [1mStack trace:[22m
+[2m    at D:\GIT\Mockachino-Blog\src\content\wiki\shoots\SHO-TIP-WHAT.md
+    [...] See full stack trace in the browser, or rerun with --verbose.[22m
+[31m[1m22:08:22[22m [ERROR][39m [31m[InvalidContentEntryDataError][39m [1mwiki → what-is-a-true-1x-magnification[22m data does not match collection schema.
+
+  [1mcategory**: **category[22m: Invalid enum value. Expected 'news' | 'guides' | 'reviews', received 'practical-shooting'
+
+  [1mHint:[22m
+[33m    See [4mhttps://docs.astro.build/en/guides/content-collections/[24m for more information on content schemas.[39m
+  [1mError reference:[22m
+    [36m[4mhttps://docs.astro.build/en/reference/errors/invalid-content-entry-data-error/[24m[39m
+  [1mStack trace:[22m
+[2m    at getEntryDataAndImages (file:///D:/GIT/Mockachino-Blog/node_modules/astro/dist/content/utils.js:168:26)
+    [...] See full stack trace in the browser, or rerun with --verbose.[22m
+[31m[1m22:08:22[22m [ERROR][39m [31m[InvalidContentEntryDataError][39m [1mwiki → you-have-an-astigmatism-and-its-ok[22m data does not match collection schema.
+
+  [1mcategory**: **category[22m: Invalid enum value. Expected 'news' | 'guides' | 'reviews', received 'practical-shooting'
+
+  [1mHint:[22m
+[33m    See [4mhttps://docs.astro.build/en/guides/content-collections/[24m for more information on content schemas.[39m
+  [1mError reference:[22m
+    [36m[4mhttps://docs.astro.build/en/reference/errors/invalid-content-entry-data-error/[24m[39m
+  [1mStack trace:[22m
+[2m    at D:\GIT\Mockachino-Blog\src\content\wiki\shoots\SHO-TIP-YOU.md
+    [...] See full stack trace in the browser, or rerun with --verbose.[22m
+[31m[1m22:08:22[22m [ERROR][39m [31m[InvalidContentEntryDataError][39m [1mwiki → the-difference-between-instructing-and-coaching[22m data does not match collection schema.
+
+  [1mcategory**: **category[22m: Invalid enum value. Expected 'news' | 'guides' | 'reviews', received 'practical-shooting'
+
+  [1mHint:[22m
+[33m    See [4mhttps://docs.astro.build/en/guides/content-collections/[24m for more information on content schemas.[39m
+  [1mError reference:[22m
+    [36m[4mhttps://docs.astro.build/en/reference/errors/invalid-content-entry-data-error/[24m[39m
+  [1mStack trace:[22m
+[2m    at getEntryDataAndImages (file:///D:/GIT/Mockachino-Blog/node_modules/astro/dist/content/utils.js:168:26)
+    [...] See full stack trace in the browser, or rerun with --verbose.[22m
+[31m[1m22:08:22[22m [ERROR][39m [31m[InvalidContentEntryDataError][39m [1mwiki → understanding-hold-overs-and-hold-unders[22m data does not match collection schema.
+
+  [1mcategory**: **category[22m: Invalid enum value. Expected 'news' | 'guides' | 'reviews', received 'practical-shooting'
+
+  [1mHint:[22m
+[33m    See [4mhttps://docs.astro.build/en/guides/content-collections/[24m for more information on content schemas.[39m
+  [1mError reference:[22m
+    [36m[4mhttps://docs.astro.build/en/reference/errors/invalid-content-entry-data-error/[24m[39m
+  [1mStack trace:[22m
+[2m    at D:\GIT\Mockachino-Blog\src\content\wiki\shoots\SHO-TRA-UND.md
+    [...] See full stack trace in the browser, or rerun with --verbose.[22m
+[31m[1m22:08:22[22m [ERROR][39m [31m[InvalidContentEntryDataError][39m [1mwiki → what-is-sight-over-bore[22m data does not match collection schema.
+
+  [1mcategory**: **category[22m: Invalid enum value. Expected 'news' | 'guides' | 'reviews', received 'practical-shooting'
+
+  [1mHint:[22m
+[33m    See [4mhttps://docs.astro.build/en/guides/content-collections/[24m for more information on content schemas.[39m
+  [1mError reference:[22m
+    [36m[4mhttps://docs.astro.build/en/reference/errors/invalid-content-entry-data-error/[24m[39m
+  [1mStack trace:[22m
+[2m    at getEntryDataAndImages (file:///D:/GIT/Mockachino-Blog/node_modules/astro/dist/content/utils.js:168:26)
+    [...] See full stack trace in the browser, or rerun with --verbose.[22m
+[Shiki] 10 instances have been created. Shiki is supposed to be used as a singleton, consider refactoring your code to cache your highlighter instance; Or call `highlighter.dispose()` to release unused instances.

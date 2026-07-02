@@ -169,7 +169,7 @@ const lastGitUpdate = getLastGitUpdate();
                 topics.map((topic) => (
                   <div class="topic-tree__group" data-topic={topic.id}>
                     <a href={`/topics/${topic.id}/`} class="topic-tree__topic">
-                      <RasterIcon name={topic.icon} class="topic-tree__icon topic-tree__icon--raster" />
+                      <img src={`/brand/logo-${topic.id}.png`} alt="" class="topic-tree__icon topic-tree__icon--logo" />
                       <span>{topic.name}</span>
                     </a>
                     <ul class="topic-tree__categories">
