@@ -67,6 +67,20 @@ function getRepoActivity() {
 
 const repoActivity = getRepoActivity();
 const totalRepoCommits = repoActivity.flat().reduce((total, cell) => total + cell.count, 0);
+
+function getLastGitUpdate() {
+  try {
+    return execSync('git log -1 --format="%cd" --date=format:"%d %b %Y"', {
+      cwd: process.cwd(),
+      encoding: "utf8",
+      stdio: ["ignore", "pipe", "ignore"],
+    }).trim();
+  } catch {
+    return "Unavailable";
+  }
+}
+
+const lastGitUpdate = getLastGitUpdate();
 ---
 
 <!doctype html>
@@ -117,23 +131,14 @@ const totalRepoCommits = repoActivity.flat().reduce((total, cell) => total + cel
               <label class="sr-only" for="site-search">Search wiki</label>
               <RasterIcon name="search" class="search-form__icon search-form__icon--raster" />
               <input id="site-search" name="q" type="search" placeholder="Search the wiki..." />
-              <span class="search-form__hint">CTRL</span>
-              <span class="search-form__hint">K</span>
             </form>
             <div class="header-utilities">
               <button class="theme-toggle" type="button" data-theme-toggle aria-label="Toggle day and night mode">
                 <RasterIcon name="sun" class="theme-toggle__icon theme-toggle__icon--dark theme-toggle__icon--raster" />
                 <RasterIcon name="moon" class="theme-toggle__icon theme-toggle__icon--light theme-toggle__icon--raster" />
               </button>
-              <a href="/about/" class="theme-toggle theme-toggle--ghost header-user" aria-label="Open help and profile">
-                <RasterIcon name="user" class="theme-toggle__icon theme-toggle__icon--raster" />
-              </a>
             </div>
           </div>
-        </div>
-        <div class="header-meta" aria-hidden="true">
-          <span>REF-001</span>
-          <span>REV-C</span>
         </div>
       </header>
 
@@ -222,8 +227,8 @@ const totalRepoCommits = repoActivity.flat().reduce((total, cell) => total + cel
         </div>
 
         <div class="footer-column footer-column--statement">
-          <p class="site-footer__blurb">Built by Mocka. For everyone.</p>
-          <p class="site-footer__ref">REF-FOOTER-01</p>
+          <p class="site-footer__blurb">Copyright © 2026 Mockachino. All rights reserved.</p>
+          <p class="site-footer__ref">Mockachino and The Mocka Wiki are trademarks of Mocka.</p>
         </div>
 
         <div class="footer-column">
@@ -262,7 +267,7 @@ const totalRepoCommits = repoActivity.flat().reduce((total, cell) => total + cel
             </div>
             <div>
               <dt>Last Update</dt>
-              <dd>25 May 2025</dd>
+              <dd>{lastGitUpdate}</dd>
             </div>
             <div>
               <dt>Status</dt>
