@@ -1,6 +1,6 @@
-# Astro Starter
+# Mockachino Blog
 
-This project has been reset to a minimal Astro starter site.
+Astro-powered static site for Mockachino content, deployed on Cloudflare Pages.
 
 ## Commands
 
@@ -29,3 +29,26 @@ npm run preview
 ```
 
 The homepage lives at `src/pages/index.astro`.
+
+## Cloudflare Pages
+
+Required build settings:
+
+```text
+Build command: npm run build
+Build output directory: dist
+Node version: 22
+```
+
+This repo also includes:
+
+- a Cloudflare Worker at `workers/ga-sync/` that syncs GA4 page view data into KV
+- a Pages Function at `functions/api/popular.json.js` that reads popularity data from KV
+
+Required bindings and secrets:
+
+```text
+Pages KV binding: MOCKACHINO_PAGEVIEWS
+Worker KV binding: MOCKACHINO_PAGEVIEWS
+Worker secret: GA_SERVICE_ACCOUNT_KEY
+```
