@@ -1,21 +1,20 @@
 ---
+articleId: COD-BLO-SWA
 slug: swapping-over-to-windows-11
 title: Swapping over to Windows 11
 summary: A clean-install diary about moving to Windows 11, refreshing the operating system, and rebuilding a working setup.
 kind: article
 topic: codes
 category: software-tools
-createdAt: 2025-11-05T10:00:00.000Z
-updatedAt: 2026-03-06T21:40:10.000Z
-articleId: COD-BLO-SWA
+createdAt: 2025-11-05T10:00:00.000+00:00
+updatedAt: 2026-03-06T21:40:00.000+00:00
 tags:
   - operating-system
   - windows
 featuredImage:
-  src: /images/COD-BLO-SWA/image_2023-03-11_235802340.png
-  alt: 
+  src: /images/COD-BLO-SWA/COD-BLO-SWA-01-featured-image.png
+  alt: ""
 ---
-
 
 So as of this weekend, I had decided it was time to have a clean install of windows. May as well upgrade to Windows 11 whilst I’m at it. I have previously experienced Windows 11 in a VM environment, when it was in alpha release. A lot has changed since then, at least I hope so considering how many bugs there are.
 

@@ -38,7 +38,7 @@ const viewsEndpoint = `https://mockachino-ga-sync.outdoortechnica.workers.dev/vi
 const articleInfoLabel = `${formatTopicLabel(entry.topic)} / ${formatCategoryLabel(entry.topic, entry.category)}`;
 const articleBody = (contentEntry as { body?: string }).body ?? entry.summary;
 const readMinutes = Math.max(1, Math.ceil(articleBody.split(/\s+/).length / 220));
-const articleId = contentEntry.data.articleId ?? entry.slug;
+const articleId = contentEntry.data.articleId;
 const heroImage =
   contentEntry.data.featuredImage?.src ??
   (entry.topic === "shoots"

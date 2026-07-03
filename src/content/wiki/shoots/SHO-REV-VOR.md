@@ -1,22 +1,21 @@
 ---
+articleId: SHO-REV-VOR
 slug: vortex-razor-hd-gen-iii-1-10x24
 title: Vortex Razor HD Gen III 1-10x24
 summary: A review entry for the Vortex Razor HD Gen III 1-10x24 LPVO and its role in practical shooting setups.
 kind: review
 topic: shoots
 category: gear-and-firearms
-createdAt: 2022-09-01T00:24:00.000Z
-updatedAt: 2023-03-12T00:27:28.000Z
-articleId: SHO-REV-VOR
+createdAt: 2022-09-01T00:24:00.000+00:00
+updatedAt: 2023-03-12T00:27:00.000+00:00
 tags:
   - lpvo
   - optics
   - vortex
 featuredImage:
-  src: /images/SHO-REV-VOR/image_2023-03-12_002716379.png
-  alt: 
+  src: /images/SHO-REV-VOR/SHO-REV-VOR-01-featured-image.png
+  alt: ""
 ---
-
 
 Vortex has been busy during COVID, updating their Razor series during the pandemic. Starting with the High Power Variable Optics and now moving over to the Low Power Variable Optics. Say hello to the latest update of the Razor HD Gen III 1-10×24; updated with 10x magnification.
 

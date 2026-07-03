@@ -1,23 +1,22 @@
 ---
+articleId: SHO-EXP-WHY
 slug: why-i-chose-an-hhs-setup-over-an-lpvo-setup-for-practical-mini-rifle
 title: Why I Chose an HHS Setup over an LPVO Setup for Practical Mini Rifle
 summary: A practical mini rifle optics note explaining the tradeoffs behind choosing a hybrid sight setup over an LPVO.
 kind: article
 topic: shoots
 category: practical-shooting
-createdAt: 2023-02-27T23:51:28.000Z
-updatedAt: 2026-03-06T13:47:35.000Z
-articleId: SHO-EXP-WHY
+createdAt: 2023-02-27T23:51:00.000+00:00
+updatedAt: 2026-03-06T13:47:00.000+00:00
 tags:
   - hhs
   - optics
   - practical-shooting
   - target-shooting
 featuredImage:
-  src: /images/SHO-EXP-WHY/image_2023-03-11_235352257.png
-  alt: 
+  src: /images/SHO-EXP-WHY/SHO-EXP-WHY-01-featured-image.png
+  alt: ""
 ---
-
 
 There are several reasons why someone might choose an HHS (Hybrid Sight System) setup over an LPVO (Low Power Variable Optic) setup for Practical Mini Rifle.
 

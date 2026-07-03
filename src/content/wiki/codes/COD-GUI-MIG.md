@@ -1,22 +1,21 @@
 ---
+articleId: COD-GUI-MIG
 slug: migrating-wordpress-sites-without-plugins
 title: Migrating WordPress Sites (Without Plugins)
 summary: A WordPress migration guide for moving a site manually without relying on migration plugins.
 kind: guide
 topic: codes
 category: software-tools
-createdAt: 2025-05-01T10:00:00.000Z
-updatedAt: 2026-03-06T21:40:12.000Z
-articleId: COD-GUI-MIG
+createdAt: 2025-05-01T10:00:00.000+00:00
+updatedAt: 2026-03-06T21:40:00.000+00:00
 tags:
   - hosting
   - web
   - wordpress
 featuredImage:
-  src: /images/COD-GUI-MIG/image_2023-03-16_195731649.png
-  alt: 
+  src: /images/COD-GUI-MIG/COD-GUI-MIG-01-featured-image.png
+  alt: ""
 ---
-
 
 Migrating a WordPress website from one site to another can be a daunting task, but it’s something that needs to be done occasionally. In this article, we will go through the step-by-step process of migrating one WordPress website to another.
 

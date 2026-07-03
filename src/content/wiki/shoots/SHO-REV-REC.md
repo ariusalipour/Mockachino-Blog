@@ -1,21 +1,20 @@
 ---
+articleId: SHO-REV-REC
 slug: recover-tactical-20-20-stabiliser-kit
 title: Recover Tactical 20/20 Stabiliser Kit
 summary: A review of the Recover Tactical 20/20 stabiliser kit and the practical appeal of handgun carbine conversions.
 kind: review
 topic: shoots
 category: gear-and-firearms
-createdAt: 2021-07-12T00:41:00.000Z
-updatedAt: 2023-03-12T00:44:46.000Z
-articleId: SHO-REV-REC
+createdAt: 2021-07-12T00:41:00.000+00:00
+updatedAt: 2023-03-12T00:44:00.000+00:00
 tags:
   - carbine-kit
   - handgun
 featuredImage:
-  src: /images/SHO-REV-REC/image_2023-03-12_004440042.png
-  alt: 
+  src: /images/SHO-REV-REC/SHO-REV-REC-01-featured-image.png
+  alt: ""
 ---
-
 
 Let’s get one thing straight. Creating a carbine kit for a handgun that renovates the design and function to compare to a personal defence weapon or submachine pistol is difficult at the very least. Handguns are usually not designed to be converted in such a manner without forethought. This means that when a company designs a kit to bring it closer to a carbine or similar, their are compromises that have to be made in order to make it work.
 

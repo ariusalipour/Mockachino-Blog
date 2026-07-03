@@ -1,22 +1,21 @@
 ---
+articleId: SHO-GUI-HOWTO
 slug: how-to-start-shooting-ipsc-action-air
 title: How to Start Shooting IPSC Action Air
 summary: A beginner guide to getting involved in IPSC Action Air, emphasizing accessibility and the low barrier to starting.
 kind: guide
 topic: shoots
 category: practical-shooting
-createdAt: 2021-02-15T00:45:00.000Z
-updatedAt: 2023-03-12T00:47:34.000Z
-articleId: SHO-GUI-HOWTO
+createdAt: 2021-02-15T00:45:00.000+00:00
+updatedAt: 2023-03-12T00:47:00.000+00:00
 tags:
   - action-air
   - ipsc
   - practical-shooting
 featuredImage:
-  src: /images/SHO-GUI-HOWTO/image_2023-03-12_004658058.png
-  alt: 
+  src: /images/SHO-GUI-HOWTO/SHO-GUI-HOWTO-01-featured-image.png
+  alt: ""
 ---
-
 
 IPSC Action Air is a very easy shooting sport to get involved in due to accessibility and how economical it is compared to other shooting disciplines within the IPSC bracket. It is worth noting that IPSC Action Air is a mirror representation of the Handgun discipline with only a few changes based on the equipment being used.
 
@@ -148,7 +147,7 @@ Allied equipment (holster, magazine holders) can be carried anywhere on the belt
 
 Action Air Open Division is the second most common division in IPSC and is normally close behind standard division in the number of competitors at a match. It is most popular amongst competitors who want to use electronic sights as it’s one of the only disciplines that allows this. 
 
-_Because of the few limitations to handgun choice, there is an extensive choice of replica handguns available. Most common replicas for standard division is the 2011 style (Hi Capa) variants of the 1911 which are double stack, single action mechanism pistols._
+*Because of the few limitations to handgun choice, there is an extensive choice of replica handguns available. Most common replicas for standard division is the 2011 style (Hi Capa) variants of the 1911 which are double stack, single action mechanism pistols.*
 
 ### ACTION AIR PISTOL & ALLIED EQUIPMENT
 

@@ -1,22 +1,21 @@
 ---
+articleId: SHO-TRA-UND
 slug: understanding-hold-overs-and-hold-unders
 title: Understanding Hold Overs... and Hold Unders
 summary: A shooting technique guide on compensating for trajectory with hold overs and hold unders at different distances.
 kind: guide
 topic: shoots
 category: practical-shooting
-createdAt: 2023-02-28T23:47:01.000Z
-updatedAt: 2026-03-06T13:47:28.000Z
-articleId: SHO-TRA-UND
+createdAt: 2023-02-28T23:47:00.000+00:00
+updatedAt: 2026-03-06T13:47:00.000+00:00
 tags:
   - optics
   - practical-shooting
   - target-shooting
 featuredImage:
-  src: /images/SHO-TRA-UND/image_2023-03-11_235030225.png
-  alt: 
+  src: /images/SHO-TRA-UND/SHO-TRA-UND-01-featured-image.png
+  alt: ""
 ---
-
 
 Hold over and hold under are two techniques used in shooting to compensate for bullet drop over long distances. When a bullet is fired from a firearm, it travels in an arc due to the force of gravity. As a result, the bullet will begin to drop as it travels farther away from the shooter. Hold over and hold under are techniques used to compensate for this drop and ensure that the bullet hits the target.
 

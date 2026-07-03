@@ -1,22 +1,21 @@
 ---
+articleId: PLA-EXP-009
 slug: new-year-new-feat
 title: New Year, New Feat!
 summary: A personal update on shifting creative priorities, simplifying Outdoor Technica, and reviving Mockachino projects.
 kind: article
 topic: plays
 category: software-tools
-createdAt: 2025-03-15T10:00:00.000Z
-updatedAt: 2026-03-06T21:40:15.000Z
-articleId: PLA-EXP-009
+createdAt: 2025-03-15T10:00:00.000+00:00
+updatedAt: 2026-03-06T21:40:00.000+00:00
 tags:
   - mockachino
   - projects
   - creative-work
 featuredImage:
-  src: /images/PLA-EXP-009/image_2023-03-12_002249803.png
-  alt: 
+  src: /images/PLA-EXP-009/PLA-EXP-009-01-featured-image.png
+  alt: ""
 ---
-
 
 Coming up to the new year (2023), I have had to think about where my priorities lay with the work I’m doing day and night. In case you didn’t know, I have been very busy working on two different entities while working at PureGym as a software engineer. The first entity is more well-known to be [Outdoor Technica](https://outdoortechnica.com/). The purpose of Outdoor Technica has been to facilitate my creative avenues of content creation and web design. Outdoor Technica currently has a blog website, a YouTube channel, some social media accounts and the odd podcast. Neither of these is doing overtly well because it is a one-man band. Outdoor Technica is also a business-to-business provider of web services which is doing ok. There hasn’t been much effort to get more clients however there is some passive and active income from the services provided which keeps for some expenses but not enough for any profit.
 

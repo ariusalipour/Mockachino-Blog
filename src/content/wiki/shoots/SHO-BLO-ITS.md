@@ -1,21 +1,20 @@
 ---
+articleId: SHO-BLO-ITS
 slug: its-a-moderator-not-a-silencer
 title: It's a Moderator! Not a Silencer!
 summary: A terminology note on why UK shooters usually call the muzzle device a moderator rather than a silencer.
 kind: article
 topic: shoots
 category: law-and-safety
-createdAt: 2022-12-01T15:15:22.000Z
-updatedAt: 2023-03-14T15:17:49.000Z
-articleId: SHO-BLO-ITS
+createdAt: 2022-12-01T15:15:00.000+00:00
+updatedAt: 2023-03-14T15:17:00.000+00:00
 tags:
   - moderators
   - target-shooting
 featuredImage:
-  src: /images/SHO-BLO-ITS/image_2023-03-14_151732197.png
-  alt: 
+  src: /images/SHO-BLO-ITS/SHO-BLO-ITS-01-featured-image.png
+  alt: ""
 ---
-
 
 In the world of firearms, the device that is often referred to as a “silencer” or “suppressor” is officially called a “moderator.” While many people might use these terms interchangeably, there are reasons why the term “moderator” is more appropriate and why it’s important to use the correct terminology.
 

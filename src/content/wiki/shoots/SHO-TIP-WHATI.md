@@ -1,22 +1,21 @@
 ---
+articleId: SHO-TIP-WHATI
 slug: what-is-a-true-1x-magnification
 title: What is a True 1x Magnification?
 summary: An optics guide explaining true 1x magnification, why it matters, and how LPVOs and red dots compare at close range.
 kind: guide
 topic: shoots
 category: practical-shooting
-createdAt: 2023-01-07T00:17:00.000Z
-updatedAt: 2026-03-06T13:48:37.000Z
-articleId: SHO-TIP-WHATI
+createdAt: 2023-01-07T00:17:00.000+00:00
+updatedAt: 2026-03-06T13:48:00.000+00:00
 tags:
   - lpvo
   - optics
   - red-dots
 featuredImage:
-  src: /images/SHO-TIP-WHATI/image_2023-03-12_002019222.png
-  alt: 
+  src: /images/SHO-TIP-WHATI/SHO-TIP-WHATI-01-featured-image.png
+  alt: ""
 ---
-
 
 True 1x magnification is a term used to describe a type of optic that offers a true, unmagnified view of the target. It is commonly used in the shooting sports, particularly in practical shooting competitions.
 

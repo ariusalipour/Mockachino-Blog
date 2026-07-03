@@ -1,13 +1,13 @@
 ---
+articleId: SHO-GUI-WHA
 slug: what-is-the-36-yard-zero
 title: What is the 36 Yard Zero?
 summary: A guide to the 36-yard zero concept and how trajectory choices affect practical rifle holds at different ranges.
 kind: guide
 topic: shoots
 category: practical-shooting
-createdAt: 2020-06-16T00:47:00.000Z
-updatedAt: 2023-03-12T00:49:40.000Z
-articleId: SHO-GUI-WHA
+createdAt: 2020-06-16T00:47:00.000+00:00
+updatedAt: 2023-03-12T00:49:00.000+00:00
 tags:
   - optics
   - practical-shooting
@@ -15,10 +15,9 @@ tags:
   - tactical-shooting
   - target-shooting
 featuredImage:
-  src: /images/SHO-GUI-WHA/image_2023-03-12_004933427.png
-  alt: 
+  src: /images/SHO-GUI-WHA/SHO-GUI-WHA-01-featured-image.png
+  alt: ""
 ---
-
 
 Vigilance Elite posted a video back in March 2018 about how he has been studying the variance in bullet drop based on zero distance. His conclusion in the video was that an unorthodox 36 yard zero is the best middle ground for variable zeroing for 100, 200 and 300 yards.
 

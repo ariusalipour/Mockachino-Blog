@@ -1,21 +1,20 @@
 ---
+articleId: SHO-EVE-IWA
 slug: iwa-outdoor-classics-what-is-it
 title: IWA Outdoor Classics, What is it?
 summary: A short explainer on IWA Outdoor Classics as a trade fair for shooting sports, hunting, outdoor equipment, and industry networking.
 kind: article
 topic: shoots
 category: practical-shooting
-createdAt: 2023-03-02T23:39:13.000Z
-updatedAt: 2026-03-06T13:47:12.000Z
-articleId: SHO-EVE-IWA
+createdAt: 2023-03-02T23:39:00.000+00:00
+updatedAt: 2026-03-06T13:47:00.000+00:00
 tags:
   - iwa
   - trade-shows
 featuredImage:
-  src: /images/SHO-EVE-IWA/image_2023-03-11_234011219.png
-  alt: 
+  src: /images/SHO-EVE-IWA/SHO-EVE-IWA-01-featured-image.png
+  alt: ""
 ---
-
 
 The IWA Outdoor Classics is an annual international trade fair for hunting, shooting sports, outdoor equipment, and civilian and official security products. The event is held in Nuremberg, Germany, and is one of the largest and most important trade fairs of its kind in the world.
 

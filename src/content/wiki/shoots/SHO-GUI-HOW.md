@@ -1,22 +1,21 @@
 ---
+articleId: SHO-GUI-HOW
 slug: how-to-start-ipsc-mini-rifle-on-a-budget
 title: How to start IPSC Mini Rifle on a Budget
 summary: A budget-minded starter guide for IPSC Mini Rifle, following on from the Action Air entry point.
 kind: guide
 topic: shoots
 category: practical-shooting
-createdAt: 2022-08-12T00:28:00.000Z
-updatedAt: 2023-03-12T01:06:55.000Z
-articleId: SHO-GUI-HOW
+createdAt: 2022-08-12T00:28:00.000+00:00
+updatedAt: 2023-03-12T01:06:00.000+00:00
 tags:
   - ipsc
   - mini-rifle
   - practical-shooting
 featuredImage:
-  src: /images/SHO-GUI-HOW/image_2023-03-12_002934982.png
-  alt: 
+  src: /images/SHO-GUI-HOW/SHO-GUI-HOW-01-featured-image.png
+  alt: ""
 ---
-
 
 Following on from the article about starting IPSC Action Air on a budget, we thought it best to continue on with the next discipline of interest. IPSC Mini Rifle is the next most common discipline to take part (at least in the UK). This discipline is however subject to law on whether you are able to use the firearms involved. We recommend you check your government regulations and law before taking action from this article.
 
@@ -114,7 +113,7 @@ Allied Equipment
 
 Personal Protective Equipment
 
-[Bolle RUSH+CLEAR Safety Glasses](https://www.amazon.co.uk/Bolle-CLEAR-Clear-Safety-Glasses/dp/B00GV928I6/ref=sr_1_8?keywords=Bolle+Safety+Glasses&qid=1659395766&sr=8-8)
+[Bolle RUSH+CLEAR Safety Glasses](https://www.amazon.co.uk/Bolle-CLEAR-Clear-Safety-Glasses/dp/B00GV928I6/ref=sr_1_8?keywords=Bolle%20Safety%20Glasses&qid=1659395766&sr=8-8)
 
 £9.25
 

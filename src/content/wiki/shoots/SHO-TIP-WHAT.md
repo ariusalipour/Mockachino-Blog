@@ -1,21 +1,20 @@
 ---
+articleId: SHO-TIP-WHAT
 slug: what-optic-setup-is-best-for-practical-mini-rifle
 title: What Optic Setup is Best for Practical Mini Rifle?
 summary: A practical guide to choosing mini rifle optics based on target distance, stage design, shooter preference, and tradeoffs.
 kind: guide
 topic: shoots
 category: practical-shooting
-createdAt: 2023-02-05T00:01:09.000Z
-updatedAt: 2026-03-06T13:47:57.000Z
-articleId: SHO-TIP-WHAT
+createdAt: 2023-02-05T00:01:00.000+00:00
+updatedAt: 2026-03-06T13:47:00.000+00:00
 tags:
   - optics
   - practical-shooting
 featuredImage:
-  src: /images/SHO-TIP-WHAT/image_2023-03-12_000141533.png
-  alt: 
+  src: /images/SHO-TIP-WHAT/SHO-TIP-WHAT-01-featured-image.png
+  alt: ""
 ---
-
 
 The best optic setup for Practical Mini Rifle will depend on a number of factors, including the shooter’s personal preferences, shooting style, and the specific requirements of the competition or activity. However, there are some general guidelines that can be useful when choosing an optic setup for Practical Mini Rifle.
 

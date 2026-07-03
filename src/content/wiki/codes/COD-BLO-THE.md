@@ -1,22 +1,21 @@
 ---
+articleId: COD-BLO-THE
 slug: the-death-of-xamarin-forms-net-maui
 title: The Death of Xamarin Forms | .NET MAUI
 summary: A mobile development note on Xamarin Forms, .NET MAUI, and Microsoft's cross-platform application direction.
 kind: article
 topic: codes
 category: software-tools
-createdAt: 2025-08-20T10:00:00.000Z
-updatedAt: 2026-03-06T21:40:11.000Z
-articleId: COD-BLO-THE
+createdAt: 2025-08-20T10:00:00.000+00:00
+updatedAt: 2026-03-06T21:40:00.000+00:00
 tags:
   - net-maui
   - mobile-apps
   - xamarin-forms
 featuredImage:
-  src: /images/COD-BLO-THE/image_2023-03-12_001630480.png
-  alt: 
+  src: /images/COD-BLO-THE/COD-BLO-THE-01-featured-image.png
+  alt: ""
 ---
-
 
 Xamarin and .NET MAUI are both Microsoft technologies that allow developers to create cross-platform mobile applications using C#. Xamarin Forms has been the go-to solution for creating cross-platform mobile apps for years, but recently, Microsoft announced the release of .NET Multi-platform App UI (MAUI), which is the successor to Xamarin Forms. While the two technologies share similarities, there are also significant differences that developers need to consider before choosing one over the other.
 

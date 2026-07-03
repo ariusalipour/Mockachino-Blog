@@ -1,22 +1,21 @@
 ---
+articleId: SHO-TRA-WHA
 slug: what-is-sight-over-bore
 title: What is Sight Over Bore?
 summary: A foundational explanation of sight height, offset, and why close-range point of impact changes relative to the optic.
 kind: guide
 topic: shoots
 category: practical-shooting
-createdAt: 2023-02-01T00:09:00.000Z
-updatedAt: 2026-03-06T13:48:09.000Z
-articleId: SHO-TRA-WHA
+createdAt: 2023-02-01T00:09:00.000+00:00
+updatedAt: 2026-03-06T13:48:00.000+00:00
 tags:
   - optics
   - practical-shooting
   - target-shooting
 featuredImage:
-  src: /images/SHO-TRA-WHA/image_2023-03-12_001037055.png
-  alt: 
+  src: /images/SHO-TRA-WHA/SHO-TRA-WHA-01-featured-image.png
+  alt: ""
 ---
-
 
 Sight over bore, also known as sight height, refers to the distance between the shooter’s eye and the barrel of the firearm when aiming down the sights. This distance can affect the alignment of the sights and the point of impact of the bullet, particularly at close ranges.
 

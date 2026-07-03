@@ -1,23 +1,22 @@
 ---
+articleId: SHO-FIR-THE
 slug: the-mp-15-22-is-your-best-and-worst-practical-mini-rifle
 title: The M&P 15-22 is your Best and Worst Practical Mini Rifle
 summary: A review-style look at the Smith & Wesson M&P 15-22 as both a strong and compromised practical mini rifle choice.
 kind: review
 topic: shoots
 category: gear-and-firearms
-createdAt: 2023-02-26T23:54:57.000Z
-updatedAt: 2026-03-06T13:47:47.000Z
-articleId: SHO-FIR-THE
+createdAt: 2023-02-26T23:54:00.000+00:00
+updatedAt: 2026-03-06T13:47:00.000+00:00
 tags:
   - mp-15-22
   - practical-shooting
   - smith-wesson
   - target-shooting
 featuredImage:
-  src: /images/SHO-FIR-THE/image_2023-03-11_235629328.png
-  alt: 
+  src: /images/SHO-FIR-THE/SHO-FIR-THE-01-featured-image.png
+  alt: ""
 ---
-
 
 The Smith & Wesson M&P 15-22 is a popular semi-automatic rifle chambered in .22 LR, designed for practical shooting competitions and plinking. It’s a lightweight, affordable, and reliable rifle that has gained a lot of popularity among gun enthusiasts. However, while it is a great rifle in many ways, it also has some drawbacks that make it the best and worst practical mini rifle.
 

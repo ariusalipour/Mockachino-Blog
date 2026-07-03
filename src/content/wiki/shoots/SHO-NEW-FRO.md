@@ -1,23 +1,22 @@
 ---
+articleId: SHO-NEW-FRO
 slug: from-air-to-fire-how-ipsc-action-air-training-prepares-you-for-the-real-deal
 title: "From Air to Fire: How IPSC Action Air Training Prepares You for the Real Deal"
 summary: A look at how IPSC Action Air can build transferable habits for live-fire handgun competition.
 kind: article
 topic: shoots
 category: practical-shooting
-createdAt: 2025-10-25T10:00:00.000Z
-updatedAt: 2026-03-06T21:40:08.000Z
-articleId: SHO-NEW-FRO
+createdAt: 2025-10-25T10:00:00.000+00:00
+updatedAt: 2026-03-06T21:40:00.000+00:00
 tags:
   - action-air
   - handgun
   - ipsc
   - practical-shooting
 featuredImage:
-  src: /images/SHO-NEW-FRO/image_2023-03-15_200626031.png
-  alt: 
+  src: /images/SHO-NEW-FRO/SHO-NEW-FRO-01-featured-image.png
+  alt: ""
 ---
-
 
 While many competitors begin their IPSC journey with a handgun, the skills learned in other disciplines can be easily transferred to the sport. This is especially so for people like me who do not have easy access to handguns, and hence need to use alternatives such as IPSC Action Air, which is an airsoft-based version of IPSC.
 
