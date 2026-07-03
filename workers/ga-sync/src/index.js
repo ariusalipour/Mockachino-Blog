@@ -154,8 +154,13 @@ export default {
       return await getPopular(env);
     }
 
+    if (pathname.startsWith("/views/")) {
+      const slug = decodeURIComponent(pathname.slice("/views/".length));
+      return await getViews(env, slug);
+    }
+
     if (pathname !== "/sync") {
-      return new Response("mockachino-ga-sync. GET /sync to trigger manually or /popular for current rankings.", { status: 200 });
+      return new Response("mockachino-ga-sync. GET /sync, /popular, or /views/{slug}.", { status: 200 });
     }
 
     return await runSync(env);
@@ -174,12 +179,12 @@ async function getPopular(env) {
   };
 
   try {
-    const raw = await env.MOCKACHINO_PAGEVIEWS.get(KV_KEY);
-    if (!raw) {
+    const data = await getStoredPageviews(env);
+    if (!data) {
       return new Response(JSON.stringify({ popular: [], updatedAt: null }), { headers });
     }
 
-    const { pageviews, updatedAt } = JSON.parse(raw);
+    const { pageviews, updatedAt } = data;
     const popular = Object.entries(pageviews ?? {})
       .sort(([, a], [, b]) => b - a)
       .map(([slug, views]) => ({ slug, views }));
@@ -191,6 +196,31 @@ async function getPopular(env) {
       headers,
     });
   }
+}
+
+async function getViews(env, slug) {
+  const headers = {
+    "Content-Type": "application/json",
+    "Access-Control-Allow-Origin": "*",
+    "Cache-Control": "public, max-age=3600",
+  };
+
+  try {
+    const data = await getStoredPageviews(env);
+    const views = data?.pageviews?.[slug] ?? 0;
+    return new Response(JSON.stringify({ slug, views, updatedAt: data?.updatedAt ?? null }), { headers });
+  } catch (err) {
+    return new Response(JSON.stringify({ error: err.message }), {
+      status: 500,
+      headers,
+    });
+  }
+}
+
+async function getStoredPageviews(env) {
+  const raw = await env.MOCKACHINO_PAGEVIEWS.get(KV_KEY);
+  if (!raw) return null;
+  return JSON.parse(raw);
 }
 
 async function runSync(env) {

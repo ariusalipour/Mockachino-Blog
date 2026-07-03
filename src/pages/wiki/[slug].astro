@@ -30,6 +30,7 @@ const topicEntries = getEntriesByTopic(entry.topic);
 const entryIndex = topicEntries.findIndex((candidate) => candidate.slug === entry.slug);
 const previousEntry = entryIndex > 0 ? topicEntries[entryIndex - 1] : undefined;
 const nextEntry = entryIndex >= 0 && entryIndex < topicEntries.length - 1 ? topicEntries[entryIndex + 1] : undefined;
+const viewsEndpoint = `https://mockachino-ga-sync.outdoortechnica.workers.dev/views/${encodeURIComponent(entry.slug)}`;
 const articleInfoLabel = `${formatTopicLabel(entry.topic)} / ${formatCategoryLabel(entry.topic, entry.category)}`;
 // Read time derived from word count at build time (220 wpm average).
 // Once this page is migrated to getCollection(), replace with:
@@ -76,6 +77,7 @@ const tocItems = migratedContent
         <div class="article-main__meta">
           <span><RasterIcon name="book" class="article-main__meta-icon article-main__meta-icon--raster" /> {formatDate(entry.createdAt)}</span>
           <span><RasterIcon name="pulse" class="article-main__meta-icon article-main__meta-icon--raster" /> {readMinutes} MIN READ</span>
+          <span id="article-views"><RasterIcon name="status" class="article-main__meta-icon article-main__meta-icon--raster" /> -- VIEWS</span>
           <span><RasterIcon name="user" class="article-main__meta-icon article-main__meta-icon--raster" /> MOCKA</span>
           <span class="article-main__meta-topic">{entry.topic.toUpperCase()}</span>
         </div>
@@ -247,4 +249,21 @@ const tocItems = migratedContent
       </section>
     </aside>
   </section>
+
+  <script is:inline define:vars={{ viewsEndpoint }}>
+    document.addEventListener("DOMContentLoaded", async () => {
+      const el = document.getElementById("article-views");
+      if (!el) return;
+
+      try {
+        const resp = await fetch(viewsEndpoint);
+        if (!resp.ok) return;
+        const { views } = await resp.json();
+        const formatted = Number(views ?? 0).toLocaleString();
+        el.innerHTML = `${el.innerHTML.replace("-- VIEWS", `${formatted} VIEWS`)}`;
+      } catch {
+        // Leave placeholder if unavailable.
+      }
+    });
+  </script>
 </Layout>
