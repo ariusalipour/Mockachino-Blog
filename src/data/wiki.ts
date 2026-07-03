@@ -148,7 +148,7 @@ export const topics: Topic[] = [
     icon: "chip",
     homeStats: {
       reviews: 0,
-      articles: 3,
+      articles: 4,
       guides: 5,
     },
     get categories() { return categories.codes; },
@@ -156,6 +156,18 @@ export const topics: Topic[] = [
 ];
 
 export const wikiEntries: WikiEntry[] = [
+  {
+    slug: "this-kills-your-ai-token-usage",
+    title: "This Kills Your AI Token Usage",
+    summary: "After years of using agentic AI to generate, debug and architect programs, it has become evident that there are a few things that lead you to an exhausted monthly usage regardless of how large your bucket is.",
+    kind: "article",
+    topic: "codes",
+    category: "ai-coding",
+    createdAt: "2026-07-03T10:00:00.000Z",
+    updatedAt: "2026-07-03T10:00:00.000Z",
+    popularity: 0,
+    tags: ["Copilot", "OpenAI", "Anthropic"],
+  },
   {
     slug: "window-size-doesnt-really-matter",
     title: "Window Size Doesn't Really Matter",
@@ -765,24 +777,132 @@ export const headerNav = [
 
 export const glossaryTerms = [
   {
-    term: "Field Notes",
-    definition: "Short operational observations captured during real-world use rather than controlled tests.",
+    term: "Agentic AI",
+    definition: "AI tooling used as an active coding partner that can plan, edit, debug, and iterate across a project rather than only answering isolated prompts.",
+  },
+  {
+    term: "Token Usage",
+    definition: "The amount of model context and generation capacity consumed while an AI assistant reads files, reasons, writes output, and revises work.",
+  },
+  {
+    term: "Context Window",
+    definition: "The working memory available to an AI model for instructions, chat history, source files, tool output, and generated responses.",
+  },
+  {
+    term: "Practical Shooting",
+    definition: "A dynamic shooting discipline built around movement, stage planning, accuracy, speed, and problem solving under measured conditions.",
+  },
+  {
+    term: "Tactical Shooting",
+    definition: "A training style focused on defensive or operational scenarios, where context and procedure often matter more than pure match performance.",
+  },
+  {
+    term: "IPSC",
+    definition: "The International Practical Shooting Confederation, a practical shooting ruleset and competition format covering handgun, rifle, shotgun, and Action Air.",
+  },
+  {
+    term: "IPSC Action Air",
+    definition: "An IPSC discipline that uses airsoft handguns to practice stage movement, target transitions, and match procedure with a lower barrier to entry.",
+  },
+  {
+    term: "Practical Mini Rifle",
+    definition: "A UK practical shooting format usually built around compact .22LR semi-automatic rifles, fast target engagement, and positional stages.",
   },
   {
     term: "Loadout",
-    definition: "The selected gear, items, or build components used for a game session or challenge route.",
+    definition: "The selected set of gear, equipment, weapons, items, or abilities used for a match, game session, or challenge route.",
   },
   {
-    term: "Build Log",
-    definition: "A running implementation record that captures decisions, tradeoffs, and revisions over time.",
+    term: "LPVO",
+    definition: "A low power variable optic that can run near 1x for close targets and magnify for distance, often used on practical rifles.",
   },
   {
-    term: "Character Sheet",
-    definition: "A compact comparison reference that reduces a product or setup into consistent evaluation traits.",
+    term: "HHS Setup",
+    definition: "A hybrid holographic sight setup, usually pairing a non-magnified sight with a flip-to-side magnifier for flexible target distances.",
   },
   {
-    term: "Operational",
-    definition: "The system state used when site content, routing, and deploy metadata are all healthy.",
+    term: "Red Dot",
+    definition: "A non-magnified optic that projects an aiming dot or reticle, commonly used for fast close-range aiming on pistols and rifles.",
+  },
+  {
+    term: "True 1x Magnification",
+    definition: "An optic view that appears life-sized with minimal distortion, making both-eyes-open shooting feel close to a red dot.",
+  },
+  {
+    term: "Sight Over Bore",
+    definition: "The vertical offset between an optic or sight line and the barrel, which changes point of impact at close distances.",
+  },
+  {
+    term: "Hold Over",
+    definition: "Aiming above the desired impact point to compensate for bullet trajectory, sight offset, or distance.",
+  },
+  {
+    term: "Hold Under",
+    definition: "Aiming below the desired impact point when a zero or trajectory causes the shot to land high at a given distance.",
+  },
+  {
+    term: "36 Yard Zero",
+    definition: "A rifle zeroing approach where the sight is set at 36 yards to produce useful near and far intersections for practical holds.",
+  },
+  {
+    term: "Moderator",
+    definition: "The UK shooting term for a muzzle-mounted device that reduces report and blast; often called a suppressor or silencer elsewhere.",
+  },
+  {
+    term: "Astigmatism",
+    definition: "An eye condition that can make red dot reticles appear smeared, starred, or distorted instead of crisp.",
+  },
+  {
+    term: "Shot Show",
+    definition: "A major US firearms, shooting sports, hunting, and outdoor trade show where manufacturers and media gather each year.",
+  },
+  {
+    term: "IWA Outdoor Classics",
+    definition: "A European trade fair for hunting, shooting sports, outdoor equipment, law enforcement products, and industry networking.",
+  },
+  {
+    term: "Escape From Tarkov",
+    definition: "A hardcore extraction shooter known for high-risk raids, detailed weapon systems, severe loss on death, and a player-driven economy.",
+  },
+  {
+    term: "Desync",
+    definition: "A multiplayer networking problem where the server and players disagree about timing, positions, shots, or damage events.",
+  },
+  {
+    term: "VOIP",
+    definition: "Voice over Internet Protocol, the technology behind internet voice chat in tools such as Discord, Teamspeak, and in-game comms.",
+  },
+  {
+    term: "BetterDiscord",
+    definition: "A third-party Discord customization tool often used for themes, plugins, and CSS tweaks, with compatibility and policy tradeoffs.",
+  },
+  {
+    term: "Deck-Building",
+    definition: "A game design pattern where the player improves and trims a card deck over time to shape strategy and survivability.",
+  },
+  {
+    term: "Roguelike",
+    definition: "A game structure built around repeated runs, changing conditions, escalating challenge, and meaningful loss or reset between attempts.",
+  },
+  {
+    term: ".NET MAUI",
+    definition: "Microsoft's modern cross-platform app framework for building native mobile and desktop apps from a shared .NET codebase.",
+  },
+  {
+    term: "Xamarin Forms",
+    definition: "Microsoft's older cross-platform mobile UI framework, succeeded by .NET MAUI for new app development.",
+  },
+  {
+    term: "S-Log 3",
+    definition: "A Sony log picture profile that captures a flatter image to preserve dynamic range for color grading.",
+  },
+  {
+    term: "Discord Bot",
+    definition: "An automated Discord account controlled by code to respond to commands, manage communities, or integrate external services.",
+  },
+  {
+    term: "WordPress Migration",
+    definition: "The process of moving a WordPress site, database, media library, theme, and configuration from one host or environment to another.",
   },
 ];
 

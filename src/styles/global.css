@@ -1119,6 +1119,108 @@ html[data-theme="light"] .theme-toggle__icon--light {
   color: var(--text-soft);
 }
 
+.tooltip-token {
+  position: relative;
+  align-items: center;
+  outline: none;
+}
+
+.tooltip-token__label {
+  display: inline;
+}
+
+.glossary-term {
+  display: inline-flex;
+  color: var(--text);
+  text-decoration-line: underline;
+  text-decoration-style: dotted;
+  text-decoration-color: rgba(245, 197, 66, 0.78);
+  text-decoration-thickness: 0.08em;
+  text-underline-offset: 0.22em;
+  cursor: help;
+}
+
+.tag-tooltip {
+  cursor: help;
+}
+
+.tooltip-popover {
+  position: absolute;
+  z-index: 9999;
+  bottom: calc(100% + 0.5rem);
+  left: 50%;
+  display: grid;
+  width: max-content;
+  min-width: 11rem;
+  max-width: min(18rem, calc(100vw - 2rem));
+  gap: 0.25rem;
+  padding: 0.65rem 0.75rem;
+  border: 1px solid rgba(245, 197, 66, 0.45);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.035), transparent 52%),
+    rgba(7, 12, 14, 0.98);
+  box-shadow: 0 0.8rem 1.9rem rgba(0, 0, 0, 0.35);
+  color: var(--text-soft);
+  font-family: "IBM Plex Mono", monospace;
+  line-height: 1.45;
+  opacity: 0;
+  pointer-events: none;
+  text-align: left;
+  text-decoration: none;
+  text-transform: none;
+  transform: translate(-50%, 0.25rem);
+  transition: opacity 160ms ease, transform 160ms ease;
+}
+
+.tooltip-popover::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  width: 0.6rem;
+  height: 0.6rem;
+  border-right: 1px solid rgba(245, 197, 66, 0.45);
+  border-bottom: 1px solid rgba(245, 197, 66, 0.45);
+  background: rgba(7, 12, 14, 0.98);
+  transform: translate(-50%, -50%) rotate(45deg);
+}
+
+.tooltip-popover__eyebrow,
+.tooltip-popover__title,
+.tooltip-popover__body {
+  display: block;
+}
+
+.tooltip-popover__eyebrow {
+  color: var(--accent);
+  font-size: 0.58rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.tooltip-popover__title {
+  color: var(--text);
+  font-size: 0.72rem;
+  font-weight: 700;
+}
+
+.tooltip-popover__body {
+  color: var(--text-dim);
+  font-size: 0.68rem;
+}
+
+.tooltip-token:hover > .tooltip-popover,
+.tooltip-token:focus-visible > .tooltip-popover,
+.tooltip-token:focus-within > .tooltip-popover {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+
+.tooltip-token:focus-visible .tooltip-token__label {
+  outline: 1px solid rgba(245, 197, 66, 0.65);
+  outline-offset: 0.18rem;
+}
+
 .taxonomy-grid,
 .topic-overview-grid,
 .detail-grid {
@@ -2491,6 +2593,7 @@ body::before {
 
 .article-main {
   padding: 0;
+  overflow: visible;
 }
 
 .article-main__hero {
@@ -3255,6 +3358,23 @@ html[data-theme="light"] .meta-chip,
 html[data-theme="light"] .tag-chip {
   border-color: rgba(170, 125, 24, 0.26);
   background: rgba(170, 125, 24, 0.06);
+}
+
+html[data-theme="light"] .glossary-term {
+  text-decoration-color: rgba(170, 125, 24, 0.78);
+}
+
+html[data-theme="light"] .tooltip-popover {
+  border-color: rgba(170, 125, 24, 0.34);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.55), transparent 52%),
+    rgba(248, 241, 229, 0.98);
+  box-shadow: 0 0.8rem 1.9rem rgba(71, 58, 33, 0.22);
+}
+
+html[data-theme="light"] .tooltip-popover::after {
+  border-color: rgba(170, 125, 24, 0.34);
+  background: rgba(248, 241, 229, 0.98);
 }
 
 html[data-theme="light"] .browse-controls {

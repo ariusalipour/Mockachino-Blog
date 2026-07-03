@@ -10,6 +10,15 @@ export interface MigratedArticleContent {
 }
 
 export const migratedArticleContent: Record<string, MigratedArticleContent> = {
+  "this-kills-your-ai-token-usage": {
+    sourceUrl: "https://mockachino.co.uk/codes/this-kills-your-ai-token-usage/",
+    sourceSlug: "this-kills-your-ai-token-usage",
+    html: "<p>We need to talk about the biggest killer of your AI token allowance. It's not necessarily the models you use, nor is it the different modes of thinking. It's nothing to do with fast mode and is not related to context build up or dealing with complex tasks. It's the loops!</p>\n\n<h2 id=\"understanding-the-issue\">Understanding the Issue</h2>\n\n<p>Agentic AI has a certain level of autonomy. It's one of the most powerful elements of using them for troubleshooting and feature iteration. It's a great way to multitask, but it's unfortunately the root of this token eating problem.</p>",
+    toc: [{ id: "understanding-the-issue", title: "Understanding the Issue" }],
+    imageCount: 0,
+    missingImages: [],
+    wordCount: 82,
+  },
   "window-size-doesnt-really-matter": {
     sourceUrl: "https://mockachino.co.uk/shoots/window-size-doesnt-really-matter/",
     sourceSlug: "window-size-doesnt-really-matter",

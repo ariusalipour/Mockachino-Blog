@@ -1,4 +1,5 @@
 ---
+import { render } from "astro:content";
 import Layout from "../../layouts/Layout.astro";
 import RasterIcon from "../../components/RasterIcon.astro";
 import {
@@ -6,12 +7,12 @@ import {
   formatTopicLabel,
   getArticleView,
   getEntriesByTopic,
-  getEntry,
   getRelatedEntries,
   getTopic,
+  getWikiContentEntry,
+  topics,
   wikiEntries,
-} from "../../data/wiki";
-import { migratedArticleContent } from "../../data/migratedArticleContent";
+} from "../../data/wiki-content";
 import { formatDate } from "../../lib/format";
 
 export function getStaticPaths() {
@@ -22,8 +23,13 @@ export function getStaticPaths() {
 }
 
 const { entry } = Astro.props;
+const contentEntry = getWikiContentEntry(entry.slug);
+
+if (!contentEntry) {
+  throw new Error(`Missing wiki content entry for slug: ${entry.slug}`);
+}
+
 const articleView = getArticleView(entry);
-const migratedContent = migratedArticleContent[entry.slug];
 const relatedEntries = getRelatedEntries(entry, 5);
 const topic = getTopic(entry.topic);
 const topicEntries = getEntriesByTopic(entry.topic);
@@ -32,19 +38,15 @@ const previousEntry = entryIndex > 0 ? topicEntries[entryIndex - 1] : undefined;
 const nextEntry = entryIndex >= 0 && entryIndex < topicEntries.length - 1 ? topicEntries[entryIndex + 1] : undefined;
 const viewsEndpoint = `https://mockachino-ga-sync.outdoortechnica.workers.dev/views/${encodeURIComponent(entry.slug)}`;
 const articleInfoLabel = `${formatTopicLabel(entry.topic)} / ${formatCategoryLabel(entry.topic, entry.category)}`;
-// Read time derived from word count at build time (220 wpm average).
-// Once this page is migrated to getCollection(), replace with:
-//   const readMinutes = Math.max(1, Math.ceil(entry.body.split(/\s+/).length / 220));
-const readMinutes = migratedContent
-  ? Math.max(1, Math.ceil(migratedContent.wordCount / 220))
-  : Math.max(1, Math.ceil(entry.summary.split(/\s+/).length / 220));
-const heroImage = migratedContent?.featuredImage?.src ?? articleView.heroAsset;
-const heroAlt = migratedContent?.featuredImage?.alt || `${entry.title} hero visual`;
-const tocItems = migratedContent
-  ? migratedContent.toc.length > 0
-    ? migratedContent.toc
-    : [{ id: "article-content", title: "Article" }]
-  : articleView.sections.map((section) => ({ id: section.id, title: section.title }));
+const articleBody = (contentEntry as { body?: string }).body ?? entry.summary;
+const readMinutes = Math.max(1, Math.ceil(articleBody.split(/\s+/).length / 220));
+const heroImage = contentEntry.data.featuredImage?.src ?? articleView.heroAsset;
+const heroAlt = contentEntry.data.featuredImage?.alt || `${entry.title} hero visual`;
+const { Content, headings } = await render(contentEntry);
+const tocItems =
+  headings.filter((heading) => heading.depth > 1).length > 0
+    ? headings.filter((heading) => heading.depth > 1).map((heading) => ({ id: heading.slug, title: heading.text }))
+    : articleView.sections.map((section) => ({ id: section.id, title: section.title }));
 ---
 
 <Layout
@@ -87,72 +89,9 @@ const tocItems = migratedContent
         <img src={heroImage} alt={heroAlt} />
       </div>
 
-      {
-        migratedContent ? (
-          <div id="article-content" class="article-content" set:html={migratedContent.html} />
-        ) : (
-          <div class="article-sections">
-            {
-              articleView.sections.map((section) => (
-                <section class="article-section" id={section.id}>
-                  <h2>
-                    <span>{section.number}</span>
-                    <span>{section.title}</span>
-                  </h2>
-                  {section.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
-
-                  {section.takeaway && (
-                    <div class="article-takeaway">
-                      <div class="article-takeaway__icon">
-                        <img src={`/brand/logo-${entry.topic}.png`} alt="" class="article-takeaway__icon-mark article-takeaway__icon-mark--logo" />
-                      </div>
-                      <div class="article-takeaway__content">
-                        <p class="article-takeaway__label">Key Takeaway</p>
-                        <p>{section.takeaway}</p>
-                      </div>
-                    </div>
-                  )}
-
-                  {section.comparisonRows && (
-                    <div class="article-compare">
-                      <div class="article-compare__header">
-                        <span>Model</span>
-                        <span>Best Used For</span>
-                        <span>Speed Range</span>
-                        <span>Notes</span>
-                      </div>
-                      {section.comparisonRows.map((row) => (
-                        <div class="article-compare__row">
-                          <span>{row.model}</span>
-                          <span>{row.bestUsedFor}</span>
-                          <span>{row.speedRange}</span>
-                          <span>{row.notes}</span>
-                        </div>
-                      ))}
-                    </div>
-                  )}
-
-                  {section.metricCards && (
-                    <div class="article-metrics">
-                      {section.metricCards.map((metric) => (
-                        <article class="article-metric-card">
-                          {metric.icon === "target" ? (
-                            <img src={`/brand/logo-${entry.topic}.png`} alt="" class="article-metric-card__icon--logo" />
-                          ) : (
-                            <RasterIcon name={metric.icon} class="article-metric-card__icon article-metric-card__icon--raster" />
-                          )}
-                          <h3>{metric.title}</h3>
-                          <p>{metric.body}</p>
-                        </article>
-                      ))}
-                    </div>
-                  )}
-                </section>
-              ))
-            }
-          </div>
-        )
-      }
+      <div id="article-content" class="article-content">
+        <Content />
+      </div>
 
       <footer class="article-pagination">
         <a href={previousEntry ? `/wiki/${previousEntry.slug}/` : "#"} class:list={["article-pagination__link", !previousEntry && "is-disabled"]}>
@@ -230,8 +169,14 @@ const tocItems = migratedContent
         <div class="article-related">
           {
             relatedEntries.map((related) => {
-              const relatedImage = migratedArticleContent[related.slug]?.featuredImage;
-              const fallbackSrc = related.topic === "shoots" ? "/brand/topic-shoots-panel.png" : related.topic === "plays" ? "/brand/topic-plays-panel.png" : "/brand/topic-codes-panel.png";
+              const relatedContent = getWikiContentEntry(related.slug);
+              const relatedImage = relatedContent?.data.featuredImage;
+              const fallbackSrc =
+                related.topic === "shoots"
+                  ? "/brand/topic-shoots-panel.png"
+                  : related.topic === "plays"
+                    ? "/brand/topic-plays-panel.png"
+                    : "/brand/topic-codes-panel.png";
               return (
                 <a href={`/wiki/${related.slug}/`} class="article-related__item" data-topic={related.topic}>
                   <div class="article-related__thumb">
@@ -247,23 +192,20 @@ const tocItems = migratedContent
           }
         </div>
       </section>
+
+
     </aside>
   </section>
 
-  <script is:inline define:vars={{ viewsEndpoint }}>
-    document.addEventListener("DOMContentLoaded", async () => {
-      const el = document.getElementById("article-views");
-      if (!el) return;
-
-      try {
-        const resp = await fetch(viewsEndpoint);
-        if (!resp.ok) return;
-        const { views } = await resp.json();
-        const formatted = Number(views ?? 0).toLocaleString();
-        el.innerHTML = `${el.innerHTML.replace("-- VIEWS", `${formatted} VIEWS`)}`;
-      } catch {
-        // Leave placeholder if unavailable.
-      }
-    });
+  <script is:inline>
+    const viewsEndpoint = "${viewsEndpoint}";
+    fetch(viewsEndpoint)
+      .then((resp) => (resp.ok ? resp.json() : null))
+      .then((payload) => {
+        if (!payload || typeof payload.views !== "number") return;
+        const el = document.getElementById("article-views");
+        if (el) el.innerHTML = `<span><svg class="article-main__meta-icon article-main__meta-icon--raster" aria-hidden="true"></svg> ${payload.views.toLocaleString()} VIEWS</span>`;
+      })
+      .catch(() => {});
   </script>
 </Layout>
