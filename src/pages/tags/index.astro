@@ -39,8 +39,8 @@ const listId = "tags-list";
     <PagedGrid id={listId} className="tag-grid" perPage={12}>
       {
         tags.map((tag) => (
-          <article class="panel tag-card" data-page-item data-search={`${tag.name} ${tag.count}`.toLowerCase()}>
-            <h3>#{tag.name}</h3>
+          <article class="panel tag-card" data-page-item data-search={`${tag.label} ${tag.count}`.toLowerCase()}>
+            <h3>#{tag.label}</h3>
             <p>{tag.count} linked entries</p>
             <a href={`/tags/${encodeURIComponent(tag.slug)}/`} class="button button--secondary">Browse Tag</a>
           </article>

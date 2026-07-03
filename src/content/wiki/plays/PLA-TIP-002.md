@@ -7,7 +7,7 @@ topic: plays
 category: tactical-shooters
 createdAt: 2025-10-10T10:00:00.000Z
 updatedAt: 2026-03-06T21:40:13.000Z
-popularity: 129
+articleId: PLA-TIP-002
 tags:
   - escape-from-tarkov
   - skills
@@ -15,6 +15,7 @@ featuredImage:
   src: /images/PLA-TIP-002/image_2023-03-14_112914867.png
   alt: 
 ---
+
 
 If you are an avid fan of Escape from Tarkov, then you have most definitely seen enough of these posts to make you sick to your stomach. I still think it’s a topic that gets addressed for many newcomers to the game. That being said, they all vary slightly, so here are 5 basic skills you need to learn… in my opinion!
 

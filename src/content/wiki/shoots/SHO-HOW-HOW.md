@@ -7,7 +7,7 @@ topic: shoots
 category: practical-shooting
 createdAt: 2023-01-17T11:50:45.000Z
 updatedAt: 2026-03-06T13:48:31.000Z
-popularity: 140
+articleId: SHO-HOW-HOW
 tags:
   - practical-shooting
   - target-shooting
@@ -16,6 +16,7 @@ featuredImage:
   src: /images/SHO-HOW-HOW/image_2023-03-14_115900136.png
   alt: 
 ---
+
 
 Sports shooting in the UK is a popular hobby enjoyed by many individuals. If you’re interested in getting started in sports shooting, here are the steps you need to take:
 

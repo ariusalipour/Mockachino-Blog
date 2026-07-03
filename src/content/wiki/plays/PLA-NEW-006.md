@@ -7,7 +7,7 @@ topic: plays
 category: tactical-shooters
 createdAt: 2025-06-20T10:00:00.000Z
 updatedAt: 2026-03-06T21:40:14.000Z
-popularity: 125
+articleId: PLA-NEW-006
 tags:
   - escape-from-tarkov
   - fps
@@ -15,6 +15,7 @@ featuredImage:
   src: /images/PLA-NEW-006/image_2023-03-11_233624736.png
   alt: 
 ---
+
 
 Escape from Tarkov is a popular online multiplayer tactical first-person shooter game that has been praised for its high level of immersion.
 

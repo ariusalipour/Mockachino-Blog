@@ -27,9 +27,25 @@ const categories = defineCollection({
   }),
 });
 
+const tags = defineCollection({
+  type: "content",
+  schema: z.object({
+    label: z.string(),
+  }),
+});
+
+const glossary = defineCollection({
+  type: "content",
+  schema: z.object({
+    term: z.string(),
+    definition: z.string(),
+  }),
+});
+
 const wiki = defineCollection({
   type: "content",
   schema: z.object({
+    articleId: z.string().optional(),
     slug: z.string().optional(),
     title: z.string(),
     summary: z.string(),
@@ -38,7 +54,6 @@ const wiki = defineCollection({
     category: z.string(),
     createdAt: z.coerce.date(),
     updatedAt: z.coerce.date(),
-    popularity: z.number(),
     tags: z.array(z.string()),
     featuredImage: z
       .object({
@@ -49,4 +64,4 @@ const wiki = defineCollection({
   }),
 });
 
-export const collections = { topics, categories, wiki };
+export const collections = { topics, categories, tags, glossary, wiki };

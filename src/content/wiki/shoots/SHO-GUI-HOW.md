@@ -7,7 +7,7 @@ topic: shoots
 category: practical-shooting
 createdAt: 2022-08-12T00:28:00.000Z
 updatedAt: 2023-03-12T01:06:55.000Z
-popularity: 135
+articleId: SHO-GUI-HOW
 tags:
   - ipsc
   - mini-rifle
@@ -16,6 +16,7 @@ featuredImage:
   src: /images/SHO-GUI-HOW/image_2023-03-12_002934982.png
   alt: 
 ---
+
 
 Following on from the article about starting IPSC Action Air on a budget, we thought it best to continue on with the next discipline of interest. IPSC Mini Rifle is the next most common discipline to take part (at least in the UK). This discipline is however subject to law on whether you are able to use the firearms involved. We recommend you check your government regulations and law before taking action from this article.
 

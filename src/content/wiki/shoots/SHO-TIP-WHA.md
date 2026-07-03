@@ -7,13 +7,14 @@ topic: shoots
 category: practical-shooting
 createdAt: 2025-07-08T10:00:00.000Z
 updatedAt: 2026-03-06T21:40:09.000Z
-popularity: 152
+articleId: SHO-TIP-WHA
 tags:
   - optics
 featuredImage:
   src: /images/SHO-TIP-WHA/C0003.MP4.16_34_43_06.Still001.png
   alt: 
 ---
+
 
 I have spent a few years reviewing shooting optics for different brands and websites. There has been a lot of variance in deciding if an optic is worth purchasing however there are some key details that I focused on which has stayed true for me.
 

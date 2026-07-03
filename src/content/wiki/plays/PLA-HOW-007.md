@@ -7,7 +7,7 @@ topic: plays
 category: software-tools
 createdAt: 2025-05-25T10:00:00.000Z
 updatedAt: 2026-03-06T21:40:14.000Z
-popularity: 124
+articleId: PLA-HOW-007
 tags:
   - discord
   - hacks
@@ -16,6 +16,7 @@ featuredImage:
   src: /images/PLA-HOW-007/image_2023-03-12_000416163.png
   alt: 
 ---
+
 
 As soon as I demo’d the Discord stream overlay hack to a friend, I was presented with an issue that only he has. It seems that BetterDiscord’s CSS override does not work on pop outs of video streams.
 

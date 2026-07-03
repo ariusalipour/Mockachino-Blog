@@ -7,7 +7,7 @@ topic: shoots
 category: practical-shooting
 createdAt: 2022-07-10T00:31:00.000Z
 updatedAt: 2023-03-12T00:33:25.000Z
-popularity: 134
+articleId: SHO-GUI-HOWT
 tags:
   - action-air
   - ipsc
@@ -16,6 +16,7 @@ featuredImage:
   src: /images/SHO-GUI-HOWT/image_2023-03-12_003255340.png
   alt: 
 ---
+
 
 Getting started with IPSC Action Air can seem daunting if not almost unnerving when comparing equipment in use by those who are already competing in the sport. You’re seeing videos and pictures of all the expensive equipment and replicas, and your wallet starts to cower in fear. How did they afford all of this kit? They must have started their journey from somewhere. Here is a guide to how you can start shooting IPSC Action Air on a budget!
 

@@ -7,7 +7,7 @@ topic: codes
 category: software-tools
 createdAt: 2025-10-01T10:00:00.000Z
 updatedAt: 2026-03-06T21:40:11.000Z
-popularity: 118
+articleId: COD-GUI-COD
 tags:
   - discord
   - hacks
@@ -16,6 +16,7 @@ featuredImage:
   src: /images/COD-GUI-COD/image_2023-03-12_000416163.png
   alt: 
 ---
+
 
 As soon as I demo’d the Discord stream overlay hack to a friend, I was presented with an issue that only he has. It seems that BetterDiscord’s CSS override does not work on pop outs of video streams.
 

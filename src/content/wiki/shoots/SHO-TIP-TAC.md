@@ -7,7 +7,7 @@ topic: shoots
 category: practical-shooting
 createdAt: 2023-03-01T23:45:05.000Z
 updatedAt: 2026-03-06T13:47:19.000Z
-popularity: 147
+articleId: SHO-TIP-TAC
 tags:
   - practical-shooting
   - tactical-shooting
@@ -15,6 +15,7 @@ featuredImage:
   src: /images/SHO-TIP-TAC/image_2023-03-11_234611196.png
   alt: 
 ---
+
 
 Practical shooting and tactical shooting are two distinct shooting disciplines that are often confused with each other due to their similar-sounding names. However, there are important differences between the two that are worth exploring.
 

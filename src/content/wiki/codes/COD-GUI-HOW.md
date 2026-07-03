@@ -7,7 +7,7 @@ topic: codes
 category: gear-and-hardware
 createdAt: 2025-07-10T10:00:00.000Z
 updatedAt: 2026-03-06T21:40:12.000Z
-popularity: 115
+articleId: COD-GUI-HOW
 tags:
   - dslr
   - filming
@@ -17,6 +17,7 @@ featuredImage:
   src: /images/COD-GUI-HOW/image_2023-03-14_114521230.png
   alt: 
 ---
+
 
 Filming in S-Log 3 on a Sony camera can be a great way to capture high dynamic range footage with lots of detail in the shadows and highlights. However, the footage can appear flat and desaturated straight out of the camera, which can make it difficult to assess exposure and color during shooting. In this article, we’ll go over the basics of filming in S-Log 3 on a Sony camera, and how to use user-made LUTs to make your life easier.
 

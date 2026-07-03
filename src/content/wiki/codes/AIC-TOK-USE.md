@@ -7,12 +7,13 @@ topic: codes
 category: ai-coding
 createdAt: 2026-07-03
 updatedAt: 2026-07-03
-popularity: 0
+articleId: AIC-TOK-USE
 tags:
   - Copilot
   - OpenAI
   - Anthropic
 ---
+
 
 We need to talk about the biggest killer of your AI token allowance. It's not necessarily the models you use, nor is it the different modes of thinking. It's nothing to do with fast mode and is not related to context build up or dealing with complex tasks. It's the loops!
 

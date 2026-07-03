@@ -7,7 +7,7 @@ topic: shoots
 category: practical-shooting
 createdAt: 2023-02-28T23:47:01.000Z
 updatedAt: 2026-03-06T13:47:28.000Z
-popularity: 146
+articleId: SHO-TRA-UND
 tags:
   - optics
   - practical-shooting
@@ -16,6 +16,7 @@ featuredImage:
   src: /images/SHO-TRA-UND/image_2023-03-11_235030225.png
   alt: 
 ---
+
 
 Hold over and hold under are two techniques used in shooting to compensate for bullet drop over long distances. When a bullet is fired from a firearm, it travels in an arc due to the force of gravity. As a result, the bullet will begin to drop as it travels farther away from the shooter. Hold over and hold under are techniques used to compensate for this drop and ensure that the bullet hits the target.
 

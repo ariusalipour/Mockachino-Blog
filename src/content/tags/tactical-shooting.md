@@ -1,0 +1,3 @@
+---
+label: "Tactical Shooting"
+---

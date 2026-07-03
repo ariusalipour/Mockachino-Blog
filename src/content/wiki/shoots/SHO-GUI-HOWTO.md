@@ -7,7 +7,7 @@ topic: shoots
 category: practical-shooting
 createdAt: 2021-02-15T00:45:00.000Z
 updatedAt: 2023-03-12T00:47:34.000Z
-popularity: 132
+articleId: SHO-GUI-HOWTO
 tags:
   - action-air
   - ipsc
@@ -16,6 +16,7 @@ featuredImage:
   src: /images/SHO-GUI-HOWTO/image_2023-03-12_004658058.png
   alt: 
 ---
+
 
 IPSC Action Air is a very easy shooting sport to get involved in due to accessibility and how economical it is compared to other shooting disciplines within the IPSC bracket. It is worth noting that IPSC Action Air is a mirror representation of the Handgun discipline with only a few changes based on the equipment being used.
 

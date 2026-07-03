@@ -5,7 +5,6 @@ import RasterIcon from "../../components/RasterIcon.astro";
 import {
   formatCategoryLabel,
   formatTopicLabel,
-  getArticleView,
   getEntriesByTopic,
   getRelatedEntries,
   getTopic,
@@ -29,7 +28,6 @@ if (!contentEntry) {
   throw new Error(`Missing wiki content entry for slug: ${entry.slug}`);
 }
 
-const articleView = getArticleView(entry);
 const relatedEntries = getRelatedEntries(entry, 5);
 const topic = getTopic(entry.topic);
 const topicEntries = getEntriesByTopic(entry.topic);
@@ -40,14 +38,21 @@ const viewsEndpoint = `https://mockachino-ga-sync.outdoortechnica.workers.dev/vi
 const articleInfoLabel = `${formatTopicLabel(entry.topic)} / ${formatCategoryLabel(entry.topic, entry.category)}`;
 const articleBody = (contentEntry as { body?: string }).body ?? entry.summary;
 const readMinutes = Math.max(1, Math.ceil(articleBody.split(/\s+/).length / 220));
-const heroImage = contentEntry.data.featuredImage?.src ?? articleView.heroAsset;
+const articleId = contentEntry.data.articleId ?? entry.slug;
+const heroImage =
+  contentEntry.data.featuredImage?.src ??
+  (entry.topic === "shoots"
+    ? "/brand/topic-shoots-panel.png"
+    : entry.topic === "plays"
+      ? "/brand/topic-plays-panel.png"
+      : "/brand/topic-codes-panel.png");
 const heroAlt = contentEntry.data.featuredImage?.alt || `${entry.title} hero visual`;
 const ogImageAlt = contentEntry.data.featuredImage?.alt || heroAlt;
 const { Content, headings } = await render(contentEntry);
 const tocItems =
   headings.filter((heading) => heading.depth > 1).length > 0
     ? headings.filter((heading) => heading.depth > 1).map((heading) => ({ id: heading.slug, title: heading.text }))
-    : articleView.sections.map((section) => ({ id: section.id, title: section.title }));
+    : [{ id: "article-content", title: "Overview" }];
 ---
 
 <Layout
@@ -75,7 +80,7 @@ const tocItems =
       <header class="article-main__hero">
         <div class="article-main__kicker-row">
           <p class="section-label article-main__kicker">// {formatCategoryLabel(entry.topic, entry.category)}</p>
-          <p class="article-main__id">ARTICLE ID: {articleView.articleId}</p>
+          <p class="article-main__id">ARTICLE ID: {articleId}</p>
         </div>
         <h1>{entry.title}</h1>
         <p class="article-main__summary">{entry.summary}</p>
@@ -159,7 +164,7 @@ const tocItems =
           </div>
           <div>
             <dt>Version</dt>
-            <dd>{articleView.version}</dd>
+            <dd>1.0</dd>
           </div>
           <div>
             <dt>Ref</dt>

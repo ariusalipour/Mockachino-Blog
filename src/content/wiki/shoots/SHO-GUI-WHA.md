@@ -7,7 +7,7 @@ topic: shoots
 category: practical-shooting
 createdAt: 2020-06-16T00:47:00.000Z
 updatedAt: 2023-03-12T00:49:40.000Z
-popularity: 131
+articleId: SHO-GUI-WHA
 tags:
   - optics
   - practical-shooting
@@ -18,6 +18,7 @@ featuredImage:
   src: /images/SHO-GUI-WHA/image_2023-03-12_004933427.png
   alt: 
 ---
+
 
 Vigilance Elite posted a video back in March 2018 about how he has been studying the variance in bullet drop based on zero distance. His conclusion in the video was that an unorthodox 36 yard zero is the best middle ground for variable zeroing for 100, 200 and 300 yards.
 

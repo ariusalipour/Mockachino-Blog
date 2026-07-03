@@ -1,0 +1,3 @@
+---
+label: "Pistol Optics"
+---

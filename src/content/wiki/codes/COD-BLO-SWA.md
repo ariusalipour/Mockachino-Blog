@@ -7,7 +7,7 @@ topic: codes
 category: software-tools
 createdAt: 2025-11-05T10:00:00.000Z
 updatedAt: 2026-03-06T21:40:10.000Z
-popularity: 119
+articleId: COD-BLO-SWA
 tags:
   - operating-system
   - windows
@@ -15,6 +15,7 @@ featuredImage:
   src: /images/COD-BLO-SWA/image_2023-03-11_235802340.png
   alt: 
 ---
+
 
 So as of this weekend, I had decided it was time to have a clean install of windows. May as well upgrade to Windows 11 whilst I’m at it. I have previously experienced Windows 11 in a VM environment, when it was in alpha release. A lot has changed since then, at least I hope so considering how many bugs there are.
 

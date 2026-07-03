@@ -7,7 +7,7 @@ topic: shoots
 category: practical-shooting
 createdAt: 2025-10-25T10:00:00.000Z
 updatedAt: 2026-03-06T21:40:08.000Z
-popularity: 155
+articleId: SHO-NEW-FRO
 tags:
   - action-air
   - handgun
@@ -17,6 +17,7 @@ featuredImage:
   src: /images/SHO-NEW-FRO/image_2023-03-15_200626031.png
   alt: 
 ---
+
 
 While many competitors begin their IPSC journey with a handgun, the skills learned in other disciplines can be easily transferred to the sport. This is especially so for people like me who do not have easy access to handguns, and hence need to use alternatives such as IPSC Action Air, which is an airsoft-based version of IPSC.
 

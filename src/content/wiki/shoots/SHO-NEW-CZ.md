@@ -1,13 +1,13 @@
 ---
 slug: cz-scorpion-evo-coming-to-the-uk
 title: CZ Scorpion Evo Coming to the UK
-summary: "A news-style note on the CZ Scorpion Evo's appeal for UK shooters and practical mini rifle competitors."
+summary: A news-style note on the CZ Scorpion Evo's appeal for UK shooters and practical mini rifle competitors.
 kind: article
 topic: shoots
 category: gear-and-firearms
 createdAt: 2025-06-03T10:00:00.000Z
 updatedAt: 2026-03-06T21:40:09.000Z
-popularity: 151
+articleId: SHO-NEW-CZ
 tags:
   - 22lr
   - cz
@@ -17,6 +17,7 @@ featuredImage:
   src: /images/SHO-NEW-CZ/image_2023-03-11_230745460.png
   alt: 
 ---
+
 
 The CZ Scorpion Evo has become a popular firearm among enthusiasts and practical shooting competitors alike, with its sleek design, reliability and ease of use. Now, the firearm is set to be even more accessible to UK shooters, as CZ has announced the CZ Scorpion Evo .22LR is coming to the UK.
 

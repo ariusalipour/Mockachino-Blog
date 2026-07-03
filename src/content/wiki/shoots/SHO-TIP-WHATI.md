@@ -7,7 +7,7 @@ topic: shoots
 category: practical-shooting
 createdAt: 2023-01-07T00:17:00.000Z
 updatedAt: 2026-03-06T13:48:37.000Z
-popularity: 139
+articleId: SHO-TIP-WHATI
 tags:
   - lpvo
   - optics
@@ -16,6 +16,7 @@ featuredImage:
   src: /images/SHO-TIP-WHATI/image_2023-03-12_002019222.png
   alt: 
 ---
+
 
 True 1x magnification is a term used to describe a type of optic that offers a true, unmagnified view of the target. It is commonly used in the shooting sports, particularly in practical shooting competitions.
 

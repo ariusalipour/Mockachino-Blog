@@ -7,7 +7,7 @@ topic: plays
 category: software-tools
 createdAt: 2025-04-30T10:00:00.000Z
 updatedAt: 2026-03-06T21:40:15.000Z
-popularity: 123
+articleId: PLA-HOW-008
 tags:
   - discord
   - hacks
@@ -16,6 +16,7 @@ featuredImage:
   src: /images/PLA-HOW-008/image_2023-03-12_000833677.png
   alt: 
 ---
+
 
 I’ve been playing games whilst using Discord to stream them to friends, for a long time now. The days of using Teamspeak are long gone and Discord is now reigning supreme. There is something that has been nagging me and that is to be able to create plugins for the apps I enjoy using. Problem is, I need a problem to fix. Recently that became evident when discord friends playing Escape from Tarkov have had issues differentiating between stream sharing which has lead to the odd death or miscommunication. Great news for me. I can look into making a plugin to fix this. I have not done that, however I have started the journey and am unproud to day that you don’t even need a plugin for it.
 

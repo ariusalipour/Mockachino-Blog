@@ -1,13 +1,13 @@
 ---
 slug: window-size-doesnt-really-matter
-title: "Window Size Doesn't Really Matter"
+title: Window Size Doesn't Really Matter
 summary: A field note on pistol optic window size, dot tracking, and why practical use matters more than spec-sheet assumptions.
 kind: article
 topic: shoots
 category: gear-and-firearms
 createdAt: 2026-03-23T09:02:28.000Z
 updatedAt: 2026-03-23T09:02:29.000Z
-popularity: 160
+articleId: SHO-EXP-WIN
 tags:
   - optics
   - pistol-optics
@@ -15,6 +15,7 @@ featuredImage:
   src: /images/SHO-EXP-WIN/sms-7.jpg
   alt: 
 ---
+
 
 I have been busy, testing different pistol optics to get a good idea of what works for me. This is especially so considering I’ve decided I’m going to shoot pistols with optics from now on. The reasoning here is that I don’t normally get to decide what pistol I get to shoot overseas. I decided having an optic to help with learning sight acquisition would help speed up the learning curve.
 

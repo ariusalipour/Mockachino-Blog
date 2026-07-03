@@ -7,7 +7,7 @@ topic: shoots
 category: gear-and-firearms
 createdAt: 2022-09-01T00:24:00.000Z
 updatedAt: 2023-03-12T00:27:28.000Z
-popularity: 136
+articleId: SHO-REV-VOR
 tags:
   - lpvo
   - optics
@@ -16,6 +16,7 @@ featuredImage:
   src: /images/SHO-REV-VOR/image_2023-03-12_002716379.png
   alt: 
 ---
+
 
 Vortex has been busy during COVID, updating their Razor series during the pandemic. Starting with the High Power Variable Optics and now moving over to the Low Power Variable Optics. Say hello to the latest update of the Razor HD Gen III 1-10×24; updated with 10x magnification.
 

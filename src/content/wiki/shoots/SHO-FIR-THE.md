@@ -7,7 +7,7 @@ topic: shoots
 category: gear-and-firearms
 createdAt: 2023-02-26T23:54:57.000Z
 updatedAt: 2026-03-06T13:47:47.000Z
-popularity: 144
+articleId: SHO-FIR-THE
 tags:
   - mp-15-22
   - practical-shooting
@@ -17,6 +17,7 @@ featuredImage:
   src: /images/SHO-FIR-THE/image_2023-03-11_235629328.png
   alt: 
 ---
+
 
 The Smith & Wesson M&P 15-22 is a popular semi-automatic rifle chambered in .22 LR, designed for practical shooting competitions and plinking. It’s a lightweight, affordable, and reliable rifle that has gained a lot of popularity among gun enthusiasts. However, while it is a great rifle in many ways, it also has some drawbacks that make it the best and worst practical mini rifle.
 
