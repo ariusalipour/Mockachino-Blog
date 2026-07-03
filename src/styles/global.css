@@ -1917,7 +1917,7 @@ body::before {
 .taxonomy-hero,
 .entry-hero {
   gap: 0.72rem;
-  min-height: 10.2rem;
+  min-height: 19.5rem;
   padding: 1.35rem 1.55rem 1.5rem;
   border-color: var(--border-panel);
   background:
