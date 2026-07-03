@@ -12,6 +12,9 @@ interface Props {
   currentPath?: string;
   headerPath?: string;
   pageClass?: string;
+  ogImage?: string;
+  ogImageAlt?: string;
+  ogType?: string;
 }
 
 const {
@@ -20,9 +23,13 @@ const {
   currentPath = "/",
   headerPath = currentPath,
   pageClass,
+  ogImage = "/brand/mockachino-blueprint.svg",
+  ogImageAlt = "Mockachino schematic",
+  ogType = "website",
 } = Astro.props;
 
 const repoStatus = getRepoStatus();
+const ogImageUrl = ogImage ? new URL(ogImage, Astro.site ?? Astro.url).toString() : undefined;
 ---
 
 <!doctype html>
@@ -34,6 +41,16 @@ const repoStatus = getRepoStatus();
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="description" content={description} />
     <title>{title}</title>
+    <meta property="og:type" content={ogType} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    {ogImageUrl && <meta property="og:image" content={ogImageUrl} />}
+    {ogImageAlt && <meta property="og:image:alt" content={ogImageAlt} />}
+    <meta name="twitter:card" content={ogImageUrl ? "summary_large_image" : "summary"} />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    {ogImageUrl && <meta name="twitter:image" content={ogImageUrl} />}
+    {ogImageAlt && <meta name="twitter:image:alt" content={ogImageAlt} />}
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-QZWF7PFHYH" is:inline></script>
     <script is:inline>
