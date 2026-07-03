@@ -131,8 +131,8 @@ async function fetchPageViews(accessToken) {
     const path = row.dimensionValues[0].value;
     const views = parseInt(row.metricValues[0].value, 10);
 
-    // Extract slug from /wiki/{slug}/ paths
-    const match = path.match(/^\/wiki\/([^/]+)\/?$/);
+    // Extract slug from common wiki URL shapes.
+    const match = path.match(/(?:https?:\/\/[^/]+)?\/wiki\/([^/?#]+)\/?(?:[?#].*)?$/);
     if (match) {
       result[match[1]] = views;
     }
@@ -148,9 +148,16 @@ async function fetchPageViews(accessToken) {
 export default {
   // Manual trigger via HTTP GET for testing
   async fetch(request, env) {
-    if (new URL(request.url).pathname !== "/sync") {
-      return new Response("mockachino-ga-sync. GET /sync to trigger manually.", { status: 200 });
+    const { pathname } = new URL(request.url);
+
+    if (pathname === "/popular") {
+      return await getPopular(env);
     }
+
+    if (pathname !== "/sync") {
+      return new Response("mockachino-ga-sync. GET /sync to trigger manually or /popular for current rankings.", { status: 200 });
+    }
+
     return await runSync(env);
   },
 
@@ -158,6 +165,33 @@ export default {
     ctx.waitUntil(runSync(env));
   },
 };
+
+async function getPopular(env) {
+  const headers = {
+    "Content-Type": "application/json",
+    "Access-Control-Allow-Origin": "*",
+    "Cache-Control": "public, max-age=3600",
+  };
+
+  try {
+    const raw = await env.MOCKACHINO_PAGEVIEWS.get(KV_KEY);
+    if (!raw) {
+      return new Response(JSON.stringify({ popular: [], updatedAt: null }), { headers });
+    }
+
+    const { pageviews, updatedAt } = JSON.parse(raw);
+    const popular = Object.entries(pageviews ?? {})
+      .sort(([, a], [, b]) => b - a)
+      .map(([slug, views]) => ({ slug, views }));
+
+    return new Response(JSON.stringify({ popular, updatedAt }), { headers });
+  } catch (err) {
+    return new Response(JSON.stringify({ error: err.message }), {
+      status: 500,
+      headers,
+    });
+  }
+}
 
 async function runSync(env) {
   try {
