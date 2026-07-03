@@ -147,7 +147,12 @@ export default function rehypeCodeShell() {
                       "aria-label": codeLanguage ? `Copy ${codeLanguage} code to clipboard` : "Copy code to clipboard",
                       title: "Copy code",
                     },
-                    [{ type: "element", tagName: "span", properties: { className: ["sr-only"] }, children: [{ type: "text", value: "Copy code" }] }],
+                    [{ type: "element", tagName: "svg", properties: { viewBox: "0 0 16 16", "aria-hidden": "true", focusable: "false" }, children: [
+                      { type: "element", tagName: "rect", properties: { x: "5.5", y: "2", width: "8", height: "10", rx: "1", fill: "none", stroke: "currentColor", "stroke-width": "1.25" }, children: [] },
+                      { type: "element", tagName: "path", properties: { d: "M2.5 5v8a.5.5 0 0 0 .5.5h7", fill: "none", stroke: "currentColor", "stroke-width": "1.25", "stroke-linecap": "round" }, children: [] },
+                    ]},
+                      { type: "element", tagName: "span", properties: { className: ["sr-only"] }, children: [{ type: "text", value: "Copy code" }] }
+                    ],
                   ),
                   createElement(
                     "button",
@@ -158,7 +163,13 @@ export default function rehypeCodeShell() {
                       "aria-label": codeLanguage ? `Download ${codeLanguage} code` : "Download code",
                       title: "Download code",
                     },
-                    [{ type: "element", tagName: "span", properties: { className: ["sr-only"] }, children: [{ type: "text", value: "Download code" }] }],
+                    [{ type: "element", tagName: "svg", properties: { viewBox: "0 0 16 16", "aria-hidden": "true", focusable: "false" }, children: [
+                      { type: "element", tagName: "path", properties: { d: "M8 1.5v8.5", fill: "none", stroke: "currentColor", "stroke-width": "1.25", "stroke-linecap": "round" }, children: [] },
+                      { type: "element", tagName: "path", properties: { d: "M4 7l4 4 4-4", fill: "none", stroke: "currentColor", "stroke-width": "1.25", "stroke-linecap": "round", "stroke-linejoin": "round" }, children: [] },
+                      { type: "element", tagName: "path", properties: { d: "M2 12.5h12", fill: "none", stroke: "currentColor", "stroke-width": "1.25", "stroke-linecap": "round" }, children: [] },
+                    ]},
+                      { type: "element", tagName: "span", properties: { className: ["sr-only"] }, children: [{ type: "text", value: "Download code" }] }
+                    ],
                   ),
                 ],
               ),
