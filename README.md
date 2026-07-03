@@ -1,56 +1,100 @@
 # Mockachino Blog
 
-Astro-powered static site for Mockachino content, deployed on Cloudflare Pages.
+Personal blog and wiki by [Aryan Alipour](https://github.com/ariusalipour), built with [Astro](https://astro.build) and deployed on [Cloudflare Pages](https://pages.cloudflare.com).
+
+Covers shooting sports, gaming, tech projects, photography, and more.
+
+## Live Site
+
+**[mockachino.app](https://mockachino.app)**
+
+## Features
+
+- **Blog entries** — long-form posts on shooting, gaming, tech, and creative work
+- **Wiki** — structured reference pages for shoots, plays, reviews, and tutorials
+- **Glossary** — tooltip-linked terminology across all content
+- **Browse & filter** — search by category, tag, or topic; random-entry mode
+- **Responsive** — optimised for desktop and mobile
+
+## Tech Stack
+
+| Layer | Tool |
+|---|---|
+| Framework | [Astro](https://astro.build) v5 |
+| Language | TypeScript |
+| Hosting | Cloudflare Pages |
+| Analytics | Google Analytics 4 via Cloudflare Worker |
+| Persistence | Cloudflare KV (pageview counts) |
+
+## Prerequisites
+
+- Node.js >= 22
+- npm
 
 ## Commands
 
-All commands are run from the project root:
-
 ```sh
-npm install
-npm run dev
-npm run build
-npm run preview
+npm install        # install dependencies
+npm run dev        # start dev server at localhost:4321
+npm run build      # build static site to dist/
+npm run preview    # preview production build locally
 ```
 
 ## Project Structure
 
-```text
+```
 /
-├── public/
+├── public/              # static assets (images, icons, brand)
 ├── src/
-│   ├── components/
-│   ├── layouts/
-│   ├── pages/
-│   └── styles/
+│   ├── components/      # Astro/UI components
+│   ├── content/         # all content (wiki, glossary, tags, categories)
+│   │   ├── wiki/        # wiki pages (shoots, plays, reviews, tutorials)
+│   │   ├── glossary/    # glossary term definitions
+│   │   ├── tags/        # tag pages
+│   │   └── categories/  # category pages
+│   ├── data/            # data helpers (glossary files, etc.)
+│   ├── layouts/         # page layouts
+│   ├── lib/             # build-time rehype plugins
+│   ├── pages/           # route pages
+│   └── styles/          # global styles
+├── functions/           # Cloudflare Pages Functions
+│   └── api/             # API endpoints (popularity data)
+├── workers/             # Cloudflare Workers
+│   └── ga-sync/         # GA4 → KV sync worker
+├── scripts/             # build & migration scripts
 ├── astro.config.mjs
-├── package.json
-└── tsconfig.json
+├── tsconfig.json
+└── package.json
 ```
 
-The homepage lives at `src/pages/index.astro`.
+## Cloudflare Pages Deployment
 
-## Cloudflare Pages
+Required settings in the Cloudflare dashboard:
 
-Required build settings:
+| Setting | Value |
+|---|---|
+| Build command | `npm run build` |
+| Build output | `dist` |
+| Node version | 22 |
 
-```text
-Build command: npm run build
-Build output directory: dist
-Node version: 22
-```
+A `prebuild` script expands shallow git history for content that displays repo activity metadata.
 
-The `prebuild` step expands shallow git checkouts before Astro renders static repo activity metadata.
+### KV Namespace
 
-This repo also includes:
+A KV namespace named `MOCKACHINO_PAGEVIEWS` must exist and be bound to both the Worker and the Pages Function.
 
-- a Cloudflare Worker at `workers/ga-sync/` that syncs GA4 page view data into KV
-- a Pages Function at `functions/api/popular.js` that reads popularity data from KV
+### Secrets
 
-Required bindings and secrets:
+| Secret | Used by | Description |
+|---|---|---|
+| `GA_SERVICE_ACCOUNT_KEY` | Worker `ga-sync` | JSON key for GA4 service account |
 
-```text
-Pages KV binding: MOCKACHINO_PAGEVIEWS
-Worker KV binding: MOCKACHINO_PAGEVIEWS
-Worker secret: GA_SERVICE_ACCOUNT_KEY
-```
+## Contributing
+
+See [CONTRIBUTING.md](./CONTRIBUTING.md) for guidelines on suggesting changes, submitting pull requests, and adding content.
+
+## License
+
+All Rights Reserved. See [LICENSE.txt](./LICENSE.txt).
+
+Copyright (c) 2025—2026 Aryan Alipour.
