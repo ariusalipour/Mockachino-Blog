@@ -27,6 +27,8 @@ It’s a great capability that allows the user to not get involved when it comes
 
 ## Fixing the Issue
 
+It can be a little difficult when you’re used to agents running endlessly. It’s annoying that system prompts don’t already do this, but that’s why we have instruction files, pre-prompt instructions and other tooling to help create guard rails in place. This is the guard rail that I’ve added to my [AGENTS.md](http://agents.md/) global file to tackle this problem. I still need to be vigilante as agents don’t always listen to the instructions.
+
 ```
 Do not poll terminals, loops, or background processes waiting for an action to occur.
 Do not spend tokens on repeated status checks, sleeps, retries, or idle waiting.
@@ -37,3 +39,7 @@ Then:
 3. ask them to report back the result.
 Prefer writing a script, test, or command the user can execute over monitoring the process yourself.
 ```
+
+## Retrospective
+
+Knowing how capable and costly agentic AI can be. It’s worth realising that the most effective use of tokens is to create tokenless automation from them. Instead of getting an agent to run a series of functions or tasks that is repeatably dumb, we can get them to generate scripts which do that for us. We can then either run these scripts manually, or create an Agentic Skill which gets the agent to fire and forget the scripts for us. Special note on the fire and forget element! We don’t want the agent to start babysitting as that would cost unnecessary token usage.
