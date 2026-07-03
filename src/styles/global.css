@@ -2663,7 +2663,7 @@ body::before {
 }
 
 .article-main__summary {
-  max-width: 35rem;
+  max-width: none;
   margin: 0.9rem 0 0;
   color: var(--text-soft);
   font-family: "IBM Plex Mono", monospace;
