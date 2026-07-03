@@ -3,9 +3,19 @@ interface Props {
   total: number;
   listId: string;
   initialQ?: string;
+  placeholder?: string;
+  resultsLabel?: string;
+  showKinds?: boolean;
 }
 
-const { total, listId, initialQ = "" } = Astro.props;
+const {
+  total,
+  listId,
+  initialQ = "",
+  placeholder = "Filter by title, summary, topic, category, or tag",
+  resultsLabel = "entries visible",
+  showKinds = true,
+} = Astro.props;
 ---
 
 <section class="panel browse-controls">
@@ -13,33 +23,37 @@ const { total, listId, initialQ = "" } = Astro.props;
     <input
       id={`${listId}-filter`}
       type="search"
-      placeholder="Filter by title, summary, topic, category, or tag"
+      placeholder={placeholder}
       value={initialQ}
     />
-    <div class="kind-pills">
-      <button class="kind-pill is-active" data-kind="all">All</button>
-      <button class="kind-pill" data-kind="article">Articles</button>
-      <button class="kind-pill" data-kind="guide">Guides</button>
-      <button class="kind-pill" data-kind="review">Reviews</button>
-    </div>
+    {
+      showKinds && (
+        <div class="kind-pills">
+          <button class="kind-pill is-active" data-kind="all">All</button>
+          <button class="kind-pill" data-kind="article">Articles</button>
+          <button class="kind-pill" data-kind="guide">Guides</button>
+          <button class="kind-pill" data-kind="review">Reviews</button>
+        </div>
+      )
+    }
   </div>
   <p class="results-meta">
-    <span class="results-count">{total}</span> entries visible
+    <span class="results-count">{total}</span> {resultsLabel}
   </p>
 </section>
 
-<script is:inline define:vars={{ listId, initialQ }}>
+<script is:inline define:vars={{ listId, initialQ, showKinds }}>
   document.addEventListener("DOMContentLoaded", () => {
     const controls = document.querySelector(`#${listId}-filter`)?.closest(".browse-controls");
     if (!controls) return;
 
     const input = controls.querySelector("input");
     const counter = controls.querySelector(".results-count");
-    const pills = [...controls.querySelectorAll(".kind-pill")];
+    const pills = showKinds ? [...controls.querySelectorAll(".kind-pill")] : [];
     const list = document.getElementById(listId);
     if (!list) return;
 
-    const items = [...list.querySelectorAll(".entry-list__item")];
+    const items = [...list.querySelectorAll("[data-search]")];
 
     let activeKind = "all";
     let needle = (initialQ ?? "").toLowerCase();
@@ -50,13 +64,17 @@ const { total, listId, initialQ = "" } = Astro.props;
         const haystack = item.dataset.search ?? "";
         const kind = item.dataset.kind ?? "";
         const textMatch = !needle || haystack.includes(needle);
-        const kindMatch = activeKind === "all" || kind === activeKind;
+        const kindMatch = !showKinds || activeKind === "all" || kind === activeKind;
         const show = textMatch && kindMatch;
         item.style.display = show ? "" : "none";
         if (show) visible++;
       });
       if (counter) counter.textContent = String(visible);
-      if (list._repage) list._repage();
+      if (typeof list._repage === "function") {
+        list._repage();
+      } else {
+        setTimeout(() => list._repage?.(), 0);
+      }
     };
 
     input?.addEventListener("input", (e) => {

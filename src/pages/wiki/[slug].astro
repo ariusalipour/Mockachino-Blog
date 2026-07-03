@@ -201,8 +201,7 @@ const tocItems =
     </aside>
   </section>
 
-  <script is:inline>
-    const viewsEndpoint = "${viewsEndpoint}";
+  <script is:inline define:vars={{ viewsEndpoint }}>
     fetch(viewsEndpoint)
       .then((resp) => (resp.ok ? resp.json() : null))
       .then((payload) => {

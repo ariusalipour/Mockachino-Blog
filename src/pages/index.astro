@@ -135,7 +135,6 @@ function relativeTime(dateValue: string) {
                     <span class="entry-list__title">{entry.title}</span>
                   </div>
                   <div class="entry-list__meta entry-list__meta--inline">
-                    <span>{formatTopicLabel(entry.topic).replace("MOCKA ", "")}</span>
                     <span>{formatCategoryLabel(entry.topic, entry.category).toUpperCase()}</span>
                     <span>{relativeTime(entry.updatedAt)}</span>
                   </div>
@@ -196,9 +195,8 @@ function relativeTime(dateValue: string) {
 
         if (ranked.length === 0) return;
 
-        list.innerHTML = ranked.map(({ slug, views }, index) => {
+        list.innerHTML = ranked.map(({ slug }, index) => {
           const entry = lookup[slug];
-          const topic = entry.topic.replace("mocka", "").trim();
           return `<li class="entry-list__item" data-topic="${entry.topic}" data-slug="${slug}">
             <a href="/wiki/${slug}/" class="entry-list__link entry-list__link--home">
               <div class="entry-list__row">
@@ -208,7 +206,6 @@ function relativeTime(dateValue: string) {
                 </div>
                 <div class="entry-list__meta entry-list__meta--inline">
                   <span>${entry.topic.replace("shoots", "Shoots").replace("plays", "Plays").replace("codes", "Codes")}</span>
-                  <span>${views.toLocaleString()} views</span>
                 </div>
               </div>
             </a>

@@ -114,7 +114,7 @@ export const topics: Topic[] = [
     shortName: "Shoots",
     strapline: "Everything about firearms, shooting sports, gear, training and competition.",
     description: "Everything about firearms, shooting sports, gear, training and competition.",
-    accent: "#f5c542",
+    accent: "#d94a3a",
     icon: "target",
     homeStats: {
       reviews: 3,
@@ -129,7 +129,7 @@ export const topics: Topic[] = [
     shortName: "Plays",
     strapline: "Game guides, reviews, walkthroughs and everything in between.",
     description: "Game guides, reviews, walkthroughs and everything in between.",
-    accent: "#9cd45a",
+    accent: "#8b5cf6",
     icon: "controller",
     homeStats: {
       reviews: 1,
@@ -144,7 +144,7 @@ export const topics: Topic[] = [
     shortName: "Codes",
     strapline: "Development tutorials, technical notes, tools and engineering insights.",
     description: "Development tutorials, technical notes, tools and engineering insights.",
-    accent: "#5f87ff",
+    accent: "#75c267",
     icon: "chip",
     homeStats: {
       reviews: 0,

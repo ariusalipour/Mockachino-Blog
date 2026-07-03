@@ -1,8 +1,13 @@
 ---
+import BrowseControls from "../../components/BrowseControls.astro";
+import PagedGrid from "../../components/PagedGrid.astro";
 import Layout from "../../layouts/Layout.astro";
 import { getTags } from "../../data/wiki-content";
 
 const tags = getTags();
+const params = Astro.url.searchParams;
+const initialQ = params.get("q") ?? "";
+const listId = "tags-list";
 ---
 
 <Layout title="Tags | MOCKACHINO" description="Browse the wiki by tag." currentPath={Astro.url.pathname}>
@@ -15,16 +20,32 @@ const tags = getTags();
       </p>
     </section>
 
-    <section class="tag-grid">
+    <BrowseControls
+      total={tags.length}
+      listId={listId}
+      initialQ={initialQ}
+      placeholder="Filter tags by name"
+      resultsLabel="tags visible"
+      showKinds={false}
+    />
+
+    <div class="section-heading section-heading--compact">
+      <div>
+        <p class="section-label">Tag Index</p>
+        <h2>Browse recurring themes and shortcuts.</h2>
+      </div>
+    </div>
+
+    <PagedGrid id={listId} className="tag-grid" perPage={12}>
       {
         tags.map((tag) => (
-          <article class="panel tag-card">
+          <article class="panel tag-card" data-page-item data-search={`${tag.name} ${tag.count}`.toLowerCase()}>
             <h3>#{tag.name}</h3>
             <p>{tag.count} linked entries</p>
             <a href={`/browse/?tag=${encodeURIComponent(tag.name)}`} class="button button--secondary">Browse Tag</a>
           </article>
         ))
       }
-    </section>
+    </PagedGrid>
   </div>
 </Layout>

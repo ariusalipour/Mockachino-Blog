@@ -1416,9 +1416,9 @@ html[data-theme="light"] .theme-toggle__icon--light {
 }
 
 :root {
-  --shoots: #f5c542;
-  --plays: #9cd45a;
-  --codes: #5f87ff;
+  --shoots: #d94a3a;
+  --plays: #8b5cf6;
+  --codes: #75c267;
   --border: rgba(245, 197, 66, 0.2);
   --border-panel: rgba(245, 197, 66, 0.26);
   --border-subtle: rgba(124, 134, 146, 0.24);
@@ -2157,6 +2157,11 @@ body::before {
 }
 
 .page-stack > .panel > .section-heading {
+  margin: 0;
+  padding: 0.95rem 1rem 0.82rem;
+}
+
+.page-stack > .section-heading {
   margin: 0;
   padding: 0.95rem 1rem 0.82rem;
 }

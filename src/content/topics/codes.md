@@ -2,7 +2,7 @@
 name: MOCKA CODES
 shortName: Codes
 strapline: Development tutorials, technical notes, tools and engineering insights.
-accent: "#5f87ff"
+accent: "#75c267"
 icon: chip
 homeStats:
   reviews: 0
