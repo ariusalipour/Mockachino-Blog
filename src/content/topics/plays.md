@@ -2,7 +2,7 @@
 name: MOCKA PLAYS
 shortName: Plays
 strapline: Game guides, reviews, walkthroughs and everything in between.
-accent: "#9cd45a"
+accent: "#8b5cf6"
 icon: controller
 homeStats:
   reviews: 1

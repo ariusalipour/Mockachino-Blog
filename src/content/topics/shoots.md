@@ -2,7 +2,7 @@
 name: MOCKA SHOOTS
 shortName: Shoots
 strapline: Everything about firearms, shooting sports, gear, training and competition.
-accent: "#f5c542"
+accent: "#d94a3a"
 icon: target
 homeStats:
   reviews: 3

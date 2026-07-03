@@ -1,6 +1,12 @@
 ---
+import BrowseControls from "../../components/BrowseControls.astro";
+import PagedGrid from "../../components/PagedGrid.astro";
 import Layout from "../../layouts/Layout.astro";
 import { glossaryTerms } from "../../data/wiki-content";
+
+const params = Astro.url.searchParams;
+const initialQ = params.get("q") ?? "";
+const listId = "glossary-list";
 ---
 
 <Layout title="Glossary | MOCKACHINO" description="Glossary of recurring wiki terms." currentPath={Astro.url.pathname}>
@@ -13,15 +19,31 @@ import { glossaryTerms } from "../../data/wiki-content";
       </p>
     </section>
 
-    <section class="glossary-grid">
+    <BrowseControls
+      total={glossaryTerms.length}
+      listId={listId}
+      initialQ={initialQ}
+      placeholder="Filter by term or definition"
+      resultsLabel="terms visible"
+      showKinds={false}
+    />
+
+    <div class="section-heading section-heading--compact">
+      <div>
+        <p class="section-label">Glossary Entries</p>
+        <h2>Definitions and shorthand used across the wiki.</h2>
+      </div>
+    </div>
+
+    <PagedGrid id={listId} className="glossary-grid" perPage={12}>
       {
         glossaryTerms.map((item) => (
-          <dl class="panel">
+          <dl class="panel" data-page-item data-search={`${item.term} ${item.definition}`.toLowerCase()}>
             <dt>{item.term}</dt>
             <dd>{item.definition}</dd>
           </dl>
         ))
       }
-    </section>
+    </PagedGrid>
   </div>
 </Layout>

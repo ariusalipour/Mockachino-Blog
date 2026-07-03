@@ -1,0 +1,69 @@
+---
+interface Props {
+  id: string;
+  perPage?: number;
+  className?: string;
+}
+
+const { id, perPage = 12, className } = Astro.props;
+---
+
+<div id={id} class={className} data-per-page={perPage}>
+  <slot />
+</div>
+
+<nav class="pagination" aria-label="Pagination">
+  <button class="pagination__prev" disabled>Prev</button>
+  <span class="pagination__info">Page <span class="pagination__current">1</span> of <span class="pagination__total">1</span></span>
+  <button class="pagination__next">Next</button>
+</nav>
+
+<script is:inline define:vars={{ id, perPage }}>
+  document.addEventListener("DOMContentLoaded", () => {
+    const list = document.getElementById(id);
+    if (!list) return;
+
+    const items = [...list.querySelectorAll("[data-page-item]")];
+    if (items.length === 0) return;
+
+    const nav = list.nextElementSibling;
+    if (!nav || !nav.classList.contains("pagination")) return;
+
+    const prevBtn = nav.querySelector(".pagination__prev");
+    const nextBtn = nav.querySelector(".pagination__next");
+    const currentSpan = nav.querySelector(".pagination__current");
+    const totalSpan = nav.querySelector(".pagination__total");
+
+    let page = 1;
+
+    const getVisible = () => items.filter((item) => item.style.display !== "none");
+    const calcPages = () => Math.max(1, Math.ceil(getVisible().length / perPage));
+
+    const showPage = (p) => {
+      const total = calcPages();
+      page = Math.max(1, Math.min(p, total));
+      const visible = getVisible();
+      const start = (page - 1) * perPage;
+      const end = start + perPage;
+
+      visible.forEach((item, idx) => {
+        item.classList.toggle("pagination-hidden", idx < start || idx >= end);
+      });
+
+      if (currentSpan) currentSpan.textContent = String(page);
+      if (totalSpan) totalSpan.textContent = String(total);
+      if (prevBtn) prevBtn.disabled = page <= 1;
+      if (nextBtn) nextBtn.disabled = page >= total;
+    };
+
+    list._repage = () => {
+      page = 1;
+      showPage(1);
+    };
+
+    if (prevBtn) prevBtn.addEventListener("click", () => showPage(page - 1));
+    if (nextBtn) nextBtn.addEventListener("click", () => showPage(page + 1));
+
+    showPage(1);
+  });
+</script>
