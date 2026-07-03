@@ -75,6 +75,10 @@ export function getEntriesByCategory(categoryId: string) {
   return wikiEntries.filter((entry) => entry.category === categoryId);
 }
 
+export function getEntriesByTag(tagName: string) {
+  return wikiEntries.filter((entry) => entry.tags.includes(tagName));
+}
+
 export function getTopicStats(topicId: TopicId) {
   const entries = getEntriesByTopic(topicId);
 
@@ -106,7 +110,7 @@ export function getTags() {
   }
 
   return [...tags.entries()]
-    .map(([name, count]) => ({ name, count }))
+    .map(([name, count]) => ({ name, count, slug: name.toLowerCase() }))
     .sort((left, right) => left.name.localeCompare(right.name));
 }
 

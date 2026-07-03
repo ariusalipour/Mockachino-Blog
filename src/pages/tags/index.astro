@@ -42,7 +42,7 @@ const listId = "tags-list";
           <article class="panel tag-card" data-page-item data-search={`${tag.name} ${tag.count}`.toLowerCase()}>
             <h3>#{tag.name}</h3>
             <p>{tag.count} linked entries</p>
-            <a href={`/browse/?tag=${encodeURIComponent(tag.name)}`} class="button button--secondary">Browse Tag</a>
+            <a href={`/tags/${encodeURIComponent(tag.slug)}/`} class="button button--secondary">Browse Tag</a>
           </article>
         ))
       }
