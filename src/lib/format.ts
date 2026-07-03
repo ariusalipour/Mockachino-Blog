@@ -1,4 +1,4 @@
-import { getCategory, getTopic, type EntryKind, type TopicId } from "../data/wiki";
+import { getCategory, getTopic, type EntryKind, type TopicId } from "../data/wiki-content";
 
 export function formatDate(dateValue: string) {
   return new Intl.DateTimeFormat("en-GB", {

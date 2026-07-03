@@ -2,7 +2,7 @@
 import BrowseControls from "../../../components/BrowseControls.astro";
 import EntryList from "../../../components/EntryList.astro";
 import Layout from "../../../layouts/Layout.astro";
-import { formatCategoryLabel, getCategory, getEntriesByCategory, topics } from "../../../data/wiki";
+import { formatCategoryLabel, getCategory, getEntriesByCategory, topics } from "../../../data/wiki-content";
 
 export function getStaticPaths() {
   return topics.flatMap((topic) =>

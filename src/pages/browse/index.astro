@@ -2,7 +2,7 @@
 import BrowseControls from "../../components/BrowseControls.astro";
 import EntryList from "../../components/EntryList.astro";
 import Layout from "../../layouts/Layout.astro";
-import { wikiEntries } from "../../data/wiki";
+import { wikiEntries } from "../../data/wiki-content";
 
 const params = Astro.url.searchParams;
 const initialQ = params.get("q") ?? params.get("tag") ?? "";
