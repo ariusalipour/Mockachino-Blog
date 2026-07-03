@@ -1,4 +1,5 @@
 import { defineConfig } from "astro/config";
+import rehypeCodeShell from "./src/lib/rehype-code-shell";
 import rehypeGlossaryTooltips from "./src/lib/rehype-glossary-tooltips";
 import { readGlossaryTermsFromContent } from "./src/data/glossary-files";
 
@@ -10,6 +11,7 @@ export default defineConfig({
   markdown: {
     rehypePlugins: [
       [rehypeGlossaryTooltips, glossaryTerms],
+      rehypeCodeShell,
     ],
   },
 });
