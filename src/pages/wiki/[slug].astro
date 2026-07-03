@@ -42,6 +42,7 @@ const articleBody = (contentEntry as { body?: string }).body ?? entry.summary;
 const readMinutes = Math.max(1, Math.ceil(articleBody.split(/\s+/).length / 220));
 const heroImage = contentEntry.data.featuredImage?.src ?? articleView.heroAsset;
 const heroAlt = contentEntry.data.featuredImage?.alt || `${entry.title} hero visual`;
+const ogImageAlt = contentEntry.data.featuredImage?.alt || heroAlt;
 const { Content, headings } = await render(contentEntry);
 const tocItems =
   headings.filter((heading) => heading.depth > 1).length > 0
@@ -55,6 +56,9 @@ const tocItems =
   currentPath={Astro.url.pathname}
   headerPath="/browse/"
   pageClass="page-article"
+  ogType="article"
+  ogImage={heroImage}
+  ogImageAlt={ogImageAlt}
 >
   <div slot="subheader" class="panel article-breadcrumb">
     <a href={`/topics/${entry.topic}/`} class="article-breadcrumb__item">{topic?.name}</a>
