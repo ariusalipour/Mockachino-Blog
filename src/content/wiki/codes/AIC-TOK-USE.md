@@ -29,7 +29,7 @@ It’s a great capability that allows the user to not get involved when it comes
 
 It can be a little difficult when you’re used to agents running endlessly. It’s annoying that system prompts don’t already do this, but that’s why we have instruction files, pre-prompt instructions and other tooling to help create guard rails in place. This is the guard rail that I’ve added to my [AGENTS.md](http://agents.md/) global file to tackle this problem. I still need to be vigilante as agents don’t always listen to the instructions.
 
-```
+```markdown
 Do not poll terminals, loops, or background processes waiting for an action to occur.
 Do not spend tokens on repeated status checks, sleeps, retries, or idle waiting.
 If progress depends on an external event, user action, interactive prompt, or long-running process, stop immediately.

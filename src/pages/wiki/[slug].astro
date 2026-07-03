@@ -216,4 +216,308 @@ const tocItems =
       })
       .catch(() => {});
   </script>
+
+  <script is:inline>
+    const codeLanguageLabels = {
+      bash: "Bash",
+      c: "C",
+      csharp: "C#",
+      css: "CSS",
+      html: "HTML",
+      ini: "INI",
+      javascript: "JavaScript",
+      js: "JavaScript",
+      json: "JSON",
+      md: "Markdown",
+      markdown: "Markdown",
+      powershell: "PowerShell",
+      py: "Python",
+      python: "Python",
+      sh: "Shell",
+      shell: "Shell",
+      ts: "TypeScript",
+      tsx: "TSX",
+      typescript: "TypeScript",
+      txt: "Text",
+      yaml: "YAML",
+      yml: "YAML",
+    };
+
+    const codeLanguageExtensions = {
+      bash: "sh",
+      c: "c",
+      csharp: "cs",
+      css: "css",
+      html: "html",
+      ini: "ini",
+      javascript: "js",
+      js: "js",
+      json: "json",
+      md: "md",
+      markdown: "md",
+      powershell: "ps1",
+      py: "py",
+      python: "py",
+      sh: "sh",
+      shell: "sh",
+      ts: "ts",
+      tsx: "tsx",
+      typescript: "ts",
+      txt: "txt",
+      yaml: "yml",
+      yml: "yml",
+    };
+
+    const formatLanguageLabel = (value) => {
+      if (!value) return "Terminal";
+      const key = String(value).trim().toLowerCase();
+      if (!key || key === "plaintext" || key === "text") return "Terminal";
+      return codeLanguageLabels[key] ?? key.toUpperCase();
+    };
+
+    const formatLanguageBadge = (value) => {
+      if (!value) return "text";
+      const key = String(value).trim().toLowerCase();
+      if (!key || key === "plaintext") return "text";
+      if (key === "text") return "text";
+      return key;
+    };
+
+    const createNoWrapIcon = () => `
+      <svg viewBox="0 0 16 16" aria-hidden="true" focusable="false">
+        <path d="M2 4.5h7.3" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" />
+        <path d="M2 8h5.4" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" />
+        <path d="M2 11.5h8.1" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" />
+        <path d="M10.6 12.2 12.8 10l2.2 2.2" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" />
+        <path d="M12.8 10V3.8" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" />
+      </svg>
+    `;
+
+    const createCopyIcon = () => `
+      <svg viewBox="0 0 16 16" aria-hidden="true" focusable="false">
+        <path d="M5.5 2.5H12a1 1 0 0 1 1 1V10" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" />
+        <path d="M3 5h6.5a1 1 0 0 1 1 1v6.5a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1z" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" />
+      </svg>
+    `;
+
+    const createDownloadIcon = () => `
+      <svg viewBox="0 0 16 16" aria-hidden="true" focusable="false">
+        <path d="M7 1h2v6.1l2-2V9L8 12 5 9V5.1l2 2z" fill="currentColor" />
+        <path d="M2 13h12v2H2z" fill="currentColor" />
+      </svg>
+    `;
+
+    const ensureToolbar = (shell, pre, rawLanguage) => {
+      let toolbar = shell.querySelector(".code-shell__toolbar");
+      const language = formatLanguageBadge(rawLanguage);
+
+      if (!toolbar) {
+        toolbar = document.createElement("div");
+        toolbar.className = "code-shell__toolbar";
+
+        const badge = document.createElement("span");
+        badge.className = "code-shell__language-badge";
+        toolbar.append(badge);
+
+        const actions = document.createElement("div");
+        actions.className = "code-shell__actions";
+
+        const wrapButton = document.createElement("button");
+        wrapButton.type = "button";
+        wrapButton.className = "code-shell__action code-shell__action--wrap";
+        wrapButton.setAttribute("data-code-block-wrap", "true");
+        wrapButton.setAttribute("aria-label", "Enable line wrap");
+        wrapButton.setAttribute("aria-pressed", "false");
+        wrapButton.title = "Unwrap code";
+        wrapButton.innerHTML = `${createNoWrapIcon()}<span class="sr-only">Unwrap code</span>`;
+
+        const copyButton = document.createElement("button");
+        copyButton.type = "button";
+        copyButton.className = "code-shell__action code-shell__action--copy";
+        copyButton.setAttribute("data-code-block-copy", "true");
+        copyButton.setAttribute("aria-label", "Copy code to clipboard");
+        copyButton.title = "Copy";
+        copyButton.innerHTML = `${createCopyIcon()}<span class="sr-only">Copy code</span>`;
+
+        const downloadButton = document.createElement("button");
+        downloadButton.type = "button";
+        downloadButton.className = "code-shell__action code-shell__action--download";
+        downloadButton.setAttribute("data-code-block-download", "true");
+        downloadButton.setAttribute("aria-label", "Download code");
+        downloadButton.title = "Download";
+        downloadButton.innerHTML = `${createDownloadIcon()}<span class="sr-only">Download code</span>`;
+
+        actions.append(wrapButton, copyButton, downloadButton);
+        toolbar.append(actions);
+        shell.insertBefore(toolbar, pre);
+      }
+
+      const badge = toolbar.querySelector(".code-shell__language-badge");
+      if (badge) badge.textContent = language;
+
+      shell.querySelector(".code-shell__titlebar")?.remove();
+      shell.querySelector(".code-shell__header")?.remove();
+      shell.querySelector("[data-code-block-wrap]")?.setAttribute("aria-pressed", shell.dataset.wrapEnabled === "false" ? "true" : "false");
+      shell.querySelector("[data-code-block-copy]")?.setAttribute(
+        "aria-label",
+        rawLanguage ? `Copy ${formatLanguageLabel(rawLanguage)} code to clipboard` : "Copy code to clipboard",
+      );
+      shell.querySelector("[data-code-block-download]")?.setAttribute(
+        "aria-label",
+        rawLanguage ? `Download ${formatLanguageLabel(rawLanguage)} code` : "Download code",
+      );
+    };
+
+    const normalizeCodeShells = () => {
+      document.querySelectorAll(".code-shell").forEach((shell) => {
+        if (shell.dataset.retroNormalized === "true") return;
+
+        const pre = shell.querySelector("pre");
+        if (!pre) return;
+
+        const rawLanguage = shell.getAttribute("data-code-language") || pre.getAttribute("data-language");
+        ensureToolbar(shell, pre, rawLanguage);
+        const wrapEnabled = shell.dataset.wrapEnabled !== "false";
+        shell.classList.toggle("code-shell--wrapped", wrapEnabled);
+        pre.classList.toggle("code-shell__pre--wrapped", wrapEnabled);
+        shell.querySelector("[data-code-block-wrap]")?.setAttribute("aria-pressed", wrapEnabled ? "false" : "true");
+        shell.dataset.retroNormalized = "true";
+      });
+    };
+
+    const resetCopyButton = (button, label) => {
+      window.setTimeout(() => {
+        button.title = label;
+        button.removeAttribute("data-copy-state");
+      }, 1400);
+    };
+
+    const copyCodeBlock = async (button) => {
+      const shell = button.closest(".code-shell");
+      const code = shell?.querySelector("pre code");
+      const text = code?.textContent ?? shell?.getAttribute("data-code-text") ?? "";
+
+      if (!text) return;
+
+      const originalLabel = button.dataset.originalLabel ?? button.title?.trim() ?? "Copy";
+      button.dataset.originalLabel = originalLabel;
+
+      const markSuccess = () => {
+        button.setAttribute("data-copy-state", "copied");
+        button.title = "Copied";
+        resetCopyButton(button, originalLabel);
+      };
+
+      try {
+        if (navigator.clipboard?.writeText) {
+          await navigator.clipboard.writeText(text);
+          markSuccess();
+          return;
+        }
+
+        const textarea = document.createElement("textarea");
+        textarea.value = text;
+        textarea.setAttribute("readonly", "");
+        textarea.style.position = "fixed";
+        textarea.style.left = "-9999px";
+        textarea.style.top = "0";
+        document.body.append(textarea);
+        textarea.select();
+        const copied = document.execCommand("copy");
+        textarea.remove();
+
+        if (copied) {
+          markSuccess();
+        }
+      } catch {
+        button.setAttribute("data-copy-state", "failed");
+        button.title = "Failed";
+        resetCopyButton(button, originalLabel);
+      }
+    };
+
+    const bindCodeCopyButtons = () => {
+      document.querySelectorAll("[data-code-block-copy]").forEach((button) => {
+        if (button.dataset.bound === "true") return;
+        button.dataset.bound = "true";
+        button.addEventListener("click", () => {
+          void copyCodeBlock(button);
+        });
+      });
+    };
+
+    const setWrapState = (button, unwrapEnabled) => {
+      const shell = button.closest(".code-shell");
+      const pre = shell?.querySelector("pre");
+      if (!shell || !pre) return;
+
+      const wrapEnabled = !unwrapEnabled;
+      shell.dataset.wrapEnabled = wrapEnabled ? "true" : "false";
+      shell.classList.toggle("code-shell--wrapped", wrapEnabled);
+      pre.classList.toggle("code-shell__pre--wrapped", wrapEnabled);
+      button.setAttribute("aria-pressed", unwrapEnabled ? "true" : "false");
+      button.title = unwrapEnabled ? "Wrap code" : "Unwrap code";
+      button.setAttribute("aria-label", unwrapEnabled ? "Disable line wrap" : "Enable line wrap");
+    };
+
+    const bindCodeWrapButtons = () => {
+      document.querySelectorAll("[data-code-block-wrap]").forEach((button) => {
+        if (button.dataset.bound === "true") return;
+        button.dataset.bound = "true";
+        button.addEventListener("click", () => {
+          const shell = button.closest(".code-shell");
+          const unwrapEnabled = shell?.dataset.wrapEnabled !== "false";
+          setWrapState(button, unwrapEnabled);
+        });
+      });
+    };
+
+    const downloadCodeBlock = (button) => {
+      const shell = button.closest(".code-shell");
+      const code = shell?.querySelector("pre code");
+      const text = code?.textContent ?? shell?.getAttribute("data-code-text") ?? "";
+      if (!text) return;
+
+      const language = String(shell?.getAttribute("data-code-language") ?? "text").trim().toLowerCase();
+      const extension = codeLanguageExtensions[language] ?? "txt";
+      const slug = (document.querySelector("meta[property='og:url']")?.getAttribute("content") || window.location.pathname)
+        .split("/")
+        .filter(Boolean)
+        .pop() || "code";
+      const fileName = `${slug}.${extension}`;
+      const blob = new Blob([text], { type: "text/plain;charset=utf-8" });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.href = url;
+      link.download = fileName;
+      link.rel = "noopener";
+      document.body.append(link);
+      link.click();
+      link.remove();
+      window.setTimeout(() => URL.revokeObjectURL(url), 1000);
+    };
+
+    const bindCodeDownloadButtons = () => {
+      document.querySelectorAll("[data-code-block-download]").forEach((button) => {
+        if (button.dataset.bound === "true") return;
+        button.dataset.bound = "true";
+        button.addEventListener("click", () => {
+          downloadCodeBlock(button);
+        });
+      });
+    };
+
+    normalizeCodeShells();
+    bindCodeWrapButtons();
+    bindCodeCopyButtons();
+    bindCodeDownloadButtons();
+    document.addEventListener("DOMContentLoaded", normalizeCodeShells);
+    document.addEventListener("DOMContentLoaded", bindCodeWrapButtons);
+    document.addEventListener("DOMContentLoaded", bindCodeCopyButtons);
+    document.addEventListener("DOMContentLoaded", bindCodeDownloadButtons);
+    document.addEventListener("astro:page-load", normalizeCodeShells);
+    document.addEventListener("astro:page-load", bindCodeWrapButtons);
+    document.addEventListener("astro:page-load", bindCodeCopyButtons);
+    document.addEventListener("astro:page-load", bindCodeDownloadButtons);
+  </script>
 </Layout>
