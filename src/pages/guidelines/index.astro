@@ -1,0 +1,108 @@
+---
+import Layout from "../../layouts/Layout.astro";
+---
+
+<Layout
+  title="Wiki Guidelines | MOCKACHINO"
+  description="Guidelines for writing and structuring wiki content."
+  currentPath={Astro.url.pathname}
+>
+  <div class="page-stack">
+    <section class="panel taxonomy-hero">
+      <p class="section-label">Wiki Guidelines</p>
+      <h1>How the wiki is organised.</h1>
+      <p class="taxonomy-copy">
+        The wiki is structured as a multi-topic reference system. Every page belongs
+        to a topic and category, uses consistent frontmatter, and links to related
+        content through tags and glossary terms. These guidelines keep things
+        consistent.
+      </p>
+    </section>
+
+    <section class="panel copy-block">
+      <h2>Topics</h2>
+      <p>
+        Content is split into three topics:
+      </p>
+      <ul>
+        <li><strong>Shoots</strong> — firearms, shooting sports, kit, events, law, safety</li>
+        <li><strong>Plays</strong> — gaming, game reviews, tactics, software tools</li>
+        <li><strong>Codes</strong> — programming, projects, AI, career, hardware</li>
+      </ul>
+      <p>
+        Every wiki entry belongs to exactly one topic. The topic determines the
+        accent colour, iconography, and section placement on the site.
+      </p>
+    </section>
+
+    <section class="panel copy-block">
+      <h2>Categories</h2>
+      <p>
+        Each topic is subdivided into categories. These group related articles and
+        are listed in the sidebar topic tree. When adding a new page, choose the
+        most specific existing category. If none fits, open an issue to discuss
+        adding one.
+      </p>
+    </section>
+
+    <section class="panel copy-block">
+      <h2>Frontmatter</h2>
+      <p>
+        Every wiki entry requires the following frontmatter fields:
+      </p>
+      <ul>
+        <li><code>articleId</code> — unique ID (e.g. <code>SHO-EVE-SHO</code>)</li>
+        <li><code>title</code> — page title</li>
+        <li><code>summary</code> — one- or two-sentence description</li>
+        <li><code>kind</code> — <code>review</code>, <code>article</code>, or <code>guide</code></li>
+        <li><code>topic</code> — <code>shoots</code>, <code>plays</code>, or <code>codes</code></li>
+        <li><code>category</code> — valid category ID within the topic</li>
+        <li><code>tags</code> — array of tag slugs (see existing entries for convention)</li>
+        <li><code>createdAt</code> / <code>updatedAt</code> — ISO 8601 dates</li>
+      </ul>
+      <p>
+        See any existing file in <code>src/content/wiki/</code> for a complete example.
+      </p>
+    </section>
+
+    <section class="panel copy-block">
+      <h2>Glossary Terms</h2>
+      <p>
+        Reusable terminology is defined in <code>src/content/glossary/</code>. When
+        a glossary term appears in article text, it automatically renders as a
+        tooltip-linked term. Add new terms when you introduce specialised vocabulary
+        that appears across multiple articles.
+      </p>
+    </section>
+
+    <section class="panel copy-block">
+      <h2>Tags</h2>
+      <p>
+        Tags cut across topics and categories. Use existing tags from the
+        <a href="/tags/">tag index</a> when possible. Create new tags sparingly —
+        a tag should apply to at least a few articles to be useful.
+      </p>
+    </section>
+
+    <section class="panel copy-block">
+      <h2>Images</h2>
+      <p>
+        Store images in <code>public/images/</code> under a subdirectory matching
+        the article ID. Use descriptive filenames. For third-party images used
+        editorially (product photos, event coverage, screenshots), credit the
+        original source in the article and note it in the PR description.
+      </p>
+    </section>
+
+    <section class="panel copy-block">
+      <h2>Writing Style</h2>
+      <ul>
+        <li>Write for a reader who is curious but not yet knowledgeable — define terms, explain context.</li>
+        <li>Keep paragraphs short. Use headings to break up long sections.</li>
+        <li>Link to related wiki entries, glossary terms, and external references.</li>
+        <li>Use lists, tables, and code blocks where they add clarity, not as decoration.</li>
+        <li>British English spelling (organise, colour, centre).</li>
+      </ul>
+    </section>
+  </div>
+</Layout>

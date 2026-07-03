@@ -1,0 +1,77 @@
+---
+import Layout from "../../layouts/Layout.astro";
+---
+
+<Layout
+  title="Contribute | MOCKACHINO"
+  description="How to contribute to the Mockachino wiki."
+  currentPath={Astro.url.pathname}
+>
+  <div class="page-stack">
+    <section class="panel taxonomy-hero">
+      <p class="section-label">Contribute</p>
+      <h1>Help improve the wiki.</h1>
+      <p class="taxonomy-copy">
+        Contributions — suggestions, bug reports, content ideas, and pull requests — are welcome.
+        Everything here is built around shooting sports, gaming, tech projects, and photography.
+        If you have something to add, here is how.
+      </p>
+    </section>
+
+    <section class="panel copy-block">
+      <h2>Report Issues</h2>
+      <p>
+        Found a broken link, typo, or factual error? Open a
+        <a href="https://github.com/ariusalipour/Mockachino-Blog/issues">GitHub issue</a>.
+        Labels help triage: use <strong>bug</strong> for broken things,
+        <strong>enhancement</strong> for suggestions, and
+        <strong>content-idea</strong> for new page proposals.
+      </p>
+    </section>
+
+    <section class="panel copy-block">
+      <h2>Suggest Content</h2>
+      <p>
+        Have an idea for a blog post, wiki entry, or glossary term? Open an issue
+        with the <strong>content-idea</strong> label. Include a working title, a short
+        outline, and any reference links so the scope is clear from the start.
+      </p>
+    </section>
+
+    <section class="panel copy-block">
+      <h2>Submit Pull Requests</h2>
+      <p>
+        PRs for fixes, improvements, and new content are encouraged:
+      </p>
+      <ol>
+        <li>Fork the repo and create a branch from <strong>main</strong>.</li>
+        <li>Make your changes. Wiki pages use Markdown with standard frontmatter — see existing entries under <code>src/content/wiki/</code> for the schema.</li>
+        <li>Test locally with <code>npm run dev</code> and verify the build with <code>npm run build</code>.</li>
+        <li>Open a PR with a clear title and description. The main branch is protected — changes require review before merging.</li>
+      </ol>
+    </section>
+
+    <section class="panel copy-block">
+      <h2>Style Guidelines</h2>
+      <ul>
+        <li>Content is written in Markdown.</li>
+        <li>Wiki pages follow the existing frontmatter schema (<code>articleId</code>, <code>title</code>, <code>summary</code>, <code>kind</code>, <code>topic</code>, <code>category</code>, etc.).</li>
+        <li>Tag and category references use existing taxonomies where possible. Browse <a href="/tags/">/tags/</a> to check what exists.</li>
+        <li>Code changes should match existing patterns — no new frameworks or tooling without discussion.</li>
+        <li>Third-party images used editorially must credit the original source.</li>
+      </ul>
+    </section>
+
+    <section class="panel copy-block">
+      <h2>License</h2>
+      <p>
+        By submitting a contribution, you retain your copyright but grant the
+        repository owner a nonexclusive, worldwide, irrevocable license to use,
+        modify, and distribute your contribution as part of this project under
+        the <a href="https://github.com/ariusalipour/Mockachino-Blog/blob/main/LICENSE.txt">All Rights Reserved license</a>.
+        You represent that you have the right to grant this license and that your
+        contribution does not infringe on any third-party rights.
+      </p>
+    </section>
+  </div>
+</Layout>
