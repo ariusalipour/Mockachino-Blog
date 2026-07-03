@@ -1,10 +1,10 @@
 ---
 import "../styles/global.css";
-import { execSync } from "node:child_process";
 import LogoMark from "../components/LogoMark.astro";
 import RasterIcon from "../components/RasterIcon.astro";
 import SystemGrid from "../components/SystemGrid.astro";
 import { headerNav, primaryNav, topics } from "../data/wiki";
+import { getRepoStatus } from "../lib/repo";
 
 interface Props {
   title?: string;
@@ -22,63 +22,7 @@ const {
   pageClass,
 } = Astro.props;
 
-const today = new Date();
-today.setHours(0, 0, 0, 0);
-const activityDays = 7 * 16;
-const activityStart = new Date(today);
-activityStart.setDate(today.getDate() - activityDays + 1);
-
-function toDateKey(date: Date) {
-  return date.toISOString().slice(0, 10);
-}
-
-function getRepoActivity() {
-  const counts = new Map<string, number>();
-
-  try {
-    const output = execSync("git log --date=short --pretty=format:%ad -n 500", {
-      cwd: process.cwd(),
-      encoding: "utf8",
-      stdio: ["ignore", "pipe", "ignore"],
-    });
-
-    for (const date of output.split(/\r?\n/).filter(Boolean)) {
-      counts.set(date, (counts.get(date) ?? 0) + 1);
-    }
-  } catch {
-    // Keep the activity grid renderable outside a git checkout.
-  }
-
-  return Array.from({ length: 16 }, (_, weekIndex) =>
-    Array.from({ length: 7 }, (_, dayIndex) => {
-      const date = new Date(activityStart);
-      date.setDate(activityStart.getDate() + weekIndex * 7 + dayIndex);
-      const dateKey = toDateKey(date);
-
-      return {
-        date: dateKey,
-        count: counts.get(dateKey) ?? 0,
-      };
-    }),
-  );
-}
-
-const repoActivity = getRepoActivity();
-const totalRepoCommits = repoActivity.flat().reduce((total, cell) => total + cell.count, 0);
-
-function getLastGitUpdate() {
-  try {
-    return execSync('git log -1 --format="%cd" --date=format:"%d %b %Y"', {
-      cwd: process.cwd(),
-      encoding: "utf8",
-      stdio: ["ignore", "pipe", "ignore"],
-    }).trim();
-  } catch {
-    return "Unavailable";
-  }
-}
-
-const lastGitUpdate = getLastGitUpdate();
+const repoStatus = getRepoStatus();
 ---
 
 <!doctype html>
@@ -201,10 +145,10 @@ const lastGitUpdate = getLastGitUpdate();
           <section class="panel panel--sidebar panel--status">
             <p class="panel__kicker">Repo Activity</p>
             <div class="repo-activity">
-              <SystemGrid activity={repoActivity} />
+              <SystemGrid activity={repoStatus.activity} />
               <div class="repo-activity__meta">
-                <span>{totalRepoCommits} commits</span>
-                <span>16 weeks</span>
+                <span>{repoStatus.totalCommits} total commits</span>
+                <span>{repoStatus.windowWeeks} weeks</span>
               </div>
             </div>
           </section>
@@ -269,7 +213,7 @@ const lastGitUpdate = getLastGitUpdate();
             </div>
             <div>
               <dt>Last Update</dt>
-              <dd>{lastGitUpdate}</dd>
+              <dd>{repoStatus.lastCommitDisplayDate}</dd>
             </div>
             <div>
               <dt>Status</dt>

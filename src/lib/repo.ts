@@ -9,10 +9,13 @@ interface CommitActivityCell {
 export interface RepoStatus {
   version: string;
   lastCommitDate: string;
+  lastCommitDisplayDate: string;
   lastCommitMessage: string;
   lastCommitHash: string;
   activity: CommitActivityCell[][];
+  totalCommits: number;
   totalCommitsInWindow: number;
+  windowWeeks: number;
 }
 
 function runGit(command: string) {
@@ -27,8 +30,32 @@ function runGit(command: string) {
   }
 }
 
-function buildActivityGrid(windowDays = 84) {
-  const now = new Date();
+function toDateKey(date: Date) {
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, "0");
+  const day = String(date.getDate()).padStart(2, "0");
+
+  return `${year}-${month}-${day}`;
+}
+
+function formatDisplayDate(dateKey: string) {
+  const [year, month, day] = dateKey.split("-").map(Number);
+
+  if (!year || !month || !day) {
+    return "Unavailable";
+  }
+
+  return new Intl.DateTimeFormat("en-GB", {
+    day: "2-digit",
+    month: "short",
+    year: "numeric",
+  }).format(new Date(year, month - 1, day));
+}
+
+function buildActivityGrid(windowWeeks = 16) {
+  const windowDays = windowWeeks * 7;
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
   const counts = new Map<string, number>();
   const commitDates = runGit(`git log --since="${windowDays} days ago" --date=short --pretty=format:%ad`)
     .split(/\r?\n/)
@@ -41,9 +68,9 @@ function buildActivityGrid(windowDays = 84) {
   const days: CommitActivityCell[] = [];
 
   for (let index = windowDays - 1; index >= 0; index -= 1) {
-    const date = new Date(now);
-    date.setUTCDate(now.getUTCDate() - index);
-    const key = date.toISOString().slice(0, 10);
+    const date = new Date(today);
+    date.setDate(today.getDate() - index);
+    const key = toDateKey(date);
 
     days.push({
       date: key,
@@ -60,6 +87,7 @@ function buildActivityGrid(windowDays = 84) {
   return {
     activity: columns,
     totalCommitsInWindow: commitDates.length,
+    windowWeeks,
   };
 }
 
@@ -73,15 +101,18 @@ function readVersion() {
 }
 
 export function getRepoStatus(): RepoStatus {
-  const lastCommit = runGit('git log -1 --date=iso --pretty=format:"%H|%ad|%s"');
-  const [lastCommitHash = "unknown", lastCommitDate = new Date().toISOString(), lastCommitMessage = "No commit metadata"] =
+  const lastCommit = runGit('git log -1 --date=short --pretty=format:"%H|%ad|%s"');
+  const [lastCommitHash = "unknown", lastCommitDate = "", lastCommitMessage = "No commit metadata"] =
     lastCommit.split("|");
+  const totalCommits = Number.parseInt(runGit("git rev-list --count HEAD"), 10) || 0;
 
   return {
     version: readVersion(),
     lastCommitDate,
+    lastCommitDisplayDate: formatDisplayDate(lastCommitDate),
     lastCommitMessage,
     lastCommitHash,
+    totalCommits,
     ...buildActivityGrid(),
   };
 }

@@ -40,6 +40,8 @@ Build output directory: dist
 Node version: 22
 ```
 
+The `prebuild` step expands shallow git checkouts before Astro renders static repo activity metadata.
+
 This repo also includes:
 
 - a Cloudflare Worker at `workers/ga-sync/` that syncs GA4 page view data into KV
