@@ -7,7 +7,7 @@ topic: plays
 category: software-tools
 createdAt: 2025-03-15T10:00:00.000Z
 updatedAt: 2026-03-06T21:40:15.000Z
-popularity: 122
+articleId: PLA-EXP-009
 tags:
   - mockachino
   - projects
@@ -16,6 +16,7 @@ featuredImage:
   src: /images/PLA-EXP-009/image_2023-03-12_002249803.png
   alt: 
 ---
+
 
 Coming up to the new year (2023), I have had to think about where my priorities lay with the work I’m doing day and night. In case you didn’t know, I have been very busy working on two different entities while working at PureGym as a software engineer. The first entity is more well-known to be [Outdoor Technica](https://outdoortechnica.com/). The purpose of Outdoor Technica has been to facilitate my creative avenues of content creation and web design. Outdoor Technica currently has a blog website, a YouTube channel, some social media accounts and the odd podcast. Neither of these is doing overtly well because it is a one-man band. Outdoor Technica is also a business-to-business provider of web services which is doing ok. There hasn’t been much effort to get more clients however there is some passive and active income from the services provided which keeps for some expenses but not enough for any profit.
 

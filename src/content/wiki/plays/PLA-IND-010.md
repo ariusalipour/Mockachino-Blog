@@ -1,13 +1,13 @@
 ---
 slug: slay-the-spire
 title: "Slay The Spire: Deck Building for Survival"
-summary: "A review of Slay the Spire's deck-building loop, relic choices, run structure, replayability, and strategic challenge."
+summary: A review of Slay the Spire's deck-building loop, relic choices, run structure, replayability, and strategic challenge.
 kind: review
 topic: plays
 category: indie-gaming
 createdAt: 2022-12-24T11:36:00.000Z
 updatedAt: 2026-03-06T14:10:52.000Z
-popularity: 121
+articleId: PLA-IND-010
 tags:
   - deck-building
   - roguelike
@@ -16,6 +16,7 @@ featuredImage:
   src: /images/PLA-IND-010/image_2023-03-14_113717022.png
   alt: 
 ---
+
 
 Slay the Spire is a roguelike deck-building game developed by MegaCrit. It was released in 2019 and has received critical acclaim for its engaging gameplay, unique mechanics, and high replayability value. In this review, I will provide an in-depth analysis of the game and why it is worth playing.
 

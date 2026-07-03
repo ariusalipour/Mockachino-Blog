@@ -7,7 +7,7 @@ topic: plays
 category: tactical-shooters
 createdAt: 2025-09-05T10:00:00.000Z
 updatedAt: 2026-03-06T21:40:13.000Z
-popularity: 128
+articleId: PLA-NEW-003
 tags:
   - battle-royale
   - fps
@@ -16,6 +16,7 @@ featuredImage:
   src: /images/PLA-NEW-003/image_2023-03-11_225756369.png
   alt: 
 ---
+
 
 The Finals is a new competitive shooter game that has taken the gaming world by storm with its unique feature of destructible environments. Developed by a team of experienced game designers, The Finals is a first-person shooter that allows players to engage in high-octane, adrenaline-fueled battles against other players from around the world, while also being able to manipulate the environment to gain a tactical advantage.
 

@@ -1,0 +1,3 @@
+---
+label: "Escape From Tarkov"
+---

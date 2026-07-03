@@ -7,7 +7,7 @@ topic: shoots
 category: practical-shooting
 createdAt: 2025-05-14T10:00:00.000Z
 updatedAt: 2026-03-06T21:40:10.000Z
-popularity: 150
+articleId: SHO-NEW-WHY
 tags:
   - ipsc
   - practical-shooting
@@ -15,6 +15,7 @@ featuredImage:
   src: /images/SHO-NEW-WHY/image_2023-03-11_231633898.png
   alt: 
 ---
+
 
 Practical shooting, also known as action shooting or dynamic shooting, is a shooting discipline that has gained popularity around the world. Practical shooting is a sport that tests a shooter’s ability to engage targets quickly and accurately while under time pressure and in various scenarios. In this article, we will explore why practical shooting is a great shooting discipline and why it’s worth considering as a hobby or sport.
 

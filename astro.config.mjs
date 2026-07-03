@@ -1,6 +1,8 @@
 import { defineConfig } from "astro/config";
 import rehypeGlossaryTooltips from "./src/lib/rehype-glossary-tooltips";
-import { glossaryTerms } from "./src/data/wiki";
+import { readGlossaryTermsFromContent } from "./src/data/glossary-files";
+
+const glossaryTerms = readGlossaryTermsFromContent();
 
 export default defineConfig({
   output: "static",

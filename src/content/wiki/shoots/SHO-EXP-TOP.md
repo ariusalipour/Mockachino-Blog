@@ -1,13 +1,13 @@
 ---
 slug: top-5-handguns-id-like-to-shoot-ipsc-handgun
-title: "Top 5 Handguns I'd like to shoot IPSC Handgun"
+title: Top 5 Handguns I'd like to shoot IPSC Handgun
 summary: A personal wishlist of handguns to try in IPSC Handgun, written from the perspective of an active competition shooter.
 kind: article
 topic: shoots
 category: gear-and-firearms
 createdAt: 2025-11-20T10:00:00.000Z
 updatedAt: 2026-03-06T21:40:08.000Z
-popularity: 156
+articleId: SHO-EXP-TOP
 tags:
   - handgun
   - practical-shooting
@@ -15,6 +15,7 @@ featuredImage:
   src: /images/SHO-EXP-TOP/image-10.png
   alt: 
 ---
+
 
 I am an avid handgun shooter who loves the ability to shoot competitions with a handgun. There are tons of handguns out there, such as the Staccato 2011s and the Laugo Arms Alien handguns. But I’m an eccentric and like to think about what I would actually own in 2023 with the current line up.
 

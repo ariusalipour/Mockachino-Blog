@@ -7,7 +7,7 @@ topic: codes
 category: software-tools
 createdAt: 2025-06-05T10:00:00.000Z
 updatedAt: 2026-03-06T21:40:12.000Z
-popularity: 114
+articleId: COD-GUI-CRE
 tags:
   - bot
   - discord
@@ -16,6 +16,7 @@ featuredImage:
   src: /images/COD-GUI-CRE/image_2023-03-16_181557188.png
   alt: 
 ---
+
 
 Discord is a popular platform for gamers and communities to communicate, share content and play games. Discord bots are automated programs that can be used to perform various tasks on a Discord server, such as moderating chats, playing music, and responding to user commands. In this article, we’ll show you how to create a basic Discord bot using Node.js and the Discord.js library.
 

@@ -7,7 +7,7 @@ topic: shoots
 category: gear-and-firearms
 createdAt: 2020-06-10T00:50:00.000Z
 updatedAt: 2023-03-12T00:52:15.000Z
-popularity: 130
+articleId: SHO-BLO-SHO
 tags:
   - handgun
   - ipsc
@@ -18,6 +18,7 @@ featuredImage:
   src: /images/SHO-BLO-SHO/image_2023-03-12_005200567.png
   alt: 
 ---
+
 
 Can you learn it that quick too?
 

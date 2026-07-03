@@ -7,7 +7,7 @@ topic: shoots
 category: practical-shooting
 createdAt: 2023-03-02T23:39:13.000Z
 updatedAt: 2026-03-06T13:47:12.000Z
-popularity: 148
+articleId: SHO-EVE-IWA
 tags:
   - iwa
   - trade-shows
@@ -15,6 +15,7 @@ featuredImage:
   src: /images/SHO-EVE-IWA/image_2023-03-11_234011219.png
   alt: 
 ---
+
 
 The IWA Outdoor Classics is an annual international trade fair for hunting, shooting sports, outdoor equipment, and civilian and official security products. The event is held in Nuremberg, Germany, and is one of the largest and most important trade fairs of its kind in the world.
 

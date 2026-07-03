@@ -6,7 +6,7 @@ accent: "#75c267"
 icon: chip
 homeStats:
   reviews: 0
-  articles: 3
+  articles: 4
   guides: 5
 ---
 

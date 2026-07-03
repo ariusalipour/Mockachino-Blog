@@ -1,13 +1,13 @@
 ---
 slug: you-have-an-astigmatism-and-its-ok
-title: "You have an Astigmatism and it's OK"
+title: You have an Astigmatism and it's OK
 summary: A reassuring optics guide for shooters who see distortion, blur, or unusual reticle shapes through red dots.
 kind: guide
 topic: shoots
 category: practical-shooting
 createdAt: 2025-04-22T10:00:00.000Z
 updatedAt: 2026-03-06T21:40:10.000Z
-popularity: 149
+articleId: SHO-TIP-YOU
 tags:
   - optics
   - practical-shooting
@@ -16,6 +16,7 @@ featuredImage:
   src: /images/SHO-TIP-YOU/image_2023-03-11_232447887.png
   alt: 
 ---
+
 
 Astigmatism can cause distortion and blurring of the reticle or dot seen through an optic. The exact appearance of the distortion will depend on the severity of the astigmatism and the type of optic being used.
 

@@ -7,7 +7,7 @@ topic: shoots
 category: gear-and-firearms
 createdAt: 2021-07-12T00:41:00.000Z
 updatedAt: 2023-03-12T00:44:46.000Z
-popularity: 133
+articleId: SHO-REV-REC
 tags:
   - carbine-kit
   - handgun
@@ -15,6 +15,7 @@ featuredImage:
   src: /images/SHO-REV-REC/image_2023-03-12_004440042.png
   alt: 
 ---
+
 
 Let’s get one thing straight. Creating a carbine kit for a handgun that renovates the design and function to compare to a personal defence weapon or submachine pistol is difficult at the very least. Handguns are usually not designed to be converted in such a manner without forethought. This means that when a company designs a kit to bring it closer to a carbine or similar, their are compromises that have to be made in order to make it work.
 

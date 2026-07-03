@@ -1,13 +1,13 @@
 ---
 slug: shot-show-2026-first-timer
 title: "Shot Show 2026: A First-Timer's Guide to the World's Biggest Firearms Trade Show"
-summary: "A first-timer's account of Shot Show 2026, covering the scale, pace, exhibitors, fatigue, and what to expect."
+summary: A first-timer's account of Shot Show 2026, covering the scale, pace, exhibitors, fatigue, and what to expect.
 kind: article
 topic: shoots
 category: practical-shooting
 createdAt: 2026-02-13T10:00:00.000Z
 updatedAt: 2026-03-06T22:30:47.000Z
-popularity: 159
+articleId: SHO-EVE-SHO
 tags:
   - optics
   - practical-shooting
@@ -17,13 +17,14 @@ featuredImage:
   alt: Shot Show 2026 entrance at the Venetian, Las Vegas
 ---
 
+
 I went to Shot Show 2026 for the first time. It was overwhelming, exciting, and I came home with the flu. Here’s what to expect if you’re thinking about going.
 
 Shot Show is not like any other trade show I’ve been to. I’ve done IWA in Nuremberg, which gives you some sense of scale for a large industry event. Shot Show made all of that feel quaint.
 
 ![Shot Show 2026 entrance at the Venetian, Las Vegas](/images/SHO-EVE-SHO/Shot-Show-Entrance.jpg)
 
-* * *
+---
 
 ## Getting There: The UK to Vegas Pipeline
 
@@ -41,7 +42,7 @@ Thanks to the guys from Mag Load who helped make the trip viable. I wouldn’t h
 
 ![Callum from Mag Load on the terminal bus](/images/SHO-EVE-SHO/Callum-from-Magload-on-a-Terminal-Bus.jpg)
 
-* * *
+---
 
 ## The Supply Showcase: Start Here
 
@@ -53,7 +54,7 @@ The Supply Showcase is not about consumer products. It’s about the suppliers b
 
 If you’re a retailer, a product developer, or someone with an idea you want to manufacture, the Supply Showcase is genuinely valuable. It probably deserves more attention than it gets.
 
-* * *
+---
 
 ## The Scale of Shot Show
 
@@ -63,7 +64,7 @@ How does it compare to IWA? Honestly, it’s difficult to say with certainty. Wh
 
 One thing I wasn’t expecting was the law enforcement section. It’s in a separate area and carries a very different atmosphere. I felt out of place at first, but there are consumer-relevant brands in there too. It just takes a moment to realise you’re allowed to be there.
 
-* * *
+---
 
 ## What I Covered: Day by Day
 
@@ -163,7 +164,7 @@ Getting to Caesar’s Palace via the bridge between the venues felt like enterin
 
 ![Goat 15 miniature .22 rifles for junior and new shooters](/images/SHO-EVE-SHO/Goat-15.jpg)
 
-* * *
+---
 
 ## A Note on the Show Floor
 
@@ -173,7 +174,7 @@ One other thing worth mentioning: Bass Pro. There are two Bass Pro visits in thi
 
 ![Bass Pro Shop - an unmissable stop for UK visitors to the US](/images/SHO-EVE-SHO/Bass-Pro-Shop.jpg)
 
-* * *
+---
 
 ## Final Thoughts
 

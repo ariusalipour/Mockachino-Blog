@@ -3,15 +3,13 @@ import Layout from "../layouts/Layout.astro";
 import {
   formatCategoryLabel,
   formatTopicLabel,
-  getPopularEntries,
   getRecentEntries,
   topics,
   wikiEntries,
 } from "../data/wiki-content";
 
 const recentEntries = getRecentEntries(10);
-// TODO: Replace static wiki popularity values with Google Analytics or Cloudflare metrics.
-const popularEntries = getPopularEntries(10);
+const popularEntries = recentEntries;
 const homeTopicPanels = topics.map((topic) => {
   const topicEntries = wikiEntries.filter((e) => e.topic === topic.id);
   return {

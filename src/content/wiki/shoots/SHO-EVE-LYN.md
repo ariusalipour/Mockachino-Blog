@@ -7,7 +7,7 @@ topic: shoots
 category: practical-shooting
 createdAt: 2026-02-06T10:00:00.000Z
 updatedAt: 2026-03-06T21:40:07.000Z
-popularity: 158
+articleId: SHO-EVE-LYN
 tags:
   - optics
   - practical-shooting
@@ -18,6 +18,7 @@ featuredImage:
   src: /images/SHO-EVE-LYN/lynx-brutality-2025-feature.jpg
   alt: Lynx Brutality 2025 - Shooter engaging target through port
 ---
+
 
 For the past two years, I’ve had the honour of commentating on the Lynx Brutality live streams. It’s been a brilliant opportunity to develop a new skill and be part of something special. But there’s always been a nagging thought in the back of my mind: what would it actually be like to shoot one of these stages myself?
 

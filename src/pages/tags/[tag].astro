@@ -13,17 +13,17 @@ export function getStaticPaths() {
 
 const { tag } = Astro.props;
 const resolvedTag = getTags().find((candidate) => candidate.slug === Astro.params.tag) ?? tag;
-const entries = getEntriesByTag(resolvedTag.name);
+const entries = getEntriesByTag(resolvedTag.slug);
 const params = Astro.url.searchParams;
 const initialQ = params.get("q") ?? "";
 const listId = `tag-list-${resolvedTag.slug}`;
 ---
 
-<Layout title={`#${resolvedTag.name} | MOCKACHINO`} description={`Pages tagged ${resolvedTag.name}.`} currentPath={Astro.url.pathname}>
+<Layout title={`#${resolvedTag.label} | MOCKACHINO`} description={`Pages tagged ${resolvedTag.label}.`} currentPath={Astro.url.pathname}>
   <div class="page-stack">
     <section class="panel taxonomy-hero">
       <p class="section-label">Tag</p>
-      <h1>#{resolvedTag.name}</h1>
+      <h1>#{resolvedTag.label}</h1>
       <p class="taxonomy-copy">
         {resolvedTag.count} linked entries share this tag. Use the search below to narrow the list further.
       </p>
@@ -36,7 +36,7 @@ const listId = `tag-list-${resolvedTag.slug}`;
       total={entries.length}
       listId={listId}
       initialQ={initialQ}
-      placeholder={`Filter entries tagged ${resolvedTag.name}`}
+      placeholder={`Filter entries tagged ${resolvedTag.label}`}
       resultsLabel="entries visible"
       showKinds={true}
     />
@@ -45,7 +45,7 @@ const listId = `tag-list-${resolvedTag.slug}`;
       <div class="section-heading section-heading--compact">
         <div>
           <p class="section-label">Tagged Entries</p>
-          <h2>All pages carrying #{resolvedTag.name}.</h2>
+          <h2>All pages carrying #{resolvedTag.label}.</h2>
         </div>
       </div>
       <EntryList entries={entries} perPage={10} id={listId} />

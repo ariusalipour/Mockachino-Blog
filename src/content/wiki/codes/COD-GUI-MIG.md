@@ -7,7 +7,7 @@ topic: codes
 category: software-tools
 createdAt: 2025-05-01T10:00:00.000Z
 updatedAt: 2026-03-06T21:40:12.000Z
-popularity: 113
+articleId: COD-GUI-MIG
 tags:
   - hosting
   - web
@@ -16,6 +16,7 @@ featuredImage:
   src: /images/COD-GUI-MIG/image_2023-03-16_195731649.png
   alt: 
 ---
+
 
 Migrating a WordPress website from one site to another can be a daunting task, but it’s something that needs to be done occasionally. In this article, we will go through the step-by-step process of migrating one WordPress website to another.
 

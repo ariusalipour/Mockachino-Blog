@@ -7,7 +7,7 @@ topic: shoots
 category: airsoft-and-tactical
 createdAt: 2025-08-12T10:00:00.000Z
 updatedAt: 2026-03-06T21:40:09.000Z
-popularity: 153
+articleId: SHO-NEW-THI
 tags:
   - airsoft
   - realism
@@ -16,6 +16,7 @@ featuredImage:
   src: /images/SHO-NEW-THI/image-6.png
   alt: 
 ---
+
 
 I don’t normally talk about Airsoft unless it related to competitive shooting or providing an avenue for cross over to sports shooting. This however is a special case as it provides more realism to what I had always seen as an issue with Automatic Electric Guns, the unrealistic trigger pull. This new product aims to resolve this!
 

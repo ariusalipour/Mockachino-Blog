@@ -7,7 +7,7 @@ topic: shoots
 category: practical-shooting
 createdAt: 2023-02-01T00:09:00.000Z
 updatedAt: 2026-03-06T13:48:09.000Z
-popularity: 142
+articleId: SHO-TRA-WHA
 tags:
   - optics
   - practical-shooting
@@ -16,6 +16,7 @@ featuredImage:
   src: /images/SHO-TRA-WHA/image_2023-03-12_001037055.png
   alt: 
 ---
+
 
 Sight over bore, also known as sight height, refers to the distance between the shooter’s eye and the barrel of the firearm when aiming down the sights. This distance can affect the alignment of the sights and the point of impact of the bullet, particularly at close ranges.
 
