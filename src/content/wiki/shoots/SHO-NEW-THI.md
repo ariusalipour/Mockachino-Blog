@@ -1,22 +1,21 @@
 ---
+articleId: SHO-NEW-THI
 slug: this-trigger-will-make-your-airsoft-gun-realistic
 title: This Trigger Will Make Your Airsoft Gun, Realistic!
 summary: A shooting-adjacent product note on using airsoft trigger realism as a bridge into more useful dry training.
 kind: article
 topic: shoots
 category: airsoft-and-tactical
-createdAt: 2025-08-12T10:00:00.000Z
-updatedAt: 2026-03-06T21:40:09.000Z
-articleId: SHO-NEW-THI
+createdAt: 2025-08-12T10:00:00.000+00:00
+updatedAt: 2026-03-06T21:40:00.000+00:00
 tags:
   - airsoft
   - realism
   - triggers
 featuredImage:
-  src: /images/SHO-NEW-THI/image-6.png
-  alt: 
+  src: /images/SHO-NEW-THI/SHO-NEW-THI-01-featured-image.png
+  alt: ""
 ---
-
 
 I don’t normally talk about Airsoft unless it related to competitive shooting or providing an avenue for cross over to sports shooting. This however is a special case as it provides more realism to what I had always seen as an issue with Automatic Electric Guns, the unrealistic trigger pull. This new product aims to resolve this!
 

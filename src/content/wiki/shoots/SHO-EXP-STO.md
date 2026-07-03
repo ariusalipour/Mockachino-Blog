@@ -1,22 +1,21 @@
 ---
+articleId: SHO-EXP-STO
 slug: stop-referring-to-firearms-as-weapons
 title: Stop referring to Firearms as Weapons!
 summary: An opinion piece about language around firearms, sporting use, and why terminology matters in shooting culture.
 kind: article
 topic: shoots
 category: law-and-safety
-createdAt: 2023-01-19T12:08:00.000Z
-updatedAt: 2026-03-06T13:48:21.000Z
-articleId: SHO-EXP-STO
+createdAt: 2023-01-19T12:08:00.000+00:00
+updatedAt: 2026-03-06T13:48:00.000+00:00
 tags:
   - practical-shooting
   - target-shooting
   - uk-shooting
 featuredImage:
-  src: /images/SHO-EXP-STO/C0240.MP4.01_49_01_041.Still001.png
-  alt: 
+  src: /images/SHO-EXP-STO/SHO-EXP-STO-01-featured-image.png
+  alt: ""
 ---
-
 
 Firearms have been around for centuries and have been used for a variety of purposes, including hunting, self-defense, and warfare. However, in recent times, there has been a growing trend to refer to firearms as “weapons.” This trend is largely fueled by the media, which often portrays firearms as tools of violence and destruction. However, it’s important to note that firearms are more commonly used for sports shooting and hunting than for any other purpose.
 

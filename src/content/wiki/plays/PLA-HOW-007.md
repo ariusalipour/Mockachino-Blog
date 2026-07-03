@@ -1,22 +1,21 @@
 ---
+articleId: PLA-HOW-007
 slug: discord-stream-overlay-hack-for-pop-out
 title: Discord Stream Overlay Hack (For Pop Out)
 summary: A follow-up workaround for keeping Discord stream name tags visible when video streams are opened in pop-out windows.
 kind: guide
 topic: plays
 category: software-tools
-createdAt: 2025-05-25T10:00:00.000Z
-updatedAt: 2026-03-06T21:40:14.000Z
-articleId: PLA-HOW-007
+createdAt: 2025-05-25T10:00:00.000+00:00
+updatedAt: 2026-03-06T21:40:00.000+00:00
 tags:
   - discord
   - hacks
   - voip
 featuredImage:
-  src: /images/PLA-HOW-007/image_2023-03-12_000416163.png
-  alt: 
+  src: /images/PLA-HOW-007/PLA-HOW-007-01-featured-image.png
+  alt: ""
 ---
-
 
 As soon as I demo’d the Discord stream overlay hack to a friend, I was presented with an issue that only he has. It seems that BetterDiscord’s CSS override does not work on pop outs of video streams.
 

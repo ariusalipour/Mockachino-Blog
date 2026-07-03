@@ -1,22 +1,21 @@
 ---
+articleId: SHO-GUI-HOWT
 slug: how-to-start-ipsc-action-air-on-a-budget
 title: How to Start IPSC Action Air on a Budget
 summary: A budget starter guide for IPSC Action Air, focused on avoiding overwhelm while choosing workable entry equipment.
 kind: guide
 topic: shoots
 category: practical-shooting
-createdAt: 2022-07-10T00:31:00.000Z
-updatedAt: 2023-03-12T00:33:25.000Z
-articleId: SHO-GUI-HOWT
+createdAt: 2022-07-10T00:31:00.000+00:00
+updatedAt: 2023-03-12T00:33:00.000+00:00
 tags:
   - action-air
   - ipsc
   - practical-shooting
 featuredImage:
-  src: /images/SHO-GUI-HOWT/image_2023-03-12_003255340.png
-  alt: 
+  src: /images/SHO-GUI-HOWT/SHO-GUI-HOWT-01-featured-image.png
+  alt: ""
 ---
-
 
 Getting started with IPSC Action Air can seem daunting if not almost unnerving when comparing equipment in use by those who are already competing in the sport. You’re seeing videos and pictures of all the expensive equipment and replicas, and your wallet starts to cower in fear. How did they afford all of this kit? They must have started their journey from somewhere. Here is a guide to how you can start shooting IPSC Action Air on a budget!
 
@@ -100,7 +99,7 @@ Allied Equipment
 
 Allied Equipment
 
-[Emerson IPSC Pistol Holster](https://www.ebay.co.uk/itm/313197143710?hash=item48ec01269e:g:KiMAAOSwAnJfRqM-&amdata=enc%3AAQAHAAAA4O2gXOCqlYYKcWIfLh013d%2FmCwDiSYmUPuJJfIfWD5AyrHcpFbl6F6XQjO%2Be6D9HW1o5JcCNwcLwe9pz6G%2F4BJyL4FARzSHak92nvmXPlq1e%2Br3l9fm8M3PIuQcyvYO5iBO5ZIptWOMz576YXwWLvw6WjwopRRiGzDjTUh9MDItkvTBj135qHQsJuTwNBqh39UaDWWX0qmlpsAwOEpl2ne%2B0ii%2BqftzIdyL5wktilCJBCQ8YRDuLcGC5WcrcF8l8b5jhakRaB0XMkM4%2FJIux4ybE5un2S6Ofm496WCxjkYQh%7Ctkp%3ABFBMlN_cnr1g)
+[Emerson IPSC Pistol Holster](https://www.ebay.co.uk/itm/313197143710?hash=item48ec01269e%3Ag%3AKiMAAOSwAnJfRqM-&amdata=enc%3AAQAHAAAA4O2gXOCqlYYKcWIfLh013d%2FmCwDiSYmUPuJJfIfWD5AyrHcpFbl6F6XQjO%2Be6D9HW1o5JcCNwcLwe9pz6G%2F4BJyL4FARzSHak92nvmXPlq1e%2Br3l9fm8M3PIuQcyvYO5iBO5ZIptWOMz576YXwWLvw6WjwopRRiGzDjTUh9MDItkvTBj135qHQsJuTwNBqh39UaDWWX0qmlpsAwOEpl2ne%2B0ii%2BqftzIdyL5wktilCJBCQ8YRDuLcGC5WcrcF8l8b5jhakRaB0XMkM4%2FJIux4ybE5un2S6Ofm496WCxjkYQh%7Ctkp%3ABFBMlN_cnr1g)
 
 £45
 
@@ -110,7 +109,7 @@ Allied Equipment
 
 Personal Protective Equipment
 
-[BOLLE RUSH+CLEAR Safety Glasses](https://www.amazon.co.uk/Bolle-CLEAR-Clear-Safety-Glasses/dp/B00GV928I6/ref=sr_1_8?keywords=Bolle+Glasses&qid=1657487099&sr=8-8)
+[BOLLE RUSH+CLEAR Safety Glasses](https://www.amazon.co.uk/Bolle-CLEAR-Clear-Safety-Glasses/dp/B00GV928I6/ref=sr_1_8?keywords=Bolle%20Glasses&qid=1657487099&sr=8-8)
 
 £10
 

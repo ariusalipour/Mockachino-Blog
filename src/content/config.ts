@@ -45,7 +45,7 @@ const glossary = defineCollection({
 const wiki = defineCollection({
   type: "content",
   schema: z.object({
-    articleId: z.string().optional(),
+    articleId: z.string(),
     slug: z.string().optional(),
     title: z.string(),
     summary: z.string(),

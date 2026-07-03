@@ -1,13 +1,13 @@
 ---
+articleId: SHO-EVE-LYN
 slug: lynx-brutality-2025-commentator-to-competitor
 title: "Lynx Brutality 2025: From Commentator to Competitor"
 summary: A match report about moving from commentary to competing at Lynx Brutality after two years behind the microphone.
 kind: article
 topic: shoots
 category: practical-shooting
-createdAt: 2026-02-06T10:00:00.000Z
-updatedAt: 2026-03-06T21:40:07.000Z
-articleId: SHO-EVE-LYN
+createdAt: 2026-02-06T10:00:00.000+00:00
+updatedAt: 2026-03-06T21:40:00.000+00:00
 tags:
   - optics
   - practical-shooting
@@ -15,10 +15,9 @@ tags:
   - target-shooting
   - uk-shooting
 featuredImage:
-  src: /images/SHO-EVE-LYN/lynx-brutality-2025-feature.jpg
+  src: /images/SHO-EVE-LYN/SHO-EVE-LYN-01-lynx-brutality-2025-shooter-engaging-target-through-port.jpg
   alt: Lynx Brutality 2025 - Shooter engaging target through port
 ---
-
 
 For the past two years, I’ve had the honour of commentating on the Lynx Brutality live streams. It’s been a brilliant opportunity to develop a new skill and be part of something special. But there’s always been a nagging thought in the back of my mind: what would it actually be like to shoot one of these stages myself?
 
@@ -48,14 +47,13 @@ Lynx Brutality was hosted at the Lynx Tactical Shooting Centre in Slovenia, a fa
 
 Since I was shooting Open Division, I had some flexibility with equipment. Clothing-wise, I kept things light: Salomon boots, wool socks, a Helikon rain shirt, and tactical pants. Thanks to the generosity of Polar Tactical, I was kitted out with:
 
--   A “What Would Stoner Do” AR-15 with a shortened barrel, Primary Arms 3x micro prism, and a Holosun pistol dot on a 45 degree mount
--   An AXE Delta pistol with a Holosun closed emitter red dot
--   A prototype retention holster from Battle Gnome Solutions
--   Enough magazines to make me feel like I was doing an extended fitness challenge
-
+- A “What Would Stoner Do” AR-15 with a shortened barrel, Primary Arms 3x micro prism, and a Holosun pistol dot on a 45 degree mount
+- An AXE Delta pistol with a Holosun closed emitter red dot
+- A prototype retention holster from Battle Gnome Solutions
+- Enough magazines to make me feel like I was doing an extended fitness challenge
 The main match runs over two days, letting competitors split the stages. I was shooting the pre-match, all stages in one day with minimal breaks. Looking back, I’m not sure splitting it would have helped. What definitely affected me was the lack of rest between kettlebell drills.
 
-![Borrowed equipment from Polar Tactical](/images/SHO-EVE-LYN/lynx-brutality-2025-equipment.jpg)
+![Borrowed equipment from Polar Tactical](/images/SHO-EVE-LYN/SHO-EVE-LYN-01-borrowed-equipment-from-polar-tactical.jpg)
 
 The borrowed kit from Polar Tactical
 
@@ -93,7 +91,7 @@ The scaffolding was wobbly, which made me cautious. The swinger technique, accel
 
 **Result: 17.10 seconds, 11th place**
 
-![Shooting from unconventional position](/images/SHO-EVE-LYN/lynx-brutality-2025-positional.jpg)
+![Shooting from unconventional position](/images/SHO-EVE-LYN/SHO-EVE-LYN-02-shooting-from-unconventional-position.jpg)
 
 The stages required shooting from all sorts of positions
 
@@ -145,7 +143,7 @@ The crank made your arms feel like jelly before shooting. I should have used the
 
 **Result: 32.03 seconds, 17th place**
 
-![Mid-stage action shot](/images/SHO-EVE-LYN/lynx-brutality-2025-action.jpg)
+![Mid-stage action shot](/images/SHO-EVE-LYN/SHO-EVE-LYN-03-mid-stage-action-shot.jpg)
 
 Mid-stage action
 

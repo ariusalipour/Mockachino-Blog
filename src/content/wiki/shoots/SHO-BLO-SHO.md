@@ -1,13 +1,13 @@
 ---
+articleId: SHO-BLO-SHO
 slug: shoot-a-handgun-in-10-minutes-or-less
 title: Shoot a Handgun in 10 Minutes or Less
 summary: A quick handgun fundamentals note inspired by a training video, focused on whether basic pistol concepts can be learned fast.
 kind: article
 topic: shoots
 category: gear-and-firearms
-createdAt: 2020-06-10T00:50:00.000Z
-updatedAt: 2023-03-12T00:52:15.000Z
-articleId: SHO-BLO-SHO
+createdAt: 2020-06-10T00:50:00.000+00:00
+updatedAt: 2023-03-12T00:52:00.000+00:00
 tags:
   - handgun
   - ipsc
@@ -15,10 +15,9 @@ tags:
   - tactical-shooting
   - target-shooting
 featuredImage:
-  src: /images/SHO-BLO-SHO/image_2023-03-12_005200567.png
-  alt: 
+  src: /images/SHO-BLO-SHO/SHO-BLO-SHO-01-featured-image.png
+  alt: ""
 ---
-
 
 Can you learn it that quick too?
 

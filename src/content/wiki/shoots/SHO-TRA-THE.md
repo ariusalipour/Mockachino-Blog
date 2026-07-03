@@ -1,21 +1,20 @@
 ---
+articleId: SHO-TRA-THE
 slug: the-difference-between-instructing-and-coaching
 title: The Difference between Instructing and Coaching
 summary: A training note separating instruction from coaching, with lessons carried between shooting practice and software mentoring.
 kind: guide
 topic: shoots
 category: practical-shooting
-createdAt: 2025-09-18T10:00:00.000Z
-updatedAt: 2026-03-06T21:40:09.000Z
-articleId: SHO-TRA-THE
+createdAt: 2025-09-18T10:00:00.000+00:00
+updatedAt: 2026-03-06T21:40:00.000+00:00
 tags:
   - coaching
   - instructing
 featuredImage:
-  src: /images/SHO-TRA-THE/C0267.MP4.01_57_38_101.Still001.png
-  alt: 
+  src: /images/SHO-TRA-THE/SHO-TRA-THE-01-featured-image.png
+  alt: ""
 ---
-
 
 I’m practicing to be a shooting coach, but I have been coaching software engineers for a few years now. One thing I’ve found interesting is how the methodology between the industries align quite well. I keep saying that I’m more of a coach than an instructor, but people keep asking me what the difference is between the two!
 
