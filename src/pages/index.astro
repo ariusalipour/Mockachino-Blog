@@ -1,5 +1,6 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import TimeAgo from "../components/TimeAgo.astro";
 import {
   formatCategoryLabel,
   formatTopicLabel,
@@ -21,19 +22,6 @@ const homeTopicPanels = topics.map((topic) => {
     },
   };
 });
-
-function relativeTime(dateValue: string) {
-  const delta = Date.now() - Date.parse(dateValue);
-  const hours = Math.max(1, Math.floor(delta / 3_600_000));
-
-  if (hours < 24) return `${hours}h ago`;
-
-  const days = Math.floor(hours / 24);
-  if (days < 30) return `${days}d ago`;
-
-  const months = Math.floor(days / 30);
-  return `${months}mo ago`;
-}
 
 ---
 
@@ -134,7 +122,7 @@ function relativeTime(dateValue: string) {
                   </div>
                   <div class="entry-list__meta entry-list__meta--inline">
                     <span>{formatCategoryLabel(entry.topic, entry.category).toUpperCase()}</span>
-                    <span>{relativeTime(entry.updatedAt)}</span>
+                    <TimeAgo date={entry.updatedAt} />
                   </div>
                 </div>
               </a>

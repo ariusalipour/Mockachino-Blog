@@ -1,0 +1,61 @@
+---
+interface Props {
+  date: string;
+  class?: string;
+}
+
+const { date, class: className } = Astro.props;
+const parsedDate = new Date(date);
+const absoluteLabel = Number.isNaN(parsedDate.getTime())
+  ? date
+  : new Intl.DateTimeFormat("en-GB", {
+      day: "numeric",
+      month: "short",
+      year: "numeric",
+      hour: "2-digit",
+      minute: "2-digit",
+      timeZoneName: "short",
+    }).format(parsedDate);
+---
+
+<time class={className} datetime={date} title={absoluteLabel} data-time-ago>{absoluteLabel}</time>
+
+<script>
+  function formatTimeAgo(dateValue: string) {
+    const timestamp = Date.parse(dateValue);
+    if (Number.isNaN(timestamp)) return null;
+
+    const delta = Date.now() - timestamp;
+    const isFuture = delta < 0;
+    const elapsed = Math.abs(delta);
+    const minutes = Math.floor(elapsed / 60_000);
+
+    if (minutes < 1) return isFuture ? "in a moment" : "just now";
+
+    const hours = Math.floor(elapsed / 3_600_000);
+    const days = Math.floor(elapsed / 86_400_000);
+    const months = Math.floor(days / 30);
+    const years = Math.floor(days / 365);
+    const value = years >= 1
+      ? `${years}y`
+      : months >= 1
+        ? `${months}mo`
+        : days >= 1
+          ? `${days}d`
+          : hours >= 1
+            ? `${hours}h`
+            : `${minutes}m`;
+
+    return isFuture ? `in ${value}` : `${value} ago`;
+  }
+
+  function updateRelativeTimes() {
+    document.querySelectorAll<HTMLTimeElement>("[data-time-ago]").forEach((element) => {
+      const relativeLabel = formatTimeAgo(element.dateTime);
+      if (relativeLabel) element.textContent = relativeLabel;
+    });
+  }
+
+  updateRelativeTimes();
+  document.addEventListener("astro:page-load", updateRelativeTimes);
+</script>

@@ -1,5 +1,6 @@
 ---
 import { formatCategoryLabel, formatTopicLabel, type WikiEntry } from "../data/wiki-content";
+import TimeAgo from "./TimeAgo.astro";
 
 interface Props {
   entries: WikiEntry[];
@@ -12,19 +13,6 @@ interface Props {
 const { entries, mode = "default", limit = entries.length, perPage, id } = Astro.props;
 const hasPagination = perPage != null && perPage < entries.length;
 const pageLimit = hasPagination ? entries.length : limit;
-
-function relativeTime(dateValue: string) {
-  const delta = Date.now() - Date.parse(dateValue);
-  const hours = Math.max(1, Math.floor(delta / 3_600_000));
-
-  if (hours < 24) return `${hours}h ago`;
-
-  const days = Math.floor(hours / 24);
-  if (days < 30) return `${days}d ago`;
-
-  const months = Math.floor(days / 30);
-  return `${months}mo ago`;
-}
 ---
 
 <ol id={id} class:list={["entry-list", `entry-list--${mode}`]} data-per-page={perPage}>
@@ -44,7 +32,7 @@ function relativeTime(dateValue: string) {
                   <div class="entry-list__meta entry-list__meta--inline">
                     <span>{formatTopicLabel(entry.topic)}</span>
                     <span>{formatCategoryLabel(entry.topic, entry.category)}</span>
-                    {mode === "recent" && <span>{relativeTime(entry.updatedAt)}</span>}
+                    {mode === "recent" && <TimeAgo date={entry.updatedAt} />}
                   </div>
                 </div>
               </>
