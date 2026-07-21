@@ -38,10 +38,10 @@ function toDateKey(date: Date) {
   return `${year}-${month}-${day}`;
 }
 
-function formatDisplayDate(dateKey: string) {
-  const [year, month, day] = dateKey.split("-").map(Number);
+function formatDisplayDate(dateValue: string) {
+  const date = new Date(dateValue);
 
-  if (!year || !month || !day) {
+  if (Number.isNaN(date.getTime())) {
     return "Unavailable";
   }
 
@@ -49,7 +49,8 @@ function formatDisplayDate(dateKey: string) {
     day: "2-digit",
     month: "short",
     year: "numeric",
-  }).format(new Date(year, month - 1, day));
+    timeZone: "Europe/London",
+  }).format(date);
 }
 
 function buildActivityGrid(windowWeeks = 16) {
@@ -101,7 +102,7 @@ function readVersion() {
 }
 
 export function getRepoStatus(): RepoStatus {
-  const lastCommit = runGit('git log -1 --date=short --pretty=format:"%H|%ad|%s"');
+  const lastCommit = runGit('git log -1 --date=iso-strict --pretty=format:"%H|%ad|%s"');
   const [lastCommitHash = "unknown", lastCommitDate = "", lastCommitMessage = "No commit metadata"] =
     lastCommit.split("|");
   const totalCommits = Number.parseInt(runGit("git rev-list --count HEAD"), 10) || 0;

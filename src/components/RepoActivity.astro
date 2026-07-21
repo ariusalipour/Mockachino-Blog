@@ -1,0 +1,183 @@
+---
+import type { RepoStatus } from "../lib/repo";
+import SystemGrid from "./SystemGrid.astro";
+import TimeAgo from "./TimeAgo.astro";
+
+interface Props {
+  status: RepoStatus;
+}
+
+const { status } = Astro.props;
+---
+
+<div class="repo-activity" data-repo-activity>
+  <SystemGrid activity={status.activity} />
+  <div class="repo-activity__meta" aria-live="polite">
+    <span><span data-repo-total>{status.totalCommits}</span> total commits</span>
+    <span>Last commit <TimeAgo date={status.lastCommitDate} /></span>
+  </div>
+</div>
+
+<script>
+  interface GitHubCommit {
+    commit?: {
+      author?: { date?: string };
+      committer?: { date?: string };
+    };
+  }
+
+  interface CachedRepoActivity {
+    storedAt: number;
+    totalCommits: number;
+    latestCommitAt: string;
+    dates: string[];
+  }
+
+  const API_URL = "https://api.github.com/repos/ariusalipour/Mockachino-Blog/commits";
+  const CACHE_KEY = "mockachino-repo-activity";
+  const CACHE_TTL = 5 * 60_000;
+  const API_HEADERS = {
+    Accept: "application/vnd.github+json",
+    "X-GitHub-Api-Version": "2022-11-28",
+  };
+
+  function londonDateKey(dateValue: string) {
+    const parts = new Intl.DateTimeFormat("en-GB", {
+      timeZone: "Europe/London",
+      year: "numeric",
+      month: "2-digit",
+      day: "2-digit",
+    }).formatToParts(new Date(dateValue));
+    const lookup = Object.fromEntries(parts.map((part) => [part.type, part.value]));
+    return `${lookup.year}-${lookup.month}-${lookup.day}`;
+  }
+
+  function commitDate(commit: GitHubCommit) {
+    return commit.commit?.committer?.date ?? commit.commit?.author?.date ?? null;
+  }
+
+  async function fetchRecentCommits(since: string) {
+    const commits: GitHubCommit[] = [];
+
+    for (let page = 1; page <= 3; page += 1) {
+      const url = new URL(API_URL);
+      url.searchParams.set("since", since);
+      url.searchParams.set("per_page", "100");
+      url.searchParams.set("page", String(page));
+
+      const response = await fetch(url, { headers: API_HEADERS });
+      if (!response.ok) throw new Error(`GitHub activity request failed: ${response.status}`);
+
+      const batch = await response.json() as GitHubCommit[];
+      commits.push(...batch);
+      if (batch.length < 100) break;
+    }
+
+    return commits;
+  }
+
+  async function fetchRepositoryTotal() {
+    const url = new URL(API_URL);
+    url.searchParams.set("per_page", "1");
+
+    const response = await fetch(url, { headers: API_HEADERS });
+    if (!response.ok) throw new Error(`GitHub total request failed: ${response.status}`);
+
+    const commits = await response.json() as GitHubCommit[];
+    const lastLink = response.headers.get("Link")
+      ?.split(",")
+      .find((link) => link.includes('rel="last"'));
+    const lastPage = lastLink?.match(/[?&]page=(\d+)/)?.[1];
+
+    return {
+      totalCommits: lastPage ? Number.parseInt(lastPage, 10) : commits.length,
+      latestCommitAt: commits[0] ? commitDate(commits[0]) : null,
+    };
+  }
+
+  function readCache() {
+    try {
+      const cached = JSON.parse(sessionStorage.getItem(CACHE_KEY) ?? "null") as CachedRepoActivity | null;
+      return cached && Date.now() - cached.storedAt < CACHE_TTL ? cached : null;
+    } catch {
+      return null;
+    }
+  }
+
+  function writeCache(activity: CachedRepoActivity) {
+    try {
+      sessionStorage.setItem(CACHE_KEY, JSON.stringify(activity));
+    } catch {
+      // Storage can be unavailable in privacy-focused browsing modes.
+    }
+  }
+
+  function applyActivity(activity: CachedRepoActivity) {
+    const counts = new Map<string, number>();
+    activity.dates.forEach((date) => counts.set(date, (counts.get(date) ?? 0) + 1));
+
+    document.querySelectorAll<HTMLElement>("[data-repo-activity]").forEach((panel) => {
+      panel.querySelectorAll<HTMLElement>("[data-activity-date]").forEach((cell) => {
+        const date = cell.dataset.activityDate ?? "";
+        const count = counts.get(date) ?? 0;
+        const level = count === 0 ? 0 : count === 1 ? 1 : count <= 3 ? 2 : 3;
+
+        cell.classList.remove("level-0", "level-1", "level-2", "level-3");
+        cell.classList.add(`level-${level}`);
+        cell.dataset.activityCount = String(count);
+        cell.title = `${date}: ${count} ${count === 1 ? "commit" : "commits"}`;
+      });
+
+      const total = panel.querySelector<HTMLElement>("[data-repo-total]");
+      if (total) total.textContent = activity.totalCommits.toLocaleString("en-GB");
+
+      const lastCommit = panel.querySelector<HTMLTimeElement>("[data-time-ago]");
+      if (lastCommit && activity.latestCommitAt) {
+        lastCommit.dateTime = activity.latestCommitAt;
+        lastCommit.title = new Intl.DateTimeFormat("en-GB", {
+          day: "numeric",
+          month: "short",
+          year: "numeric",
+          hour: "2-digit",
+          minute: "2-digit",
+          timeZone: "Europe/London",
+          timeZoneName: "short",
+        }).format(new Date(activity.latestCommitAt));
+      }
+    });
+
+    document.dispatchEvent(new Event("time-ago:update"));
+  }
+
+  async function refreshRepoActivity() {
+    const cached = readCache();
+    if (cached) {
+      applyActivity(cached);
+      return;
+    }
+
+    const firstCell = document.querySelector<HTMLElement>("[data-activity-date]");
+    const since = `${firstCell?.dataset.activityDate ?? "1970-01-01"}T00:00:00Z`;
+
+    try {
+      const [recentCommits, repository] = await Promise.all([
+        fetchRecentCommits(since),
+        fetchRepositoryTotal(),
+      ]);
+      const activity: CachedRepoActivity = {
+        storedAt: Date.now(),
+        totalCommits: repository.totalCommits,
+        latestCommitAt: repository.latestCommitAt ?? commitDate(recentCommits[0]) ?? "",
+        dates: recentCommits.map(commitDate).filter((date): date is string => Boolean(date)).map(londonDateKey),
+      };
+
+      writeCache(activity);
+      applyActivity(activity);
+    } catch {
+      // Keep the build-time Git snapshot when GitHub is unavailable or rate-limited.
+    }
+  }
+
+  void refreshRepoActivity();
+  document.addEventListener("astro:page-load", () => void refreshRepoActivity());
+</script>

@@ -2,7 +2,7 @@
 import "../styles/global.css";
 import LogoMark from "../components/LogoMark.astro";
 import RasterIcon from "../components/RasterIcon.astro";
-import SystemGrid from "../components/SystemGrid.astro";
+import RepoActivity from "../components/RepoActivity.astro";
 import { headerNav, primaryNav, topics } from "../data/wiki-content";
 import { getRepoStatus } from "../lib/repo";
 
@@ -161,13 +161,7 @@ const ogImageUrl = ogImage ? new URL(ogImage, Astro.site ?? Astro.url).toString(
 
           <section class="panel panel--sidebar panel--status">
             <p class="panel__kicker">Repo Activity</p>
-            <div class="repo-activity">
-              <SystemGrid activity={repoStatus.activity} />
-              <div class="repo-activity__meta">
-                <span>{repoStatus.totalCommits} total commits</span>
-                <span>{repoStatus.windowWeeks} weeks</span>
-              </div>
-            </div>
+            <RepoActivity status={repoStatus} />
           </section>
         </aside>
 

@@ -22,7 +22,16 @@ function getLevel(count: number) {
   {
     activity.map((column) => (
       <div class="status-grid__column">
-        {column.map((cell) => <span class={`status-grid__cell level-${getLevel(cell.count)}`} title={`${cell.date}: ${cell.count} commits`} />)}
+        {
+          column.map((cell) => (
+            <span
+              class={`status-grid__cell level-${getLevel(cell.count)}`}
+              title={`${cell.date}: ${cell.count} ${cell.count === 1 ? "commit" : "commits"}`}
+              data-activity-date={cell.date}
+              data-activity-count={cell.count}
+            />
+          ))
+        }
       </div>
     ))
   }

@@ -1817,12 +1817,17 @@ body::before {
 .repo-activity__meta {
   display: flex;
   justify-content: space-between;
+  flex-wrap: wrap;
   gap: 0.8rem;
   color: var(--text-dim);
   font-family: "IBM Plex Mono", monospace;
   font-size: 0.68rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
+}
+
+.repo-activity__meta time {
+  color: var(--text);
 }
 
 .page-home .page-content > .panel,
