@@ -1,0 +1,35 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import { projects } from "../../data/projects";
+
+const activeProjects = projects.filter((project) => project.status.toLowerCase() !== "archived").length;
+---
+
+<Layout title="Projects | MOCKACHINO" description="Apps, games, and tools built by Mocka." currentPath={Astro.url.pathname}>
+  <div class="page-stack">
+    <section class="panel taxonomy-hero">
+      <p class="section-label">Projects</p>
+      <h1>Things I am building, testing, and figuring out.</h1>
+      <p class="taxonomy-copy">
+        A separate record of the apps, games, and tools behind the rest of Mocka.
+        Each project has a durable profile, with short development updates added as
+        the work changes.
+      </p>
+      <div class="meta-strip">
+        <span class="meta-chip">{projects.length} projects</span>
+        <span class="meta-chip">{activeProjects} active</span>
+      </div>
+    </section>
+
+    <section class="taxonomy-grid">
+      {projects.map((project) => (
+        <article class="panel category-card">
+          <p class="section-label">{project.status}</p>
+          <h3>{project.name}</h3>
+          <p>{project.summary}</p>
+          <a href={`/projects/${project.slug}/`} class="button button--secondary">Open Project</a>
+        </article>
+      ))}
+    </section>
+  </div>
+</Layout>

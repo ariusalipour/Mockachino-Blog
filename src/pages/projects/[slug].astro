@@ -1,0 +1,68 @@
+---
+import { render } from "astro:content";
+import ProjectUpdateList from "../../components/ProjectUpdateList.astro";
+import Layout from "../../layouts/Layout.astro";
+import { formatDate } from "../../lib/format";
+import { getProject, getProjectContentEntry, getProjectUpdates, projects } from "../../data/projects";
+
+export function getStaticPaths() {
+  return projects.map((project) => ({
+    params: { slug: project.slug },
+    props: { project },
+  }));
+}
+
+const { project } = Astro.props;
+const contentEntry = getProjectContentEntry(project.slug);
+
+if (!contentEntry) {
+  throw new Error(`Missing project content entry for slug: ${project.slug}`);
+}
+
+const resolvedProject = getProject(project.slug) ?? project;
+const updates = getProjectUpdates(project.slug);
+const { Content } = await render(contentEntry);
+---
+
+<Layout
+  title={`${resolvedProject.name} | Projects | MOCKACHINO`}
+  description={resolvedProject.summary}
+  currentPath={Astro.url.pathname}
+  headerPath="/projects/"
+>
+  <div slot="subheader" class="panel article-breadcrumb">
+    <a href="/projects/" class="article-breadcrumb__item">Projects</a>
+    <span class="article-breadcrumb__sep">›</span>
+    <span class="article-breadcrumb__item article-breadcrumb__item--current">{resolvedProject.name}</span>
+  </div>
+
+  <div class="page-stack">
+    <section class="panel taxonomy-hero">
+      <p class="section-label">Project Profile</p>
+      <h1>{resolvedProject.name}</h1>
+      <p class="taxonomy-copy">{resolvedProject.summary}</p>
+      <div class="meta-strip">
+        <span class="meta-chip">{resolvedProject.status}</span>
+        <span class="meta-chip">Updated {formatDate(resolvedProject.updatedAt)}</span>
+        {resolvedProject.repository && <a class="meta-chip" href={resolvedProject.repository} target="_blank" rel="noreferrer">GitHub</a>}
+        {resolvedProject.liveUrl && <a class="meta-chip" href={resolvedProject.liveUrl} target="_blank" rel="noreferrer">Open Project</a>}
+      </div>
+    </section>
+
+    <section class="panel copy-block project-profile-content">
+      <div class="article-content">
+        <Content />
+      </div>
+    </section>
+
+    <section class="panel">
+      <div class="section-heading section-heading--compact">
+        <div>
+          <p class="section-label">Development Log</p>
+          <h2>Updates from {resolvedProject.name}.</h2>
+        </div>
+      </div>
+      <ProjectUpdateList projectSlug={resolvedProject.slug} updates={updates} />
+    </section>
+  </div>
+</Layout>

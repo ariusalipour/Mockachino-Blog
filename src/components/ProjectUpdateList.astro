@@ -1,0 +1,32 @@
+---
+import { formatDate } from "../lib/format";
+import type { ProjectUpdate } from "../data/projects";
+
+interface Props {
+  projectSlug: string;
+  updates: ProjectUpdate[];
+}
+
+const { projectSlug, updates } = Astro.props;
+---
+
+{updates.length > 0 ? (
+  <ol class="entry-list project-update-list">
+    {updates.map((update) => (
+      <li class="entry-list__item">
+        <a href={`/projects/${projectSlug}/updates/${update.slug}/`} class="entry-list__link">
+          <div class="entry-list__header">
+            <span class="entry-list__title">{update.title}</span>
+          </div>
+          <p class="entry-list__summary">{update.summary}</p>
+          <div class="entry-list__meta">
+            <span>Project Update</span>
+            <span>{formatDate(update.updatedAt)}</span>
+          </div>
+        </a>
+      </li>
+    ))}
+  </ol>
+) : (
+  <p class="empty-state">No project updates published yet.</p>
+)}

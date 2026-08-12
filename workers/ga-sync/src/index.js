@@ -17,7 +17,11 @@ const GA_SCOPES = "https://www.googleapis.com/auth/analytics.readonly";
 const GA_TOKEN_URL = "https://oauth2.googleapis.com/token";
 const GA_DATA_API = `https://analyticsdata.googleapis.com/v1beta/properties/${GA_PROPERTY_ID}:runReport`;
 const KV_KEY = "pageviews";
-const TOP_N = 50;
+// The wiki currently has well under 10,000 pages. Keep the limit above the
+// entire content set so individual article view counts are retained as well
+// as the popular ranking.
+const TOP_N = 10000;
+const GA_START_DATE = "2005-01-01";
 
 // ---------------------------------------------------------------------------
 // JWT / OAuth helpers (no external deps — pure Web Crypto)
@@ -102,10 +106,20 @@ async function getAccessToken(serviceAccount) {
 
 async function fetchPageViews(accessToken) {
   const body = {
-    dateRanges: [{ startDate: "30daysAgo", endDate: "today" }],
+    dateRanges: [{ startDate: GA_START_DATE, endDate: "today" }],
     dimensions: [{ name: "pagePath" }],
     metrics: [{ name: "screenPageViews" }],
     orderBys: [{ metric: { metricName: "screenPageViews" }, desc: true }],
+    dimensionFilter: {
+      filter: {
+        fieldName: "pagePath",
+        stringFilter: {
+          matchType: "BEGINS_WITH",
+          value: "/wiki/",
+          caseSensitive: false,
+        },
+      },
+    },
     limit: TOP_N,
   };
 
@@ -234,9 +248,8 @@ async function runSync(env) {
       pageviews,
     });
 
-    await env.MOCKACHINO_PAGEVIEWS.put(KV_KEY, payload, {
-      expirationTtl: 60 * 60 * 48, // 48h TTL — cron runs daily so always fresh
-    });
+    // Keep the last successful all-time snapshot available if a scheduled sync fails.
+    await env.MOCKACHINO_PAGEVIEWS.put(KV_KEY, payload);
 
     console.log(`Synced ${Object.keys(pageviews).length} pages to KV`);
     return new Response(`OK — synced ${Object.keys(pageviews).length} pages`, { status: 200 });

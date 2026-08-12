@@ -42,6 +42,32 @@ const glossary = defineCollection({
   }),
 });
 
+const projects = defineCollection({
+  type: "content",
+  schema: z.object({
+    name: z.string(),
+    summary: z.string(),
+    status: z.string(),
+    updatedAt: z.coerce.date(),
+    repository: z.string().url().optional(),
+    liveUrl: z.string().url().optional(),
+    tags: z.array(z.string()).default([]),
+  }),
+});
+
+const projectUpdates = defineCollection({
+  type: "content",
+  schema: z.object({
+    project: z.string(),
+    slug: z.string().optional(),
+    title: z.string(),
+    summary: z.string(),
+    createdAt: z.coerce.date(),
+    updatedAt: z.coerce.date(),
+    tags: z.array(z.string()).default([]),
+  }),
+});
+
 const wiki = defineCollection({
   type: "content",
   schema: z.object({
@@ -64,4 +90,4 @@ const wiki = defineCollection({
   }),
 });
 
-export const collections = { topics, categories, tags, glossary, wiki };
+export const collections = { topics, categories, tags, glossary, wiki, projects, "project-updates": projectUpdates };

@@ -130,6 +130,7 @@ export const headerNav = [
   { href: "/", label: "Home" },
   { href: "/browse/", label: "Browse" },
   { href: "/recent/", label: "Recent" },
+  { href: "/projects/", label: "Projects" },
   { href: "/about/", label: "About" },
 ] as const;
 

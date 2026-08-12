@@ -159,7 +159,7 @@ const homeTopicPanels = topics.map((topic) => {
     </article>
   </section>
 
-  <script is:inline define:vars={{ wikiEntries: popularEntries.map(e => ({ slug: e.slug, title: e.title, topic: e.topic })) }}>
+  <script is:inline define:vars={{ wikiEntries: wikiEntries.map(e => ({ slug: e.slug, title: e.title, topic: e.topic })) }}>
     // Hydrate popular list from live GA data
     (async () => {
       try {

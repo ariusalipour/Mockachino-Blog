@@ -12,6 +12,7 @@ Covers shooting sports, gaming, tech projects, photography, and more.
 
 - **Blog entries** — long-form posts on shooting, gaming, tech, and creative work
 - **Wiki** — structured reference pages for shoots, plays, reviews, and tutorials
+- **Projects** — dedicated profiles and development updates for apps, games, and tools
 - **Glossary** — tooltip-linked terminology across all content
 - **Browse & filter** — search by category, tag, or topic; random-entry mode
 - **Responsive** — optimised for desktop and mobile
@@ -49,6 +50,8 @@ npm run preview    # preview production build locally
 │   ├── components/      # Astro/UI components
 │   ├── content/         # all content (wiki, glossary, tags, categories)
 │   │   ├── wiki/        # wiki pages (shoots, plays, reviews, tutorials)
+│   │   ├── projects/    # standalone project profiles
+│   │   ├── project-updates/ # short development updates linked to projects
 │   │   ├── glossary/    # glossary term definitions
 │   │   ├── tags/        # tag pages
 │   │   └── categories/  # category pages

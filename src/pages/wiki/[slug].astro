@@ -212,7 +212,16 @@ const tocItems =
       .then((payload) => {
         if (!payload || typeof payload.views !== "number") return;
         const el = document.getElementById("article-views");
-        if (el) el.innerHTML = `<span><svg class="article-main__meta-icon article-main__meta-icon--raster" aria-hidden="true"></svg> ${payload.views.toLocaleString()} VIEWS</span>`;
+        if (!el) return;
+
+        // Keep the view item as one flex item. Replacing it with a nested span
+        // makes the metadata selector apply a second flex gap to the item.
+        const icon = el.querySelector(".article-main__meta-icon");
+        if (icon) {
+          el.replaceChildren(icon, document.createTextNode(` ${payload.views.toLocaleString()} VIEWS`));
+        } else {
+          el.textContent = `${payload.views.toLocaleString()} VIEWS`;
+        }
       })
       .catch(() => {});
   </script>

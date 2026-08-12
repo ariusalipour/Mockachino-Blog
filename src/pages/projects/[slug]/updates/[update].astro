@@ -1,0 +1,62 @@
+---
+import { render } from "astro:content";
+import Layout from "../../../../layouts/Layout.astro";
+import { formatDate } from "../../../../lib/format";
+import {
+  getProject,
+  getProjectUpdate,
+  getProjectUpdateContentEntry,
+  projectUpdates,
+} from "../../../../data/projects";
+
+export function getStaticPaths() {
+  return projectUpdates.map((update) => ({
+    params: { slug: update.project, update: update.slug },
+    props: { update },
+  }));
+}
+
+const { update } = Astro.props;
+const project = getProject(update.project);
+const contentEntry = getProjectUpdateContentEntry(update.project, update.slug);
+
+if (!project || !contentEntry) {
+  throw new Error(`Missing project update content entry for ${update.project}/${update.slug}`);
+}
+
+const resolvedUpdate = getProjectUpdate(update.project, update.slug) ?? update;
+const { Content } = await render(contentEntry);
+---
+
+<Layout
+  title={`${resolvedUpdate.title} | ${project.name} | MOCKACHINO`}
+  description={resolvedUpdate.summary}
+  currentPath={Astro.url.pathname}
+  headerPath="/projects/"
+>
+  <div slot="subheader" class="panel article-breadcrumb">
+    <a href="/projects/" class="article-breadcrumb__item">Projects</a>
+    <span class="article-breadcrumb__sep">›</span>
+    <a href={`/projects/${project.slug}/`} class="article-breadcrumb__item">{project.name}</a>
+    <span class="article-breadcrumb__sep">›</span>
+    <span class="article-breadcrumb__item article-breadcrumb__item--current">{resolvedUpdate.title}</span>
+  </div>
+
+  <div class="page-stack">
+    <section class="panel entry-hero">
+      <p class="section-label">Project Update</p>
+      <h1>{resolvedUpdate.title}</h1>
+      <p class="taxonomy-copy">{resolvedUpdate.summary}</p>
+      <div class="meta-strip">
+        <a class="meta-chip" href={`/projects/${project.slug}/`}>{project.name}</a>
+        <span class="meta-chip">Updated {formatDate(resolvedUpdate.updatedAt)}</span>
+      </div>
+    </section>
+
+    <section class="panel copy-block project-profile-content">
+      <div class="article-content">
+        <Content />
+      </div>
+    </section>
+  </div>
+</Layout>

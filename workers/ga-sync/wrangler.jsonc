@@ -1,0 +1,15 @@
+{
+  "$schema": "https://developers.cloudflare.com/workers/wrangler/config-schema.json",
+  "name": "mockachino-ga-sync",
+  "main": "src/index.js",
+  "compatibility_date": "2026-08-12",
+  "triggers": {
+    "crons": ["0 2 * * *"]
+  },
+  "kv_namespaces": [
+    {
+      "binding": "MOCKACHINO_PAGEVIEWS",
+      "id": "ad9f8f23c3cf4e7b8599929284562db9"
+    }
+  ]
+}
