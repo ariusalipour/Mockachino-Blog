@@ -207,7 +207,10 @@ const tocItems =
   </section>
 
   <script is:inline define:vars={{ viewsEndpoint }}>
-    fetch(viewsEndpoint)
+    const viewsUrl = new URL(viewsEndpoint);
+    viewsUrl.searchParams.set("t", Date.now().toString());
+
+    fetch(viewsUrl, { cache: "no-store" })
       .then((resp) => (resp.ok ? resp.json() : null))
       .then((payload) => {
         if (!payload || typeof payload.views !== "number") return;

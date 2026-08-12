@@ -10,7 +10,32 @@ import {
 } from "../data/wiki-content";
 
 const recentEntries = getRecentEntries(10);
-const popularEntries = recentEntries;
+const popularEntries = await (async () => {
+  try {
+    const popularUrl = new URL("https://mockachino-ga-sync.outdoortechnica.workers.dev/popular");
+    popularUrl.searchParams.set("t", Date.now().toString());
+    const response = await fetch(popularUrl, { cache: "no-store" });
+    if (!response.ok) return recentEntries;
+
+    const payload = await response.json();
+    const lookup = new Map(wikiEntries.map((entry) => [entry.slug, entry]));
+    const ranked = Array.isArray(payload.popular)
+      ? payload.popular
+          .filter(({ slug }) => lookup.has(slug))
+          .sort((left, right) => {
+            const viewDifference = Number(right.views ?? 0) - Number(left.views ?? 0);
+            return viewDifference || String(left.slug).localeCompare(String(right.slug));
+          })
+          .slice(0, 10)
+          .map(({ slug }) => lookup.get(slug))
+          .filter(Boolean)
+      : [];
+
+    return ranked.length > 0 ? ranked : recentEntries;
+  } catch {
+    return recentEntries;
+  }
+})();
 const homeTopicPanels = topics.map((topic) => {
   const topicEntries = wikiEntries.filter((e) => e.topic === topic.id);
   return {
@@ -163,7 +188,9 @@ const homeTopicPanels = topics.map((topic) => {
     // Hydrate popular list from live GA data
     (async () => {
       try {
-        const resp = await fetch("https://mockachino-ga-sync.outdoortechnica.workers.dev/popular");
+        const popularUrl = new URL("https://mockachino-ga-sync.outdoortechnica.workers.dev/popular");
+        popularUrl.searchParams.set("t", Date.now().toString());
+        const resp = await fetch(popularUrl, { cache: "no-store" });
         if (!resp.ok) return;
         const { popular } = await resp.json();
         if (!popular || popular.length === 0) return;
@@ -177,6 +204,10 @@ const homeTopicPanels = topics.map((topic) => {
         // Filter to slugs we know about and take top 10
         const ranked = popular
           .filter(({ slug }) => lookup[slug])
+          .sort((left, right) => {
+            const viewDifference = Number(right.views ?? 0) - Number(left.views ?? 0);
+            return viewDifference || String(left.slug).localeCompare(String(right.slug));
+          })
           .slice(0, 10);
 
         if (ranked.length === 0) return;
