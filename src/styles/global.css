@@ -4470,8 +4470,8 @@ html[data-theme="light"] .project-actions .button--primary:focus-visible {
 }
 
 .project-index-card {
-  display: grid;
-  align-content: start;
+  display: flex;
+  flex-direction: column;
   gap: 0.9rem;
   min-height: 22rem;
   padding: 1.35rem 1.45rem 1.4rem;
