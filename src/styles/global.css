@@ -4407,6 +4407,13 @@ html[data-theme="light"] .project-actions .button--primary:focus-visible {
   }
 }
 
+/* Keep the homepage ranking fully visible instead of clipping the lower rows
+   inside the viewport-sized desktop grid. */
+.page-home .page-content {
+  height: auto;
+  grid-template-rows: auto auto auto;
+}
+
 .project-index-hero {
   display: grid;
   grid-template-columns: minmax(0, 1.5fr) minmax(15rem, 0.75fr);
