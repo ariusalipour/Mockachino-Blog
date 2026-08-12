@@ -48,9 +48,13 @@ const projects = defineCollection({
     name: z.string(),
     summary: z.string(),
     status: z.string(),
+    startedAt: z.coerce.date(),
     updatedAt: z.coerce.date(),
     repository: z.string().url().optional(),
+    repositoryPublic: z.boolean().default(false),
     liveUrl: z.string().url().optional(),
+    platforms: z.array(z.string()).default([]),
+    stack: z.array(z.string()).default([]),
     tags: z.array(z.string()).default([]),
   }),
 });

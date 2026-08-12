@@ -21,6 +21,9 @@ if (!contentEntry) {
 
 const resolvedProject = getProject(project.slug) ?? project;
 const updates = getProjectUpdates(project.slug);
+const projectIndex = projects.findIndex((entry) => entry.slug === resolvedProject.slug) + 1;
+const projectNumber = String(projectIndex).padStart(2, "0");
+const publicRepository = resolvedProject.repositoryPublic ? resolvedProject.repository : undefined;
 const { Content } = await render(contentEntry);
 ---
 
@@ -37,30 +40,104 @@ const { Content } = await render(contentEntry);
   </div>
 
   <div class="page-stack">
-    <section class="panel taxonomy-hero">
-      <p class="section-label">Project Profile</p>
-      <h1>{resolvedProject.name}</h1>
-      <p class="taxonomy-copy">{resolvedProject.summary}</p>
-      <div class="meta-strip">
-        <span class="meta-chip">{resolvedProject.status}</span>
-        <span class="meta-chip">Updated {formatDate(resolvedProject.updatedAt)}</span>
-        {resolvedProject.repository && <a class="meta-chip" href={resolvedProject.repository} target="_blank" rel="noreferrer">GitHub</a>}
-        {resolvedProject.liveUrl && <a class="meta-chip" href={resolvedProject.liveUrl} target="_blank" rel="noreferrer">Open Project</a>}
-      </div>
-    </section>
-
-    <section class="panel copy-block project-profile-content">
-      <div class="article-content">
-        <Content />
-      </div>
-    </section>
-
-    <section class="panel">
-      <div class="section-heading section-heading--compact">
-        <div>
-          <p class="section-label">Development Log</p>
-          <h2>Updates from {resolvedProject.name}.</h2>
+    <section class="panel project-hero">
+      <div class="project-hero__main">
+        <div class="project-hero__eyebrow">
+          <p class="section-label">Project dossier</p>
+          <span class="project-hero__number">{projectNumber} / {String(projects.length).padStart(2, "0")}</span>
         </div>
+        <h1>{resolvedProject.name}</h1>
+        <p class="project-hero__summary">{resolvedProject.summary}</p>
+        <div class="project-actions">
+          {resolvedProject.liveUrl && (
+            <a class="button button--primary" href={resolvedProject.liveUrl} target="_blank" rel="noreferrer">Visit project</a>
+          )}
+          {publicRepository && (
+            <a class="button button--secondary" href={publicRepository} target="_blank" rel="noreferrer">Public GitHub</a>
+          )}
+        </div>
+      </div>
+      <aside class="project-hero__rail" aria-label={`${resolvedProject.name} project summary`}>
+        <div class="project-hero__status">
+          <span class="project-fact__label">Current state</span>
+          <strong>{resolvedProject.status}</strong>
+        </div>
+        <dl class="project-hero__facts">
+          <div>
+            <dt>Started</dt>
+            <dd>{formatDate(resolvedProject.startedAt)}</dd>
+          </div>
+          <div>
+            <dt>Last profile update</dt>
+            <dd>{formatDate(resolvedProject.updatedAt)}</dd>
+          </div>
+          <div>
+            <dt>Development notes</dt>
+            <dd>{updates.length}</dd>
+          </div>
+        </dl>
+      </aside>
+    </section>
+
+    <div class="project-layout">
+      <section class="panel copy-block project-profile-content">
+        <div class="project-section-heading">
+          <div>
+            <p class="section-label">The work</p>
+            <h2>What this project is becoming.</h2>
+          </div>
+          <span class="project-section-index">01</span>
+        </div>
+        <div class="article-content">
+          <Content />
+        </div>
+      </section>
+
+      <aside class="project-aside">
+        <section class="panel project-facts">
+          <div class="project-section-heading">
+            <div>
+              <p class="section-label">Build record</p>
+              <h2>At a glance.</h2>
+            </div>
+          </div>
+          <dl class="project-facts__list">
+            <div>
+              <dt>Platforms</dt>
+              <dd>{resolvedProject.platforms.join(" · ") || "Not specified"}</dd>
+            </div>
+            <div>
+              <dt>Stack</dt>
+              <dd>{resolvedProject.stack.join(" · ") || "Not specified"}</dd>
+            </div>
+            <div>
+              <dt>Project age</dt>
+              <dd>Since {formatDate(resolvedProject.startedAt)}</dd>
+            </div>
+          </dl>
+        </section>
+
+        <section class="panel project-facts">
+          <div class="project-section-heading">
+            <div>
+              <p class="section-label">Filed under</p>
+              <h2>Signals.</h2>
+            </div>
+          </div>
+          <div class="tag-cloud">
+            {resolvedProject.tags.map((tag) => <span class="tag-chip">{tag}</span>)}
+          </div>
+        </section>
+      </aside>
+    </div>
+
+    <section class="panel project-log">
+      <div class="project-section-heading project-log__heading">
+        <div>
+          <p class="section-label">Development log</p>
+          <h2>Notes from the build.</h2>
+        </div>
+        <span class="project-section-index">02</span>
       </div>
       <ProjectUpdateList projectSlug={resolvedProject.slug} updates={updates} />
     </section>

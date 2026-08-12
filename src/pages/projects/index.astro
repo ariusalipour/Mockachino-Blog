@@ -1,33 +1,50 @@
 ---
 import Layout from "../../layouts/Layout.astro";
-import { projects } from "../../data/projects";
+import { projectUpdates, projects } from "../../data/projects";
+import { formatDate } from "../../lib/format";
 
 const activeProjects = projects.filter((project) => project.status.toLowerCase() !== "archived").length;
 ---
 
 <Layout title="Projects | MOCKACHINO" description="Apps, games, and tools built by Mocka." currentPath={Astro.url.pathname}>
   <div class="page-stack">
-    <section class="panel taxonomy-hero">
-      <p class="section-label">Projects</p>
-      <h1>Things I am building, testing, and figuring out.</h1>
-      <p class="taxonomy-copy">
-        A separate record of the apps, games, and tools behind the rest of Mocka.
-        Each project has a durable profile, with short development updates added as
-        the work changes.
-      </p>
-      <div class="meta-strip">
-        <span class="meta-chip">{projects.length} projects</span>
-        <span class="meta-chip">{activeProjects} active</span>
+    <section class="panel project-index-hero">
+      <div>
+        <p class="section-label">Project registry</p>
+        <h1>Things I am building, testing, and figuring out.</h1>
+        <p class="taxonomy-copy">
+          A separate record of the apps, games, and tools behind the rest of Mocka.
+          Each project has a durable profile, with short development updates added as
+          the work changes.
+        </p>
+      </div>
+      <div class="project-index-hero__readout" aria-label="Project registry summary">
+        <span>{projects.length} tracked projects</span>
+        <span>{activeProjects} active lines of work</span>
+        <span>{projectUpdates.length} published notes</span>
       </div>
     </section>
 
-    <section class="taxonomy-grid">
-      {projects.map((project) => (
-        <article class="panel category-card">
-          <p class="section-label">{project.status}</p>
-          <h3>{project.name}</h3>
+    <section class="project-index-grid">
+      {projects.map((project, index) => (
+        <article class="panel project-index-card">
+          <div class="project-index-card__topline">
+            <span class="section-label">{project.status}</span>
+            <span class="project-index-card__number">{String(index + 1).padStart(2, "0")}</span>
+          </div>
+          <h2>{project.name}</h2>
           <p>{project.summary}</p>
-          <a href={`/projects/${project.slug}/`} class="button button--secondary">Open Project</a>
+          <dl class="project-index-card__facts">
+            <div>
+              <dt>Started</dt>
+              <dd>{formatDate(project.startedAt)}</dd>
+            </div>
+            <div>
+              <dt>Notes</dt>
+              <dd>{projectUpdates.filter((update) => update.project === project.slug).length}</dd>
+            </div>
+          </dl>
+          <a href={`/projects/${project.slug}/`} class="button button--secondary">Open dossier</a>
         </article>
       ))}
     </section>

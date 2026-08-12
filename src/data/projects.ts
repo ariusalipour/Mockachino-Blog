@@ -5,9 +5,13 @@ export interface Project {
   name: string;
   summary: string;
   status: string;
+  startedAt: string;
   updatedAt: string;
   repository?: string;
+  repositoryPublic: boolean;
   liveUrl?: string;
+  platforms: string[];
+  stack: string[];
   tags: string[];
 }
 
@@ -34,9 +38,13 @@ function normalizeProject(entry: ProjectContentEntry): Project {
     name: entry.data.name,
     summary: entry.data.summary,
     status: entry.data.status,
+    startedAt: entry.data.startedAt.toISOString(),
     updatedAt: entry.data.updatedAt.toISOString(),
     repository: entry.data.repository,
+    repositoryPublic: entry.data.repositoryPublic,
     liveUrl: entry.data.liveUrl,
+    platforms: [...entry.data.platforms],
+    stack: [...entry.data.stack],
     tags: [...entry.data.tags],
   };
 }
