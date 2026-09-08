@@ -1,7 +1,7 @@
 ---
 articleId: SHO-TIP-WHATI
 slug: what-is-a-true-1x-magnification
-title: What is a True 1x Magnification?
+title: Why True 1x Magnification Doesn’t Exist!
 summary: An optics guide explaining true 1x magnification, why it matters, and how LPVOs and red dots compare at close range.
 kind: guide
 topic: shoots
