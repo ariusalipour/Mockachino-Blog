@@ -115,8 +115,11 @@ For the existing `mockachino-blog` Pages project:
 A configured CMS fetch failure fails the build and leaves the previous Pages
 release live. Without `CMS_URL`, local development uses checked-in Markdown.
 To use the live CMS locally, create a root `.env` with the same CMS_URL and
-restart `npm run dev`; to refresh content in a running local session, run
-`npm run cms:sync` (or restart the dev command).
+restart `npm run dev`. The dev launcher syncs published content before starting
+Astro, then checks for changes every 15 seconds. Changed content is synced for
+Astro's normal live reload; unchanged snapshots do not rewrite files. A later
+CMS outage keeps the last synced content and retries. Without CMS_URL there is
+no polling. You can also refresh manually with `npm run cms:sync`.
 
 ## Courses, lessons and quizzes
 

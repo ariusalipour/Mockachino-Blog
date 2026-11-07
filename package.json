@@ -6,11 +6,10 @@
     "node": ">=22.0.0"
   },
   "scripts": {
-    "dev": "astro dev",
+    "dev": "node scripts/cms-dev.mjs",
     "prebuild": "node scripts/cms-sync.mjs && node scripts/ensure-git-history.mjs",
     "build": "astro build",
     "preview": "astro preview",
-    "predev": "node scripts/cms-sync.mjs",
     "cms:sync": "node scripts/cms-sync.mjs",
     "cms:bundle": "node scripts/cms-bundle.mjs",
     "test:cms": "node --test tests/cms-*.test.mjs",
