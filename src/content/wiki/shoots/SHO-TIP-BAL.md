@@ -6,8 +6,8 @@ summary: A practical reflection on balancing shooting, tech work, content, and r
 kind: guide
 topic: shoots
 category: practical-shooting
-createdAt: 2025-12-15T10:00:00.000+00:00
-updatedAt: 2026-03-06T21:40:00.000+00:00
+createdAt: 2025-12-15T10:00:00.000Z
+updatedAt: 2026-03-06T21:40:00.000Z
 tags:
   - burnout
   - time-management

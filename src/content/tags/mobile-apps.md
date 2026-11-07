@@ -1,3 +1,3 @@
 ---
-label: "Mobile Apps"
+label: Mobile Apps
 ---

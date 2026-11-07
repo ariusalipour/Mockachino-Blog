@@ -6,8 +6,8 @@ summary: A clean-install diary about moving to Windows 11, refreshing the operat
 kind: article
 topic: codes
 category: software-tools
-createdAt: 2025-11-05T10:00:00.000+00:00
-updatedAt: 2026-03-06T21:40:00.000+00:00
+createdAt: 2025-11-05T10:00:00.000Z
+updatedAt: 2026-03-06T21:40:00.000Z
 tags:
   - operating-system
   - windows

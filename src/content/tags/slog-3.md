@@ -1,3 +1,3 @@
 ---
-label: "Slog 3"
+label: Slog 3
 ---

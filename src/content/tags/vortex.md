@@ -1,3 +1,3 @@
 ---
-label: "Vortex"
+label: Vortex
 ---

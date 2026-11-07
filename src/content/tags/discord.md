@@ -1,3 +1,3 @@
 ---
-label: "Discord"
+label: Discord
 ---

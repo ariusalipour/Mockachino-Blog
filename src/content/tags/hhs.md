@@ -1,3 +1,3 @@
 ---
-label: "HHS"
+label: HHS
 ---

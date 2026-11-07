@@ -6,8 +6,8 @@ summary: A quick handgun fundamentals note inspired by a training video, focused
 kind: article
 topic: shoots
 category: gear-and-firearms
-createdAt: 2020-06-10T00:50:00.000+00:00
-updatedAt: 2023-03-12T00:52:00.000+00:00
+createdAt: 2020-06-10T00:50:00.000Z
+updatedAt: 2023-03-12T00:52:00.000Z
 tags:
   - handgun
   - ipsc

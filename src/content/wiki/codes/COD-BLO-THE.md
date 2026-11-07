@@ -6,8 +6,8 @@ summary: A mobile development note on Xamarin Forms, .NET MAUI, and Microsoft's 
 kind: article
 topic: codes
 category: software-tools
-createdAt: 2025-08-20T10:00:00.000+00:00
-updatedAt: 2026-03-06T21:40:00.000+00:00
+createdAt: 2025-08-20T10:00:00.000Z
+updatedAt: 2026-03-06T21:40:00.000Z
 tags:
   - net-maui
   - mobile-apps

@@ -1,3 +1,3 @@
 ---
-label: "Bugs"
+label: Bugs
 ---

@@ -6,8 +6,8 @@ summary: An optics guide explaining true 1x magnification, why it matters, and h
 kind: guide
 topic: shoots
 category: practical-shooting
-createdAt: 2023-01-07T00:17:00.000+00:00
-updatedAt: 2026-03-06T13:48:00.000+00:00
+createdAt: 2023-01-07T00:17:00.000Z
+updatedAt: 2026-03-06T13:48:00.000Z
 tags:
   - lpvo
   - optics

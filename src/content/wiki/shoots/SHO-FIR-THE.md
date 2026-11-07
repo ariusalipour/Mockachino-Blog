@@ -6,8 +6,8 @@ summary: A review-style look at the Smith & Wesson M&P 15-22 as both a strong an
 kind: review
 topic: shoots
 category: gear-and-firearms
-createdAt: 2023-02-26T23:54:00.000+00:00
-updatedAt: 2026-03-06T13:47:00.000+00:00
+createdAt: 2023-02-26T23:54:00.000Z
+updatedAt: 2026-03-06T13:47:00.000Z
 tags:
   - mp-15-22
   - practical-shooting

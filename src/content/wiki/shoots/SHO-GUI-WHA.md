@@ -6,8 +6,8 @@ summary: A guide to the 36-yard zero concept and how trajectory choices affect p
 kind: guide
 topic: shoots
 category: practical-shooting
-createdAt: 2020-06-16T00:47:00.000+00:00
-updatedAt: 2023-03-12T00:49:00.000+00:00
+createdAt: 2020-06-16T00:47:00.000Z
+updatedAt: 2023-03-12T00:49:00.000Z
 tags:
   - optics
   - practical-shooting

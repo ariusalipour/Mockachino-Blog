@@ -1,3 +1,3 @@
 ---
-label: "Triggers"
+label: Triggers
 ---

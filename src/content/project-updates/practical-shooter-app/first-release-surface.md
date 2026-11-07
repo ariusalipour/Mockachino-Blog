@@ -3,8 +3,8 @@ project: practical-shooter-app
 slug: first-release-surface
 title: Building the first release surface
 summary: The Practical Shooter App is being shaped as one place for rules, matches, learning, and scoring rather than a collection of disconnected utilities.
-createdAt: 2026-08-12T09:00:00.000+00:00
-updatedAt: 2026-08-12T09:00:00.000+00:00
+createdAt: 2026-08-12T09:00:00.000Z
+updatedAt: 2026-08-12T09:00:00.000Z
 tags:
   - ipsc
   - mobile-apps

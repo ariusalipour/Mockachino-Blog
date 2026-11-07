@@ -1,3 +1,3 @@
 ---
-label: "Red Dots"
+label: Red Dots
 ---

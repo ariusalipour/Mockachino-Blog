@@ -6,8 +6,8 @@ summary: A training note separating instruction from coaching, with lessons carr
 kind: guide
 topic: shoots
 category: practical-shooting
-createdAt: 2025-09-18T10:00:00.000+00:00
-updatedAt: 2026-03-06T21:40:00.000+00:00
+createdAt: 2025-09-18T10:00:00.000Z
+updatedAt: 2026-03-06T21:40:00.000Z
 tags:
   - coaching
   - instructing

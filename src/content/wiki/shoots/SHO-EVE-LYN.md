@@ -6,8 +6,8 @@ summary: A match report about moving from commentary to competing at Lynx Brutal
 kind: article
 topic: shoots
 category: practical-shooting
-createdAt: 2026-02-06T10:00:00.000+00:00
-updatedAt: 2026-03-06T21:40:00.000+00:00
+createdAt: 2026-02-06T10:00:00.000Z
+updatedAt: 2026-03-06T21:40:00.000Z
 tags:
   - optics
   - practical-shooting

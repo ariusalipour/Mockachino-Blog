@@ -1,3 +1,3 @@
 ---
-label: "Rifle"
+label: Rifle
 ---

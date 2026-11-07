@@ -1,3 +1,3 @@
 ---
-label: "Operating System"
+label: Operating System
 ---

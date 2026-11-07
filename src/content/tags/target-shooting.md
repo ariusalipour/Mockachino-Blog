@@ -1,3 +1,3 @@
 ---
-label: "Target Shooting"
+label: Target Shooting
 ---

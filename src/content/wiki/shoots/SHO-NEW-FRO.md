@@ -6,8 +6,8 @@ summary: A look at how IPSC Action Air can build transferable habits for live-fi
 kind: article
 topic: shoots
 category: practical-shooting
-createdAt: 2025-10-25T10:00:00.000+00:00
-updatedAt: 2026-03-06T21:40:00.000+00:00
+createdAt: 2025-10-25T10:00:00.000Z
+updatedAt: 2026-03-06T21:40:00.000Z
 tags:
   - action-air
   - handgun

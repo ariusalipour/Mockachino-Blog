@@ -1,3 +1,3 @@
 ---
-label: "Action Air"
+label: Action Air
 ---

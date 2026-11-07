@@ -6,8 +6,8 @@ summary: A terminology note on why UK shooters usually call the muzzle device a 
 kind: article
 topic: shoots
 category: law-and-safety
-createdAt: 2022-12-01T15:15:00.000+00:00
-updatedAt: 2023-03-14T15:17:00.000+00:00
+createdAt: 2022-12-01T15:15:00.000Z
+updatedAt: 2023-03-14T15:17:00.000Z
 tags:
   - moderators
   - target-shooting

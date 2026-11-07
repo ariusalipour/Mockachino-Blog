@@ -6,8 +6,8 @@ summary: A field note on pistol optic window size, dot tracking, and why practic
 kind: article
 topic: shoots
 category: gear-and-firearms
-createdAt: 2026-03-23T09:02:00.000+00:00
-updatedAt: 2026-03-23T09:02:00.000+00:00
+createdAt: 2026-03-23T09:02:00.000Z
+updatedAt: 2026-03-23T09:02:00.000Z
 tags:
   - optics
   - pistol-optics

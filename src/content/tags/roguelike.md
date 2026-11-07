@@ -1,3 +1,3 @@
 ---
-label: "Roguelike"
+label: Roguelike
 ---

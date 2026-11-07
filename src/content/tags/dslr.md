@@ -1,3 +1,3 @@
 ---
-label: "DSLR"
+label: DSLR
 ---

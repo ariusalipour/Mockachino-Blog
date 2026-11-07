@@ -1,3 +1,3 @@
 ---
-label: "Smith Wesson"
+label: Smith Wesson
 ---

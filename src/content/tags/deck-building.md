@@ -1,3 +1,3 @@
 ---
-label: "Deck Building"
+label: Deck Building
 ---

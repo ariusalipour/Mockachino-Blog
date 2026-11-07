@@ -6,8 +6,8 @@ summary: A comparison of tactical and practical shooting, clarifying how goals, 
 kind: guide
 topic: shoots
 category: practical-shooting
-createdAt: 2023-03-01T23:45:00.000+00:00
-updatedAt: 2026-03-06T13:47:00.000+00:00
+createdAt: 2023-03-01T23:45:00.000Z
+updatedAt: 2026-03-06T13:47:00.000Z
 tags:
   - practical-shooting
   - tactical-shooting

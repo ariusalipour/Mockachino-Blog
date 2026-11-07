@@ -6,8 +6,8 @@ summary: A short explainer on IWA Outdoor Classics as a trade fair for shooting 
 kind: article
 topic: shoots
 category: practical-shooting
-createdAt: 2023-03-02T23:39:00.000+00:00
-updatedAt: 2026-03-06T13:47:00.000+00:00
+createdAt: 2023-03-02T23:39:00.000Z
+updatedAt: 2026-03-06T13:47:00.000Z
 tags:
   - iwa
   - trade-shows

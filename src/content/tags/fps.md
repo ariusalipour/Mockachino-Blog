@@ -1,3 +1,3 @@
 ---
-label: "FPS"
+label: FPS
 ---

@@ -1,3 +1,3 @@
 ---
-label: "Tactical Shooting"
+label: Tactical Shooting
 ---

@@ -3,8 +3,8 @@ project: terminus
 slug: engine-and-interface
 title: Separating the game engine from the interface
 summary: Terminus is being developed with a headless engine so the game rules can be tested and played without driving the mobile UI.
-createdAt: 2026-08-12T09:00:00.000+00:00
-updatedAt: 2026-08-12T09:00:00.000+00:00
+createdAt: 2026-08-12T09:00:00.000Z
+updatedAt: 2026-08-12T09:00:00.000Z
 tags:
   - mobile-apps
   - game-development

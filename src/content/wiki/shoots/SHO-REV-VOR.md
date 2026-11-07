@@ -6,8 +6,8 @@ summary: A review entry for the Vortex Razor HD Gen III 1-10x24 LPVO and its rol
 kind: review
 topic: shoots
 category: gear-and-firearms
-createdAt: 2022-09-01T00:24:00.000+00:00
-updatedAt: 2023-03-12T00:27:00.000+00:00
+createdAt: 2022-09-01T00:24:00.000Z
+updatedAt: 2023-03-12T00:27:00.000Z
 tags:
   - lpvo
   - optics

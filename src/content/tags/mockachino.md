@@ -1,3 +1,3 @@
 ---
-label: "Mockachino"
+label: Mockachino
 ---

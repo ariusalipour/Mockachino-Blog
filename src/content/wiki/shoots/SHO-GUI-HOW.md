@@ -6,8 +6,8 @@ summary: A budget-minded starter guide for IPSC Mini Rifle, following on from th
 kind: guide
 topic: shoots
 category: practical-shooting
-createdAt: 2022-08-12T00:28:00.000+00:00
-updatedAt: 2023-03-12T01:06:00.000+00:00
+createdAt: 2022-08-12T00:28:00.000Z
+updatedAt: 2023-03-12T01:06:00.000Z
 tags:
   - ipsc
   - mini-rifle

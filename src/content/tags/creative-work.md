@@ -1,3 +1,3 @@
 ---
-label: "Creative Work"
+label: Creative Work
 ---

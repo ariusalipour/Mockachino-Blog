@@ -6,8 +6,8 @@ summary: A Shoots-side personal update about shifting priorities, reviving Mocka
 kind: article
 topic: shoots
 category: field-notes
-createdAt: 2023-01-01T00:21:00.000+00:00
-updatedAt: 2026-03-06T13:48:00.000+00:00
+createdAt: 2023-01-01T00:21:00.000Z
+updatedAt: 2026-03-06T13:48:00.000Z
 tags:
   - mockachino
   - projects

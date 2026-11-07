@@ -1,3 +1,3 @@
 ---
-label: "The Finals"
+label: The Finals
 ---

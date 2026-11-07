@@ -2,7 +2,7 @@
 name: Brass Log
 summary: A firearms management and logging application for tracking usage, ammunition, storage, components, and reporting.
 status: Active development
-updatedAt: 2026-08-12T09:00:00.000+00:00
+updatedAt: 2026-08-12T09:00:00.000Z
 repository: https://github.com/ariusalipour/brasslog
 tags:
   - mobile-apps

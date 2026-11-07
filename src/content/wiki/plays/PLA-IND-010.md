@@ -6,8 +6,8 @@ summary: A review of Slay the Spire's deck-building loop, relic choices, run str
 kind: review
 topic: plays
 category: indie-gaming
-createdAt: 2022-12-24T11:36:00.000+00:00
-updatedAt: 2026-03-06T14:10:00.000+00:00
+createdAt: 2022-12-24T11:36:00.000Z
+updatedAt: 2026-03-06T14:10:00.000Z
 tags:
   - deck-building
   - roguelike

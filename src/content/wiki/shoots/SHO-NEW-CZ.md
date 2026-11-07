@@ -6,8 +6,8 @@ summary: A news-style note on the CZ Scorpion Evo's appeal for UK shooters and p
 kind: article
 topic: shoots
 category: gear-and-firearms
-createdAt: 2025-06-03T10:00:00.000+00:00
-updatedAt: 2026-03-06T21:40:00.000+00:00
+createdAt: 2025-06-03T10:00:00.000Z
+updatedAt: 2026-03-06T21:40:00.000Z
 tags:
   - 22lr
   - cz

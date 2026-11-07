@@ -1,3 +1,3 @@
 ---
-label: "Optics"
+label: Optics
 ---

@@ -1,3 +1,3 @@
 ---
-label: "Hacks"
+label: Hacks
 ---

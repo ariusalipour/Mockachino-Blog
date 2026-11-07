@@ -1,3 +1,3 @@
 ---
-label: "Coaching"
+label: Coaching
 ---

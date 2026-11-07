@@ -6,8 +6,8 @@ summary: A WordPress migration guide for moving a site manually without relying 
 kind: guide
 topic: codes
 category: software-tools
-createdAt: 2025-05-01T10:00:00.000+00:00
-updatedAt: 2026-03-06T21:40:00.000+00:00
+createdAt: 2025-05-01T10:00:00.000Z
+updatedAt: 2026-03-06T21:40:00.000Z
 tags:
   - hosting
   - web

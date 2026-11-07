@@ -2,7 +2,7 @@
 name: Practical Shooter App
 summary: A cross-platform companion for IPSC shooters, bringing rulebooks, match discovery, learning tools, and scoring utilities into one place.
 status: Active development
-updatedAt: 2026-08-12T09:00:00.000+00:00
+updatedAt: 2026-08-12T09:00:00.000Z
 liveUrl: https://practicalshooter.expo.app
 tags:
   - ipsc

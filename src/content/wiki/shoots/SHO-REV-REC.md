@@ -6,8 +6,8 @@ summary: A review of the Recover Tactical 20/20 stabiliser kit and the practical
 kind: review
 topic: shoots
 category: gear-and-firearms
-createdAt: 2021-07-12T00:41:00.000+00:00
-updatedAt: 2023-03-12T00:44:00.000+00:00
+createdAt: 2021-07-12T00:41:00.000Z
+updatedAt: 2023-03-12T00:44:00.000Z
 tags:
   - carbine-kit
   - handgun

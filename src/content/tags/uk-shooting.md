@@ -1,3 +1,3 @@
 ---
-label: "Uk Shooting"
+label: Uk Shooting
 ---

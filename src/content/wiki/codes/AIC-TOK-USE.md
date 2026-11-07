@@ -6,8 +6,8 @@ summary: After years of using agentic AI to generate, debug and architect progra
 kind: article
 topic: codes
 category: ai-coding
-createdAt: 2026-07-03
-updatedAt: 2026-07-03
+createdAt: 2026-07-03T00:00:00.000Z
+updatedAt: 2026-07-03T00:00:00.000Z
 tags:
   - Copilot
   - OpenAI

@@ -1,3 +1,3 @@
 ---
-label: "Web"
+label: Web
 ---

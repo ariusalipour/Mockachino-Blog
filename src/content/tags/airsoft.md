@@ -1,3 +1,3 @@
 ---
-label: "Airsoft"
+label: Airsoft
 ---

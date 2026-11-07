@@ -1,3 +1,3 @@
 ---
-label: "OpenAI"
+label: OpenAI
 ---

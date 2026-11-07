@@ -6,8 +6,8 @@ summary: AI does not need to replace an engineer's expertise to be useful. The r
 kind: article
 topic: codes
 category: ai-coding
-createdAt: 2026-08-12
-updatedAt: 2026-08-12
+createdAt: 2026-08-12T00:00:00.000Z
+updatedAt: 2026-08-12T00:00:00.000Z
 tags:
   - OpenAI
 featuredImage:

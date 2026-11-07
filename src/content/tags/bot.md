@@ -1,3 +1,3 @@
 ---
-label: "Bot"
+label: Bot
 ---

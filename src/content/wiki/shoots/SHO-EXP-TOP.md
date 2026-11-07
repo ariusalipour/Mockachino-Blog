@@ -6,8 +6,8 @@ summary: A personal wishlist of handguns to try in IPSC Handgun, written from th
 kind: article
 topic: shoots
 category: gear-and-firearms
-createdAt: 2025-11-20T10:00:00.000+00:00
-updatedAt: 2026-03-06T21:40:00.000+00:00
+createdAt: 2025-11-20T10:00:00.000Z
+updatedAt: 2026-03-06T21:40:00.000Z
 tags:
   - handgun
   - practical-shooting

@@ -6,8 +6,8 @@ summary: A reassuring optics guide for shooters who see distortion, blur, or unu
 kind: guide
 topic: shoots
 category: practical-shooting
-createdAt: 2025-04-22T10:00:00.000+00:00
-updatedAt: 2026-03-06T21:40:00.000+00:00
+createdAt: 2025-04-22T10:00:00.000Z
+updatedAt: 2026-03-06T21:40:00.000Z
 tags:
   - optics
   - practical-shooting

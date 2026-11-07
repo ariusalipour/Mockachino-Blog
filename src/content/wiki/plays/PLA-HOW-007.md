@@ -6,8 +6,8 @@ summary: A follow-up workaround for keeping Discord stream name tags visible whe
 kind: guide
 topic: plays
 category: software-tools
-createdAt: 2025-05-25T10:00:00.000+00:00
-updatedAt: 2026-03-06T21:40:00.000+00:00
+createdAt: 2025-05-25T10:00:00.000Z
+updatedAt: 2026-03-06T21:40:00.000Z
 tags:
   - discord
   - hacks

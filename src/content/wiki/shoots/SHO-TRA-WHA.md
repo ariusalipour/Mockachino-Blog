@@ -6,8 +6,8 @@ summary: A foundational explanation of sight height, offset, and why close-range
 kind: guide
 topic: shoots
 category: practical-shooting
-createdAt: 2023-02-01T00:09:00.000+00:00
-updatedAt: 2026-03-06T13:48:00.000+00:00
+createdAt: 2023-02-01T00:09:00.000Z
+updatedAt: 2026-03-06T13:48:00.000Z
 tags:
   - optics
   - practical-shooting

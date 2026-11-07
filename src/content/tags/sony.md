@@ -1,3 +1,3 @@
 ---
-label: "Sony"
+label: Sony
 ---

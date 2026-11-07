@@ -1,3 +1,3 @@
 ---
-label: "VOIP"
+label: VOIP
 ---

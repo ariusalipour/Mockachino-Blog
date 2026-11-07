@@ -1,3 +1,3 @@
 ---
-label: "Teamspeak"
+label: Teamspeak
 ---

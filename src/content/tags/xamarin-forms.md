@@ -1,3 +1,3 @@
 ---
-label: "Xamarin Forms"
+label: Xamarin Forms
 ---

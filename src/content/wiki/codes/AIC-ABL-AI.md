@@ -6,8 +6,8 @@ summary: AI agents can make implementation dramatically faster, but the engineer
 kind: article
 topic: codes
 category: ai-coding
-createdAt: 2026-08-06
-updatedAt: 2026-08-12
+createdAt: 2026-08-06T00:00:00.000Z
+updatedAt: 2026-08-12T00:00:00.000Z
 tags:
   - OpenAI
 featuredImage:

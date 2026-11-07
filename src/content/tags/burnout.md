@@ -1,3 +1,3 @@
 ---
-label: "Burnout"
+label: Burnout
 ---

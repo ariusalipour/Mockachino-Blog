@@ -6,8 +6,8 @@ summary: A short introduction to The Finals, centered on destructible arenas, lo
 kind: article
 topic: plays
 category: tactical-shooters
-createdAt: 2025-09-05T10:00:00.000+00:00
-updatedAt: 2026-03-06T21:40:00.000+00:00
+createdAt: 2025-09-05T10:00:00.000Z
+updatedAt: 2026-03-06T21:40:00.000Z
 tags:
   - battle-royale
   - fps

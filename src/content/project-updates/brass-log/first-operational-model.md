@@ -3,8 +3,8 @@ project: brass-log
 slug: first-operational-model
 title: Shaping the first operational model
 summary: "Brass Log is being organised around the records an organisation needs to keep: usage, storage, ammunition, components, and maintenance."
-createdAt: 2026-08-12T09:00:00.000+00:00
-updatedAt: 2026-08-12T09:00:00.000+00:00
+createdAt: 2026-08-12T09:00:00.000Z
+updatedAt: 2026-08-12T09:00:00.000Z
 tags:
   - mobile-apps
   - firearms

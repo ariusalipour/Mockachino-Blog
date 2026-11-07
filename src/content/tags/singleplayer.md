@@ -1,3 +1,3 @@
 ---
-label: "Singleplayer"
+label: Singleplayer
 ---

@@ -6,8 +6,8 @@ summary: A budget starter guide for IPSC Action Air, focused on avoiding overwhe
 kind: guide
 topic: shoots
 category: practical-shooting
-createdAt: 2022-07-10T00:31:00.000+00:00
-updatedAt: 2023-03-12T00:33:00.000+00:00
+createdAt: 2022-07-10T00:31:00.000Z
+updatedAt: 2023-03-12T00:33:00.000Z
 tags:
   - action-air
   - ipsc

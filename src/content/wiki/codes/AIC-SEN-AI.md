@@ -6,8 +6,8 @@ summary: AI can make a graduate engineer dramatically faster, but seniority was 
 kind: article
 topic: codes
 category: ai-coding
-createdAt: 2026-08-15
-updatedAt: 2026-08-15
+createdAt: 2026-08-15T00:00:00.000Z
+updatedAt: 2026-08-15T00:00:00.000Z
 tags:
   - OpenAI
   - Copilot

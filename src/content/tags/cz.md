@@ -1,3 +1,3 @@
 ---
-label: "Cz"
+label: Cz
 ---

@@ -1,3 +1,3 @@
 ---
-label: "Net Maui"
+label: Net Maui
 ---

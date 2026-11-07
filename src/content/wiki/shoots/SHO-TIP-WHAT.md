@@ -6,8 +6,8 @@ summary: A practical guide to choosing mini rifle optics based on target distanc
 kind: guide
 topic: shoots
 category: practical-shooting
-createdAt: 2023-02-05T00:01:00.000+00:00
-updatedAt: 2026-03-06T13:47:00.000+00:00
+createdAt: 2023-02-05T00:01:00.000Z
+updatedAt: 2026-03-06T13:47:00.000Z
 tags:
   - optics
   - practical-shooting

@@ -1,3 +1,3 @@
 ---
-label: "Anthropic"
+label: Anthropic
 ---

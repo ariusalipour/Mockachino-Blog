@@ -1,3 +1,3 @@
 ---
-label: "Slay The Spire"
+label: Slay The Spire
 ---

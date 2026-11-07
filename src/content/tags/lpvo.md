@@ -1,3 +1,3 @@
 ---
-label: "LPVO"
+label: LPVO
 ---

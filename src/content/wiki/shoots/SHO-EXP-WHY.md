@@ -6,8 +6,8 @@ summary: A practical mini rifle optics note explaining the tradeoffs behind choo
 kind: article
 topic: shoots
 category: practical-shooting
-createdAt: 2023-02-27T23:51:00.000+00:00
-updatedAt: 2026-03-06T13:47:00.000+00:00
+createdAt: 2023-02-27T23:51:00.000Z
+updatedAt: 2026-03-06T13:47:00.000Z
 tags:
   - hhs
   - optics

@@ -1,3 +1,3 @@
 ---
-label: "Realism"
+label: Realism
 ---

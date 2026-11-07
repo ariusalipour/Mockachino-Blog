@@ -1,3 +1,3 @@
 ---
-label: "Mini Rifle"
+label: Mini Rifle
 ---

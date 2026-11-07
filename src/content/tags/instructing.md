@@ -1,3 +1,3 @@
 ---
-label: "Instructing"
+label: Instructing
 ---

@@ -2,7 +2,7 @@
 name: Terminus
 summary: A narrative card game about surviving strange worlds, built as an evolving React Native and Expo project.
 status: Active development
-updatedAt: 2026-08-12T09:00:00.000+00:00
+updatedAt: 2026-08-12T09:00:00.000Z
 repository: https://github.com/ariusalipour/terminus-game
 tags:
   - mobile-apps

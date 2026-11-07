@@ -1,3 +1,3 @@
 ---
-label: "Battle Royale"
+label: Battle Royale
 ---

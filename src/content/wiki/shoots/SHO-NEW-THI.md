@@ -6,8 +6,8 @@ summary: A shooting-adjacent product note on using airsoft trigger realism as a 
 kind: article
 topic: shoots
 category: airsoft-and-tactical
-createdAt: 2025-08-12T10:00:00.000+00:00
-updatedAt: 2026-03-06T21:40:00.000+00:00
+createdAt: 2025-08-12T10:00:00.000Z
+updatedAt: 2026-03-06T21:40:00.000Z
 tags:
   - airsoft
   - realism

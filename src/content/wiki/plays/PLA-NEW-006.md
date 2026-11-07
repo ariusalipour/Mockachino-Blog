@@ -6,8 +6,8 @@ summary: A breakdown of the mechanics that make Tarkov feel tense and grounded, 
 kind: article
 topic: plays
 category: tactical-shooters
-createdAt: 2025-06-20T10:00:00.000+00:00
-updatedAt: 2026-03-06T21:40:00.000+00:00
+createdAt: 2025-06-20T10:00:00.000Z
+updatedAt: 2026-03-06T21:40:00.000Z
 tags:
   - escape-from-tarkov
   - fps

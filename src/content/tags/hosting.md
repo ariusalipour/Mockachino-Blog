@@ -1,3 +1,3 @@
 ---
-label: "Hosting"
+label: Hosting
 ---

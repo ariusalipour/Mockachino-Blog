@@ -1,3 +1,3 @@
 ---
-label: "Escape From Tarkov"
+label: Escape From Tarkov
 ---

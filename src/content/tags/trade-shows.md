@@ -1,3 +1,3 @@
 ---
-label: "Trade Shows"
+label: Trade Shows
 ---

@@ -1,3 +1,3 @@
 ---
-label: "Practical Shooting"
+label: Practical Shooting
 ---

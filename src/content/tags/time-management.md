@@ -1,3 +1,3 @@
 ---
-label: "Time Management"
+label: Time Management
 ---
