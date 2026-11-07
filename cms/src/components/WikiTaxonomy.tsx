@@ -117,7 +117,7 @@ export function WikiTags({ path, readOnly }: JSONFieldClientProps) {
       readOnly={disabled} showError={field.showError}
       onChange={selection => field.setValue(selectedValues(selection))}
       description={catalogue.error ? 'Tags could not be loaded. Refresh this page to try again.' : 'Search existing tags or add a new tag below.'} />
-    {!readOnly && <div className="field-type text" style={{ marginTop: '-12px', marginBottom: '24px' }}>
+    {!readOnly && <div className="field-type text" style={{ marginTop: '0', marginBottom: '24px' }}>
       <label className="field-label" htmlFor={`${path}-new-tag`}>New tag</label>
       <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
         <input id={`${path}-new-tag`} type="text" value={label} maxLength={100} disabled={disabled}
