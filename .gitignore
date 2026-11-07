@@ -64,3 +64,5 @@ cms/.next/
 cms/data/
 cms/*.tsbuildinfo
 !cms/src/migrations/*.json
+deploy/cms/backups/
+/*.tar.gz
