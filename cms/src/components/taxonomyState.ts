@@ -19,3 +19,11 @@ export function selectedValues(value: unknown): string[] {
   const choices = Array.isArray(value) ? value : value ? [value] : []
   return choices.flatMap(choice => choice && typeof choice === 'object' && 'value' in choice ? [String(choice.value)] : [])
 }
+
+export function newTagSlug(label: string): string {
+  return label.normalize('NFKD').replace(/[\u0300-\u036f]/g, '').toLowerCase()
+    .replace(/['’]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '').slice(0, 90).replace(/-$/, '')
+}
+export function matchingTag(docs: CatalogueDocument[], label: string): CatalogueDocument | undefined {
+  return docs.find(doc => doc.label?.trim().toLowerCase() === label.trim().toLowerCase() || stem(doc.sourcePath).toLowerCase() === newTagSlug(label))
+}
