@@ -59,7 +59,7 @@ while (true) {
         await save({acknowledged:digest, deployedAt:new Date().toISOString()});
         console.log('Verified published revision on the live website.');
       }
-    } else if (candidate === digest && (!state.requestedAt || Date.now() - state.requestedAt >= retryAfter)) {
+    } else if (candidate === digest && (state.pending !== digest || !state.requestedAt || Date.now() - state.requestedAt >= retryAfter)) {
       const deploy = await fetch(hook, {method:'POST', signal:AbortSignal.timeout(30000)});
       if (!deploy.ok) throw new Error(`Deploy hook returned HTTP ${deploy.status}`);
       await save({...state, pending:digest, requestedAt:Date.now()});

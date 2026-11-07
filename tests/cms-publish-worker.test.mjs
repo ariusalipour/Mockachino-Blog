@@ -129,6 +129,24 @@ test('failed hook POST is retried and only the accepted request becomes pending'
   } finally { await rm(result.dir, { recursive: true, force: true }); }
 });
 
+test('a new published digest deploys immediately while an older digest is pending', async () => {
+  const result = await runWorker({
+    cycles: 2,
+    liveStatus: 404,
+    initialState: JSON.stringify({
+      acknowledged: 'previous-release',
+      pending: 'older-pending-digest',
+      requestedAt: Date.now(),
+    }),
+  });
+  try {
+    assert.equal(result.calls.filter(call => call.kind === 'hook').length, 1);
+    assert.equal(result.state.acknowledged, 'previous-release');
+    assert.equal(result.state.pending, result.computedDigest);
+    assert.notEqual(result.state.pending, 'older-pending-digest');
+  } finally { await rm(result.dir, { recursive: true, force: true }); }
+});
+
 test('draft-only changes omitted from the published snapshot do not trigger a build', async () => {
   // The endpoint returns only published collections; an unrelated draft count is outside the digest.
   const result = await runWorker({ cycles: 2, liveStatus: 200 });
