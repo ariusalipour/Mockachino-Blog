@@ -13,11 +13,15 @@ const interval = Math.max(10, Number(process.env.PUBLISH_POLL_SECONDS) || 30) * 
 const retryAfter = Math.max(120, Number(process.env.PUBLISH_RETRY_SECONDS) || 600) * 1000;
 const collections = ['topics','categories','tags','glossary','wiki','projects','project-updates'];
 let state = {};
-try { state = JSON.parse(await readFile(statePath, 'utf8')); }
+try {
+  state = JSON.parse(await readFile(statePath, 'utf8'));
+  if (!state || typeof state !== 'object' || Array.isArray(state)) throw new Error('Invalid publication state');
+}
 catch (error) {
   if (error.code !== 'ENOENT') {
     console.error('Invalid publication state; quarantining and verifying live revision.');
     await rename(statePath, `${statePath}.invalid-${Date.now()}`);
+    state = {};
   }
 }
 let candidate;
