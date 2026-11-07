@@ -2,7 +2,8 @@
 import type { CollectionEntry } from "astro:content";
 interface Props { quiz: CollectionEntry<"quizzes">; }
 const { quiz } = Astro.props;
-const { slug, title, questions } = quiz.data;
+const { title, questions } = quiz.data;
+const slug = quiz.data.slug ?? quiz.slug;
 const quizID = `quiz-${slug}`;
 const quizJSON = JSON.stringify(questions).replace(/</g, "\\u003c");
 ---

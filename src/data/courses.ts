@@ -1,8 +1,17 @@
 import { getCollection } from "astro:content";
 
-const [courseEntries, lessonEntries, quizEntries] = await Promise.all([
+const [rawCourses, rawLessons, rawQuizzes] = await Promise.all([
   getCollection("courses"), getCollection("course-lessons"), getCollection("quizzes"),
 ]);
+
+// Astro reserves frontmatter `slug` and can remove it from entry.data. Keep
+// one canonical value for relationship lookups, URLs and static route params.
+function canonicalEntry<T extends { slug: string; data: { slug?: string } }>(entry: T) {
+  return { ...entry, data: { ...entry.data, slug: entry.data.slug ?? entry.slug } };
+}
+const courseEntries = rawCourses.map(canonicalEntry);
+const lessonEntries = rawLessons.map(canonicalEntry);
+const quizEntries = rawQuizzes.map(canonicalEntry);
 
 const lessonBySlug = new Map(lessonEntries.map(entry => [entry.data.slug, entry]));
 const quizBySlug = new Map(quizEntries.map(entry => [entry.data.slug, entry]));

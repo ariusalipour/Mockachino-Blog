@@ -95,7 +95,7 @@ const courseImage = z.object({ src: z.string(), alt: z.string().nullable().defau
 const courses = defineCollection({
   type: "content",
   schema: z.object({
-    courseId: z.string(), slug: routeSlug, title: z.string(), summary: z.string(),
+    courseId: z.string(), slug: routeSlug.optional(), title: z.string(), summary: z.string(),
     topic: z.enum(["shoots", "plays", "codes"]), category: z.string(), tags: z.array(z.string()).default([]),
     createdAt: z.coerce.date(), updatedAt: z.coerce.date(), featuredImage: courseImage,
     lessons: z.array(z.object({ lesson: routeSlug, quiz: routeSlug.optional() })).default([]),
@@ -105,14 +105,14 @@ const courses = defineCollection({
 const courseLessons = defineCollection({
   type: "content",
   schema: z.object({
-    lessonId: z.string(), slug: routeSlug, title: z.string(), summary: z.string(),
+    lessonId: z.string(), slug: routeSlug.optional(), title: z.string(), summary: z.string(),
     createdAt: z.coerce.date(), updatedAt: z.coerce.date(), featuredImage: courseImage,
   }),
 });
 const quizzes = defineCollection({
   type: "content",
   schema: z.object({
-    quizId: z.string(), slug: routeSlug, title: z.string(), createdAt: z.coerce.date(), updatedAt: z.coerce.date(),
+    quizId: z.string(), slug: routeSlug.optional(), title: z.string(), createdAt: z.coerce.date(), updatedAt: z.coerce.date(),
     questions: z.array(z.object({
       question: z.string().min(1), explanation: z.string().min(1),
       answers: z.array(z.object({ text: z.string().min(1), correct: z.boolean() })).min(2)
