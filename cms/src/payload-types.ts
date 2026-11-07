@@ -408,22 +408,8 @@ export interface Glossary {
  */
 export interface Wiki {
   id: number;
-  /**
-   * Stable filename within this content collection, including .md. Keep it unchanged to preserve URLs (for example shoots/SHO-EXP-001.md).
-   */
-  sourcePath: string;
-  articleId: string;
-  slug?: string | null;
-  title: string;
-  summary: string;
-  kind: 'review' | 'article' | 'guide';
   topic: 'shoots' | 'plays' | 'codes';
   category: string;
-  authoredAt: string;
-  revisedAt: string;
-  /**
-   * Array of tag slugs, for example ["ipsc", "projects"].
-   */
   tags:
     | {
         [k: string]: unknown;
@@ -433,10 +419,9 @@ export interface Wiki {
     | number
     | boolean
     | null;
-  featuredImage?: {
-    src?: string | null;
-    alt?: string | null;
-  };
+  title: string;
+  summary: string;
+  kind: 'article' | 'review' | 'guide';
   content?: {
     root: {
       type: string;
@@ -452,8 +437,34 @@ export interface Wiki {
     };
     [k: string]: unknown;
   } | null;
-  body?: string | null;
-  contentMigration?:
+  featuredImage?: {
+    src?: string | null;
+    alt?: string | null;
+  };
+  /**
+   * Generated on first save and kept stable when the title or topic changes.
+   */
+  sourcePath?: string | null;
+  /**
+   * Generated automatically on first save.
+   */
+  articleId?: string | null;
+  /**
+   * Generated when a new post first has a title, then kept stable.
+   */
+  slug?: string | null;
+  /**
+   * Set automatically; original publication dates are preserved.
+   */
+  authoredAt?: string | null;
+  /**
+   * Updated when changed content is published.
+   */
+  revisedAt?: string | null;
+  /**
+   * Additional metadata retained from the original post.
+   */
+  extraFrontmatter?:
     | {
         [k: string]: unknown;
       }
@@ -462,10 +473,8 @@ export interface Wiki {
     | number
     | boolean
     | null;
-  /**
-   * Preserves metadata imported from the original Markdown files.
-   */
-  extraFrontmatter?:
+  body?: string | null;
+  contentMigration?:
     | {
         [k: string]: unknown;
       }
@@ -841,27 +850,27 @@ export interface GlossarySelect<T extends boolean = true> {
  * via the `definition` "wiki_select".
  */
 export interface WikiSelect<T extends boolean = true> {
-  sourcePath?: T;
-  articleId?: T;
-  slug?: T;
+  topic?: T;
+  category?: T;
+  tags?: T;
   title?: T;
   summary?: T;
   kind?: T;
-  topic?: T;
-  category?: T;
-  authoredAt?: T;
-  revisedAt?: T;
-  tags?: T;
+  content?: T;
   featuredImage?:
     | T
     | {
         src?: T;
         alt?: T;
       };
-  content?: T;
+  sourcePath?: T;
+  articleId?: T;
+  slug?: T;
+  authoredAt?: T;
+  revisedAt?: T;
+  extraFrontmatter?: T;
   body?: T;
   contentMigration?: T;
-  extraFrontmatter?: T;
   updatedAt?: T;
   createdAt?: T;
   _status?: T;

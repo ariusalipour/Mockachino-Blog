@@ -47,6 +47,8 @@ test('anonymous reads return published content and never drafts, including draft
   await assert.rejects(payload.delete({ collection: 'tags', id: published.id, overrideAccess: false }))
 })
 test('editorial dates, Markdown and additional frontmatter survive database storage', async () => {
+  await payload.create({ collection: 'categories', data: { sourcePath: 'shoots-experiences.md', topic: 'shoots', name: 'Experiences', description: 'Test category', _status: 'published' }, overrideAccess: true })
+  await payload.create({ collection: 'tags', data: { sourcePath: 'ipsc.md', label: 'IPSC', _status: 'published' }, overrideAccess: true })
   const entry = { sourcePath: 'shoots/round-trip.md', body: '\n# Unchanged\n\n![Image](/images/example.png)\n', data: { articleId: 'TEST-001', slug: 'shoots/round-trip', title: 'Round trip', summary: 'Test summary', kind: 'article', topic: 'shoots', category: 'experiences', createdAt: '2024-01-01T10:20:30.000Z', updatedAt: '2025-02-02T11:22:33.000Z', tags: ['ipsc'], legacyField: { nested: ['kept'] } } }
   const doc = await payload.create({ collection: 'wiki', data: { ...fromSiteDocument('wiki', entry), _status: 'published' } as RequiredDataFromCollectionSlug<'wiki'>, overrideAccess: true })
   assert.deepEqual(toSiteDocument('wiki', doc as unknown as Record<string, unknown>), entry)

@@ -44,8 +44,9 @@ test('published and draft-only legacy documents migrate without leaking or overw
  assert.ok(publicDocs.docs.every(doc=>doc.label!=='PRIVATE draft label'&&doc.id!==draftOnly.id))
 })
 test('migration never merges private optional fields or JSON/group values into published content',async()=>{
+ await payload.create({collection:'categories',overrideAccess:true,data:{sourcePath:'codes-software-tools.md',topic:'codes',name:'Software tools',description:'Test category',_status:'published'}})
  const published=await payload.create({collection:'wiki',overrideAccess:true,data:{sourcePath:'codes/optional.md',articleId:'OPTIONAL',title:'Public',summary:'Public summary',kind:'article',topic:'codes',category:'software-tools',authoredAt:'2020-01-01T00:00:00Z',revisedAt:'2020-02-01T00:00:00Z',tags:[],body:'Public body',extraFrontmatter:{nested:{public:'kept'}},_status:'published'}})
- await payload.update({collection:'wiki',id:published.id,draft:true,overrideAccess:true,data:{slug:'private-slug',summary:'PRIVATE summary',body:'PRIVATE body',content:null,featuredImage:{src:'https://example.invalid/private.png',alt:'PRIVATE alt'},extraFrontmatter:{nested:{private:'SECRET'}},_status:'draft'}})
+ await payload.update({collection:'wiki',id:published.id,draft:true,overrideAccess:true,context:{preserveWikiMetadata:true},data:{slug:'private-slug',summary:'PRIVATE summary',body:'PRIVATE body',content:null,featuredImage:{src:'https://example.invalid/private.png',alt:'PRIVATE alt'},extraFrontmatter:{nested:{private:'SECRET'}},_status:'draft'}})
  await (payload.db as any).drizzle.run(sql`UPDATE wiki SET content = NULL, content_migration = NULL WHERE id = ${published.id}`)
  await (payload.db as any).drizzle.run(sql`UPDATE _wiki_v SET version_content = NULL, version_content_migration = NULL WHERE parent_id = ${published.id}`)
  await migrateRichText(payload)

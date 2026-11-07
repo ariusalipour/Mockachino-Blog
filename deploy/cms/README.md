@@ -19,6 +19,21 @@ records and keep their original alternative text. YouTube and Giphy embeds have
 editable titles, URLs, and previews. Original images remain in the Astro
 repository as well as the media library.
 
+## Writing wiki posts
+
+The wiki editor starts with Topic → Category → Tags. Categories are filtered by
+the selected topic, and tags use the existing tag catalogue instead of a JSON
+input. Manage new categories and tags in their corresponding collections and
+publish them before assigning them to a published article.
+
+For a new post, the CMS generates its article ID and content filename. It creates
+a title-based URL slug and the initial publication/update dates; the URL and
+identifiers then stay stable when the title, topic, or category changes. Technical
+values are shown read-only in a collapsed section. Existing article IDs,
+filenames, URL slugs, and dates are preserved when an article is simply opened or
+saved without content changes. Drafts can be saved while the article is still
+in progress. Publication validates the selected topic/category/tags together.
+
 The original Markdown is retained in a hidden, read-only `body` field as a
 recovery copy. `content` is the editable rich text source. The published snapshot
 serializes rich text into the site's Markdown pipeline so Astro retains heading
