@@ -44,6 +44,17 @@ test('a topic-only draft receives a stable identity and dates without requiring 
   assert.equal(published._status, 'published'); assert.equal(published.slug, titled.slug)
 })
 
+test('new posts default to first-save date and published posts can be backdated', async () => {
+  const beforeSave = Date.now()
+  const draft = await create({ topic: 'codes' })
+  const afterSave = Date.now()
+  const createdDate = new Date(String(draft.authoredAt)).getTime()
+  assert.ok(createdDate >= beforeSave - 1000 && createdDate <= afterSave + 1000)
+  const publicationDate = '2019-04-12T00:00:00.000Z'
+  const published = await update(draft.id, { category: 'software-tools', title: 'Backdated post', summary: 'Summary', authoredAt: publicationDate }, false)
+  assert.equal(published.authoredAt, publicationDate)
+})
+
 test('same-title posts get collision-safe identities and URLs, including private drafts', async () => {
   const left = await create({ topic: 'codes', title: 'Same title' })
   const right = await create({ topic: 'codes', title: 'Same title' })
@@ -91,7 +102,7 @@ test('unchanged visual editor roundtrips preserve editorial dates; changed publi
   const editorConfig = editorConfigFactory.fromField({ field })
   const editor = createHeadlessEditor({ nodes: getEnabledNodes({ editorConfig }), onError: error => { throw error } })
   editor.setEditorState(editor.parseEditorState(JSON.stringify(original.content)))
-  const unchanged = await update(original.id, { content: editor.getEditorState().toJSON() }, false)
+  const unchanged = await update(original.id, { content: editor.getEditorState().toJSON(), authoredAt: original.authoredAt }, false)
   assert.equal(unchanged.revisedAt, original.revisedAt)
   const draft = await update(original.id, { content: markdownToRichText('A new private draft') })
   assert.equal(draft.revisedAt, original.revisedAt)
@@ -100,4 +111,16 @@ test('unchanged visual editor roundtrips preserve editorial dates; changed publi
   const published = await update(original.id, {}, false)
   assert.ok(new Date(String(published.revisedAt)).getTime() > new Date(String(original.revisedAt)).getTime())
   assert.equal(published.authoredAt, original.authoredAt)
+})
+
+test('a private publication-date edit stays private until publishing the latest draft', async () => {
+  const original = await create({ topic: 'codes', category: 'software-tools', title: 'Date isolation', summary: 'Summary', tags: [], authoredAt: '2020-01-01T00:00:00.000Z' }, false)
+  const privateDate = '2010-01-01T00:00:00.000Z'
+  const draft = await update(original.id, { authoredAt: privateDate })
+  assert.equal(draft.authoredAt, privateDate)
+  const liveBeforePublish = await payload.findByID({ collection: 'wiki', id: original.id, draft: false, overrideAccess: true })
+  assert.equal(liveBeforePublish.authoredAt, original.authoredAt)
+  const published = await update(original.id, {}, false)
+  assert.equal(published.authoredAt, privateDate)
+  assert.ok(new Date(String(published.revisedAt)).getTime() > new Date(String(original.revisedAt)).getTime())
 })

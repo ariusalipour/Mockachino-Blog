@@ -28,6 +28,11 @@ function fail(req: PayloadRequest, path: string, message: string): never {
 function same(left: unknown, right: unknown) {
   return JSON.stringify(left ?? null) === JSON.stringify(right ?? null)
 }
+function normalizedDate(value: unknown) {
+  if (!value) return null
+  const timestamp = new Date(String(value)).getTime()
+  return Number.isFinite(timestamp) ? new Date(timestamp).toISOString() : String(value)
+}
 async function uniqueSlug(req: PayloadRequest, title: string, articleId: string): Promise<string> {
   // An identity suffix also prevents two simultaneous same-title requests from
   // racing through an availability check and claiming the same public URL.
@@ -73,6 +78,7 @@ async function meaningfulContent(doc: Data, req: PayloadRequest): Promise<Record
     title: doc.title ?? '', summary: doc.summary ?? '', kind: doc.kind ?? 'article',
     topic: doc.topic, category: doc.category ?? '', tags: doc.tags ?? [],
     featuredImage: doc.featuredImage?.src ? { src: doc.featuredImage.src, alt: doc.featuredImage.alt ?? '' } : null,
+    authoredAt: normalizedDate(doc.authoredAt),
     extraFrontmatter: doc.extraFrontmatter ?? null, body,
   }
 }
@@ -100,19 +106,19 @@ export const automateWiki: CollectionBeforeValidateHook = async ({ data, origina
     data.articleId = original.articleId
     data.sourcePath = original.sourcePath
     data.slug = original.slug
-    data.authoredAt = original.authoredAt
     data.revisedAt = original.revisedAt
     if (!original.slug && generatedArticlePattern.test(String(original.articleId)) && titleSlug(String(merged.title || ''))) {
       const history = await req.payload.findVersions({ collection: 'wiki', where: { and: [{ parent: { equals: original.id } }, { 'version._status': { equals: 'published' } }] }, limit: 1, depth: 0, overrideAccess: true, req })
       if (!history.docs.length) data.slug = await uniqueSlug(req, String(merged.title), String(original.articleId))
     }
   }
-  const outgoing = { ...original, ...data }
-  const publishing = outgoing._status === 'published'
-  await validateTaxonomy(req, outgoing, original, publishing)
+  const publishing = (data._status ?? original?._status) === 'published'
+  if (operation === 'update' && original && (data.authoredAt == null || data.authoredAt === '')) data.authoredAt = original.authoredAt
+  const finalOutgoing = { ...original, ...data }
+  await validateTaxonomy(req, finalOutgoing, original, publishing)
   if (operation === 'update' && original && publishing) {
     const live = await req.payload.findByID({ collection: 'wiki', id: original.id, draft: false, depth: 0, overrideAccess: true, req }) as unknown as Data
-    if (live._status !== 'published' || !same(await meaningfulContent(live, req), await meaningfulContent(outgoing, req))) data.revisedAt = now
+    if (live._status !== 'published' || !same(await meaningfulContent(live, req), await meaningfulContent(finalOutgoing, req))) data.revisedAt = now
   }
   return data
 }

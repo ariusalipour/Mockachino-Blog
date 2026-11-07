@@ -30,10 +30,19 @@ them in a published article.
 For a new post, the CMS generates its article ID and content filename. It creates
 a title-based URL slug and the initial publication/update dates; the URL and
 identifiers then stay stable when the title, topic, or category changes. Technical
-values are shown read-only in a collapsed section. Existing article IDs,
+identifiers are shown read-only in a collapsed section. Existing article IDs,
 filenames, URL slugs, and dates are preserved when an article is simply opened or
 saved without content changes. Drafts can be saved while the article is still
 in progress. Publication validates the selected topic/category/tags together.
+
+To backdate a wiki post, expand Publishing details and set Publication date to
+the intended date, then publish the changes. Saving as a draft keeps that date
+edit private until the draft is published. The website uses this date for the
+article's publication date; its article ID, filename and URL remain stable.
+Content updated date is still automatic. New posts receive a default publication
+date if none is entered, and an omitted or cleared date keeps the existing value.
+Backdating changes date metadata, while scheduled publishing controls when the
+post becomes public. A scheduled publish includes the latest saved date edit.
 
 The original Markdown is retained in a hidden, read-only `body` field as a
 recovery copy. `content` is the editable rich text source. The published snapshot
