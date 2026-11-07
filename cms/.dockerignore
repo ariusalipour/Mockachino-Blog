@@ -4,3 +4,5 @@ data
 .env
 .env.*
 *.tsbuildinfo
+**/._*
+**/.DS_Store

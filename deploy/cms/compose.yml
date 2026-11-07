@@ -4,7 +4,6 @@ services:
     build: ../../cms
     image: mockachino-cms:local
     restart: unless-stopped
-    init: true
     env_file: .env
     environment:
       NODE_ENV: production
@@ -27,8 +26,11 @@ services:
     read_only: true
     cap_drop: [ALL]
     security_opt: [no-new-privileges:true]
-    env_file: .env
     environment:
+      CLOUDFLARE_PAGES_DEPLOY_HOOK: ${CLOUDFLARE_PAGES_DEPLOY_HOOK:-}
+      PUBLISH_POLL_SECONDS: ${PUBLISH_POLL_SECONDS:-30}
+      PUBLISH_RETRY_SECONDS: ${PUBLISH_RETRY_SECONDS:-600}
+      SITE_PUBLIC_URL: https://mockachino.app
       CMS_INTERNAL_URL: http://cms:3000
       PUBLISH_STATE_PATH: /state/publish-state.json
     command: ['node', '/worker/cms-publish-worker.mjs']
