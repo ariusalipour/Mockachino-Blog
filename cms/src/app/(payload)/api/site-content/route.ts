@@ -1,0 +1,26 @@
+import { existsSync } from 'node:fs'
+import path from 'node:path'
+import config from '@payload-config'
+import { getPayload, createLocalReq, initTransaction, commitTransaction, killTransaction } from 'payload'
+import { collectionSlugs, toSiteDocument } from '../../../../site-content'
+export const dynamic = 'force-dynamic'
+export async function GET() {
+  if (process.env.CMS_REQUIRE_IMPORT_COMPLETE === '1' && !existsSync(path.resolve(process.env.CMS_DATA_DIR || './data', 'import-complete'))) {
+    return Response.json({ error: 'Initial content import is not complete.' }, { status: 503, headers: { 'Cache-Control': 'no-store' } })
+  }
+  const payload = await getPayload({ config })
+  const req = await createLocalReq({}, payload)
+  const startedTransaction = await initTransaction(req)
+  try {
+  const collections = Object.fromEntries(await Promise.all(collectionSlugs.map(async (collection) => {
+    const result = await payload.find({ collection, where: { _status: { equals: 'published' } }, draft: false, overrideAccess: false, pagination: false, depth: 0, sort: 'sourcePath', req })
+    return [collection, result.docs.map(doc => toSiteDocument(collection, doc as unknown as Record<string, unknown>))]
+  })))
+  if (startedTransaction) await commitTransaction(req)
+  const counts = Object.fromEntries(Object.entries(collections).map(([slug, docs]) => [slug, (docs as unknown[]).length]))
+  return Response.json({ version: 1, complete: true, collections, counts }, { headers: { 'Cache-Control': 'no-store' } })
+  } catch (error) {
+    if (startedTransaction) await killTransaction(req)
+    throw error
+  }
+}

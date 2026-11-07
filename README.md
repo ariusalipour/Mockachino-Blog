@@ -101,3 +101,13 @@ See [CONTRIBUTING.md](./CONTRIBUTING.md) for guidelines on suggesting changes, s
 All Rights Reserved. See [LICENSE.txt](./LICENSE.txt).
 
 Copyright (c) 2025—2026 Aryan Alipour.
+
+## Payload CMS
+
+The site supports a self-hosted Payload CMS in [`cms/`](./cms), with NAS Docker
+deployment and automatic Cloudflare Pages rebuilds. See
+[the deployment and content migration guide](./deploy/cms/README.md).
+
+Set `CMS_URL=https://cms.mockachino.app` to fetch published CMS content before
+`npm run build` or `npm run dev`. With no CMS_URL, the checked-in content remains
+available for local development. A configured but unavailable CMS fails the build.

@@ -7,13 +7,19 @@
   },
   "scripts": {
     "dev": "astro dev",
-    "prebuild": "node scripts/ensure-git-history.mjs",
+    "prebuild": "node scripts/cms-sync.mjs && node scripts/ensure-git-history.mjs",
     "build": "astro build",
-    "preview": "astro preview"
+    "preview": "astro preview",
+    "predev": "node scripts/cms-sync.mjs",
+    "cms:sync": "node scripts/cms-sync.mjs",
+    "cms:bundle": "node scripts/cms-bundle.mjs",
+    "test:cms": "node --test tests/cms-*.test.mjs",
+    "cms:verify": "node scripts/cms-verify.mjs"
   },
   "dependencies": {
     "astro": "^5.12.0",
-    "typescript": "^5.9.2"
+    "typescript": "^5.9.2",
+    "yaml": "^2.9.1"
   },
   "devDependencies": {
     "@types/turndown": "^5.0.6",

@@ -1,0 +1,43 @@
+name: mockachino-cms
+services:
+  cms:
+    build: ../../cms
+    image: mockachino-cms:local
+    restart: unless-stopped
+    init: true
+    env_file: .env
+    environment:
+      NODE_ENV: production
+      CMS_DATA_DIR: /data
+      CMS_REQUIRE_IMPORT_COMPLETE: '1'
+      CMS_PUBLIC_URL: https://cms.mockachino.app
+    volumes:
+      - cms-data:/data
+    ports:
+      - '127.0.0.1:3030:3000'
+    healthcheck:
+      test: ['CMD', 'node', '-e', "fetch('http://127.0.0.1:3000/api/health').then(r=>{if(!r.ok)process.exit(1)}).catch(()=>process.exit(1))"]
+      interval: 30s
+      timeout: 10s
+      start_period: 90s
+      retries: 5
+  publish-worker:
+    image: node:22-bookworm-slim
+    restart: unless-stopped
+    read_only: true
+    cap_drop: [ALL]
+    security_opt: [no-new-privileges:true]
+    env_file: .env
+    environment:
+      CMS_INTERNAL_URL: http://cms:3000
+      PUBLISH_STATE_PATH: /state/publish-state.json
+    command: ['node', '/worker/cms-publish-worker.mjs']
+    volumes:
+      - ./cms-publish-worker.mjs:/worker/cms-publish-worker.mjs:ro
+      - publish-state:/state
+    depends_on:
+      cms:
+        condition: service_healthy
+volumes:
+  cms-data:
+  publish-state:
