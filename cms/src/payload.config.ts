@@ -16,8 +16,10 @@ const serverURL = process.env.CMS_PUBLIC_URL || 'http://localhost:3000'
 export default buildConfig({
   serverURL,
   secret,
-  admin: { user: 'users', importMap: { baseDir: dirname }, meta: { titleSuffix: ' | Mockachino CMS' } },
+  admin: { timezones: { defaultTimezone: 'Europe/London' }, user: 'users', importMap: { baseDir: dirname }, meta: { titleSuffix: ' | Mockachino CMS' } },
   collections: [Users, Media, ...contentCollections],
+  // The dedicated NAS worker runs queued jobs; web processes never start a cron runner.
+  jobs: { deleteJobOnComplete: false, access: { run: ({ req }) => Boolean(req.user), queue: ({ req }) => Boolean(req.user), cancel: ({ req }) => Boolean(req.user) } },
   cors: [serverURL],
   csrf: [serverURL],
   db: sqliteAdapter({

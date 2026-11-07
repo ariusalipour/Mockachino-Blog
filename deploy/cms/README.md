@@ -23,8 +23,9 @@ repository as well as the media library.
 
 The wiki editor starts with Topic → Category → Tags. Categories are filtered by
 the selected topic, and tags use the existing tag catalogue instead of a JSON
-input. Manage new categories and tags in their corresponding collections and
-publish them before assigning them to a published article.
+input. Add a shared tag with the inline New tag control, or manage tags and
+categories in their corresponding collections. Publish categories before using
+them in a published article.
 
 For a new post, the CMS generates its article ID and content filename. It creates
 a title-based URL slug and the initial publication/update dates; the URL and
@@ -108,6 +109,47 @@ To use the live CMS locally, create a root `.env` with the same CMS_URL and
 restart `npm run dev`; to refresh content in a running local session, run
 `npm run cms:sync` (or restart the dev command).
 
+## Scheduled wiki publishing
+
+Wiki posts support Payload's native scheduled publish and unpublish controls.
+Save the draft, choose the scheduling action in the editor, select its date and
+time, and confirm the schedule. The timezone defaults to Europe/London and can
+be changed in that dialog. The job publishes the latest saved draft at execution
+time, including edits saved after scheduling. Review the time shown in the dialog:
+the saved job uses an absolute UTC instant, so daylight saving changes do not
+move an already scheduled publication. Manage or cancel pending events from
+the post's scheduling controls.
+
+`jobs-worker` uses the same CMS image, secret, and local SQLite volume. One
+worker checks the default queue every minute and processes up to 20 due jobs.
+It starts after the CMS is healthy, so database migrations finish first, and
+restarts automatically with Docker. No public job-run endpoint or additional
+Cloudflare route is required. Keep exactly one jobs worker for this SQLite
+deployment.
+
+Publishing changes the public CMS snapshot. The separate `publish-worker`
+requests the Astro/Cloudflare Pages rebuild; the post becomes visible on the
+website when that deployment completes. This includes the normal queue polling
+and build delay, so a scheduled time is the CMS publication time rather than an
+exact website release time. Due jobs queued during a NAS outage run when the
+worker returns.
+
+Before deploying the scheduling schema, take a backup and rehearse its migration
+on a restored database. Start or update the services together:
+
+```sh
+docker compose up -d --wait cms jobs-worker publish-worker
+docker compose logs --tail 100 jobs-worker
+```
+
+Inspect failed jobs in Payload's jobs collection and the worker logs. Payload's
+native schedule task does not automatically retry a failed task. After fixing
+the cause, cancel/recreate that scheduled event. A hard worker interruption can
+leave a claimed job marked as processing: stop the worker, back up the database,
+and inspect the individual job before repairing or replacing it. Never reset
+all processing jobs blindly. Roll back the app and database together if a
+scheduling schema migration needs to be undone.
+
 ## Rich text migration
 
 Take a database/media backup and retain the current image before upgrading.
@@ -150,7 +192,7 @@ editing. Keep the pre-migration backup for recovery.
 ```sh
 cd /home/mockachino/apps/mockachino-blog/deploy/cms
 docker compose ps
-docker compose logs --tail 100 cms publish-worker
+docker compose logs --tail 100 cms jobs-worker publish-worker
 ./backup.sh
 docker compose restart cms
 ```

@@ -20,6 +20,21 @@ services:
       timeout: 10s
       start_period: 90s
       retries: 5
+  jobs-worker:
+    image: mockachino-cms:local
+    restart: unless-stopped
+    env_file: .env
+    environment:
+      NODE_ENV: production
+      CMS_DATA_DIR: /data
+      CMS_PUBLIC_URL: https://cms.mockachino.app
+      TZ: Europe/London
+    command: ['npm', 'run', 'payload', '--', 'jobs:run', '--queue', 'default', '--cron', '* * * * *', '--limit', '20']
+    volumes:
+      - cms-data:/data
+    depends_on:
+      cms:
+        condition: service_healthy
   publish-worker:
     image: node:22-bookworm-slim
     restart: unless-stopped

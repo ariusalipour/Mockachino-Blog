@@ -23,7 +23,7 @@ function content(slug: CollectionConfig['slug'], title: string, fields: Field[])
     slug,
     admin: { useAsTitle: title, group: 'Website content', defaultColumns: [title, '_status', 'sourcePath'] },
     access: { read: publishedOrAuthenticated, create: authenticated, update: authenticated, delete: authenticated },
-    versions: { drafts: true, maxPerDoc: 20 },
+    versions: { drafts: slug === 'wiki' ? { schedulePublish: { timeFormat: 'HH:mm', timeIntervals: 5 } } : true, maxPerDoc: 20 },
     hooks: { beforeValidate: [async ({data, req, operation, originalDoc}) => {
       if (!data) return data
       const mayInitializeLegacy = operation === 'create' || req.context.isRestoringVersion || req.context.richTextMigration || (!originalDoc?.contentMigration && !originalDoc?.content)
