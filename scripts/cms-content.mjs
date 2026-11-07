@@ -19,7 +19,7 @@ export function parseMarkdown(source) {
 }
 
 export function serializeMarkdown({ data, body }) {
-  // The body is never converted through HTML or a rich-text representation.
+  // Payload exports the editor content as Markdown; preserve that body without a second conversion.
   return `---\n${YAML.stringify(data, { lineWidth: 0 })}---\n${body}`;
 }
 

@@ -11,10 +11,19 @@ Cloudflare Pages build. Draft edits do not appear in the snapshot.
 After cutover, edit website content in Payload at
 `https://cms.mockachino.app/admin`. Payload owns all seven content collections.
 Keep `sourcePath` stable: it preserves the original collection filename. Article
-slugs, original publication dates, Markdown/HTML, and `/images/...` references are
-preserved. Original images remain in the Astro repository and are also imported
-into Payload's media library. For new uploads, paste the media URL into the
-Markdown or featured image source field.
+slugs, original publication dates, formatting, and `/images/...` references are
+preserved. Edit the Content field with Payload's Lexical visual editor: use the
+toolbar for formatting, Upload for images from the media library, and the slash
+menu for code blocks and video embeds. Imported images are linked to their media
+records and keep their original alternative text. YouTube and Giphy embeds have
+editable titles, URLs, and previews. Original images remain in the Astro
+repository as well as the media library.
+
+The original Markdown is retained in a hidden, read-only `body` field as a
+recovery copy. `content` is the editable rich text source. The published snapshot
+serializes rich text into the site's Markdown pipeline so Astro retains heading
+anchors, syntax highlighting, glossary tooltips, and existing styling. The
+serializer rejects unsupported editor nodes instead of dropping them.
 
 Do not run the former Notion-to-Markdown publishing job against this checkout.
 Notion can still be used for planning; it is no longer this website's publishing
@@ -83,6 +92,43 @@ release live. Without `CMS_URL`, local development uses checked-in Markdown.
 To use the live CMS locally, create a root `.env` with the same CMS_URL and
 restart `npm run dev`; to refresh content in a running local session, run
 `npm run cms:sync` (or restart the dev command).
+
+## Rich text migration
+
+Take a database/media backup and retain the current image before upgrading.
+Deploy the backwards-compatible Astro embed renderer first, then stop the publish
+worker while the schema and content migration run. Migration reads the current
+CMS database, including drafts; it never replaces it from the checked-in seed.
+Run the migration on a restored backup first. For the NAS cutover, after the new
+image is built and a fresh backup is saved:
+
+```sh
+cd deploy/cms
+docker compose stop publish-worker cms
+docker compose run --rm --no-deps cms npm run payload -- migrate
+docker compose run --rm --no-deps cms npm run migrate:richtext -- --dry-run --report=/data/richtext-dry-run.json
+# Verify the dry-run before/forcedAfter snapshots before applying any content change.
+docker compose run --rm --no-deps cms npm run migrate:richtext -- --report=/data/richtext-migration.json
+docker compose up -d --wait cms
+# Verify the live published snapshot and the visual editor, then resume publishing.
+docker compose up -d publish-worker
+```
+
+The migration is transactional and repeatable. It keeps existing rich text edits,
+original Markdown, editorial dates, published state, and newer unpublished drafts.
+Its restricted report contains the pre-migration and forced-conversion snapshots.
+Compare the snapshots using:
+
+```sh
+npm run cms:verify-richtext -- before-published.json after-published.json
+```
+
+This checks rendered formatting, heading IDs, links, image URLs and alt text,
+video URLs and titles, code, glossary behavior, and document metadata. The
+`cms:verify` command uses the same semantic checks; pass `--exact` when checking
+an original Markdown import. After deployment, verify CMS health, the editor,
+public draft isolation, and the live site revision marker before resuming normal
+editing. Keep the pre-migration backup for recovery.
 
 ## Operations and recovery
 

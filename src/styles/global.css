@@ -4054,3 +4054,8 @@ html[data-theme="light"] .article-metric-card {
 
 
 
+
+/* Rich text video blocks retain the same responsive article layout. */
+.article-content .video-embed iframe {
+  margin-bottom: 0;
+}

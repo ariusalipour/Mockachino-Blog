@@ -14,7 +14,8 @@
     "cms:sync": "node scripts/cms-sync.mjs",
     "cms:bundle": "node scripts/cms-bundle.mjs",
     "test:cms": "node --test tests/cms-*.test.mjs",
-    "cms:verify": "node scripts/cms-verify.mjs"
+    "cms:verify": "node scripts/cms-verify.mjs",
+    "cms:verify-richtext": "node scripts/cms-richtext-verify.mjs"
   },
   "dependencies": {
     "astro": "^5.12.0",
@@ -22,8 +23,11 @@
     "yaml": "^2.9.1"
   },
   "devDependencies": {
+    "@astrojs/markdown-remark": "6.3.11",
     "@types/turndown": "^5.0.6",
+    "rehype-parse": "9.0.1",
     "turndown": "^7.2.4",
+    "unified": "11.0.5",
     "unist-util-visit": "^5.1.0"
   }
 }

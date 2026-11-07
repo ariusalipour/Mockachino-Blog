@@ -13,17 +13,24 @@
     "payload": "payload",
     "generate:types": "payload generate:types",
     "import:content": "tsx scripts/import.ts",
-    "test": "tsx --test tests/*.test.ts"
+    "test": "tsx --test tests/*.test.ts",
+    "migrate:richtext": "tsx scripts/migrate-richtext.ts"
   },
   "dependencies": {
     "@payloadcms/db-sqlite": "3.93.0",
     "@payloadcms/next": "3.93.0",
+    "@payloadcms/richtext-lexical": "3.93.0",
     "graphql": "^16.11.0",
     "next": "16.4.5",
     "payload": "3.93.0",
     "react": "19.3.1",
     "react-dom": "19.3.1",
-    "sharp": "0.35.5"
+    "remark-gfm": "^4.0.1",
+    "remark-parse": "^11.0.0",
+    "remark-stringify": "^11.0.0",
+    "sharp": "0.35.5",
+    "unified": "^11.0.5",
+    "@payloadcms/ui": "3.93.0"
   },
   "devDependencies": {
     "@types/node": "^24.0.0",
@@ -33,6 +40,7 @@
     "typescript": "^5.9.2"
   },
   "overrides": {
-    "dompurify": "3.4.17"
+    "dompurify": "3.4.17",
+    "happy-dom": "21.0.4"
   }
 }

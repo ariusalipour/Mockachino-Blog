@@ -24,6 +24,7 @@ export default buildConfig({
     client: { url: process.env.DATABASE_URL || `file:${path.join(dataDir, 'payload.db')}` },
     migrationDir: path.join(dirname, 'migrations'),
     push: process.env.NODE_ENV === 'development',
+    transactionOptions: { behavior: 'deferred' },
     wal: true,
     busyTimeout: 5000,
   }),

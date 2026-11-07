@@ -105,7 +105,7 @@ Copyright (c) 2025—2026 Aryan Alipour.
 ## Payload CMS
 
 The site supports a self-hosted Payload CMS in [`cms/`](./cms), with NAS Docker
-deployment and automatic Cloudflare Pages rebuilds. See
+deployment, a visual rich text editor, and automatic Cloudflare Pages rebuilds. See
 [the deployment and content migration guide](./deploy/cms/README.md).
 
 Set `CMS_URL=https://cms.mockachino.app` to fetch published CMS content before

@@ -1,3 +1,4 @@
+import { documentBody, type RichTextContext } from './richtext'
 export const collectionSlugs = ['topics', 'categories', 'tags', 'glossary', 'wiki', 'projects', 'project-updates'] as const
 export type ContentSlug = typeof collectionSlugs[number]
 export type SiteDocument = { sourcePath: string; body: string; data: Record<string, unknown> }
@@ -20,7 +21,7 @@ export function fromSiteDocument(collection: ContentSlug, entry: SiteDocument) {
   }
   return { ...data, extraFrontmatter }
 }
-export function toSiteDocument(collection: ContentSlug, doc: Record<string, unknown>): SiteDocument {
+export function toSiteDocument(collection: ContentSlug, doc: Record<string, unknown>, context: RichTextContext = {}): SiteDocument {
   const data: Record<string, unknown> = { ...(doc.extraFrontmatter as Record<string, unknown> || {}) }
   for (const key of fieldNames[collection]) {
     const value = doc[cmsField(key)]
@@ -37,5 +38,5 @@ export function toSiteDocument(collection: ContentSlug, doc: Record<string, unkn
       } else data[key] = value
     }
   }
-  return { sourcePath: String(doc.sourcePath), body: String(doc.body ?? ''), data }
+  return { sourcePath: String(doc.sourcePath), body: documentBody(doc, context), data }
 }

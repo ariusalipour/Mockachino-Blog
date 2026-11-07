@@ -12,9 +12,11 @@ export async function GET() {
   const req = await createLocalReq({}, payload)
   const startedTransaction = await initTransaction(req)
   try {
+  const media = await payload.find({collection:'media',pagination:false,depth:0,overrideAccess:false,req})
+  const mediaByID = new Map(media.docs.map(doc => [String(doc.id),doc]))
   const collections = Object.fromEntries(await Promise.all(collectionSlugs.map(async (collection) => {
     const result = await payload.find({ collection, where: { _status: { equals: 'published' } }, draft: false, overrideAccess: false, pagination: false, depth: 0, sort: 'sourcePath', req })
-    return [collection, result.docs.map(doc => toSiteDocument(collection, doc as unknown as Record<string, unknown>))]
+    return [collection, result.docs.map(doc => toSiteDocument(collection, doc as unknown as Record<string, unknown>, {mediaByID}))]
   })))
   if (startedTransaction) await commitTransaction(req)
   const counts = Object.fromEntries(Object.entries(collections).map(([slug, docs]) => [slug, (docs as unknown[]).length]))

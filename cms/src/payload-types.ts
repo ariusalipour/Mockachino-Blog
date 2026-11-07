@@ -202,10 +202,31 @@ export interface Topic {
     articles?: number | null;
     guides?: number | null;
   };
-  /**
-   * Standard Markdown. Existing images use /images/...; for new uploads copy the media URL into Markdown.
-   */
+  content?: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
   body?: string | null;
+  contentMigration?:
+    | {
+        [k: string]: unknown;
+      }
+    | unknown[]
+    | string
+    | number
+    | boolean
+    | null;
   /**
    * Preserves metadata imported from the original Markdown files.
    */
@@ -235,10 +256,31 @@ export interface Category {
   topic: 'shoots' | 'plays' | 'codes';
   name: string;
   description: string;
-  /**
-   * Standard Markdown. Existing images use /images/...; for new uploads copy the media URL into Markdown.
-   */
+  content?: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
   body?: string | null;
+  contentMigration?:
+    | {
+        [k: string]: unknown;
+      }
+    | unknown[]
+    | string
+    | number
+    | boolean
+    | null;
   /**
    * Preserves metadata imported from the original Markdown files.
    */
@@ -266,10 +308,31 @@ export interface Tag {
    */
   sourcePath: string;
   label: string;
-  /**
-   * Standard Markdown. Existing images use /images/...; for new uploads copy the media URL into Markdown.
-   */
+  content?: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
   body?: string | null;
+  contentMigration?:
+    | {
+        [k: string]: unknown;
+      }
+    | unknown[]
+    | string
+    | number
+    | boolean
+    | null;
   /**
    * Preserves metadata imported from the original Markdown files.
    */
@@ -298,10 +361,31 @@ export interface Glossary {
   sourcePath: string;
   term: string;
   definition: string;
-  /**
-   * Standard Markdown. Existing images use /images/...; for new uploads copy the media URL into Markdown.
-   */
+  content?: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
   body?: string | null;
+  contentMigration?:
+    | {
+        [k: string]: unknown;
+      }
+    | unknown[]
+    | string
+    | number
+    | boolean
+    | null;
   /**
    * Preserves metadata imported from the original Markdown files.
    */
@@ -353,10 +437,31 @@ export interface Wiki {
     src?: string | null;
     alt?: string | null;
   };
-  /**
-   * Standard Markdown. Existing images use /images/...; for new uploads copy the media URL into Markdown.
-   */
+  content?: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
   body?: string | null;
+  contentMigration?:
+    | {
+        [k: string]: unknown;
+      }
+    | unknown[]
+    | string
+    | number
+    | boolean
+    | null;
   /**
    * Preserves metadata imported from the original Markdown files.
    */
@@ -401,10 +506,31 @@ export interface Project {
     | number
     | boolean
     | null;
-  /**
-   * Standard Markdown. Existing images use /images/...; for new uploads copy the media URL into Markdown.
-   */
+  content?: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
   body?: string | null;
+  contentMigration?:
+    | {
+        [k: string]: unknown;
+      }
+    | unknown[]
+    | string
+    | number
+    | boolean
+    | null;
   /**
    * Preserves metadata imported from the original Markdown files.
    */
@@ -449,10 +575,31 @@ export interface ProjectUpdate {
     | number
     | boolean
     | null;
-  /**
-   * Standard Markdown. Existing images use /images/...; for new uploads copy the media URL into Markdown.
-   */
+  content?: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
   body?: string | null;
+  contentMigration?:
+    | {
+        [k: string]: unknown;
+      }
+    | unknown[]
+    | string
+    | number
+    | boolean
+    | null;
   /**
    * Preserves metadata imported from the original Markdown files.
    */
@@ -633,7 +780,9 @@ export interface TopicsSelect<T extends boolean = true> {
         articles?: T;
         guides?: T;
       };
+  content?: T;
   body?: T;
+  contentMigration?: T;
   extraFrontmatter?: T;
   updatedAt?: T;
   createdAt?: T;
@@ -648,7 +797,9 @@ export interface CategoriesSelect<T extends boolean = true> {
   topic?: T;
   name?: T;
   description?: T;
+  content?: T;
   body?: T;
+  contentMigration?: T;
   extraFrontmatter?: T;
   updatedAt?: T;
   createdAt?: T;
@@ -661,7 +812,9 @@ export interface CategoriesSelect<T extends boolean = true> {
 export interface TagsSelect<T extends boolean = true> {
   sourcePath?: T;
   label?: T;
+  content?: T;
   body?: T;
+  contentMigration?: T;
   extraFrontmatter?: T;
   updatedAt?: T;
   createdAt?: T;
@@ -675,7 +828,9 @@ export interface GlossarySelect<T extends boolean = true> {
   sourcePath?: T;
   term?: T;
   definition?: T;
+  content?: T;
   body?: T;
+  contentMigration?: T;
   extraFrontmatter?: T;
   updatedAt?: T;
   createdAt?: T;
@@ -703,7 +858,9 @@ export interface WikiSelect<T extends boolean = true> {
         src?: T;
         alt?: T;
       };
+  content?: T;
   body?: T;
+  contentMigration?: T;
   extraFrontmatter?: T;
   updatedAt?: T;
   createdAt?: T;
@@ -722,7 +879,9 @@ export interface ProjectsSelect<T extends boolean = true> {
   repository?: T;
   liveUrl?: T;
   tags?: T;
+  content?: T;
   body?: T;
+  contentMigration?: T;
   extraFrontmatter?: T;
   updatedAt?: T;
   createdAt?: T;
@@ -741,7 +900,9 @@ export interface ProjectUpdatesSelect<T extends boolean = true> {
   authoredAt?: T;
   revisedAt?: T;
   tags?: T;
+  content?: T;
   body?: T;
+  contentMigration?: T;
   extraFrontmatter?: T;
   updatedAt?: T;
   createdAt?: T;
