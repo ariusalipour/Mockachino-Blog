@@ -27,10 +27,13 @@ export async function syncSnapshot(snapshot, root = projectRoot) {
   const content = path.join(root, 'src/content');
   const stateFile = path.join(root, '.cms-sync-state.json');
   let managed = baseline;
-  try { managed = JSON.parse(await readFile(stateFile, 'utf8')).managed; }
+  let priorState = null;
+  try { priorState = JSON.parse(await readFile(stateFile, 'utf8')); managed = priorState.managed; }
   catch (error) { if (error.code !== 'ENOENT') throw error; }
   if (!managed || typeof managed !== 'object') throw new Error('Invalid CMS sync state');
+  if (snapshot.version === 1 && (priorState?.cmsVersion === 2 || ['courses', 'course-lessons', 'quizzes'].some(name => (managed[name] ?? []).length > 0))) throw new Error('Refusing CMS v1 downgrade because managed course content could be deleted');
   for (const name of collections) {
+    if (managed[name] === undefined && ['courses', 'course-lessons', 'quizzes'].includes(name)) managed[name] = [];
     if (!Array.isArray(managed[name])) throw new Error('Invalid CMS sync state');
     managed[name].forEach(sourcePath => safeSourcePath(sourcePath));
   }
@@ -54,7 +57,7 @@ export async function syncSnapshot(snapshot, root = projectRoot) {
     for (const name of collections) {
       for (const sourcePath of managed[name]) await rm(path.join(staged, name, sourcePath), { force: true });
       nextManaged[name] = [];
-      for (const entry of snapshot.collections[name]) {
+      for (const entry of snapshot.collections[name] ?? []) {
         const target = path.join(staged, name, entry.sourcePath);
         try {
           await lstat(target);
@@ -65,7 +68,7 @@ export async function syncSnapshot(snapshot, root = projectRoot) {
         nextManaged[name].push(entry.sourcePath);
       }
     }
-    await writeFile(path.join(transaction, 'state.json'), JSON.stringify({ version: 1, managed: nextManaged }, null, 2) + '\n');
+    await writeFile(path.join(transaction, 'state.json'), JSON.stringify({ version: 1, cmsVersion: snapshot.version, managed: nextManaged }, null, 2) + '\n');
     await rename(content, previous);
     try {
       await rename(staged, content);
@@ -82,7 +85,7 @@ export async function syncSnapshot(snapshot, root = projectRoot) {
     await mkdir(path.join(root, 'public'), { recursive: true });
     await writeFile(path.join(transaction, 'revision.json'), JSON.stringify({ version: 1, digest }) + '\n');
     await rename(path.join(transaction, 'revision.json'), path.join(root, 'public/cms-revision.json'));
-    return Object.fromEntries(collections.map(name => [name, snapshot.collections[name].length]));
+    return Object.fromEntries(collections.map(name => [name, (snapshot.collections[name] ?? []).length]));
   } finally { await rm(transaction, { recursive: true, force: true }); }
 }
 

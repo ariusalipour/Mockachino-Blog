@@ -118,7 +118,40 @@ To use the live CMS locally, create a root `.env` with the same CMS_URL and
 restart `npm run dev`; to refresh content in a running local session, run
 `npm run cms:sync` (or restart the dev command).
 
-## Scheduled wiki publishing
+## Courses, lessons and quizzes
+
+Courses have their own articles in Course Lessons, separate from the wiki. In
+the Courses editor, choose the topic, category and tags, write the introduction,
+then arrange lesson references in reading order. Each lesson can have an optional
+quiz in that course, and the course can also have an optional final quiz. Reuse
+the normal rich text editor for introductions and lesson bodies, including
+images, code and supported video embeds. Technical IDs, filenames and stable
+URLs are generated automatically.
+
+Create and publish the lessons and any quizzes before publishing their parent
+course. Quiz questions need at least two answers, exactly one correct answer,
+and an explanation. Drafts can be saved while incomplete. Course publication
+validates its references; if a referenced lesson or quiz is later unpublished,
+the public export removes that lesson or quiz link rather than exposing a draft
+or leaving a broken course link. New course content supports scheduling and
+editable publication dates through the existing jobs worker.
+
+The website lists courses at `/courses/`, each course at `/courses/<course>/`,
+and its lessons at `/courses/<course>/<lesson>/`. Lesson pages follow the course's
+reading order and offer previous/next navigation. Quizzes are browser-based
+multiple-choice self-checks with scores, correct answers and explanations; there
+are no learner accounts or saved attempts. Answer keys are public content in
+the static website, so these quizzes are not secure assessments.
+
+The CMS exports snapshot version 2 with `courses`, `course-lessons` and `quizzes`
+alongside the original seven collections. The frontend accepts the previous
+version 1 during rollout without changing its revision hash. Deploy that
+compatible frontend first and verify `/courses/`, then migrate and deploy the
+CMS and jobs worker. Do not downgrade to an older snapshot after new course
+content has been synced: the sync guard protects against deleting it silently.
+Back up and rehearse migrations against a database copy before the NAS upgrade.
+
+## Scheduled publishing
 
 Wiki posts support Payload's native scheduled publish and unpublish controls.
 Save the draft, choose the scheduling action in the editor, select its date and

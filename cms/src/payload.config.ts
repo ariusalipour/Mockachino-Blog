@@ -5,6 +5,7 @@ import { sqliteAdapter } from '@payloadcms/db-sqlite'
 import { buildConfig } from 'payload'
 import sharp from 'sharp'
 import { contentCollections, Media, Users } from './collections'
+import { learningCollections } from './courses'
 
 const dirname = path.dirname(fileURLToPath(import.meta.url))
 const secret = process.env.PAYLOAD_SECRET
@@ -17,7 +18,7 @@ export default buildConfig({
   serverURL,
   secret,
   admin: { timezones: { defaultTimezone: 'Europe/London' }, user: 'users', importMap: { baseDir: dirname }, meta: { titleSuffix: ' | Mockachino CMS' } },
-  collections: [Users, Media, ...contentCollections],
+  collections: [Users, Media, ...contentCollections, ...learningCollections],
   // The dedicated NAS worker runs queued jobs; web processes never start a cron runner.
   jobs: { deleteJobOnComplete: false, access: { run: ({ req }) => Boolean(req.user), queue: ({ req }) => Boolean(req.user), cancel: ({ req }) => Boolean(req.user) } },
   cors: [serverURL],

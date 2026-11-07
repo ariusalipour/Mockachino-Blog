@@ -48,6 +48,52 @@ test('allows intentionally unpublishing every article only after completed impor
   assert.doesNotThrow(() => validateSnapshot(snapshot));
 });
 
+test('accepts raw v1 snapshots without adding optional arrays or changing their revision digest', async () => {
+  const legacy = structuredClone(initial);
+  legacy.version = 1;
+  for (const name of ['courses', 'course-lessons', 'quizzes']) delete legacy.collections[name];
+  const digest = createHash('sha256').update(JSON.stringify(legacy.collections)).digest('hex');
+  assert.doesNotThrow(() => validateSnapshot(legacy));
+  assert.deepEqual(Object.keys(legacy.collections).sort(), [...collections.slice(0, 7)].sort());
+  assert.equal(createHash('sha256').update(JSON.stringify(legacy.collections)).digest('hex'), digest);
+  const directory = await mkdtemp(path.join(os.tmpdir(), 'mockachino-cms-v1-'));
+  try {
+    await mkdir(path.join(directory, 'src/content'), { recursive: true });
+    await cp(path.join(root, 'src/content'), path.join(directory, 'src/content'), { recursive: true });
+    await syncSnapshot(legacy, directory);
+    assert.deepEqual(JSON.parse(await readFile(path.join(directory, 'public/cms-revision.json'), 'utf8')), { version: 1, digest });
+  } finally { await rm(directory, { recursive: true, force: true }); }
+});
+
+function courseFixture() {
+  const snapshot = { version: 2, complete: true, collections: Object.fromEntries(collections.map(name => [name, structuredClone(initial.collections[name])])) };
+  snapshot.collections.courses = [{ sourcePath: 'intro.md', body: '# Intro', data: { courseId: 'c1', slug: 'intro', title: 'Intro', summary: 'Start', topic: 'shoots', category: 'basics', tags: [], createdAt: '2026-01-01T00:00:00.000Z', updatedAt: '2026-01-01T00:00:00.000Z', lessons: [{ lesson: 'first' }], finalQuiz: 'final' } }];
+  snapshot.collections['course-lessons'] = [{ sourcePath: 'first.md', body: '# First', data: { lessonId: 'l1', slug: 'first', title: 'First', summary: 'One', createdAt: '2026-01-01T00:00:00.000Z', updatedAt: '2026-01-01T00:00:00.000Z' } }];
+  snapshot.collections.quizzes = [{ sourcePath: 'final.md', body: '', data: { quizId: 'q1', slug: 'final', title: 'Final', createdAt: '2026-01-01T00:00:00.000Z', updatedAt: '2026-01-01T00:00:00.000Z', questions: [{ question: 'Q?', answers: [{ text: 'Yes', correct: true }, { text: 'No', correct: false }], explanation: 'Because.' }] } }];
+  return snapshot;
+}
+
+test('validates v2 collections, quizzes, references and requires all v2 arrays', () => {
+  const snapshot = courseFixture();
+  assert.doesNotThrow(() => validateSnapshot(snapshot));
+  for (const mutate of [
+    s => { delete s.collections.quizzes; },
+    s => { s.collections.courses[0].data.lessons[0].lesson = 'missing'; },
+    s => { s.collections.quizzes[0].data.questions[0].answers[1].correct = true; },
+    s => { s.collections.quizzes[0].data.questions[0].explanation = 4; },
+    s => { s.collections.quizzes[0].data.questions = []; },
+    s => { s.collections.courses[0].data.topic = 'unknown'; },
+    s => { s.collections.courses[0].data.slug = '../unsafe'; },
+  ]) { const invalid = courseFixture(); mutate(invalid); assert.throws(() => validateSnapshot(invalid)); }
+  const draft = courseFixture(); draft.collections.courses[0]._status = 'draft'; assert.throws(() => validateSnapshot(draft));
+});
+
+test('validates optional new collections when they appear in a v1 payload', () => {
+  const snapshot = courseFixture(); snapshot.version = 1;
+  snapshot.collections.courses[0]._status = 'draft';
+  assert.throws(() => validateSnapshot(snapshot), /draft/);
+});
+
 test('syncs complete snapshots, removes unpublished managed content, preserves unrelated files', async () => {
   const directory = await mkdtemp(path.join(os.tmpdir(), 'mockachino-cms-test-'));
   try {
@@ -82,5 +128,29 @@ test('invalid snapshot leaves the checkout unchanged', async () => {
     await assert.rejects(syncSnapshot(snapshot, directory));
     assert.equal(await readFile(path.join(directory, 'src/content/sentinel'), 'utf8'), 'unchanged');
     await assert.rejects(readFile(path.join(directory, 'public/cms-revision.json')), { code: 'ENOENT' });
+  } finally { await rm(directory, { recursive: true, force: true }); }
+});
+
+test('syncs course content and removals, then refuses a v1 downgrade that would delete it', async () => {
+  const directory = await mkdtemp(path.join(os.tmpdir(), 'mockachino-cms-courses-'));
+  try {
+    await mkdir(path.join(directory, 'src/content'), { recursive: true });
+    await cp(path.join(root, 'src/content'), path.join(directory, 'src/content'), { recursive: true });
+    const snapshot = courseFixture();
+    await syncSnapshot(snapshot, directory);
+    assert.match(await readFile(path.join(directory, 'src/content/courses/intro.md'), 'utf8'), /courseId: c1/);
+    snapshot.collections.courses = [];
+    snapshot.collections['course-lessons'] = [];
+    snapshot.collections.quizzes = [];
+    await syncSnapshot(snapshot, directory);
+    await assert.rejects(readFile(path.join(directory, 'src/content/courses/intro.md')), { code: 'ENOENT' });
+    // Re-add content so the downgrade guard covers nonempty managed paths.
+    snapshot.collections.courses = courseFixture().collections.courses;
+    snapshot.collections['course-lessons'] = courseFixture().collections['course-lessons'];
+    snapshot.collections.quizzes = courseFixture().collections.quizzes;
+    await syncSnapshot(snapshot, directory);
+    const legacy = structuredClone(initial); legacy.version = 1;
+    for (const name of ['courses', 'course-lessons', 'quizzes']) delete legacy.collections[name];
+    await assert.rejects(syncSnapshot(legacy, directory), /Refusing CMS v1 downgrade/);
   } finally { await rm(directory, { recursive: true, force: true }); }
 });

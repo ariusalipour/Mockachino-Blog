@@ -76,6 +76,9 @@ export interface Config {
     wiki: Wiki;
     projects: Project;
     'project-updates': ProjectUpdate;
+    courses: Course;
+    'course-lessons': CourseLesson;
+    quizzes: Quiz;
     'payload-kv': PayloadKv;
     'payload-jobs': PayloadJob;
     'payload-locked-documents': PayloadLockedDocument;
@@ -93,6 +96,9 @@ export interface Config {
     wiki: WikiSelect<false> | WikiSelect<true>;
     projects: ProjectsSelect<false> | ProjectsSelect<true>;
     'project-updates': ProjectUpdatesSelect<false> | ProjectUpdatesSelect<true>;
+    courses: CoursesSelect<false> | CoursesSelect<true>;
+    'course-lessons': CourseLessonsSelect<false> | CourseLessonsSelect<true>;
+    quizzes: QuizzesSelect<false> | QuizzesSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-jobs': PayloadJobsSelect<false> | PayloadJobsSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
@@ -462,7 +468,7 @@ export interface Wiki {
    */
   slug?: string | null;
   /**
-   * Set automatically; original publication dates are preserved.
+   * Defaults to the first save date. Edit to backdate or correct the publication date.
    */
   authoredAt?: string | null;
   /**
@@ -635,6 +641,192 @@ export interface ProjectUpdate {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "courses".
+ */
+export interface Course {
+  id: number;
+  topic: 'shoots' | 'plays' | 'codes';
+  category: string;
+  tags:
+    | {
+        [k: string]: unknown;
+      }
+    | unknown[]
+    | string
+    | number
+    | boolean
+    | null;
+  title: string;
+  summary: string;
+  content?: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  featuredImage?: {
+    src?: string | null;
+    alt?: string | null;
+  };
+  /**
+   * Publish lesson articles first, then add and drag them into course order. Quizzes are optional.
+   */
+  lessons?:
+    | {
+        lesson: number | CourseLesson;
+        quiz?: (number | null) | Quiz;
+        id?: string | null;
+      }[]
+    | null;
+  finalQuiz?: (number | null) | Quiz;
+  sourcePath?: string | null;
+  courseId?: string | null;
+  slug?: string | null;
+  /**
+   * Defaults to first save; edit to backdate the publication date.
+   */
+  authoredAt?: string | null;
+  revisedAt?: string | null;
+  extraFrontmatter?:
+    | {
+        [k: string]: unknown;
+      }
+    | unknown[]
+    | string
+    | number
+    | boolean
+    | null;
+  body?: string | null;
+  contentMigration?:
+    | {
+        [k: string]: unknown;
+      }
+    | unknown[]
+    | string
+    | number
+    | boolean
+    | null;
+  updatedAt: string;
+  createdAt: string;
+  _status?: ('draft' | 'published') | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "course-lessons".
+ */
+export interface CourseLesson {
+  id: number;
+  title: string;
+  summary: string;
+  content?: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  featuredImage?: {
+    src?: string | null;
+    alt?: string | null;
+  };
+  sourcePath?: string | null;
+  lessonId?: string | null;
+  slug?: string | null;
+  /**
+   * Defaults to first save; edit to backdate the publication date.
+   */
+  authoredAt?: string | null;
+  revisedAt?: string | null;
+  extraFrontmatter?:
+    | {
+        [k: string]: unknown;
+      }
+    | unknown[]
+    | string
+    | number
+    | boolean
+    | null;
+  body?: string | null;
+  contentMigration?:
+    | {
+        [k: string]: unknown;
+      }
+    | unknown[]
+    | string
+    | number
+    | boolean
+    | null;
+  updatedAt: string;
+  createdAt: string;
+  _status?: ('draft' | 'published') | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "quizzes".
+ */
+export interface Quiz {
+  id: number;
+  title: string;
+  questions: {
+    question: string;
+    answers: {
+      text: string;
+      correct?: boolean | null;
+      id?: string | null;
+    }[];
+    explanation: string;
+    id?: string | null;
+  }[];
+  sourcePath?: string | null;
+  quizId?: string | null;
+  slug?: string | null;
+  /**
+   * Defaults to first save; edit to backdate the publication date.
+   */
+  authoredAt?: string | null;
+  revisedAt?: string | null;
+  extraFrontmatter?:
+    | {
+        [k: string]: unknown;
+      }
+    | unknown[]
+    | string
+    | number
+    | boolean
+    | null;
+  body?: string | null;
+  contentMigration?:
+    | {
+        [k: string]: unknown;
+      }
+    | unknown[]
+    | string
+    | number
+    | boolean
+    | null;
+  updatedAt: string;
+  createdAt: string;
+  _status?: ('draft' | 'published') | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv".
  */
 export interface PayloadKv {
@@ -784,6 +976,18 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'project-updates';
         value: number | ProjectUpdate;
+      } | null)
+    | ({
+        relationTo: 'courses';
+        value: number | Course;
+      } | null)
+    | ({
+        relationTo: 'course-lessons';
+        value: number | CourseLesson;
+      } | null)
+    | ({
+        relationTo: 'quizzes';
+        value: number | Quiz;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -1019,6 +1223,101 @@ export interface ProjectUpdatesSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "courses_select".
+ */
+export interface CoursesSelect<T extends boolean = true> {
+  topic?: T;
+  category?: T;
+  tags?: T;
+  title?: T;
+  summary?: T;
+  content?: T;
+  featuredImage?:
+    | T
+    | {
+        src?: T;
+        alt?: T;
+      };
+  lessons?:
+    | T
+    | {
+        lesson?: T;
+        quiz?: T;
+        id?: T;
+      };
+  finalQuiz?: T;
+  sourcePath?: T;
+  courseId?: T;
+  slug?: T;
+  authoredAt?: T;
+  revisedAt?: T;
+  extraFrontmatter?: T;
+  body?: T;
+  contentMigration?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  _status?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "course-lessons_select".
+ */
+export interface CourseLessonsSelect<T extends boolean = true> {
+  title?: T;
+  summary?: T;
+  content?: T;
+  featuredImage?:
+    | T
+    | {
+        src?: T;
+        alt?: T;
+      };
+  sourcePath?: T;
+  lessonId?: T;
+  slug?: T;
+  authoredAt?: T;
+  revisedAt?: T;
+  extraFrontmatter?: T;
+  body?: T;
+  contentMigration?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  _status?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "quizzes_select".
+ */
+export interface QuizzesSelect<T extends boolean = true> {
+  title?: T;
+  questions?:
+    | T
+    | {
+        question?: T;
+        answers?:
+          | T
+          | {
+              text?: T;
+              correct?: T;
+              id?: T;
+            };
+        explanation?: T;
+        id?: T;
+      };
+  sourcePath?: T;
+  quizId?: T;
+  slug?: T;
+  authoredAt?: T;
+  revisedAt?: T;
+  extraFrontmatter?: T;
+  body?: T;
+  contentMigration?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  _status?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv_select".
  */
 export interface PayloadKvSelect<T extends boolean = true> {
@@ -1106,10 +1405,23 @@ export interface TaskSchedulePublish {
   input: {
     type?: ('publish' | 'unpublish') | null;
     locale?: string | null;
-    doc?: {
-      relationTo: 'wiki';
-      value: number | Wiki;
-    } | null;
+    doc?:
+      | ({
+          relationTo: 'wiki';
+          value: number | Wiki;
+        } | null)
+      | ({
+          relationTo: 'courses';
+          value: number | Course;
+        } | null)
+      | ({
+          relationTo: 'course-lessons';
+          value: number | CourseLesson;
+        } | null)
+      | ({
+          relationTo: 'quizzes';
+          value: number | Quiz;
+        } | null);
     global?: string | null;
     user?: {
       relationTo: 'users';

@@ -14,13 +14,17 @@ export async function GET() {
   try {
   const media = await payload.find({collection:'media',pagination:false,depth:0,overrideAccess:false,req})
   const mediaByID = new Map(media.docs.map(doc => [String(doc.id),doc]))
-  const collections = Object.fromEntries(await Promise.all(collectionSlugs.map(async (collection) => {
+  const published = await Promise.all(collectionSlugs.map(async collection => {
     const result = await payload.find({ collection, where: { _status: { equals: 'published' } }, draft: false, overrideAccess: false, pagination: false, depth: 0, sort: 'sourcePath', req })
-    return [collection, result.docs.map(doc => toSiteDocument(collection, doc as unknown as Record<string, unknown>, {mediaByID}))]
-  })))
+    return [collection, result.docs] as const
+  }))
+  const byCollection = new Map<string, readonly any[]>(published)
+  const lessonSlugsByID = new Map((byCollection.get('course-lessons') || []).map(doc => [String(doc.id), String(doc.slug)]))
+  const quizSlugsByID = new Map((byCollection.get('quizzes') || []).map(doc => [String(doc.id), String(doc.slug)]))
+  const collections = Object.fromEntries(published.map(([collection, docs]) => [collection, docs.map(doc => toSiteDocument(collection, doc as unknown as Record<string, unknown>, {mediaByID, lessonSlugsByID, quizSlugsByID}))]))
   if (startedTransaction) await commitTransaction(req)
   const counts = Object.fromEntries(Object.entries(collections).map(([slug, docs]) => [slug, (docs as unknown[]).length]))
-  return Response.json({ version: 1, complete: true, collections, counts }, { headers: { 'Cache-Control': 'no-store' } })
+  return Response.json({ version: 2, complete: true, collections, counts }, { headers: { 'Cache-Control': 'no-store' } })
   } catch (error) {
     if (startedTransaction) await killTransaction(req)
     throw error

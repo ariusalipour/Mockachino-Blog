@@ -1,0 +1,91 @@
+---
+import type { CollectionEntry } from "astro:content";
+interface Props { quiz: CollectionEntry<"quizzes">; }
+const { quiz } = Astro.props;
+const { slug, title, questions } = quiz.data;
+const quizID = `quiz-${slug}`;
+const quizJSON = JSON.stringify(questions).replace(/</g, "\\u003c");
+---
+<section class="panel course-quiz" data-course-quiz aria-labelledby={`${quizID}-title`}>
+  <p class="section-label">Knowledge check</p>
+  <h2 id={`${quizID}-title`}>{title}</h2>
+  <p class="quiz-intro">Choose one answer for each question, then check your score. You can try again as often as you like.</p>
+  <p class="quiz-result" data-quiz-result role="status" aria-live="polite" tabindex="-1" hidden></p>
+  <form data-quiz-form>
+    {questions.map((question, questionIndex) => (
+      <fieldset class="quiz-question">
+        <legend>{questionIndex + 1}. {question.question}</legend>
+        <div class="quiz-answers">
+          {question.answers.map((answer, answerIndex) => (
+            <label class="quiz-answer">
+              <input type="radio" name={`${quizID}-question-${questionIndex}`} value={answerIndex} required />
+              <span>{answer.text}</span>
+            </label>
+          ))}
+        </div>
+        <p class="quiz-feedback" data-quiz-feedback hidden></p>
+      </fieldset>
+    ))}
+    <div class="quiz-actions">
+      <button type="submit" class="button">Check answers</button>
+      <button type="button" class="button button--secondary" data-quiz-reset hidden>Try again</button>
+    </div>
+  </form>
+  <noscript><p>Enable JavaScript to check your answers and see the explanations.</p></noscript>
+  <script type="application/json" data-quiz-questions set:html={quizJSON}></script>
+</section>
+
+<script>
+  import { gradeQuiz } from "../lib/quiz-grading.mjs";
+  type Question = { question: string; answers: { text: string; correct: boolean }[]; explanation: string };
+  for (const quiz of document.querySelectorAll<HTMLElement>("[data-course-quiz]")) {
+    const form = quiz.querySelector<HTMLFormElement>("[data-quiz-form]")!;
+    const result = quiz.querySelector<HTMLElement>("[data-quiz-result]")!;
+    const reset = quiz.querySelector<HTMLButtonElement>("[data-quiz-reset]")!;
+    const questions: Question[] = JSON.parse(quiz.querySelector("[data-quiz-questions]")!.textContent || "[]");
+    const fields = Array.from(form.querySelectorAll<HTMLFieldSetElement>("fieldset"));
+    const feedback = Array.from(form.querySelectorAll<HTMLElement>("[data-quiz-feedback]"));
+    const clearFeedback = () => {
+      result.hidden = true; result.textContent = "";
+      for (const element of feedback) { element.hidden = true; element.textContent = ""; delete element.dataset.correct; }
+    };
+    form.addEventListener("submit", event => {
+      event.preventDefault();
+      if (!form.reportValidity()) return;
+      const selections = fields.map(field => Number(field.querySelector<HTMLInputElement>("input:checked")!.value));
+      const score = gradeQuiz(questions, selections);
+      result.textContent = `You scored ${score.correct} of ${score.total} (${score.percentage}%). Review each answer below.`;
+      result.hidden = false;
+      score.answers.forEach((answer, index) => {
+        const element = feedback[index];
+        const correctText = questions[index].answers[answer.correctIndex].text;
+        element.textContent = `${answer.correct ? "Correct." : "Not quite."} Correct answer: ${correctText}. ${answer.explanation}`;
+        element.dataset.correct = String(answer.correct);
+        element.hidden = false;
+      });
+      reset.hidden = false; result.focus();
+    });
+    form.addEventListener("change", clearFeedback);
+    reset.addEventListener("click", () => {
+      form.reset(); clearFeedback(); reset.hidden = true;
+      form.querySelector<HTMLInputElement>("input")?.focus();
+    });
+  }
+</script>
+
+<style>
+  .course-quiz { padding: 1.4rem; }
+  .course-quiz h2 { margin: 0 0 1rem; }
+  .quiz-intro { color: var(--text-soft); line-height: 1.7; }
+  .quiz-question { min-width: 0; margin: 1.5rem 0; padding: 1rem; border: 1px solid var(--border); }
+  .quiz-question legend { padding: 0 .4rem; color: var(--text); line-height: 1.6; font-weight: 500; }
+  .quiz-answers { display: grid; gap: .55rem; }
+  .quiz-answer { display: flex; align-items: flex-start; gap: .7rem; padding: .65rem; cursor: pointer; line-height: 1.6; }
+  .quiz-answer:hover { background: var(--panel-tint); }
+  .quiz-answer input { flex: 0 0 auto; width: 1rem; height: 1rem; margin: .25rem 0 0; accent-color: var(--accent); }
+  .quiz-answer:has(input:focus-visible) { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .quiz-feedback, .quiz-result { padding: .9rem; border-left: 3px solid var(--accent); background: var(--surface-elevated); line-height: 1.7; }
+  .quiz-feedback[data-correct="true"] { border-left-color: var(--success); }
+  .quiz-actions { display: flex; flex-wrap: wrap; gap: .75rem; }
+  [hidden] { display: none !important; }
+</style>

@@ -21,8 +21,9 @@ function safePath(value: string, extension?: string) {
   if (typeof value !== 'string' || !value || value.includes('\\') || value.includes('\0') || value.includes(':') || value.startsWith('/') || value.split('/').some(part => !part || part === '.' || part === '..') || (extension && !value.endsWith(extension))) throw new Error(`Unsafe sourcePath: ${value}`)
   return value
 }
-if (manifest.version !== 1 || !manifest.collections || !Array.isArray(manifest.media)) throw new Error('Invalid seed manifest')
+if (![1, 2].includes(manifest.version) || !manifest.collections || !Array.isArray(manifest.media)) throw new Error('Invalid seed manifest')
 for (const slug of collectionSlugs) {
+  if (manifest.version === 1 && ['courses', 'course-lessons', 'quizzes'].includes(slug) && manifest.collections[slug] === undefined) manifest.collections[slug] = []
   if (!Array.isArray(manifest.collections[slug])) throw new Error(`Missing seed collection: ${slug}`)
   const keys = new Set<string>()
   for (const doc of manifest.collections[slug]) {
@@ -42,12 +43,22 @@ const { default: config } = await import('../src/payload.config')
 const payload = await getPayload({ config })
 const report: Record<string, { created: number; skipped: number }> = {}
 try {
-  for (const slug of collectionSlugs) {
+  for (const slug of [...collectionSlugs.filter(slug => slug !== 'courses'), 'courses'] as typeof collectionSlugs[number][]) {
     report[slug] = { created: 0, skipped: 0 }
     for (const entry of manifest.collections[slug]) {
       const existing = await payload.find({ collection: slug as CollectionSlug, where: { sourcePath: { equals: entry.sourcePath } }, limit: 1, depth: 0, overrideAccess: true, draft: true })
       if (existing.docs.length) { report[slug].skipped++; continue }
-      const data = { ...fromSiteDocument(slug, entry), _status: 'published' } as RequiredDataFromCollectionSlug<typeof slug>
+      const imported: Record<string, unknown> = fromSiteDocument(slug, entry)
+      if (slug === 'courses') {
+        const resolve = async (collection: 'course-lessons' | 'quizzes', key: string) => {
+          const found = await payload.find({collection, where:{slug:{equals:key}},limit:1,depth:0,overrideAccess:true})
+          if (!found.docs.length) throw new Error(`Missing ${collection} item ${key}`)
+          return found.docs[0].id
+        }
+        imported.lessons = await Promise.all(((entry.data.lessons || []) as any[]).map(async row => ({lesson:await resolve('course-lessons',row.lesson),...(row.quiz ? {quiz:await resolve('quizzes',row.quiz)} : {})})))
+        if (entry.data.finalQuiz) imported.finalQuiz = await resolve('quizzes',String(entry.data.finalQuiz))
+      }
+      const data = { ...imported, _status: 'published' } as RequiredDataFromCollectionSlug<typeof slug>
       await payload.create({ collection: slug, data, overrideAccess: true, context: { skipRebuild: true }, draft: false })
       report[slug].created++
     }

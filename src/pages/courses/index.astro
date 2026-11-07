@@ -1,0 +1,27 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import { courses, getCourseLessons } from "../../data/courses";
+import { formatTopicLabel } from "../../data/wiki-content";
+---
+<Layout title="Courses | MOCKACHINO" description="Follow a course through ordered lessons and optional knowledge checks." currentPath={Astro.url.pathname}>
+  <div class="page-stack">
+    <section class="panel taxonomy-hero">
+      <p class="section-label">Courses</p>
+      <h1>Learn one lesson at a time.</h1>
+      <p class="taxonomy-copy">Follow a sequence of dedicated articles, with optional quizzes to check what you have learned.</p>
+      <div class="meta-strip"><span class="meta-chip">{courses.length} {courses.length === 1 ? "course" : "courses"}</span></div>
+    </section>
+    {courses.length ? <section class="taxonomy-grid" aria-label="Available courses">
+      {courses.map(course => {
+        const lessons = getCourseLessons(course);
+        return <article class="panel category-card">
+          <p class="section-label">{formatTopicLabel(course.data.topic)}</p>
+          <h2>{course.data.title}</h2>
+          <p>{course.data.summary}</p>
+          <p>{lessons.length} {lessons.length === 1 ? "lesson" : "lessons"}</p>
+          <a href={`/courses/${course.data.slug}/`} class="button button--secondary">View course</a>
+        </article>;
+      })}
+    </section> : <section class="panel copy-block"><h2>New courses are on the way.</h2><p>Published courses will appear here. In the meantime, explore the <a href="/browse/">wiki articles</a>.</p></section>}
+  </div>
+</Layout>

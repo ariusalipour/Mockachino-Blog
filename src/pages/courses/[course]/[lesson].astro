@@ -1,0 +1,55 @@
+---
+import { render } from "astro:content";
+import Layout from "../../../layouts/Layout.astro";
+import CourseQuiz from "../../../components/CourseQuiz.astro";
+import ArticleCodeControls from "../../../components/ArticleCodeControls.astro";
+import { courses, getCourseLessons, lessonHref } from "../../../data/courses";
+import { formatDate } from "../../../lib/format";
+export function getStaticPaths() {
+  return courses.flatMap(course => getCourseLessons(course).map(({ lesson, quiz }, index) => ({
+    params: { course: course.data.slug, lesson: lesson.data.slug }, props: { course, lesson, quiz, index },
+  })));
+}
+const { course, lesson, quiz, index } = Astro.props;
+const lessons = getCourseLessons(course);
+const previous = lessons[index - 1]?.lesson;
+const next = lessons[index + 1]?.lesson;
+const { Content, headings } = await render(lesson);
+const toc = headings.filter(heading => heading.depth > 1);
+---
+<Layout title={`${lesson.data.title} | ${course.data.title} | MOCKACHINO`} description={lesson.data.summary} currentPath={Astro.url.pathname} headerPath="/courses/" pageClass="page-article" ogType="article" ogImage={lesson.data.featuredImage?.src || course.data.featuredImage?.src} ogImageAlt={lesson.data.featuredImage?.alt || lesson.data.title}>
+  <div slot="subheader" class="panel article-breadcrumb">
+    <a class="article-breadcrumb__item" href="/courses/">Courses</a><span class="article-breadcrumb__sep">›</span>
+    <a class="article-breadcrumb__item" href={`/courses/${course.data.slug}/`}>{course.data.title}</a><span class="article-breadcrumb__sep">›</span>
+    <span class="article-breadcrumb__item article-breadcrumb__item--current">{lesson.data.title}</span>
+  </div>
+  <section class="article-layout">
+    <article class="panel article-main">
+      <header class="article-main__hero">
+        <p class="section-label">Lesson {index + 1} of {lessons.length}</p>
+        <h1>{lesson.data.title}</h1><p class="article-main__summary">{lesson.data.summary}</p>
+        <div class="article-main__meta"><span>Published {formatDate(lesson.data.createdAt.toISOString())}</span><span>Updated {formatDate(lesson.data.updatedAt.toISOString())}</span></div>
+      </header>
+      {lesson.data.featuredImage && <div class="article-main__visual panel"><img src={lesson.data.featuredImage.src} alt={lesson.data.featuredImage.alt || ""} /></div>}
+      <div id="lesson-content" class="article-content"><Content /></div>
+      {quiz && <CourseQuiz quiz={quiz} />}
+      <nav class="article-pagination" aria-label="Lesson navigation">
+        {previous ? <a class="article-pagination__link" href={lessonHref(course.data.slug, previous.data.slug)}><span class="article-pagination__label">Previous lesson</span><span class="article-pagination__title">{previous.data.title}</span></a> : <a class="article-pagination__link" href={`/courses/${course.data.slug}/`}><span class="article-pagination__label">Course overview</span><span class="article-pagination__title">{course.data.title}</span></a>}
+        {next ? <a class="article-pagination__link" href={lessonHref(course.data.slug, next.data.slug)}><span class="article-pagination__label">Next lesson</span><span class="article-pagination__title">{next.data.title}</span></a> : <a class="article-pagination__link" href={`/courses/${course.data.slug}/${course.data.finalQuiz ? '#quiz-' + course.data.finalQuiz + '-title' : ''}`}><span class="article-pagination__label">{course.data.finalQuiz ? 'Final knowledge check' : 'Course overview'}</span><span class="article-pagination__title">{course.data.title}</span></a>}
+      </nav>
+    </article>
+    <aside class="article-rail">
+      <section class="panel article-rail__panel">
+        <p class="panel__kicker">Course lessons</p>
+        <ol class="article-toc">{lessons.map(({ lesson: item }, itemIndex) => <li><a href={lessonHref(course.data.slug, item.data.slug)} aria-current={item.data.slug === lesson.data.slug ? "page" : undefined}><span>{String(itemIndex + 1).padStart(2, "0")}</span><span>{item.data.title}</span></a></li>)}</ol>
+        <a class="course-return" href={`/courses/${course.data.slug}/`}>Back to course overview</a>
+      </section>
+      {toc.length > 0 && <section class="panel article-rail__panel"><p class="panel__kicker">In this lesson</p><ol class="article-toc">{toc.map((heading, itemIndex) => <li><a href={`#${heading.slug}`}><span>{String(itemIndex + 1).padStart(2, "0")}</span><span>{heading.text}</span></a></li>)}</ol></section>}
+    </aside>
+  </section>
+  <ArticleCodeControls />
+</Layout>
+<style>
+  .article-toc a[aria-current="page"] { color: var(--accent); font-weight: 500; }
+  .course-return { display: block; margin-top: 1rem; font-size: .75rem; line-height: 1.7; }
+</style>

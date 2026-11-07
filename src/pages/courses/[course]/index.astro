@@ -1,0 +1,52 @@
+---
+import { render } from "astro:content";
+import Layout from "../../../layouts/Layout.astro";
+import CourseQuiz from "../../../components/CourseQuiz.astro";
+import ArticleCodeControls from "../../../components/ArticleCodeControls.astro";
+import { courses, getCourseLessons, getQuiz, lessonHref } from "../../../data/courses";
+import { formatDate, formatTopicCategory } from "../../../lib/format";
+export function getStaticPaths() {
+  return courses.map(course => ({ params: { course: course.data.slug }, props: { course } }));
+}
+const { course } = Astro.props;
+const lessons = getCourseLessons(course);
+const finalQuiz = getQuiz(course.data.finalQuiz);
+const { Content } = await render(course);
+---
+<Layout title={`${course.data.title} | Courses | MOCKACHINO`} description={course.data.summary} currentPath={Astro.url.pathname} headerPath="/courses/" ogImage={course.data.featuredImage?.src} ogImageAlt={course.data.featuredImage?.alt || course.data.title}>
+  <div slot="subheader" class="panel article-breadcrumb">
+    <a href="/courses/" class="article-breadcrumb__item">Courses</a><span class="article-breadcrumb__sep">›</span>
+    <span class="article-breadcrumb__item article-breadcrumb__item--current">{course.data.title}</span>
+  </div>
+  <div class="page-stack">
+    <section class="panel taxonomy-hero">
+      <p class="section-label">{formatTopicCategory(course.data.topic, course.data.category)}</p>
+      <h1>{course.data.title}</h1><p class="taxonomy-copy">{course.data.summary}</p>
+      <div class="meta-strip">
+        <span class="meta-chip">{lessons.length} {lessons.length === 1 ? "lesson" : "lessons"}</span>
+        <span class="meta-chip">Published {formatDate(course.data.createdAt.toISOString())}</span>
+      </div>
+      {lessons[0] && <a class="button" href={lessonHref(course.data.slug, lessons[0].lesson.data.slug)}>Start course</a>}
+    </section>
+    {course.data.featuredImage && <figure class="panel course-cover"><img src={course.data.featuredImage.src} alt={course.data.featuredImage.alt || ""} /></figure>}
+    {course.body.trim() && <section class="panel copy-block"><div class="article-content"><Content /></div></section>}
+    <section class="panel copy-block" aria-labelledby="course-lessons-title">
+      <p class="section-label">Course outline</p><h2 id="course-lessons-title">Lessons</h2>
+      {lessons.length ? <ol class="course-outline">{lessons.map(({ lesson, quiz }, index) => <li>
+        <a href={lessonHref(course.data.slug, lesson.data.slug)}><span class="lesson-number">{String(index + 1).padStart(2, "0")}</span><span><strong>{lesson.data.title}</strong><span class="lesson-summary">{lesson.data.summary}</span>{quiz && <span class="lesson-quiz">Includes a knowledge check</span>}</span></a>
+      </li>)}</ol> : <p>The lessons for this course are being prepared.</p>}
+    </section>
+    {finalQuiz && <CourseQuiz quiz={finalQuiz} />}
+  </div>
+  <ArticleCodeControls />
+</Layout>
+<style>
+  .course-cover { margin: 0; overflow: hidden; }
+  .course-cover img { display: block; width: 100%; max-height: 26rem; object-fit: cover; }
+  .course-outline { padding: 0; margin: 1rem 0 0; list-style: none; }
+  .course-outline li + li { border-top: 1px solid var(--border); }
+  .course-outline a { display: flex; gap: 1rem; padding: 1.2rem 0; text-decoration: none; line-height: 1.6; }
+  .lesson-number { color: var(--accent); }
+  .lesson-summary, .lesson-quiz { display: block; color: var(--text-soft); margin-top: .4rem; }
+  .lesson-quiz { color: var(--accent); font-size: .75rem; }
+</style>

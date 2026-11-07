@@ -1,6 +1,6 @@
 import { createHash } from 'node:crypto'
 import { createLocalReq, initTransaction, commitTransaction, killTransaction, type Payload, type CollectionSlug } from 'payload'
-import { collectionSlugs, toSiteDocument } from './site-content'
+import { legacyCollectionSlugs as collectionSlugs, toSiteDocument } from './site-content'
 import { contentHash, markdownSignature, markdownToRichText, richTextToMarkdown, type MediaRecord } from './richtext'
 
 type Doc = Record<string, any> & {id:string | number}

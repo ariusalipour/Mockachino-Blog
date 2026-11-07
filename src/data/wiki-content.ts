@@ -119,6 +119,7 @@ export const tags: TagEntry[] = sortedTagEntries.map(normalizeTagEntry);
 export const primaryNav = [
   { href: "/", label: "Home", icon: "home" },
   { href: "/browse/", label: "Browse All", icon: "grid" },
+  { href: "/courses/", label: "Courses", icon: "book" },
   { href: "/recent/", label: "Recent Changes", icon: "pulse" },
   { href: "/random/", label: "Random Page", icon: "shuffle" },
   { href: "/glossary/", label: "Glossary", icon: "book" },
@@ -131,6 +132,7 @@ export const headerNav = [
   { href: "/browse/", label: "Browse" },
   { href: "/recent/", label: "Recent" },
   { href: "/projects/", label: "Projects" },
+  { href: "/courses/", label: "Courses" },
   { href: "/about/", label: "About" },
 ] as const;
 

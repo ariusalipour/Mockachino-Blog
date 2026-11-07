@@ -90,4 +90,35 @@ const wiki = defineCollection({
   }),
 });
 
-export const collections = { topics, categories, tags, glossary, wiki, projects, "project-updates": projectUpdates };
+const routeSlug = z.string().regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/);
+const courseImage = z.object({ src: z.string(), alt: z.string().nullable().default("") }).optional();
+const courses = defineCollection({
+  type: "content",
+  schema: z.object({
+    courseId: z.string(), slug: routeSlug, title: z.string(), summary: z.string(),
+    topic: z.enum(["shoots", "plays", "codes"]), category: z.string(), tags: z.array(z.string()).default([]),
+    createdAt: z.coerce.date(), updatedAt: z.coerce.date(), featuredImage: courseImage,
+    lessons: z.array(z.object({ lesson: routeSlug, quiz: routeSlug.optional() })).default([]),
+    finalQuiz: routeSlug.optional(),
+  }),
+});
+const courseLessons = defineCollection({
+  type: "content",
+  schema: z.object({
+    lessonId: z.string(), slug: routeSlug, title: z.string(), summary: z.string(),
+    createdAt: z.coerce.date(), updatedAt: z.coerce.date(), featuredImage: courseImage,
+  }),
+});
+const quizzes = defineCollection({
+  type: "content",
+  schema: z.object({
+    quizId: z.string(), slug: routeSlug, title: z.string(), createdAt: z.coerce.date(), updatedAt: z.coerce.date(),
+    questions: z.array(z.object({
+      question: z.string().min(1), explanation: z.string().min(1),
+      answers: z.array(z.object({ text: z.string().min(1), correct: z.boolean() })).min(2)
+        .refine(answers => answers.filter(answer => answer.correct).length === 1, "Each question needs exactly one correct answer"),
+    })).min(1),
+  }),
+});
+
+export const collections = { topics, categories, tags, glossary, wiki, projects, "project-updates": projectUpdates, courses, "course-lessons": courseLessons, quizzes };
