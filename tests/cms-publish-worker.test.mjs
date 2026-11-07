@@ -15,9 +15,10 @@ const collections = {
   wiki: [{ sourcePath: 'shoots/one.md', data: { title: 'One' }, body: 'text' }],
   projects: [], 'project-updates': [],
 };
+const v2Collections = { ...collections, courses: [], 'course-lessons': [], quizzes: [] };
 const digestOf = value => createHash('sha256').update(JSON.stringify(value)).digest('hex');
 
-async function runWorker({ cycles = 1, snapshotStatus = 200, collections: content = collections, liveStatus = 404, liveDigest, hookStatuses = [200], initialState } = {}) {
+async function runWorker({ cycles = 1, snapshotStatus = 200, version = 1, collections: content = collections, counts, liveStatus = 404, liveDigest, hookStatuses = [200], initialState } = {}) {
   const dir = await mkdtemp(path.join(os.tmpdir(), 'cms-poller-test-'));
   const statePath = path.join(dir, 'state.json');
   const callsPath = path.join(dir, 'calls.json');
@@ -25,7 +26,8 @@ async function runWorker({ cycles = 1, snapshotStatus = 200, collections: conten
   const preloadPath = path.join(dir, 'preload.mjs');
   const timersPath = path.join(dir, 'fake-timers.mjs');
   const computedDigest = digestOf(content);
-  const config = { cycles, snapshotStatus, collections: content, liveStatus, liveDigest: liveDigest ?? computedDigest, hookStatuses, callsPath };
+  const snapshotCounts = counts ?? Object.fromEntries(Object.entries(content).map(([name, docs]) => [name, docs?.length ?? 0]));
+  const config = { cycles, snapshotStatus, version, collections: content, counts: snapshotCounts, liveStatus, liveDigest: liveDigest ?? computedDigest, hookStatuses, callsPath };
   await writeFile(configPath, JSON.stringify(config));
   if (initialState !== undefined) await writeFile(statePath, initialState);
   await writeFile(timersPath, `
@@ -49,7 +51,7 @@ async function runWorker({ cycles = 1, snapshotStatus = 200, collections: conten
       const url = String(input);
       if (url.endsWith('/api/site-content')) {
         calls.push({ kind: 'snapshot' });
-        return Response.json({ version: 1, complete: true, collections: cfg.collections, draftRevision: calls.length }, { status: cfg.snapshotStatus });
+        return Response.json({ version: cfg.version, complete: true, collections: cfg.collections, counts: cfg.version === 2 ? cfg.counts : undefined, draftRevision: calls.length }, { status: cfg.snapshotStatus });
       }
       if (url.includes('/cms-revision.json')) {
         calls.push({ kind: 'marker' });
@@ -163,4 +165,26 @@ test('an unavailable initial CMS endpoint does not request a build', async () =>
     assert.equal(result.calls.filter(call => call.kind === 'marker' || call.kind === 'hook').length, 0);
     assert.equal(result.state, undefined);
   } finally { await rm(result.dir, { recursive: true, force: true }); }
+});
+
+test('accepts a complete v2 snapshot and hashes its raw ten-collection object', async () => {
+  const result = await runWorker({ version: 2, collections: v2Collections, liveStatus: 200 });
+  try {
+    assert.equal(result.state.acknowledged, digestOf(v2Collections));
+    assert.equal(result.calls.filter(call => call.kind === 'hook').length, 0);
+  } finally { await rm(result.dir, { recursive: true, force: true }); }
+});
+
+test('rejects v2 snapshots missing a collection or with inconsistent counts', async () => {
+  for (const options of [
+    { version: 2, collections: { ...v2Collections, quizzes: undefined } },
+    { version: 2, collections: v2Collections, counts: { ...Object.fromEntries(Object.entries(v2Collections).map(([name, docs]) => [name, docs.length])), courses: 1 } },
+  ]) {
+    const result = await runWorker({ ...options, cycles: 1, liveStatus: 404 });
+    try {
+      assert.equal(result.calls.filter(call => call.kind === 'marker' || call.kind === 'hook').length, 0);
+      assert.match(result.stderr, /Incomplete CMS snapshot/);
+      assert.equal(result.state, undefined);
+    } finally { await rm(result.dir, { recursive: true, force: true }); }
+  }
 });
