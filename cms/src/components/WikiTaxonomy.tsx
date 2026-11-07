@@ -128,7 +128,7 @@ export function WikiTags({ path, readOnly }: JSONFieldClientProps) {
         <button type="button" className="btn btn--style-secondary btn--size-small" disabled={disabled || !label.trim()}
           style={{ margin: 0, whiteSpace: 'nowrap' }} onClick={() => { void createTag() }}>{creating ? 'Adding…' : 'Add tag'}</button>
       </div>
-      <div id={`${path}-new-tag-help`} className="field-description">New tags become available across the site immediately. Your post stays unpublished until you publish it.</div>
+      <div id={`${path}-new-tag-help`} className="field-description">New tags are shared across posts. Adding a tag does not publish your post changes.</div>
       {creationError && <p role="alert">{creationError}</p>}
       {message && <p role="status">{message}</p>}
     </div>}
