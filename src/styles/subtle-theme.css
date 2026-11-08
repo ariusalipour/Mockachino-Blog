@@ -1,0 +1,80 @@
+/* Local preview: softer technical details with modest breathing room. */
+html { --border-panel:rgba(124,134,146,.24); }
+html .page-content { padding:1rem; gap:1rem; }
+html .page-stack, html .taxonomy-grid, html .tag-grid, html .glossary-grid,
+html .topic-overview-grid, html .detail-grid, html .dual-panel,
+html .article-layout { gap:1rem; }
+html .page-stack { background:transparent; }
+html .panel, html .topic-card, html .category-card, html .tag-card,
+html .copy-block, html .entry-card { border-radius:5px; }
+html .page-content > .panel, html .page-stack > .panel,
+html .taxonomy-grid > .panel, html .tag-grid > .panel,
+html .glossary-grid > .panel, html .dual-panel > .panel,
+html .article-main, html .article-rail__panel {
+  border:1px solid var(--border-panel);
+}
+html .topic-card-grid { gap:.8rem; border:0; }
+html .topics-panel { padding:1rem; }
+html .topics-panel > .section-heading { padding:0 0 .8rem; }
+html .topic-card { border:1px solid color-mix(in srgb,currentColor 45%,transparent); }
+html .page-content .panel::before, html .page-content .panel::after,
+html .site-header::after { opacity:.25; }
+html body::before, html body::after { opacity:.25; }
+html .button, html .kind-pill, html .search-form,
+html .filter-bar input, html .pagination button { border-radius:4px; }
+html .entry-list__link:hover, html .nav-link:hover { background:rgba(245,197,66,.045); }
+html .article-rail { gap:1rem; align-content:start; grid-template-rows:none; }
+html .article-rail__panel:last-child { align-self:auto; }
+html .glossary-grid dl { margin:0; }
+html .site-footer { margin-top:1rem; border:1px solid var(--border-panel); }
+html[data-theme="light"] .page-stack { background:transparent; }
+@media(max-width:620px) {
+  html .page-content { padding:.65rem; gap:.75rem; }
+  html .page-stack, html .dual-panel, html .article-layout { gap:.75rem; }
+}
+
+/* Neutral charcoal preview, dark mode only. Topic accents stay original. */
+html[data-theme="dark"] {
+  --bg:#141416; --bg-secondary:#19191C;
+  --surface:#202023; --surface-strong:#262629; --surface-elevated:#2C2C30;
+  --text:#E7E5E0; --text-soft:#C6C4BF; --text-dim:#969590;
+  --accent:#C5AA68; --border:rgba(195,193,186,.18);
+  --border-panel:rgba(195,193,186,.2); --border-strong:rgba(197,170,104,.45);
+  --plus:rgba(197,170,104,.25);
+}
+html[data-theme="dark"] body { background:var(--bg); }
+html[data-theme="dark"] :is(.site-main, .sidebar) { background:var(--bg-secondary); }
+html[data-theme="dark"] :is(.panel, .site-header, .site-footer, .taxonomy-hero, .entry-hero,
+.category-card, .tag-card, .copy-block, .entry-card, .browse-controls,
+.article-breadcrumb, .article-main, .article-rail__panel, .glossary-grid .panel,
+.topic-overview-grid .copy-block) { background:var(--surface); }
+html[data-theme="dark"] :is(.search-form, .filter-bar input, .tooltip-popover) { background:var(--bg-secondary); color:var(--text-soft); }
+html[data-theme="dark"] :is(.header-nav__link, .nav-link, .topic-tree__categories a) { color:var(--text-soft); }
+html[data-theme="dark"] :is(.header-nav__link.is-active, .nav-link.is-active) { color:var(--accent); }
+html[data-theme="dark"] :is(.meta-chip, .tag-chip, .kind-pill.is-active) {
+  border-color:var(--border-strong); background:rgba(197,170,104,.06); color:var(--text-soft);
+}
+html[data-theme="dark"] :is(.nav-link:hover, .entry-list__link:hover, .nav-link.is-active) { background:rgba(197,170,104,.06); }
+html[data-theme="dark"] :is(.category-card, .tag-card) .button { color:var(--accent); border-color:var(--border-strong); }
+
+/* Quieter article titles, retaining the original heading typeface. */
+html .article-main h1 {
+  font-size:clamp(1.6rem,2.2vw,2.2rem);
+  line-height:1.2;
+  letter-spacing:0;
+  text-transform:none;
+}
+
+/* Compact article metadata, including at the narrow-screen breakpoint. */
+html .article-main__meta {
+  flex-direction:row;
+  align-items:center;
+  flex-wrap:wrap;
+  column-gap:.85rem;
+  row-gap:.4rem;
+}
+html .article-main__meta span {
+  font-size:.68rem;
+  letter-spacing:.025em;
+  white-space:nowrap;
+}

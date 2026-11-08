@@ -2709,8 +2709,7 @@ body::before {
 
 .article-main__visual {
   margin: 1rem 1.4rem 0;
-  padding: 0.55rem;
-  border-color: rgba(245, 197, 66, 0.55);
+  padding: 0;
 }
 
 .article-main__visual img,
@@ -3909,7 +3908,7 @@ html[data-theme="light"] .article-metric-card {
   }
 
   .article-main__visual {
-    margin: 0.85rem 0.95rem 0;
+    margin: 0.85rem 1.4rem 0;
   }
 
   .article-rail,
@@ -4059,3 +4058,5 @@ html[data-theme="light"] .article-metric-card {
 .article-content .video-embed iframe {
   margin-bottom: 0;
 }
+
+.article-main__visual img { display: block; }
