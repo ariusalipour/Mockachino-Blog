@@ -43,9 +43,10 @@ const {
 </section>
 
 <script is:inline define:vars={{ listId, initialQ, showKinds }}>
-  document.addEventListener("DOMContentLoaded", () => {
+  const initializeBrowseControls = () => {
     const controls = document.querySelector(`#${listId}-filter`)?.closest(".browse-controls");
-    if (!controls) return;
+    if (!controls || controls.dataset.filterInitialized === "true") return;
+    controls.dataset.filterInitialized = "true";
 
     const input = controls.querySelector("input");
     const counter = controls.querySelector(".results-count");
@@ -56,7 +57,13 @@ const {
     const items = [...list.querySelectorAll("[data-search]")];
 
     let activeKind = "all";
-    let needle = (initialQ ?? "").toLowerCase();
+    const params = new URLSearchParams(window.location.search);
+    const urlQuery = window.location.pathname.replace(/\/+$/, "") === "/browse"
+      ? params.get("q") ?? params.get("tag")
+      : null;
+    const initialValue = urlQuery ?? initialQ ?? "";
+    if (input && urlQuery !== null) input.value = initialValue;
+    let needle = initialValue.trim().toLowerCase();
 
     const apply = () => {
       let visible = 0;
@@ -91,5 +98,11 @@ const {
     });
 
     apply();
-  });
+  };
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initializeBrowseControls, { once: true });
+  } else {
+    initializeBrowseControls();
+  }
 </script>

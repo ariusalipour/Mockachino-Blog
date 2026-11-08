@@ -27,13 +27,14 @@ input. Add a shared tag with the inline New tag control, or manage tags and
 categories in their corresponding collections. Publish categories before using
 them in a published article.
 
-For a new post, the CMS generates its article ID and content filename. It creates
-a title-based URL slug and the initial publication/update dates; the URL and
-identifiers then stay stable when the title, topic, or category changes. Technical
-identifiers are shown read-only in a collapsed section. Existing article IDs,
-filenames, URL slugs, and dates are preserved when an article is simply opened or
-saved without content changes. Drafts can be saved while the article is still
-in progress. Publication validates the selected topic/category/tags together.
+For a new post, the CMS generates its article ID and content filename. The ID is
+hidden from the editor and retained internally for content filenames, exports, and
+legacy compatibility. The CMS also creates a title-based URL slug and initial
+publication/update dates; the filename and URL remain stable when the title, topic,
+or category changes. Existing IDs, filenames, URL slugs, and dates are preserved
+when an article is opened or saved without content changes. Drafts can be saved
+while the article is still in progress. Publication validates the selected
+topic/category/tags together.
 
 To backdate a wiki post, expand Publishing details and set Publication date to
 the intended date, then publish the changes. Saving as a draft keeps that date

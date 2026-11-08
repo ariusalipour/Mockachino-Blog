@@ -14,7 +14,8 @@
     "cms:bundle": "node scripts/cms-bundle.mjs",
     "test:cms": "node --test tests/cms-*.test.mjs",
     "cms:verify": "node scripts/cms-verify.mjs",
-    "cms:verify-richtext": "node scripts/cms-richtext-verify.mjs"
+    "cms:verify-richtext": "node scripts/cms-richtext-verify.mjs",
+    "dev:theme": "node scripts/cms-dev.mjs --host 127.0.0.1 --port 4322"
   },
   "dependencies": {
     "astro": "^5.12.0",

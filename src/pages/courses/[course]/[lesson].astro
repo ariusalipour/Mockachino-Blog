@@ -30,7 +30,7 @@ const toc = headings.filter(heading => heading.depth > 1);
         <h1>{lesson.data.title}</h1><p class="article-main__summary">{lesson.data.summary}</p>
         <div class="article-main__meta"><span>Published {formatDate(lesson.data.createdAt.toISOString())}</span><span>Updated {formatDate(lesson.data.updatedAt.toISOString())}</span></div>
       </header>
-      {lesson.data.featuredImage && <div class="article-main__visual panel"><img src={lesson.data.featuredImage.src} alt={lesson.data.featuredImage.alt || ""} /></div>}
+      {lesson.data.featuredImage && <div class="article-main__visual"><img src={lesson.data.featuredImage.src} alt={lesson.data.featuredImage.alt || ""} /></div>}
       <div id="lesson-content" class="article-content"><Content /></div>
       {quiz && <CourseQuiz quiz={quiz} />}
       <nav class="article-pagination" aria-label="Lesson navigation">

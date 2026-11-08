@@ -58,7 +58,7 @@ export const contentCollections: CollectionConfig[] = [
     { name: 'featuredImage', type: 'group', fields: [text('src', false), text('alt', false)] },
     { type: 'collapsible', label: 'Publishing details', admin: { initCollapsed: true }, fields: [
       { ...(baseFields[0] as TextField), required: false, admin: { readOnly: true, description: 'Generated on first save and kept stable when the title or topic changes.' }, validate: (value: unknown) => !value || typeof value === 'string' && value.endsWith('.md') && !value.includes('\\') && !value.includes(':') && !value.includes('\0') && !value.startsWith('/') && value.split('/').every(part => part && part !== '.' && part !== '..') || 'Invalid content filename.' },
-      { name: 'articleId', label: 'Article ID', type: 'text', admin: { readOnly: true, description: 'Generated automatically on first save.' } },
+      { name: 'articleId', label: 'Article ID', type: 'text', admin: { hidden: true, readOnly: true, description: 'Generated automatically on first save.' } },
       { name: 'slug', label: 'Website address', type: 'text', admin: { readOnly: true, description: 'Generated when a new post first has a title, then kept stable.' } },
       { ...date('authoredAt', 'Publication date'), required: false, admin: { date: { pickerAppearance: 'dayAndTime' }, description: 'Defaults to the first save date. Edit to backdate or correct the publication date.' } },
       { ...date('revisedAt', 'Content updated date'), required: false, admin: { readOnly: true, description: 'Updated when changed content is published.' } },
