@@ -1,7 +1,6 @@
 ---
 import "../styles/global.css";
 import "../styles/subtle-theme.css";
-import LogoMark from "../components/LogoMark.astro";
 import RasterIcon from "../components/RasterIcon.astro";
 import RepoActivity from "../components/RepoActivity.astro";
 import { headerNav, primaryNav, topics } from "../data/wiki-content";
@@ -39,7 +38,8 @@ const ogImageUrl = ogImage ? new URL(ogImage, Astro.site ?? Astro.url).toString(
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-precision-v2.png" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=precision-2" />
     <meta name="description" content={description} />
     <title>{title}</title>
     <meta property="og:type" content={ogType} />
@@ -72,11 +72,7 @@ const ogImageUrl = ogImage ? new URL(ogImage, Astro.site ?? Astro.url).toString(
         <div class="site-header__row">
           <div class="site-header__lead">
             <a href="/" class="site-brand">
-              <LogoMark variant="monogram" class="site-brand__mark" />
-              <div class="site-brand__copy">
-                <span class="site-brand__title">MOCKACHINO</span>
-                <span class="site-brand__subtitle">THE MOCKA WIKI</span>
-              </div>
+              <img class:list={["precision-lockup", { "precision-lockup--home": Astro.url.pathname === "/" }]} src="/brand/mockachino-precision-lockup.svg" alt="Mockachino" width="1358" height="217" />
             </a>
 
             <nav aria-label="Header">
@@ -176,11 +172,7 @@ const ogImageUrl = ogImage ? new URL(ogImage, Astro.site ?? Astro.url).toString(
       <footer class="site-footer panel">
         <div class="site-footer__brand footer-column">
           <div class="site-footer__brand-lockup">
-            <LogoMark variant="monogram" class="site-footer__mark" />
-            <div>
-              <p class="site-footer__title">MOCKACHINO</p>
-              <p class="site-footer__subtitle">The Mocka Wiki</p>
-            </div>
+            <img class="precision-lockup precision-lockup--footer" src="/brand/mockachino-precision-lockup.svg" alt="Mockachino" width="1358" height="217" />
           </div>
         </div>
 
@@ -248,3 +240,12 @@ const ogImageUrl = ogImage ? new URL(ogImage, Astro.site ?? Astro.url).toString(
     </script>
   </body>
 </html>
+
+<style>
+  .precision-lockup { display: block; width: 18rem; max-width: 100%; height: auto; mix-blend-mode: lighten; }
+  .precision-lockup--footer { width: 15rem; }
+  :global(html[data-theme="light"]) .precision-lockup { filter: invert(1); mix-blend-mode: multiply; }
+  @media (max-width: 640px) { .precision-lockup { width: 15rem; } }
+  .site-brand .precision-lockup--home { width: 16.9rem; }
+  @media (max-width: 640px) { .site-brand .precision-lockup--home { width: 14.1rem; } }
+</style>
