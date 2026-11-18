@@ -72,8 +72,8 @@ const ogImageUrl = ogImage ? new URL(ogImage, Astro.site ?? Astro.url).toString(
         <div class="site-header__row">
           <div class="site-header__lead">
             <a href="/" class="site-brand">
-              <img class:list={["precision-lockup", "precision-lockup--dark", { "precision-lockup--home": Astro.url.pathname === "/" }]} src="/brand/precision/logo-dark.svg" alt="Mockachino" width="1358" height="217" />
-              <img class:list={["precision-lockup", "precision-lockup--light", { "precision-lockup--home": Astro.url.pathname === "/" }]} src="/brand/precision/logo-light.svg" alt="Mockachino" width="1358" height="217" />
+              <img class="precision-lockup precision-lockup--dark" src="/brand/precision/logo-dark.svg" alt="Mockachino" width="1358" height="217" />
+              <img class="precision-lockup precision-lockup--light" src="/brand/precision/logo-light.svg" alt="Mockachino" width="1358" height="217" />
             </a>
 
             <nav aria-label="Header">
@@ -250,6 +250,4 @@ const ogImageUrl = ogImage ? new URL(ogImage, Astro.site ?? Astro.url).toString(
   :global(html[data-theme="light"]) .precision-lockup--dark { display: none; }
   :global(html[data-theme="light"]) .precision-lockup--light { display: block; }
   @media (max-width: 640px) { .precision-lockup { width: 15rem; } }
-  .site-brand .precision-lockup--home { width: 16.9rem; }
-  @media (max-width: 640px) { .site-brand .precision-lockup--home { width: 14.1rem; } }
 </style>
