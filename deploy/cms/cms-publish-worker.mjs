@@ -12,7 +12,8 @@ const hook = process.env.CLOUDFLARE_PAGES_DEPLOY_HOOK;
 const interval = Math.max(10, Number(process.env.PUBLISH_POLL_SECONDS) || 30) * 1000;
 const retryAfter = Math.max(120, Number(process.env.PUBLISH_RETRY_SECONDS) || 600) * 1000;
 const legacyCollections = ['topics','categories','tags','glossary','wiki','projects','project-updates'];
-const collections = [...legacyCollections,'courses','course-lessons','quizzes'];
+const v2Collections = [...legacyCollections,'courses','course-lessons','quizzes'];
+const collections = [...v2Collections,'project-policies'];
 let state = {};
 try {
   state = JSON.parse(await readFile(statePath, 'utf8'));
@@ -41,9 +42,9 @@ while (true) {
     if (!response.ok) throw new Error(`CMS snapshot returned HTTP ${response.status}`);
     const snapshot = await response.json();
     const version = snapshot.version;
-    const requiredCollections = version === 1 ? legacyCollections : version === 2 ? collections : [];
+    const requiredCollections = version === 1 ? legacyCollections : version === 2 ? v2Collections : version === 3 ? collections : [];
     if (snapshot.complete !== true || !requiredCollections.length || !snapshot.collections || !requiredCollections.every(key=>Array.isArray(snapshot.collections[key]))) throw new Error('Incomplete CMS snapshot');
-    if (version === 2 && (!snapshot.counts || !collections.every(key=>snapshot.counts[key] === snapshot.collections[key].length))) throw new Error('Incomplete CMS snapshot counts');
+    if (version >= 2 && (!snapshot.counts || !requiredCollections.every(key=>snapshot.counts[key] === snapshot.collections[key].length))) throw new Error('Incomplete CMS snapshot counts');
     if (snapshot.counts && requiredCollections.some(key=>snapshot.counts[key] !== undefined && snapshot.counts[key] !== snapshot.collections[key].length)) throw new Error('Incomplete CMS snapshot counts');
     const digest = createHash('sha256').update(JSON.stringify(snapshot.collections)).digest('hex');
     const markerURL = new URL('/cms-revision.json', site);

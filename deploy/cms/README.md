@@ -253,3 +253,24 @@ Do not run `docker compose down -v`. Keep the stable Payload secret across
 restarts. There is no SMTP provider configured initially: an existing admin can
 manage accounts, and initial credentials are held in the restricted NAS `.env`.
 Configure an email adapter before relying on email password reset.
+
+## Project policies
+
+Use **Project Policies** for a project's Terms of Service and Privacy Policy.
+These are independent versioned documents, not development updates. Choose the
+project's stable slug and policy type, enter a title and effective date, and use
+the same rich text editor as other website content. One policy of each type is
+allowed per project; the project/type and URL stay fixed after creation.
+
+Publish the project before its policies. Published policies are linked from the
+project profile at `/projects/<project>/terms/` and `/projects/<project>/privacy/`.
+Unpublishing a project hides its policies from the public snapshot. Draft policy
+edits stay private and cannot appear in the development log.
+
+Snapshot v3 adds `project-policies`; the frontend still accepts v1/v2 without
+changing their revision hashes. Deploy this frontend before the upgraded CMS and
+publish worker. Once a v3 snapshot has been synced, older snapshots are rejected
+to protect managed policy files from deletion. Back up and rehearse the schema
+migration against a database copy before deployment. Existing policy drafts in
+Project Updates must be copied with their rich text preserved and verified before
+archiving the old drafts. Do not publish unfinished legal text as part of migration.

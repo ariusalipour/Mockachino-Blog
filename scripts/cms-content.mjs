@@ -4,7 +4,7 @@ import YAML from 'yaml';
 
 export const legacyCollections = ['topics', 'categories', 'tags', 'glossary', 'wiki', 'projects', 'project-updates'];
 export const newCollections = ['courses', 'course-lessons', 'quizzes'];
-export const collections = [...legacyCollections, ...newCollections];
+export const collections = [...legacyCollections, ...newCollections, 'project-policies'];
 export function safeSourcePath(value, extension = '.md') {
   if (typeof value !== 'string' || !value || value.includes('\\') || value.includes('\0') || value.includes(':') || value.startsWith('/') || value.split('/').some(part => !part || part === '.' || part === '..') || (extension && !value.endsWith(extension))) {
     throw new Error(`Unsafe content path: ${JSON.stringify(value)}`);
@@ -53,10 +53,16 @@ export function validateDocument(collection, entry) {
     categories: ['name', 'description', 'topic'], tags: ['label'], glossary: ['term', 'definition'],
     wiki: ['articleId', 'title', 'summary', 'kind', 'topic', 'category'],
     projects: ['name', 'summary', 'status'], 'project-updates': ['project', 'title', 'summary'],
+    'project-policies': ['project', 'type', 'title'],
     courses: ['courseId', 'slug', 'title', 'summary', 'topic', 'category'],
     'course-lessons': ['lessonId', 'slug', 'title', 'summary'], quizzes: ['quizId', 'slug', 'title'],
   };
   for (const key of strings[collection]) requireString(data, key, collection);
+  if (collection === 'project-policies') {
+    if (!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(data.project) || !['terms','privacy'].includes(data.type) || entry.sourcePath !== `${data.project}/${data.type}.md`) throw new Error('project-policies: invalid identity');
+    requireDate(data, 'effectiveAt', collection);
+    requireDate(data, 'updatedAt', collection);
+  }
   if (newCollections.includes(collection)) {
     if (!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(data.slug)) throw new Error(`${collection}: invalid slug`);
   }
@@ -103,8 +109,9 @@ export function validateDocument(collection, entry) {
 }
 
 export function validateSnapshot(snapshot) {
-  if (![1, 2].includes(snapshot?.version) || !snapshot.collections || typeof snapshot.collections !== 'object') throw new Error('Unsupported or incomplete CMS snapshot');
+  if (![1, 2, 3].includes(snapshot?.version) || !snapshot.collections || typeof snapshot.collections !== 'object') throw new Error('Unsupported or incomplete CMS snapshot');
   for (const name of collections) {
+    if (snapshot.version < 3 && name === 'project-policies' && snapshot.collections[name] === undefined) continue;
     if (snapshot.version === 1 && newCollections.includes(name) && snapshot.collections[name] === undefined) continue;
     if (!Array.isArray(snapshot.collections[name])) throw new Error(`Missing CMS collection: ${name}`);
     const paths = new Set();
@@ -131,19 +138,27 @@ export function validateSnapshot(snapshot) {
     }
     if (course.data.finalQuiz && !bySlug.quizzes.has(course.data.finalQuiz)) throw new Error(`courses: unknown final quiz ${course.data.finalQuiz}`);
   }
-  if (snapshot.version === 2 && collections.some(name => !Array.isArray(snapshot.collections[name]))) throw new Error('CMS v2 requires all collections');
+  const policyKeys = new Set();
+  const projectSlugs = new Set(snapshot.collections.projects.map(p => p.sourcePath.slice(0, -3)));
+  for (const policy of snapshot.collections['project-policies'] ?? []) {
+    const key = `${policy.data.project}:${policy.data.type}`;
+    if (policyKeys.has(key) || !projectSlugs.has(policy.data.project)) throw new Error('project-policies: duplicate or unknown project');
+    policyKeys.add(key);
+  }
+  if (snapshot.version === 3 && collections.some(name => !Array.isArray(snapshot.collections[name]))) throw new Error('CMS v3 requires all collections');
+  if (snapshot.version === 2 && collections.filter(name => name !== 'project-policies').some(name => !Array.isArray(snapshot.collections[name]))) throw new Error('CMS v2 requires all collections');
   if (snapshot.complete !== true && (!snapshot.collections.topics.length || !snapshot.collections.wiki.length)) throw new Error('CMS has not confirmed its initial import is complete');
   return snapshot;
 }
 
 export async function readRepositoryContent(root) {
-  const snapshot = { version: 2, collections: {} };
+  const snapshot = { version: 3, collections: {} };
   for (const name of collections) {
     const directory = path.join(root, 'src/content', name);
     snapshot.collections[name] = [];
     let files;
     try { files = await walkFiles(directory); }
-    catch (error) { if (error.code === 'ENOENT' && newCollections.includes(name)) files = []; else throw error; }
+    catch (error) { if (error.code === 'ENOENT' && [...newCollections, 'project-policies'].includes(name)) files = []; else throw error; }
     for (const sourcePath of files) {
       if (!sourcePath.endsWith('.md')) continue;
       const { data, body } = parseMarkdown(await readFile(path.join(directory, sourcePath), 'utf8'));

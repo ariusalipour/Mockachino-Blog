@@ -51,7 +51,7 @@ test('allows intentionally unpublishing every article only after completed impor
 test('accepts raw v1 snapshots without adding optional arrays or changing their revision digest', async () => {
   const legacy = structuredClone(initial);
   legacy.version = 1;
-  for (const name of ['courses', 'course-lessons', 'quizzes']) delete legacy.collections[name];
+  for (const name of ['courses', 'course-lessons', 'quizzes', 'project-policies']) delete legacy.collections[name];
   const digest = createHash('sha256').update(JSON.stringify(legacy.collections)).digest('hex');
   assert.doesNotThrow(() => validateSnapshot(legacy));
   assert.deepEqual(Object.keys(legacy.collections).sort(), [...collections.slice(0, 7)].sort());
@@ -150,7 +150,32 @@ test('syncs course content and removals, then refuses a v1 downgrade that would 
     snapshot.collections.quizzes = courseFixture().collections.quizzes;
     await syncSnapshot(snapshot, directory);
     const legacy = structuredClone(initial); legacy.version = 1;
-    for (const name of ['courses', 'course-lessons', 'quizzes']) delete legacy.collections[name];
+    for (const name of ['courses', 'course-lessons', 'quizzes', 'project-policies']) delete legacy.collections[name];
     await assert.rejects(syncSnapshot(legacy, directory), /Refusing CMS v1 downgrade/);
   } finally { await rm(directory, { recursive: true, force: true }); }
+});
+
+function policyFixture() {
+  const snapshot = structuredClone(initial);
+  snapshot.version = 3;
+  snapshot.complete = true;
+  const project = snapshot.collections.projects[0].sourcePath.replace(/\.md$/, '');
+  snapshot.collections['project-policies'] = [{sourcePath:`${project}/privacy.md`,body:'Privacy text',data:{project,type:'privacy',title:'Privacy Policy',effectiveAt:'2026-11-18T00:00:00Z',updatedAt:'2026-11-18T00:00:00Z'}}];
+  return snapshot;
+}
+test('validates policy type, project, dates and one policy per project/type', () => {
+  assert.doesNotThrow(()=>validateSnapshot(policyFixture()));
+  for (const mutate of [s=>s.collections['project-policies'][0].data.type='other',s=>s.collections['project-policies'][0].data.project='missing',s=>s.collections['project-policies'][0].data.effectiveAt='invalid',s=>s.collections['project-policies'].push({...s.collections['project-policies'][0],sourcePath:'duplicate.md'})]) {
+    const snapshot=policyFixture();mutate(snapshot);assert.throws(()=>validateSnapshot(snapshot));
+  }
+});
+test('preserves old snapshot digest and refuses downgrading managed policy content', async () => {
+  const dir=await mkdtemp(path.join(os.tmpdir(),'cms-policy-'));
+  try {
+    await mkdir(path.join(dir,'src/content'),{recursive:true});
+    await syncSnapshot(policyFixture(),dir);
+    const old=structuredClone(initial);old.version=2;delete old.collections['project-policies'];
+    await assert.rejects(syncSnapshot(old,dir),/downgrade/);
+    assert.match(await readFile(path.join(dir,'src/content/project-policies',policyFixture().collections['project-policies'][0].sourcePath),'utf8'),/Privacy text/);
+  } finally {await rm(dir,{recursive:true,force:true});}
 });

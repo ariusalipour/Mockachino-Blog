@@ -1,0 +1,37 @@
+---
+import { render } from "astro:content";
+import Layout from "../../../layouts/Layout.astro";
+import { formatDate } from "../../../lib/format";
+import { projectPolicies, getProjectPolicies } from "../../../data/project-policies";
+export function getStaticPaths() {
+  return projectPolicies.map(policy => ({ params: { slug: policy.project.slug, policy: policy.type }, props: { policy } }));
+}
+const { policy } = Astro.props;
+const { entry, project } = policy;
+const { Content } = await render(entry);
+const related = getProjectPolicies(project.slug).filter(item => item.type !== policy.type);
+---
+<Layout title={`${entry.data.title} | MOCKACHINO`} description={`${entry.data.title} for ${project.name}.`} currentPath={Astro.url.pathname} headerPath="/projects/">
+  <div slot="subheader" class="panel article-breadcrumb">
+    <a href="/projects/" class="article-breadcrumb__item">Projects</a>
+    <span class="article-breadcrumb__sep">›</span>
+    <a href={`/projects/${project.slug}/`} class="article-breadcrumb__item">{project.name}</a>
+    <span class="article-breadcrumb__sep">›</span>
+    <span class="article-breadcrumb__item article-breadcrumb__item--current">{policy.type === "terms" ? "Terms of Service" : "Privacy Policy"}</span>
+  </div>
+  <article class="panel copy-block">
+    <header>
+      <p class="section-label">{project.name} · Project policy</p>
+      <h1>{entry.data.title}</h1>
+      <div class="meta-strip">
+        <span>Effective {formatDate(entry.data.effectiveAt.toISOString())}</span>
+        <span>Updated {formatDate(entry.data.updatedAt.toISOString())}</span>
+      </div>
+    </header>
+    <div class="article-content"><Content /></div>
+    <nav class="meta-strip" aria-label="Related project pages">
+      <a href={`/projects/${project.slug}/`}>Back to {project.name}</a>
+      {related.map(item => <a href={item.url}>{item.type === "terms" ? "Terms of Service" : "Privacy Policy"}</a>)}
+    </nav>
+  </article>
+</Layout>

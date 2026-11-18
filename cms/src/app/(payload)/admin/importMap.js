@@ -29,6 +29,7 @@ import { BoldFeatureClient as BoldFeatureClient_e70f5e05f09f93e00b997edb1ef0c864
 import { ItalicFeatureClient as ItalicFeatureClient_e70f5e05f09f93e00b997edb1ef0c864 } from '@payloadcms/richtext-lexical/client'
 import { WikiCategory as WikiCategory_ce4c4b0b2cbddbeb6e9a7fa3de714b31 } from '../../../components/WikiTaxonomy'
 import { WikiTags as WikiTags_ce4c4b0b2cbddbeb6e9a7fa3de714b31 } from '../../../components/WikiTaxonomy'
+import { PolicyProject as PolicyProject_d162a67626215aa9e58dfee6dcc41662 } from '../../../components/PolicyProject'
 import { CollectionCards as CollectionCards_f9c02e79a4aed9a3924487c0cd4cafb1 } from '@payloadcms/next/rsc'
 
 /** @type import('payload').ImportMap */
@@ -64,5 +65,6 @@ export const importMap = {
   "@payloadcms/richtext-lexical/client#ItalicFeatureClient": ItalicFeatureClient_e70f5e05f09f93e00b997edb1ef0c864,
   "./components/WikiTaxonomy#WikiCategory": WikiCategory_ce4c4b0b2cbddbeb6e9a7fa3de714b31,
   "./components/WikiTaxonomy#WikiTags": WikiTags_ce4c4b0b2cbddbeb6e9a7fa3de714b31,
+  "./components/PolicyProject#PolicyProject": PolicyProject_d162a67626215aa9e58dfee6dcc41662,
   "@payloadcms/next/rsc#CollectionCards": CollectionCards_f9c02e79a4aed9a3924487c0cd4cafb1
 }

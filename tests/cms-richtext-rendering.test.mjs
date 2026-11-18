@@ -1,3 +1,4 @@
+import { fileURLToPath } from 'node:url';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { createMarkdownProcessor } from '@astrojs/markdown-remark';
@@ -5,7 +6,7 @@ import { readRepositoryContent } from '../scripts/cms-content.mjs';
 import { compareSnapshots, htmlSemantics } from '../scripts/cms-richtext-verify.mjs';
 import remarkVideoEmbeds, { parseVideoComment } from '../src/lib/remark-video-embeds.mjs';
 
-const root = new URL('../', import.meta.url).pathname;
+const root = fileURLToPath(new URL('../', import.meta.url));
 
 test('legacy video comments become responsive embeds without losing pipe-containing titles or URLs', async () => {
   const markdown = '<!-- VIDEO: A title | including a pipe | https://www.youtube.com/embed/abc_123?feature=oembed -->';

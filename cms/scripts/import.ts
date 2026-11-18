@@ -21,8 +21,9 @@ function safePath(value: string, extension?: string) {
   if (typeof value !== 'string' || !value || value.includes('\\') || value.includes('\0') || value.includes(':') || value.startsWith('/') || value.split('/').some(part => !part || part === '.' || part === '..') || (extension && !value.endsWith(extension))) throw new Error(`Unsafe sourcePath: ${value}`)
   return value
 }
-if (![1, 2].includes(manifest.version) || !manifest.collections || !Array.isArray(manifest.media)) throw new Error('Invalid seed manifest')
+if (![1, 2, 3].includes(manifest.version) || !manifest.collections || !Array.isArray(manifest.media)) throw new Error('Invalid seed manifest')
 for (const slug of collectionSlugs) {
+  if (manifest.version < 3 && slug === 'project-policies' && manifest.collections[slug] === undefined) manifest.collections[slug] = []
   if (manifest.version === 1 && ['courses', 'course-lessons', 'quizzes'].includes(slug) && manifest.collections[slug] === undefined) manifest.collections[slug] = []
   if (!Array.isArray(manifest.collections[slug])) throw new Error(`Missing seed collection: ${slug}`)
   const keys = new Set<string>()

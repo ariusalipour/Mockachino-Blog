@@ -121,4 +121,12 @@ const quizzes = defineCollection({
   }),
 });
 
-export const collections = { topics, categories, tags, glossary, wiki, projects, "project-updates": projectUpdates, courses, "course-lessons": courseLessons, quizzes };
+const projectPolicies = defineCollection({
+  type: "content",
+  schema: z.object({
+    project: routeSlug, type: z.enum(["terms", "privacy"]), title: z.string(),
+    effectiveAt: z.coerce.date(), updatedAt: z.coerce.date(),
+  }),
+});
+
+export const collections = { topics, categories, tags, glossary, wiki, projects, "project-updates": projectUpdates, "project-policies": projectPolicies, courses, "course-lessons": courseLessons, quizzes };

@@ -3,7 +3,7 @@ import { mkdtemp, readFile, rm, writeFile } from 'node:fs/promises';
 import os from 'node:os';
 import path from 'node:path';
 import { spawn } from 'node:child_process';
-import { fileURLToPath } from 'node:url';
+import { fileURLToPath, pathToFileURL } from 'node:url';
 import test from 'node:test';
 import { createHash } from 'node:crypto';
 
@@ -51,7 +51,7 @@ async function runWorker({ cycles = 1, snapshotStatus = 200, version = 1, collec
       const url = String(input);
       if (url.endsWith('/api/site-content')) {
         calls.push({ kind: 'snapshot' });
-        return Response.json({ version: cfg.version, complete: true, collections: cfg.collections, counts: cfg.version === 2 ? cfg.counts : undefined, draftRevision: calls.length }, { status: cfg.snapshotStatus });
+        return Response.json({ version: cfg.version, complete: true, collections: cfg.collections, counts: cfg.version >= 2 ? cfg.counts : undefined, draftRevision: calls.length }, { status: cfg.snapshotStatus });
       }
       if (url.includes('/cms-revision.json')) {
         calls.push({ kind: 'marker' });
@@ -64,7 +64,7 @@ async function runWorker({ cycles = 1, snapshotStatus = 200, version = 1, collec
     process.on('exit', () => writeFileSync(cfg.callsPath, JSON.stringify(calls)));
   `);
   try {
-    const child = spawn(process.execPath, ['--import', preloadPath, worker], {
+    const child = spawn(process.execPath, ['--import', pathToFileURL(preloadPath).href, worker], {
       cwd: repo,
       env: {
         ...process.env,
@@ -187,4 +187,10 @@ test('rejects v2 snapshots missing a collection or with inconsistent counts', as
       assert.equal(result.state, undefined);
     } finally { await rm(result.dir, { recursive: true, force: true }); }
   }
+});
+
+test('accepts complete v3 policy snapshots', async () => {
+ const content={...v2Collections,'project-policies':[]};
+ const result=await runWorker({version:3,collections:content,liveStatus:200});
+ assert.equal(result.exitCode,0);assert.equal(result.state.acknowledged,digestOf(content));
 });

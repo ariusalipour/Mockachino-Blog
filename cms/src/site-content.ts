@@ -1,6 +1,6 @@
 import { documentBody, type RichTextContext } from './richtext'
-export const collectionSlugs = ['topics', 'categories', 'tags', 'glossary', 'wiki', 'projects', 'project-updates', 'courses', 'course-lessons', 'quizzes'] as const
-export const legacyCollectionSlugs = collectionSlugs.filter(slug => !['courses', 'course-lessons', 'quizzes'].includes(slug))
+export const collectionSlugs = ['topics', 'categories', 'tags', 'glossary', 'wiki', 'projects', 'project-updates', 'courses', 'course-lessons', 'quizzes', 'project-policies'] as const
+export const legacyCollectionSlugs = collectionSlugs.filter(slug => !['courses', 'course-lessons', 'quizzes', 'project-policies'].includes(slug))
 export type ContentSlug = typeof collectionSlugs[number]
 export type SiteDocument = { sourcePath: string; body: string; data: Record<string, unknown> }
 export const fieldNames: Record<ContentSlug, string[]> = {
@@ -11,6 +11,7 @@ export const fieldNames: Record<ContentSlug, string[]> = {
   wiki: ['articleId', 'slug', 'title', 'summary', 'kind', 'topic', 'category', 'createdAt', 'updatedAt', 'tags', 'featuredImage'],
   projects: ['name', 'summary', 'status', 'updatedAt', 'repository', 'liveUrl', 'tags'],
   'project-updates': ['project', 'slug', 'title', 'summary', 'createdAt', 'updatedAt', 'tags'],
+  'project-policies': ['project', 'type', 'title', 'effectiveAt', 'updatedAt'],
   courses: ['courseId', 'slug', 'title', 'summary', 'topic', 'category', 'tags', 'createdAt', 'updatedAt', 'featuredImage', 'lessons', 'finalQuiz'],
   'course-lessons': ['lessonId', 'slug', 'title', 'summary', 'createdAt', 'updatedAt', 'featuredImage'],
   quizzes: ['quizId', 'slug', 'title', 'createdAt', 'updatedAt', 'questions'],

@@ -3,6 +3,7 @@ import { websiteEditor } from './editor'
 import { contentHash, markdownToRichText, richTextToMarkdown, type MediaRecord } from './richtext'
 import { createHash } from 'node:crypto'
 import { automateWiki, topicOptions } from './wiki-authoring'
+import { automateProjectPolicy } from './project-policies'
 
 export const authenticated: Access = ({ req }) => Boolean(req.user)
 export const publishedOrAuthenticated: Access = ({ req }) => req.user ? true : { _status: { equals: 'published' } }
@@ -39,8 +40,8 @@ function content(slug: CollectionConfig['slug'], title: string, fields: Field[])
         richTextToMarkdown(data.content, {mediaByID}) // Fail before saving unsupported or broken editor nodes.
       }
       return data
-    }, ...(slug === 'wiki' ? [automateWiki] : [])] },
-    fields: slug === 'wiki' ? fields : [baseFields[0], ...fields, ...baseFields.slice(1)],
+    }, ...(slug === 'wiki' ? [automateWiki] : []), ...(slug === 'project-policies' ? [automateProjectPolicy] : [])] },
+    fields: slug === 'wiki' ? fields : [slug === 'project-policies' ? { ...(baseFields[0] as TextField), required: false, admin: { readOnly: true, description: 'Generated from the project and policy type; this preserves the public address.' } } : baseFields[0], ...fields, ...baseFields.slice(1)],
   }
 }
 export const contentCollections: CollectionConfig[] = [
@@ -68,6 +69,12 @@ export const contentCollections: CollectionConfig[] = [
   ]),
   content('projects', 'name', [text('name'), textarea('summary'), text('status'), date('revisedAt', 'Content updated date'), text('repository', false), text('liveUrl', false), tags]),
   content('project-updates', 'title', [text('project'), text('slug', false), text('title'), textarea('summary'), date('authoredAt', 'Publication date'), date('revisedAt', 'Content updated date'), tags]),
+  { ...content('project-policies', 'title', [
+    { name: 'project', type: 'text', required: true, index: true, admin: { components: { Field: './components/PolicyProject#PolicyProject' } } },
+    { name: 'type', label: 'Policy type', type: 'select', required: true, options: [{ label: 'Terms of Service', value: 'terms' }, { label: 'Privacy Policy', value: 'privacy' }] },
+    text('title'), date('effectiveAt', 'Effective date'),
+    { ...date('revisedAt', 'Content updated date'), required: false, admin: { readOnly: true } },
+  ]), admin: { useAsTitle: 'title', group: 'Website content', defaultColumns: ['title', 'project', 'type', '_status'] } },
 ]
 export const Users: CollectionConfig = {
   slug: 'users',

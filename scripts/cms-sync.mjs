@@ -32,8 +32,9 @@ export async function syncSnapshot(snapshot, root = projectRoot) {
   catch (error) { if (error.code !== 'ENOENT') throw error; }
   if (!managed || typeof managed !== 'object') throw new Error('Invalid CMS sync state');
   if (snapshot.version === 1 && (priorState?.cmsVersion === 2 || ['courses', 'course-lessons', 'quizzes'].some(name => (managed[name] ?? []).length > 0))) throw new Error('Refusing CMS v1 downgrade because managed course content could be deleted');
+  if (snapshot.version < 3 && (priorState?.cmsVersion >= 3 || (managed['project-policies'] ?? []).length > 0)) throw new Error('Refusing CMS downgrade because managed policies could be deleted');
   for (const name of collections) {
-    if (managed[name] === undefined && ['courses', 'course-lessons', 'quizzes'].includes(name)) managed[name] = [];
+    if (managed[name] === undefined && ['courses', 'course-lessons', 'quizzes', 'project-policies'].includes(name)) managed[name] = [];
     if (!Array.isArray(managed[name])) throw new Error('Invalid CMS sync state');
     managed[name].forEach(sourcePath => safeSourcePath(sourcePath));
   }

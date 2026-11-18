@@ -76,6 +76,7 @@ export interface Config {
     wiki: Wiki;
     projects: Project;
     'project-updates': ProjectUpdate;
+    'project-policies': ProjectPolicy;
     courses: Course;
     'course-lessons': CourseLesson;
     quizzes: Quiz;
@@ -96,6 +97,7 @@ export interface Config {
     wiki: WikiSelect<false> | WikiSelect<true>;
     projects: ProjectsSelect<false> | ProjectsSelect<true>;
     'project-updates': ProjectUpdatesSelect<false> | ProjectUpdatesSelect<true>;
+    'project-policies': ProjectPoliciesSelect<false> | ProjectPoliciesSelect<true>;
     courses: CoursesSelect<false> | CoursesSelect<true>;
     'course-lessons': CourseLessonsSelect<false> | CourseLessonsSelect<true>;
     quizzes: QuizzesSelect<false> | QuizzesSelect<true>;
@@ -641,6 +643,65 @@ export interface ProjectUpdate {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "project-policies".
+ */
+export interface ProjectPolicy {
+  id: number;
+  /**
+   * Generated from the project and policy type; this preserves the public address.
+   */
+  sourcePath?: string | null;
+  /**
+   * Stable project slug matching its content filename without .md. Publish the project before publishing its policies.
+   */
+  project: string;
+  type: 'terms' | 'privacy';
+  title: string;
+  effectiveAt: string;
+  revisedAt?: string | null;
+  content?: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  body?: string | null;
+  contentMigration?:
+    | {
+        [k: string]: unknown;
+      }
+    | unknown[]
+    | string
+    | number
+    | boolean
+    | null;
+  /**
+   * Preserves metadata imported from the original Markdown files.
+   */
+  extraFrontmatter?:
+    | {
+        [k: string]: unknown;
+      }
+    | unknown[]
+    | string
+    | number
+    | boolean
+    | null;
+  updatedAt: string;
+  createdAt: string;
+  _status?: ('draft' | 'published') | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "courses".
  */
 export interface Course {
@@ -978,6 +1039,10 @@ export interface PayloadLockedDocument {
         value: number | ProjectUpdate;
       } | null)
     | ({
+        relationTo: 'project-policies';
+        value: number | ProjectPolicy;
+      } | null)
+    | ({
         relationTo: 'courses';
         value: number | Course;
       } | null)
@@ -1213,6 +1278,25 @@ export interface ProjectUpdatesSelect<T extends boolean = true> {
   authoredAt?: T;
   revisedAt?: T;
   tags?: T;
+  content?: T;
+  body?: T;
+  contentMigration?: T;
+  extraFrontmatter?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  _status?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "project-policies_select".
+ */
+export interface ProjectPoliciesSelect<T extends boolean = true> {
+  sourcePath?: T;
+  project?: T;
+  type?: T;
+  title?: T;
+  effectiveAt?: T;
+  revisedAt?: T;
   content?: T;
   body?: T;
   contentMigration?: T;

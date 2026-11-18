@@ -1,4 +1,5 @@
 ---
+import { getProjectPolicies } from "../../data/project-policies";
 import { render } from "astro:content";
 import ProjectUpdateList from "../../components/ProjectUpdateList.astro";
 import Layout from "../../layouts/Layout.astro";
@@ -20,6 +21,7 @@ if (!contentEntry) {
 }
 
 const resolvedProject = getProject(project.slug) ?? project;
+const policies = getProjectPolicies(project.slug);
 const updates = getProjectUpdates(project.slug);
 const { Content } = await render(contentEntry);
 ---
@@ -54,6 +56,13 @@ const { Content } = await render(contentEntry);
         <Content />
       </div>
     </section>
+
+    {policies.length > 0 && <nav class="panel copy-block" aria-label="Project policies">
+      <p class="section-label">Project policies</p>
+      <div class="meta-strip">
+        {policies.map(policy => <a class="meta-chip" href={policy.url}>{policy.type === "terms" ? "Terms of Service" : "Privacy Policy"}</a>)}
+      </div>
+    </nav>}
 
     <section class="panel">
       <div class="section-heading section-heading--compact">
